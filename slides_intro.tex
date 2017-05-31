@@ -1,0 +1,343 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{default}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,amstext,latexsym}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{patterns,snakes}
+\definecolor{mygray}{gray}{0.9}
+
+\begin{document}
+
+\begin{frame}
+
+  \begin{center}
+    \Huge
+    Approximate computing
+  \end{center}
+  Reduce the execution time of an application by giving inexact results.
+  \pause
+  \begin{itemize}
+    \item Precision of a floating-point value
+    \item No exact result exists (search query...)
+    \item ...
+  \end{itemize}
+  \pause
+  \begin{itemize}
+   \item Skip steps in loops
+   \item Branching to avoid useless computations
+   \item Faulty hardware (fast adders...)
+   \item ...
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Multi-grid}
+ Solve $\beta u''(x)+\alpha u(x)=f(x)$ in $u$, on $[0;1]$ and $u(0)=u(1)=0$.\\ \vspace{0.3cm}
+ Interpolate function on a grid of step $h=\frac{1}{N}$, $x_i = \frac{i}{N}$, $i=0..N$.\\
+ $u''(x_i) \approx \frac{u(x_{i-1})-2u(x_i)+u(x_{i+1})}{h^2} \Rightarrow Au = f$, $A \in \mathcal{M}_n(\mathbb{R}^{N-1xN-1})$.\\ \vspace{0.3cm}
+ 
+ Then relax, $u_{i+1} = M u_{i} + N f$. What is $u_{0}$? How fast does it converge to $u$?
+\end{frame}
+
+\begin{frame}{Multi-grid}
+ The idea is to use different values of $h$, different grids: $h,2h,\dots,H$.\\
+ $u^{2h}$ can be a good initial guess for $u^h_0$.\\
+ It also improves the convergence speed.\vspace{0.5cm}
+ 
+ Two measures have to be taken into account, the error $e$ and the residual $r$: $u = u_i + e_i \Rightarrow Ae_i = f-Au_i = r_i$.
+ 
+\end{frame}
+
+\begin{frame}{Multi-grid}
+  V-cycle$(h,H,\alpha_1,\alpha_2)$:\\
+  \begin{enumerate}
+    \item $s \leftarrow h; u^h\leftarrow0$
+   \item Relax $\alpha_1$ times on grid $s$, initial guess $u^s$.
+   \item if $s<H$ : $f^{2s} \leftarrow I_{s\rightarrow 2s}(f^s-A^su^s)$,$u^{2s}\leftarrow0$,$s \leftarrow 2s$ and goto 2.
+   \item $u^s \leftarrow u^s+I_{2s\rightarrow s} u^{2s}$.
+   \item Relax $\alpha_2$ times on grid $s$, initial guess $u^s$
+   \item if $s > h$ : $s = s/2$ and goto 4.
+  \end{enumerate}
+
+  Two ways of controlling the execution time and precision: limiting the number of steps ($\alpha_1,\alpha_2$), do several V-cycles and stopping when reaching a given precision $\epsilon$ or a maximum number of V-cycles.
+  
+\end{frame}
+
+\begin{frame}{BoomerAMG and AMG2006}
+  
+  \begin{itemize}
+   \item Execute 3D problems (Laplace on a cube...)
+   \item Default parameters: 8x8x8=512 variables
+   \item Solved with preconditioned conjudate gradient, using BoomerAMG preconditioner (HYPRE library)
+   \pause
+   \item Measures done on execution of BoomerAMG algorithm to directly solve $Ax=b$, not as preconditioner!
+   \item Different parameters to play with:
+    \begin{itemize}
+      \item Tolerance ($\epsilon$) for relative residual norm
+      \item Max number of cycles
+      \item Type of cycle
+      \item Number of relaxations at each step
+      \item Number of variables
+    \end{itemize}
+    
+  \end{itemize}
+ 
+\end{frame}
+
+\begin{frame}{Types of cycle}
+ \begin{figure}
+ %\resizebox{\linewidth}{4cm}{
+ \begin{tikzpicture}
+ 
+ 
+\begin{scope}[xscale=2/5]
+
+  \node (sh) at (-5,3) { h };
+  \node (shh) at (-5,2) { 2h };
+  \node (shhh) at (-5,1) { 4h };
+  \node (shhhh) at (-5,0) { H };
+  
+  \node (title) at (0,5) { V-cycle k=1};
+  \node (title2) at (14,5) {W-cycle k=2};
+
+    \node[circle,fill=blue] (a) at (-3,3) { };
+    \node[circle,fill=blue] (b) at (-2,2) {};
+    \node[circle,fill=blue] (c) at (-1,1) {};
+    \node[circle,fill=red] (d) at (0,0) {};
+    \node[circle,fill=blue] (e) at (1,1) {};
+    \node[circle,fill=blue] (f) at (2,2) {};
+    \node[circle,fill=blue] (g) at (3,3) {};
+    
+    \draw[->] (a) -- (b);
+    \draw[->] (b) -- (c);
+    \draw[->] (c) -- (d);
+    \draw[->] (d) -- (e);
+    \draw[->] (e) -- (f);
+    \draw[->] (f) -- (g);
+    
+    \node[circle,fill=blue] (aa) at (7,3) { };
+    \node[circle,fill=blue] (ab) at (8,2) {};
+    \node[circle,fill=blue] (ac) at (9,1) {};
+    \node[circle,fill=red] (ad) at (10,0) {};
+    \node[circle,fill=blue] (ae) at (11,1) {};
+    \node[circle,fill=red] (af) at (12,0) {};
+    \node[circle,fill=blue] (ag) at (13,1) {};
+    \node[circle,fill=blue] (ah) at (14,2) {};
+    \node[circle,fill=blue] (ai) at (15,1) {};
+    \node[circle,fill=red] (aj) at (16,0) {};
+    \node[circle,fill=blue] (ak) at (17,1) {};
+    \node[circle,fill=red] (al) at (18,0) {};
+    \node[circle,fill=blue] (am) at (19,1) {};
+    \node[circle,fill=blue] (an) at (20,2) {};
+    \node[circle,fill=blue] (ao) at (21,3) {};
+    
+    \draw[->] (aa) -- (ab);
+    \draw[->] (ab) -- (ac);
+    \draw[->] (ac) -- (ad);
+    \draw[->] (ad) -- (ae);
+    \draw[->] (ae) -- (af);
+    \draw[->] (af) -- (ag);
+    \draw[->] (ag) -- (ah);
+    \draw[->] (ah) -- (ai);
+    \draw[->] (ai) -- (aj);
+    \draw[->] (aj) -- (ak);
+    \draw[->] (ak) -- (al);
+    \draw[->] (al) -- (am);
+    \draw[->] (am) -- (an);
+    \draw[->] (an) -- (ao);
+    \end{scope}
+    
+ \end{tikzpicture}
+ %}
+\end{figure}
+ 
+\end{frame}
+
+\begin{frame}{Cost of a $k$-cycle}
+ 
+ Using a grid with $N$ points for each of the $d$ dimensions, doing $s$ relaxations at each level:
+ \begin{itemize}
+  \item V-cycle (1-cycle) costs $\leq \frac{2}{1-2^{-d}} sN^d$
+  \item W-cycle (2-cycle) costs $\leq \frac{3}{1-2^{1-d}} sN^d$
+  \item $k$-cycle costs $\leq \frac{k+1}{1-k2^{-d}} sN^d$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Results - 80x80x80}
+ \includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_1.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80}
+ \includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence.pdf}
+\end{frame}
+\begin{frame}{Results - 40x40x40}
+ \includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_1_small.pdf}
+\end{frame}
+\begin{frame}{Results - 40x40x40}
+ \includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence_small.pdf}
+\end{frame}
+
+\begin{frame}{Results}
+80x80x80:
+\vspace{-0.8cm}
+ \begin{table}
+  \resizebox{\linewidth}{!}{
+     \begin{tabular}{|c||c|c|c|c||c|c|c|c|}
+     \hline
+       Parameters & V (1) & V (2) & V (3) & V (10) & W (1) & W (2) & W (3) & W (10) \\
+     \hline
+       Slope	  & 0.123 & 0.207 & 0.304 & 0.799 & 0.248 & 0.443 & 0.591 & 1.758 \\
+     \hline
+       Offset     & -0.046 & 0.069 & 0.151 & 0.082 & 0.078 & 0.038 & -0.003 & -0.030 \\
+     \hline
+     \end{tabular}
+  }
+ \end{table}
+\vspace{-0.5cm}
+ \begin{table}
+     \begin{tabular}{|c|c|c|c|c|c|}
+     \hline
+       W/V & 1 & 2 & 3 & 10 & Theoretical \\
+     \hline
+       Value	  & 2.018 & 2.149 & 1.947 & 2.199 & 1.75 \\
+     \hline
+     \end{tabular}
+ \end{table}
+
+40x40x40:
+\vspace{-0.8cm}
+ \begin{table}
+  \resizebox{\linewidth}{!}{
+     \begin{tabular}{|c||c|c|c|c||c|c|c|c|}
+     \hline
+       Parameters & V (1) & V (2) & V (3) & V (10) & W (1) & W (2) & W (3) & W (10) \\
+     \hline
+       Slope	  & 0.0188 & 0.0298 & 0.0379 & 0.115 & 0.0317 & 0.0547 & 0.0722 & 0.214 \\
+     \hline
+       Offset     & -0.0340 & -0.0801 & 0.0279 & 0.0382 & 0.00229 & -0.0768 & -0.0397 & -0.0312 \\
+     \hline
+     \end{tabular}
+  }
+ \end{table}
+\vspace{-0.5cm}
+ 
+ \begin{table}
+     \begin{tabular}{|c|c|c|c|c|c|}
+     \hline
+       W/V & 1 & 2 & 3 & 10 & Theoretical \\
+     \hline
+       Value	  & 1.685 & 1.836 & 1.906 & 1.852 & 1.75 \\
+     \hline
+     \end{tabular}
+ \end{table}
+ 
+ Ratio between 10x10x10 and 5x5x5 is between 6.540 and 8.561 (average 7.644).
+ 
+ 
+\end{frame}
+
+\begin{frame}{Execution times in a V-cycle}
+ Problem size: 80x80x80. Grid levels: 8.\\ \vspace{0.5cm}
+ \resizebox{\linewidth}{!}{
+ \begin{tabular}{|c|c|c|c|c|c|c|}
+ \hline
+ Level & Matrix size & Non-zero & Relax (down) & Relax (up) & Matvec (down) & Matvec (up) \\
+ \hline
+  0 & 512,000 & 4,042,520 & 20 ms & 20 ms & 15 ms & -\\
+ \hline
+  1 & 256,000 & 6,475,239 & 20 ms & 25 ms & 12 ms & 4 ms\\
+ \hline
+  2 & 58893 & 2,000,513 & 8 ms & 8 ms & 3 ms & 2 ms\\
+ \hline
+  3 & 14285 & 788,509 & 2 ms & 2 ms & 1 ms & 0.7 ms\\
+ \hline
+  4 & 4238 & 386,333 & 1 ms & 1 ms & 0.5 ms & 0.2 ms\\
+ \hline
+  5 & 609 & 53,493 & 0 ms & 0 ms & 0 ms & 0 ms\\
+ \hline
+  6 & 69 & 2,873 & 0 ms & 0 ms & 0 ms & 0 ms\\
+ \hline
+  7 & 2 & 4 & 0 ms & - & - & 0 ms\\
+ \hline
+ \end{tabular}
+ }\\ \vspace{0.5cm}
+Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matrix-vector products $\approx$25-30\%.
+ \end{frame}
+
+\begin{frame}{Ideas}
+  Idea: remove or add relaxation steps at given levels $l \in 0,\dots,n-1$.\\
+  Observations: removing relaxation steps at finer levels is \textbf{less efficient}. Adding relaxation steps at coarser levels is \textbf{useless}.
+  Strategies tested:\\
+  \begin{itemize}
+   \item \emph{Fast} : no relaxation at level 1.
+   \item \emph{Fast2} : 10 relaxations at level $n-3$.
+   \item \emph{Fast3} : 2 relaxations at levels $n-3,n-5,\dots,2$.
+   \item \emph{Fast4} : no relaxation at level 2.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Results - 40x40x40}
+ \includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_fast_small.pdf}
+\end{frame}
+\begin{frame}{Results - 40x40x40}
+ \includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence_fast_small.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80}
+ \includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_fast.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80}
+ \includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence_fast.pdf}
+\end{frame}
+
+\begin{frame}{Ideas}
+  Idea: remove or add relaxation steps at given levels $l \in 0,\dots,n-1$.\\
+  Observations: removing relaxation steps at finer levels is \textbf{less efficient}. Adding relaxation steps at coarser levels is \textbf{useless}.
+  Strategies tested:\\
+  \begin{itemize}
+   \item {\color{mygray}\emph{Fast} : no relaxation at level 1.
+   \item \emph{Fast2} : 10 relaxations at level $n-3$.
+   \item \emph{Fast3} : 2 relaxations at levels $n-3,n-5,\dots,2$.}
+   \item \emph{Fast4} : no relaxation at level 2.
+   \item \emph{Up} : relaxation only when going up in the cycle.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Results - 80x80x80}
+ \includegraphics[width=\linewidth]{AMG2006/test/ASUS/convergence_fast.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80}
+ \includegraphics[width=\linewidth]{AMG2006/test/ASUS/time_convergence_fast.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80 - Laplace27pt}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/convergence_fast_10.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80 - Laplace27pt}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/time_convergence_fast_10.pdf}
+\end{frame}
+\begin{frame}{Results - 40x40x40 - Laplace27pt}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/convergence_fast.pdf}
+\end{frame}
+\begin{frame}{Results - 40x40x40 - Laplace27pt}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/time_convergence_fast.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80 - Laplace}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/laplace/convergence_fast.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80 - Laplace}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/laplace/time_convergence_fast.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80 - Jumps}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/convergence_fast_10.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80 - Jumps}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/time_convergence_fast_10.pdf}
+\end{frame}
+\begin{frame}{Results - 40x40x40 - Jumps}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/convergence_fast.pdf}
+\end{frame}
+\begin{frame}{Results - 40x40x40 - Jumps}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/time_convergence_fast.pdf}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,1343 @@
+Entering AMG Solve
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 15.071000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 22.593000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.673000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.669000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.539000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.066000
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+Level 6 relaxation : 0.081000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.065000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.534000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.603000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.862000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 16.676000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 19.594000
+Number of iterations : 1
+Final residual norm : 2.661276e-03
+Entering AMG Solve
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 15.058000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 19.180000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 7.569000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.647000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.538000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.065000
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+Level 6 relaxation : 0.083000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.065000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.535000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.606000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.787000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 16.043000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 20.772000
+Number of iterations : 1
+Final residual norm : 2.661276e-03
+Entering AMG Solve
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 15.279000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 16.292000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 5.949000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.879000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.687000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.084000
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+Level 6 relaxation : 0.118000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.072000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.596000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 2.031000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.895000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 16.110000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 16.674000
+Number of iterations : 1
+Final residual norm : 2.661276e-03
+Entering AMG Solve
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 18.495000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 16.130000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 5.065000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 2.165000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.867000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.083000
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+Level 6 relaxation : 0.120000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.168000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.605000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.756000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 6.215000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 17.856000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 15.056000
+Number of iterations : 1
+Final residual norm : 2.661276e-03
+Entering AMG Solve
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 21.273000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 16.201000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.711000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.623000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.541000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.068000
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+Level 6 relaxation : 0.094000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.065000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.534000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.603000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 7.202000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 20.223000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 15.104000
+Number of iterations : 1
+Final residual norm : 2.661276e-03
+Entering AMG Solve
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 17.971000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 18.260000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.690000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.641000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.591000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.069000
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+Level 6 relaxation : 0.083000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.065000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.540000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.603000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.660000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 23.306000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 15.115000
+Number of iterations : 1
+Final residual norm : 2.661276e-03
+Entering AMG Solve
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 17.944000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 19.912000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.932000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.626000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.556000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.069000
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+Level 6 relaxation : 0.086000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.067000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.566000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.604000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.690000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 22.936000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 15.294000
+Number of iterations : 1
+Final residual norm : 2.661276e-03
+Entering AMG Solve
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 15.069000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 22.752000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.693000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.703000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.565000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.067000
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+Level 6 relaxation : 0.084000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.065000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.543000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.609000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.718000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 19.523000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 17.872000
+Number of iterations : 1
+Final residual norm : 2.661276e-03
+Entering AMG Solve
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 15.031000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 23.185000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.694000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.645000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.539000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.067000
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+Level 6 relaxation : 0.086000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.066000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.535000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.609000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.935000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 18.314000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 18.642000
+Number of iterations : 1
+Final residual norm : 2.661276e-03
+Entering AMG Solve
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 15.066000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 20.405000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 5.783000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.711000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.559000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.072000
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+num rows = 8
+Level 6 relaxation : 0.088000
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+num rows = 84
+Level 5 relaxation : 0.065000
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+num rows = 540
+Level 4 relaxation : 0.534000
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+num rows = 1931
+Level 3 relaxation : 1.631000
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+num rows = 7785
+Level 2 relaxation : 4.803000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+num rows = 32000
+Level 1 relaxation : 15.987000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+num rows = 64000
+Level 0 relaxation : 21.145000
+Number of iterations : 1
+Final residual norm : 2.661276e-03
+=============================================
+AMG times:
+=============================================
+Multi-grid:
+  wall clock time = 0.939691 seconds
+  cpu clock time  = 0.939631 seconds
+
+AMG Sequoia Benchmark version 1.0
+Iterations = 0
+Final Relative Residual Norm = 0.000000e+00
+
+System Size * Iterations / Solve Phase Time: 0.000000e+00
+

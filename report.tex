@@ -1,0 +1,69 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,amstext,latexsym}	
+%opening
+\title{Approximating a Multi-Grid Solver}
+\author{Valentin Le Fèvre}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+The multi-grid algorithms are a class of linear system solvers.
+The idea is to restrict and interpolate vectors and matrices to have easier problems to solve, that is, problems that we can solve in much less time than the original one.
+
+We will focus on a quite general and simple multi-grid solver implemented using the HYPRE library.
+
+\section{Definitions}
+
+\begin{itemize}
+ \item A system of equations is represented by the following equation: $Ax=b$, where $A \in \mathcal{M}(\mathbb{R})^{n\times n}$ and $b \in \mathcal{\mathbb{R}}^n$ are given and
+ $x \in \mathbb{R}^n$ is the unknown. The \emph{exact} solution of this system will be denoted by $\widetilde{x}$.
+ \item A level is an integer between $1$ and $L$. Level $1$ will be called the finest level, and level $L$ will be called the coarsest level.
+ \item The restriction of $A$ (or $b$ or $x$) to level $l$ will be denoted by $A^l$ (or $b^l$ or $x^l$). We have $A^1 = A$ (and $b^1=b,x^1=x$).
+ \item We define a set of $L-1$ restriction matrices $R_1,\dots,R_{L-1}$ such that $R_l b^l = b^{l+1}$. We also define some prolongation matrices $P_1,\dots,P_{L-1}$ such that $P_{l}b^{l+1} = b^l$.
+ In other words, we have $P_l = {R_l}^T$ and we build the $A^l$ matrices as follows: $A^{l+1} = R_l A^l P_l$.
+ \item We denote by $e^l$ the error at level $l$, that is the vector such that $x^l + e^l = \widetilde{x^l}$, that is to say $\widetilde{x^l}-x^l$.
+ We also define the residual at level $l$, $r^l = b^l - A^lx^l$. As $b^l = A^l\widetilde{x^l}$, we can also write $r^l = A^le^l$.
+ \item We call relaxation a step of an iterative method for solving linear systems (such as Jacobi, Gauss-Sneidel, \dots). Formally, for a vector $x \in \mathbb{R}^n$, it represents the computation of
+ $x \leftarrow Mx + c$ where $M \in \mathcal{M}(\mathbb{R})^{n\times n}$ and $c \in \mathcal{\mathbb{R}}^n$ and are defined depending on the method used.
+\end{itemize}
+
+\section{How it works}
+
+  The goal of the algorithm is to improve the efficiency of iterative methods. Indeed, the choice of the starting vector $x$ on which to apply relaxations has consequences on the convergence
+  time of the solver, and depending on the system to solve, the convergence of factor (related to the matrix $M$) can be close to 1.\\
+  Here the idea is to do some relaxations and then correct the value of $x$ by adding it the corresponding error term. However, this error term cannot be computed easily (otherwise,
+  solving the problem would be done by computing the error term and adding it to $x$). Multi-grid solvers instead use recursion to compute the error term. The stopping parameter for the
+  recursion will be determined by decreasing the sizes of vectors and matrices (thus loosing on precision but saving time).
+  Formally, we can sum up the algorithm as follows:
+  
+  MG$(l,x,f,\alpha_1,\alpha_2)$:
+  \begin{itemize}
+    \item If $l = L$, return $x = {A^L}^{-1} f$ (exact solve);
+    \item Else:
+    \begin{enumerate}
+      \item Relax $x$ $\alpha_1$ times using an iterative method (matrix $A^l$, right hand side $f$);
+      \item $r \leftarrow R_l ( f - Ax )$;
+      \item $y \leftarrow 0$:
+      \item MG$(l+1,y,r,\alpha_1,\alpha_2)$;
+      \item $e \leftarrow P_{l} y$;
+      \item $x \leftarrow x+e$;
+      \item Relax $x$ $\alpha_2$ times using an iterative method (matrix $A^l$, right hand side $f$);
+   \end{enumerate}
+  \end{itemize}
+  The algorihtm is then executed by setting $x^l \leftarrow 0$ and then executing MG$(1,x^l,b^l,\alpha_1,\alpha_2)$.
+
+  Then several ways of modifying the algorithm appear:
+  \begin{itemize}
+   \item Which iterative method to use?
+   \item Do we want only one recursion or more?
+   \item How many times do we need to apply the algorithm?
+   \item How to determine good $\alpha_1$ and $\alpha_2$ parameters?
+   \item How many levels should be defined?
+  \end{itemize}
+
+
+\end{document}

@@ -1,0 +1,5143 @@
+Entering AMG Solve
+num rows = 512000
+Level 0 relaxation : 15.315000
+num rows = 256000
+Level 1 relaxation : 17.147000
+num rows = 58893
+Level 2 relaxation : 4.822000
+num rows = 14285
+Level 3 relaxation : 1.891000
+num rows = 4238
+Level 4 relaxation : 0.868000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.880000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.966000
+num rows = 14285
+Level 3 relaxation : 1.933000
+num rows = 4238
+Level 4 relaxation : 0.869000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.879000
+num rows = 609
+Level 5 relaxation : 0.109000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.010000
+num rows = 2
+Level 7 relaxation : 0.021000
+num rows = 69
+Level 6 relaxation : 0.010000
+num rows = 2
+Level 7 relaxation : 0.013000
+num rows = 69
+Level 6 relaxation : 0.010000
+num rows = 609
+Level 5 relaxation : 0.107000
+num rows = 4238
+Level 4 relaxation : 0.909000
+num rows = 14285
+Level 3 relaxation : 2.020000
+num rows = 58893
+Level 2 relaxation : 4.827000
+num rows = 14285
+Level 3 relaxation : 2.834000
+num rows = 4238
+Level 4 relaxation : 0.869000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 1.020000
+num rows = 609
+Level 5 relaxation : 0.160000
+num rows = 69
+Level 6 relaxation : 0.013000
+num rows = 2
+Level 7 relaxation : 0.039000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.130000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.010000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.021000
+num rows = 609
+Level 5 relaxation : 0.115000
+num rows = 4238
+Level 4 relaxation : 0.974000
+num rows = 14285
+Level 3 relaxation : 1.918000
+num rows = 4238
+Level 4 relaxation : 0.910000
+num rows = 609
+Level 5 relaxation : 0.125000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 4238
+Level 4 relaxation : 0.882000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.020000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.882000
+num rows = 14285
+Level 3 relaxation : 1.960000
+num rows = 58893
+Level 2 relaxation : 4.823000
+num rows = 256000
+Level 1 relaxation : 15.361000
+num rows = 58893
+Level 2 relaxation : 5.493000
+num rows = 14285
+Level 3 relaxation : 2.022000
+num rows = 4238
+Level 4 relaxation : 0.870000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.018000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 4238
+Level 4 relaxation : 0.883000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.885000
+num rows = 14285
+Level 3 relaxation : 2.058000
+num rows = 4238
+Level 4 relaxation : 0.939000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.018000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.918000
+num rows = 609
+Level 5 relaxation : 0.124000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.021000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.052000
+num rows = 2
+Level 7 relaxation : 0.010000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 4238
+Level 4 relaxation : 0.934000
+num rows = 14285
+Level 3 relaxation : 2.145000
+num rows = 58893
+Level 2 relaxation : 4.901000
+num rows = 14285
+Level 3 relaxation : 1.895000
+num rows = 4238
+Level 4 relaxation : 0.868000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.025000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.987000
+num rows = 609
+Level 5 relaxation : 0.109000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.101000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.986000
+num rows = 14285
+Level 3 relaxation : 3.101000
+num rows = 4238
+Level 4 relaxation : 0.899000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.902000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 0.985000
+num rows = 14285
+Level 3 relaxation : 2.226000
+num rows = 58893
+Level 2 relaxation : 4.987000
+num rows = 256000
+Level 1 relaxation : 15.375000
+num rows = 512000
+Level 0 relaxation : 16.511000
+Number of iterations : 1
+Final residual norm : 4.174812e-02
+Entering AMG Solve
+num rows = 512000
+Level 0 relaxation : 15.290000
+num rows = 256000
+Level 1 relaxation : 18.329000
+num rows = 58893
+Level 2 relaxation : 4.894000
+num rows = 14285
+Level 3 relaxation : 1.894000
+num rows = 4238
+Level 4 relaxation : 0.879000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.101000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.880000
+num rows = 609
+Level 5 relaxation : 0.163000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 4238
+Level 4 relaxation : 0.890000
+num rows = 14285
+Level 3 relaxation : 2.032000
+num rows = 4238
+Level 4 relaxation : 0.954000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.877000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.020000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.010000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 1.060000
+num rows = 14285
+Level 3 relaxation : 2.683000
+num rows = 58893
+Level 2 relaxation : 5.411000
+num rows = 14285
+Level 3 relaxation : 1.935000
+num rows = 4238
+Level 4 relaxation : 0.939000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.031000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.881000
+num rows = 609
+Level 5 relaxation : 0.127000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.887000
+num rows = 14285
+Level 3 relaxation : 2.011000
+num rows = 4238
+Level 4 relaxation : 0.927000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.108000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.924000
+num rows = 609
+Level 5 relaxation : 0.125000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.108000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.932000
+num rows = 14285
+Level 3 relaxation : 2.028000
+num rows = 58893
+Level 2 relaxation : 5.048000
+num rows = 256000
+Level 1 relaxation : 17.109000
+num rows = 58893
+Level 2 relaxation : 4.876000
+num rows = 14285
+Level 3 relaxation : 1.961000
+num rows = 4238
+Level 4 relaxation : 0.892000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.890000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.875000
+num rows = 14285
+Level 3 relaxation : 2.115000
+num rows = 4238
+Level 4 relaxation : 0.868000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.886000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.020000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.948000
+num rows = 14285
+Level 3 relaxation : 2.044000
+num rows = 58893
+Level 2 relaxation : 4.847000
+num rows = 14285
+Level 3 relaxation : 2.178000
+num rows = 4238
+Level 4 relaxation : 1.089000
+num rows = 609
+Level 5 relaxation : 0.115000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.026000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.927000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 1.002000
+num rows = 14285
+Level 3 relaxation : 2.504000
+num rows = 4238
+Level 4 relaxation : 1.014000
+num rows = 609
+Level 5 relaxation : 0.121000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.024000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 4238
+Level 4 relaxation : 1.063000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.024000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.115000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.952000
+num rows = 14285
+Level 3 relaxation : 2.038000
+num rows = 58893
+Level 2 relaxation : 4.880000
+num rows = 256000
+Level 1 relaxation : 15.291000
+num rows = 512000
+Level 0 relaxation : 17.080000
+Number of iterations : 1
+Final residual norm : 4.174812e-02
+Entering AMG Solve
+num rows = 512000
+Level 0 relaxation : 15.127000
+num rows = 256000
+Level 1 relaxation : 16.238000
+num rows = 58893
+Level 2 relaxation : 4.805000
+num rows = 14285
+Level 3 relaxation : 1.969000
+num rows = 4238
+Level 4 relaxation : 0.868000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.888000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 1.259000
+num rows = 14285
+Level 3 relaxation : 2.371000
+num rows = 4238
+Level 4 relaxation : 1.128000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.912000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 0.952000
+num rows = 14285
+Level 3 relaxation : 2.443000
+num rows = 58893
+Level 2 relaxation : 5.242000
+num rows = 14285
+Level 3 relaxation : 1.892000
+num rows = 4238
+Level 4 relaxation : 0.892000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.028000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.906000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.895000
+num rows = 14285
+Level 3 relaxation : 2.013000
+num rows = 4238
+Level 4 relaxation : 0.929000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.022000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.905000
+num rows = 609
+Level 5 relaxation : 0.127000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.928000
+num rows = 14285
+Level 3 relaxation : 2.023000
+num rows = 58893
+Level 2 relaxation : 4.911000
+num rows = 256000
+Level 1 relaxation : 18.216000
+num rows = 58893
+Level 2 relaxation : 4.826000
+num rows = 14285
+Level 3 relaxation : 1.899000
+num rows = 4238
+Level 4 relaxation : 0.868000
+num rows = 609
+Level 5 relaxation : 0.163000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.028000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.883000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.876000
+num rows = 14285
+Level 3 relaxation : 2.038000
+num rows = 4238
+Level 4 relaxation : 0.866000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.881000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.108000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.012000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.980000
+num rows = 14285
+Level 3 relaxation : 2.795000
+num rows = 58893
+Level 2 relaxation : 5.951000
+num rows = 14285
+Level 3 relaxation : 1.978000
+num rows = 4238
+Level 4 relaxation : 0.969000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.027000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.889000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.880000
+num rows = 14285
+Level 3 relaxation : 1.933000
+num rows = 4238
+Level 4 relaxation : 0.871000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.017000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 0.945000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.011000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.914000
+num rows = 14285
+Level 3 relaxation : 2.086000
+num rows = 58893
+Level 2 relaxation : 5.064000
+num rows = 256000
+Level 1 relaxation : 17.632000
+num rows = 512000
+Level 0 relaxation : 15.919000
+Number of iterations : 1
+Final residual norm : 4.174812e-02
+Entering AMG Solve
+num rows = 512000
+Level 0 relaxation : 16.738000
+num rows = 256000
+Level 1 relaxation : 15.490000
+num rows = 58893
+Level 2 relaxation : 4.856000
+num rows = 14285
+Level 3 relaxation : 2.422000
+num rows = 4238
+Level 4 relaxation : 0.922000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 1.092000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.022000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.010000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 4238
+Level 4 relaxation : 0.921000
+num rows = 14285
+Level 3 relaxation : 1.887000
+num rows = 4238
+Level 4 relaxation : 0.937000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.019000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.880000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.020000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 4238
+Level 4 relaxation : 0.887000
+num rows = 14285
+Level 3 relaxation : 1.996000
+num rows = 58893
+Level 2 relaxation : 4.815000
+num rows = 14285
+Level 3 relaxation : 2.009000
+num rows = 4238
+Level 4 relaxation : 0.868000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.021000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.109000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.882000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.906000
+num rows = 14285
+Level 3 relaxation : 2.146000
+num rows = 4238
+Level 4 relaxation : 0.909000
+num rows = 609
+Level 5 relaxation : 0.123000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.883000
+num rows = 609
+Level 5 relaxation : 0.154000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.931000
+num rows = 14285
+Level 3 relaxation : 2.182000
+num rows = 58893
+Level 2 relaxation : 6.670000
+num rows = 256000
+Level 1 relaxation : 16.108000
+num rows = 58893
+Level 2 relaxation : 4.807000
+num rows = 14285
+Level 3 relaxation : 1.893000
+num rows = 4238
+Level 4 relaxation : 0.867000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.879000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.150000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.122000
+num rows = 4238
+Level 4 relaxation : 1.000000
+num rows = 14285
+Level 3 relaxation : 2.270000
+num rows = 4238
+Level 4 relaxation : 1.146000
+num rows = 609
+Level 5 relaxation : 0.117000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.019000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.013000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 0.917000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 4238
+Level 4 relaxation : 0.929000
+num rows = 14285
+Level 3 relaxation : 2.654000
+num rows = 58893
+Level 2 relaxation : 5.088000
+num rows = 14285
+Level 3 relaxation : 1.895000
+num rows = 4238
+Level 4 relaxation : 0.868000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.895000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 4238
+Level 4 relaxation : 0.876000
+num rows = 14285
+Level 3 relaxation : 1.961000
+num rows = 4238
+Level 4 relaxation : 0.992000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.883000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.013000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.012000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 69
+Level 6 relaxation : 0.015000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.929000
+num rows = 14285
+Level 3 relaxation : 2.052000
+num rows = 58893
+Level 2 relaxation : 5.080000
+num rows = 256000
+Level 1 relaxation : 18.017000
+num rows = 512000
+Level 0 relaxation : 15.294000
+Number of iterations : 1
+Final residual norm : 4.174812e-02
+Entering AMG Solve
+num rows = 512000
+Level 0 relaxation : 17.341000
+num rows = 256000
+Level 1 relaxation : 15.303000
+num rows = 58893
+Level 2 relaxation : 5.875000
+num rows = 14285
+Level 3 relaxation : 1.980000
+num rows = 4238
+Level 4 relaxation : 0.971000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.899000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.913000
+num rows = 14285
+Level 3 relaxation : 2.078000
+num rows = 4238
+Level 4 relaxation : 0.894000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.908000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.022000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.923000
+num rows = 14285
+Level 3 relaxation : 2.045000
+num rows = 58893
+Level 2 relaxation : 5.066000
+num rows = 14285
+Level 3 relaxation : 1.941000
+num rows = 4238
+Level 4 relaxation : 0.890000
+num rows = 609
+Level 5 relaxation : 0.117000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.020000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 4238
+Level 4 relaxation : 0.885000
+num rows = 609
+Level 5 relaxation : 0.171000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.892000
+num rows = 14285
+Level 3 relaxation : 2.175000
+num rows = 4238
+Level 4 relaxation : 1.183000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.018000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.131000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.019000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.161000
+num rows = 4238
+Level 4 relaxation : 1.735000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 0.910000
+num rows = 14285
+Level 3 relaxation : 1.983000
+num rows = 58893
+Level 2 relaxation : 5.436000
+num rows = 256000
+Level 1 relaxation : 15.350000
+num rows = 58893
+Level 2 relaxation : 4.825000
+num rows = 14285
+Level 3 relaxation : 2.145000
+num rows = 4238
+Level 4 relaxation : 1.258000
+num rows = 609
+Level 5 relaxation : 0.124000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.911000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 0.903000
+num rows = 14285
+Level 3 relaxation : 2.542000
+num rows = 4238
+Level 4 relaxation : 1.033000
+num rows = 609
+Level 5 relaxation : 0.119000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.027000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.010000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.010000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.109000
+num rows = 4238
+Level 4 relaxation : 0.974000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.951000
+num rows = 14285
+Level 3 relaxation : 2.111000
+num rows = 58893
+Level 2 relaxation : 4.963000
+num rows = 14285
+Level 3 relaxation : 1.947000
+num rows = 4238
+Level 4 relaxation : 0.937000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.881000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.880000
+num rows = 14285
+Level 3 relaxation : 1.985000
+num rows = 4238
+Level 4 relaxation : 0.869000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.101000
+num rows = 4238
+Level 4 relaxation : 0.880000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.012000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.894000
+num rows = 14285
+Level 3 relaxation : 2.021000
+num rows = 58893
+Level 2 relaxation : 6.477000
+num rows = 256000
+Level 1 relaxation : 16.108000
+num rows = 512000
+Level 0 relaxation : 15.317000
+Number of iterations : 1
+Final residual norm : 4.174812e-02
+Entering AMG Solve
+num rows = 512000
+Level 0 relaxation : 16.084000
+num rows = 256000
+Level 1 relaxation : 16.030000
+num rows = 58893
+Level 2 relaxation : 5.013000
+num rows = 14285
+Level 3 relaxation : 1.895000
+num rows = 4238
+Level 4 relaxation : 0.866000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.027000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.882000
+num rows = 609
+Level 5 relaxation : 0.109000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.878000
+num rows = 14285
+Level 3 relaxation : 1.981000
+num rows = 4238
+Level 4 relaxation : 0.947000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.916000
+num rows = 609
+Level 5 relaxation : 0.118000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.020000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 0.947000
+num rows = 14285
+Level 3 relaxation : 2.081000
+num rows = 58893
+Level 2 relaxation : 4.935000
+num rows = 14285
+Level 3 relaxation : 2.099000
+num rows = 4238
+Level 4 relaxation : 1.778000
+num rows = 609
+Level 5 relaxation : 0.205000
+num rows = 69
+Level 6 relaxation : 0.013000
+num rows = 2
+Level 7 relaxation : 0.033000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.935000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.903000
+num rows = 14285
+Level 3 relaxation : 2.406000
+num rows = 4238
+Level 4 relaxation : 0.988000
+num rows = 609
+Level 5 relaxation : 0.115000
+num rows = 69
+Level 6 relaxation : 0.036000
+num rows = 2
+Level 7 relaxation : 0.024000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.018000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.018000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 4238
+Level 4 relaxation : 0.993000
+num rows = 609
+Level 5 relaxation : 0.138000
+num rows = 69
+Level 6 relaxation : 0.010000
+num rows = 2
+Level 7 relaxation : 0.027000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.119000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.011000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.943000
+num rows = 14285
+Level 3 relaxation : 2.105000
+num rows = 58893
+Level 2 relaxation : 4.875000
+num rows = 256000
+Level 1 relaxation : 15.284000
+num rows = 58893
+Level 2 relaxation : 6.328000
+num rows = 14285
+Level 3 relaxation : 2.049000
+num rows = 4238
+Level 4 relaxation : 0.940000
+num rows = 609
+Level 5 relaxation : 0.131000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.013000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 1.013000
+num rows = 609
+Level 5 relaxation : 0.115000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.018000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.904000
+num rows = 14285
+Level 3 relaxation : 1.990000
+num rows = 4238
+Level 4 relaxation : 0.866000
+num rows = 609
+Level 5 relaxation : 0.142000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.877000
+num rows = 609
+Level 5 relaxation : 0.127000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.926000
+num rows = 14285
+Level 3 relaxation : 2.067000
+num rows = 58893
+Level 2 relaxation : 5.000000
+num rows = 14285
+Level 3 relaxation : 1.903000
+num rows = 4238
+Level 4 relaxation : 0.866000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.888000
+num rows = 609
+Level 5 relaxation : 0.109000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.921000
+num rows = 14285
+Level 3 relaxation : 1.947000
+num rows = 4238
+Level 4 relaxation : 1.027000
+num rows = 609
+Level 5 relaxation : 0.120000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 1.082000
+num rows = 609
+Level 5 relaxation : 0.183000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.107000
+num rows = 4238
+Level 4 relaxation : 1.168000
+num rows = 14285
+Level 3 relaxation : 1.953000
+num rows = 58893
+Level 2 relaxation : 5.587000
+num rows = 256000
+Level 1 relaxation : 15.457000
+num rows = 512000
+Level 0 relaxation : 15.189000
+Number of iterations : 1
+Final residual norm : 4.174812e-02
+Entering AMG Solve
+num rows = 512000
+Level 0 relaxation : 15.295000
+num rows = 256000
+Level 1 relaxation : 17.930000
+num rows = 58893
+Level 2 relaxation : 4.820000
+num rows = 14285
+Level 3 relaxation : 1.940000
+num rows = 4238
+Level 4 relaxation : 0.898000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.907000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.892000
+num rows = 14285
+Level 3 relaxation : 1.986000
+num rows = 4238
+Level 4 relaxation : 0.877000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.878000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.019000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.917000
+num rows = 14285
+Level 3 relaxation : 2.166000
+num rows = 58893
+Level 2 relaxation : 6.544000
+num rows = 14285
+Level 3 relaxation : 2.446000
+num rows = 4238
+Level 4 relaxation : 0.881000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.944000
+num rows = 609
+Level 5 relaxation : 0.125000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 4238
+Level 4 relaxation : 0.875000
+num rows = 14285
+Level 3 relaxation : 1.919000
+num rows = 4238
+Level 4 relaxation : 0.864000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.883000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.044000
+num rows = 2
+Level 7 relaxation : 0.012000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.117000
+num rows = 4238
+Level 4 relaxation : 0.913000
+num rows = 14285
+Level 3 relaxation : 2.062000
+num rows = 58893
+Level 2 relaxation : 4.866000
+num rows = 256000
+Level 1 relaxation : 15.305000
+num rows = 58893
+Level 2 relaxation : 5.033000
+num rows = 14285
+Level 3 relaxation : 1.894000
+num rows = 4238
+Level 4 relaxation : 0.868000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.882000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.010000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.108000
+num rows = 4238
+Level 4 relaxation : 0.883000
+num rows = 14285
+Level 3 relaxation : 1.988000
+num rows = 4238
+Level 4 relaxation : 0.886000
+num rows = 609
+Level 5 relaxation : 0.123000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 0.897000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.019000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.886000
+num rows = 14285
+Level 3 relaxation : 2.010000
+num rows = 58893
+Level 2 relaxation : 4.793000
+num rows = 14285
+Level 3 relaxation : 1.909000
+num rows = 4238
+Level 4 relaxation : 0.964000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.019000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 1.048000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.145000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.229000
+num rows = 4238
+Level 4 relaxation : 1.568000
+num rows = 14285
+Level 3 relaxation : 1.946000
+num rows = 4238
+Level 4 relaxation : 0.911000
+num rows = 609
+Level 5 relaxation : 0.147000
+num rows = 69
+Level 6 relaxation : 0.010000
+num rows = 2
+Level 7 relaxation : 0.037000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.019000
+num rows = 69
+Level 6 relaxation : 0.024000
+num rows = 609
+Level 5 relaxation : 0.137000
+num rows = 69
+Level 6 relaxation : 0.010000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.013000
+num rows = 69
+Level 6 relaxation : 0.010000
+num rows = 609
+Level 5 relaxation : 0.137000
+num rows = 4238
+Level 4 relaxation : 1.092000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.028000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.032000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.932000
+num rows = 14285
+Level 3 relaxation : 2.023000
+num rows = 58893
+Level 2 relaxation : 4.821000
+num rows = 256000
+Level 1 relaxation : 15.352000
+num rows = 512000
+Level 0 relaxation : 16.536000
+Number of iterations : 1
+Final residual norm : 4.174812e-02
+Entering AMG Solve
+num rows = 512000
+Level 0 relaxation : 15.154000
+num rows = 256000
+Level 1 relaxation : 17.829000
+num rows = 58893
+Level 2 relaxation : 4.944000
+num rows = 14285
+Level 3 relaxation : 1.897000
+num rows = 4238
+Level 4 relaxation : 0.878000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.881000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.885000
+num rows = 14285
+Level 3 relaxation : 1.935000
+num rows = 4238
+Level 4 relaxation : 0.952000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.020000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 1.044000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.019000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.125000
+num rows = 69
+Level 6 relaxation : 0.010000
+num rows = 2
+Level 7 relaxation : 0.021000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.154000
+num rows = 4238
+Level 4 relaxation : 1.692000
+num rows = 14285
+Level 3 relaxation : 1.899000
+num rows = 58893
+Level 2 relaxation : 5.509000
+num rows = 14285
+Level 3 relaxation : 2.048000
+num rows = 4238
+Level 4 relaxation : 0.866000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.882000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.889000
+num rows = 14285
+Level 3 relaxation : 1.933000
+num rows = 4238
+Level 4 relaxation : 0.877000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.018000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.884000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.012000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.919000
+num rows = 14285
+Level 3 relaxation : 2.196000
+num rows = 58893
+Level 2 relaxation : 4.853000
+num rows = 256000
+Level 1 relaxation : 17.191000
+num rows = 58893
+Level 2 relaxation : 4.833000
+num rows = 14285
+Level 3 relaxation : 1.909000
+num rows = 4238
+Level 4 relaxation : 0.890000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.882000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.108000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.009000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 0.913000
+num rows = 14285
+Level 3 relaxation : 1.959000
+num rows = 4238
+Level 4 relaxation : 0.869000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.884000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.018000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.123000
+num rows = 4238
+Level 4 relaxation : 0.930000
+num rows = 14285
+Level 3 relaxation : 2.033000
+num rows = 58893
+Level 2 relaxation : 4.940000
+num rows = 14285
+Level 3 relaxation : 2.306000
+num rows = 4238
+Level 4 relaxation : 0.891000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 1.260000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.107000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 0.895000
+num rows = 14285
+Level 3 relaxation : 2.113000
+num rows = 4238
+Level 4 relaxation : 0.875000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.021000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.044000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 4238
+Level 4 relaxation : 0.965000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.024000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.927000
+num rows = 14285
+Level 3 relaxation : 2.076000
+num rows = 58893
+Level 2 relaxation : 4.940000
+num rows = 256000
+Level 1 relaxation : 15.456000
+num rows = 512000
+Level 0 relaxation : 17.412000
+Number of iterations : 1
+Final residual norm : 4.174812e-02
+Entering AMG Solve
+num rows = 512000
+Level 0 relaxation : 15.030000
+num rows = 256000
+Level 1 relaxation : 15.518000
+num rows = 58893
+Level 2 relaxation : 4.805000
+num rows = 14285
+Level 3 relaxation : 1.939000
+num rows = 4238
+Level 4 relaxation : 0.971000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 1.278000
+num rows = 609
+Level 5 relaxation : 0.347000
+num rows = 69
+Level 6 relaxation : 0.014000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.122000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.011000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.108000
+num rows = 4238
+Level 4 relaxation : 1.316000
+num rows = 14285
+Level 3 relaxation : 1.897000
+num rows = 4238
+Level 4 relaxation : 0.892000
+num rows = 609
+Level 5 relaxation : 0.133000
+num rows = 69
+Level 6 relaxation : 0.029000
+num rows = 2
+Level 7 relaxation : 0.021000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.012000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.129000
+num rows = 4238
+Level 4 relaxation : 1.118000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.019000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 4238
+Level 4 relaxation : 0.934000
+num rows = 14285
+Level 3 relaxation : 1.975000
+num rows = 58893
+Level 2 relaxation : 5.047000
+num rows = 14285
+Level 3 relaxation : 1.981000
+num rows = 4238
+Level 4 relaxation : 0.883000
+num rows = 609
+Level 5 relaxation : 0.113000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.024000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.883000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.874000
+num rows = 14285
+Level 3 relaxation : 2.140000
+num rows = 4238
+Level 4 relaxation : 0.889000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.902000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.019000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 4238
+Level 4 relaxation : 0.939000
+num rows = 14285
+Level 3 relaxation : 2.090000
+num rows = 58893
+Level 2 relaxation : 4.949000
+num rows = 256000
+Level 1 relaxation : 18.061000
+num rows = 58893
+Level 2 relaxation : 4.858000
+num rows = 14285
+Level 3 relaxation : 1.899000
+num rows = 4238
+Level 4 relaxation : 0.875000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.881000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.895000
+num rows = 14285
+Level 3 relaxation : 2.011000
+num rows = 4238
+Level 4 relaxation : 0.879000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.899000
+num rows = 609
+Level 5 relaxation : 0.149000
+num rows = 69
+Level 6 relaxation : 0.010000
+num rows = 2
+Level 7 relaxation : 0.025000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.010000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.120000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.010000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 4238
+Level 4 relaxation : 1.074000
+num rows = 14285
+Level 3 relaxation : 3.254000
+num rows = 58893
+Level 2 relaxation : 5.179000
+num rows = 14285
+Level 3 relaxation : 2.006000
+num rows = 4238
+Level 4 relaxation : 0.877000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.026000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.901000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.015000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.889000
+num rows = 14285
+Level 3 relaxation : 1.940000
+num rows = 4238
+Level 4 relaxation : 0.926000
+num rows = 609
+Level 5 relaxation : 0.110000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.021000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.922000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 4238
+Level 4 relaxation : 0.990000
+num rows = 14285
+Level 3 relaxation : 2.051000
+num rows = 58893
+Level 2 relaxation : 4.842000
+num rows = 256000
+Level 1 relaxation : 17.180000
+num rows = 512000
+Level 0 relaxation : 15.848000
+Number of iterations : 1
+Final residual norm : 4.174812e-02
+Entering AMG Solve
+num rows = 512000
+Level 0 relaxation : 16.948000
+num rows = 256000
+Level 1 relaxation : 15.357000
+num rows = 58893
+Level 2 relaxation : 5.186000
+num rows = 14285
+Level 3 relaxation : 1.955000
+num rows = 4238
+Level 4 relaxation : 1.142000
+num rows = 609
+Level 5 relaxation : 0.168000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.029000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.018000
+num rows = 69
+Level 6 relaxation : 0.017000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.116000
+num rows = 4238
+Level 4 relaxation : 0.907000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.883000
+num rows = 14285
+Level 3 relaxation : 2.121000
+num rows = 4238
+Level 4 relaxation : 0.866000
+num rows = 609
+Level 5 relaxation : 0.139000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.020000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 4238
+Level 4 relaxation : 0.881000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.020000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.902000
+num rows = 14285
+Level 3 relaxation : 2.054000
+num rows = 58893
+Level 2 relaxation : 4.846000
+num rows = 14285
+Level 3 relaxation : 1.948000
+num rows = 4238
+Level 4 relaxation : 0.892000
+num rows = 609
+Level 5 relaxation : 0.115000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.023000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 0.901000
+num rows = 609
+Level 5 relaxation : 0.115000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.036000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.911000
+num rows = 14285
+Level 3 relaxation : 2.038000
+num rows = 4238
+Level 4 relaxation : 0.895000
+num rows = 609
+Level 5 relaxation : 0.114000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.016000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.918000
+num rows = 609
+Level 5 relaxation : 0.122000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.021000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.104000
+num rows = 4238
+Level 4 relaxation : 1.078000
+num rows = 14285
+Level 3 relaxation : 2.690000
+num rows = 58893
+Level 2 relaxation : 5.293000
+num rows = 256000
+Level 1 relaxation : 15.659000
+num rows = 58893
+Level 2 relaxation : 4.791000
+num rows = 14285
+Level 3 relaxation : 1.904000
+num rows = 4238
+Level 4 relaxation : 0.869000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.030000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 1.023000
+num rows = 609
+Level 5 relaxation : 0.117000
+num rows = 69
+Level 6 relaxation : 0.008000
+num rows = 2
+Level 7 relaxation : 0.018000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.106000
+num rows = 4238
+Level 4 relaxation : 1.183000
+num rows = 14285
+Level 3 relaxation : 3.149000
+num rows = 4238
+Level 4 relaxation : 0.871000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.022000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.987000
+num rows = 609
+Level 5 relaxation : 0.117000
+num rows = 69
+Level 6 relaxation : 0.011000
+num rows = 2
+Level 7 relaxation : 0.038000
+num rows = 69
+Level 6 relaxation : 0.011000
+num rows = 2
+Level 7 relaxation : 0.019000
+num rows = 69
+Level 6 relaxation : 0.010000
+num rows = 609
+Level 5 relaxation : 0.201000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.011000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.984000
+num rows = 14285
+Level 3 relaxation : 1.901000
+num rows = 58893
+Level 2 relaxation : 5.004000
+num rows = 14285
+Level 3 relaxation : 1.921000
+num rows = 4238
+Level 4 relaxation : 0.907000
+num rows = 609
+Level 5 relaxation : 0.112000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.027000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.892000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.014000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.882000
+num rows = 14285
+Level 3 relaxation : 2.065000
+num rows = 4238
+Level 4 relaxation : 0.957000
+num rows = 609
+Level 5 relaxation : 0.111000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.017000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.007000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.102000
+num rows = 4238
+Level 4 relaxation : 0.928000
+num rows = 609
+Level 5 relaxation : 0.126000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.021000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.008000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.105000
+num rows = 69
+Level 6 relaxation : 0.007000
+num rows = 2
+Level 7 relaxation : 0.009000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 2
+Level 7 relaxation : 0.006000
+num rows = 69
+Level 6 relaxation : 0.006000
+num rows = 609
+Level 5 relaxation : 0.103000
+num rows = 4238
+Level 4 relaxation : 0.924000
+num rows = 14285
+Level 3 relaxation : 2.050000
+num rows = 58893
+Level 2 relaxation : 4.969000
+num rows = 256000
+Level 1 relaxation : 18.138000
+num rows = 512000
+Level 0 relaxation : 15.349000
+Number of iterations : 1
+Final residual norm : 4.174812e-02
+=============================================
+AMG times:
+=============================================
+Multi-grid:
+  wall clock time = 2.587327 seconds
+  cpu clock time  = 2.587050 seconds
+
+AMG Sequoia Benchmark version 1.0
+Iterations = 0
+Final Relative Residual Norm = 0.000000e+00
+
+System Size * Iterations / Solve Phase Time: 0.000000e+00
+

@@ -1,0 +1,333 @@
+Entering AMG Solve
+Level 0 relaxation : 18.169000
+level 0 matvec coarser : 14.850000
+Level 1 relaxation : 16.879000
+level 1 matvec coarser : 9.836000
+Level 2 relaxation : 0.001000
+level 2 matvec coarser : 3.315000
+Level 3 relaxation : 6.677000
+level 3 matvec coarser : 1.708000
+Level 4 relaxation : 0.986000
+level 4 matvec coarser : 0.453000
+Level 5 relaxation : 0.126000
+level 5 matvec coarser : 0.074000
+Level 6 relaxation : 0.007000
+level 6 matvec coarser : 0.007000
+Level 7 relaxation : 0.030000
+level 7 matvec finer : 0.002000
+Level 6 relaxation : 0.006000
+level 6 matvec finer : 0.008000
+Level 5 relaxation : 0.101000
+level 5 matvec finer : 0.051000
+Level 4 relaxation : 0.934000
+level 4 matvec finer : 0.169000
+Level 3 relaxation : 2.062000
+level 3 matvec finer : 0.633000
+Level 2 relaxation : 0.001000
+level 2 matvec finer : 2.004000
+Level 1 relaxation : 18.622000
+level 1 matvec finer : 3.571000
+Level 0 relaxation : 18.501000
+Number of iterations : 1
+Final residual norm : 5.656777e-02
+Entering AMG Solve
+Level 0 relaxation : 17.855000
+level 0 matvec coarser : 16.777000
+Level 1 relaxation : 18.507000
+level 1 matvec coarser : 9.877000
+Level 2 relaxation : 0.000000
+level 2 matvec coarser : 3.577000
+Level 3 relaxation : 2.155000
+level 3 matvec coarser : 1.084000
+Level 4 relaxation : 0.972000
+level 4 matvec coarser : 0.489000
+Level 5 relaxation : 0.115000
+level 5 matvec coarser : 0.062000
+Level 6 relaxation : 0.007000
+level 6 matvec coarser : 0.006000
+Level 7 relaxation : 0.029000
+level 7 matvec finer : 0.002000
+Level 6 relaxation : 0.006000
+level 6 matvec finer : 0.008000
+Level 5 relaxation : 0.106000
+level 5 matvec finer : 0.052000
+Level 4 relaxation : 0.999000
+level 4 matvec finer : 0.172000
+Level 3 relaxation : 4.691000
+level 3 matvec finer : 0.598000
+Level 2 relaxation : 0.000000
+level 2 matvec finer : 1.700000
+Level 1 relaxation : 20.587000
+level 1 matvec finer : 3.593000
+Level 0 relaxation : 16.069000
+Number of iterations : 1
+Final residual norm : 5.656777e-02
+Entering AMG Solve
+Level 0 relaxation : 16.258000
+level 0 matvec coarser : 14.782000
+Level 1 relaxation : 20.821000
+level 1 matvec coarser : 12.117000
+Level 2 relaxation : 0.001000
+level 2 matvec coarser : 3.543000
+Level 3 relaxation : 1.903000
+level 3 matvec coarser : 1.048000
+Level 4 relaxation : 0.911000
+level 4 matvec coarser : 0.438000
+Level 5 relaxation : 0.108000
+level 5 matvec coarser : 0.060000
+Level 6 relaxation : 0.007000
+level 6 matvec coarser : 0.005000
+Level 7 relaxation : 0.029000
+level 7 matvec finer : 0.002000
+Level 6 relaxation : 0.006000
+level 6 matvec finer : 0.008000
+Level 5 relaxation : 0.101000
+level 5 matvec finer : 0.051000
+Level 4 relaxation : 0.966000
+level 4 matvec finer : 0.173000
+Level 3 relaxation : 2.079000
+level 3 matvec finer : 0.676000
+Level 2 relaxation : 0.000000
+level 2 matvec finer : 2.782000
+Level 1 relaxation : 18.798000
+level 1 matvec finer : 5.991000
+Level 0 relaxation : 16.494000
+Number of iterations : 1
+Final residual norm : 5.656777e-02
+Entering AMG Solve
+Level 0 relaxation : 16.509000
+level 0 matvec coarser : 11.434000
+Level 1 relaxation : 23.451000
+level 1 matvec coarser : 11.523000
+Level 2 relaxation : 0.000000
+level 2 matvec coarser : 2.916000
+Level 3 relaxation : 2.314000
+level 3 matvec coarser : 1.020000
+Level 4 relaxation : 0.855000
+level 4 matvec coarser : 0.436000
+Level 5 relaxation : 0.112000
+level 5 matvec coarser : 0.061000
+Level 6 relaxation : 0.007000
+level 6 matvec coarser : 0.005000
+Level 7 relaxation : 0.030000
+level 7 matvec finer : 0.002000
+Level 6 relaxation : 0.006000
+level 6 matvec finer : 0.007000
+Level 5 relaxation : 0.102000
+level 5 matvec finer : 0.050000
+Level 4 relaxation : 0.898000
+level 4 matvec finer : 0.165000
+Level 3 relaxation : 1.901000
+level 3 matvec finer : 0.615000
+Level 2 relaxation : 0.000000
+level 2 matvec finer : 1.689000
+Level 1 relaxation : 22.972000
+level 1 matvec finer : 4.841000
+Level 0 relaxation : 16.557000
+Number of iterations : 1
+Final residual norm : 5.656777e-02
+Entering AMG Solve
+Level 0 relaxation : 18.561000
+level 0 matvec coarser : 11.920000
+Level 1 relaxation : 23.445000
+level 1 matvec coarser : 10.671000
+Level 2 relaxation : 0.000000
+level 2 matvec coarser : 2.962000
+Level 3 relaxation : 1.945000
+level 3 matvec coarser : 1.014000
+Level 4 relaxation : 0.859000
+level 4 matvec coarser : 0.437000
+Level 5 relaxation : 0.111000
+level 5 matvec coarser : 0.060000
+Level 6 relaxation : 0.006000
+level 6 matvec coarser : 0.006000
+Level 7 relaxation : 0.029000
+level 7 matvec finer : 0.002000
+Level 6 relaxation : 0.006000
+level 6 matvec finer : 0.007000
+Level 5 relaxation : 0.108000
+level 5 matvec finer : 0.050000
+Level 4 relaxation : 0.877000
+level 4 matvec finer : 0.164000
+Level 3 relaxation : 1.873000
+level 3 matvec finer : 0.590000
+Level 2 relaxation : 0.001000
+level 2 matvec finer : 1.725000
+Level 1 relaxation : 21.928000
+level 1 matvec finer : 3.868000
+Level 0 relaxation : 17.504000
+Number of iterations : 1
+Final residual norm : 5.656777e-02
+Entering AMG Solve
+Level 0 relaxation : 20.764000
+level 0 matvec coarser : 13.462000
+Level 1 relaxation : 21.780000
+level 1 matvec coarser : 10.521000
+Level 2 relaxation : 0.000000
+level 2 matvec coarser : 4.591000
+Level 3 relaxation : 3.247000
+level 3 matvec coarser : 1.046000
+Level 4 relaxation : 1.060000
+level 4 matvec coarser : 0.465000
+Level 5 relaxation : 0.106000
+level 5 matvec coarser : 0.060000
+Level 6 relaxation : 0.007000
+level 6 matvec coarser : 0.006000
+Level 7 relaxation : 0.028000
+level 7 matvec finer : 0.003000
+Level 6 relaxation : 0.006000
+level 6 matvec finer : 0.008000
+Level 5 relaxation : 0.102000
+level 5 matvec finer : 0.050000
+Level 4 relaxation : 0.935000
+level 4 matvec finer : 0.168000
+Level 3 relaxation : 1.883000
+level 3 matvec finer : 0.595000
+Level 2 relaxation : 0.000000
+level 2 matvec finer : 1.670000
+Level 1 relaxation : 21.935000
+level 1 matvec finer : 3.285000
+Level 0 relaxation : 18.130000
+Number of iterations : 1
+Final residual norm : 5.656777e-02
+Entering AMG Solve
+Level 0 relaxation : 20.294000
+level 0 matvec coarser : 14.363000
+Level 1 relaxation : 18.072000
+level 1 matvec coarser : 14.900000
+Level 2 relaxation : 0.000000
+level 2 matvec coarser : 2.886000
+Level 3 relaxation : 1.891000
+level 3 matvec coarser : 1.162000
+Level 4 relaxation : 2.090000
+level 4 matvec coarser : 0.517000
+Level 5 relaxation : 0.109000
+level 5 matvec coarser : 0.060000
+Level 6 relaxation : 0.008000
+level 6 matvec coarser : 0.006000
+Level 7 relaxation : 0.028000
+level 7 matvec finer : 0.002000
+Level 6 relaxation : 0.006000
+level 6 matvec finer : 0.008000
+Level 5 relaxation : 0.102000
+level 5 matvec finer : 0.051000
+Level 4 relaxation : 1.105000
+level 4 matvec finer : 0.167000
+Level 3 relaxation : 1.873000
+level 3 matvec finer : 0.773000
+Level 2 relaxation : 0.000000
+level 2 matvec finer : 2.896000
+Level 1 relaxation : 17.592000
+level 1 matvec finer : 5.345000
+Level 0 relaxation : 19.805000
+Number of iterations : 1
+Final residual norm : 5.656777e-02
+Entering AMG Solve
+Level 0 relaxation : 19.316000
+level 0 matvec coarser : 14.654000
+Level 1 relaxation : 22.262000
+level 1 matvec coarser : 16.738000
+Level 2 relaxation : 0.001000
+level 2 matvec coarser : 2.970000
+Level 3 relaxation : 1.847000
+level 3 matvec coarser : 1.029000
+Level 4 relaxation : 1.905000
+level 4 matvec coarser : 0.690000
+Level 5 relaxation : 0.113000
+level 5 matvec coarser : 0.063000
+Level 6 relaxation : 0.010000
+level 6 matvec coarser : 0.006000
+Level 7 relaxation : 0.035000
+level 7 matvec finer : 0.003000
+Level 6 relaxation : 0.006000
+level 6 matvec finer : 0.008000
+Level 5 relaxation : 0.117000
+level 5 matvec finer : 0.051000
+Level 4 relaxation : 0.880000
+level 4 matvec finer : 0.167000
+Level 3 relaxation : 1.881000
+level 3 matvec finer : 0.596000
+Level 2 relaxation : 0.000000
+level 2 matvec finer : 2.118000
+Level 1 relaxation : 20.846000
+level 1 matvec finer : 7.151000
+Level 0 relaxation : 16.445000
+Number of iterations : 1
+Final residual norm : 5.656777e-02
+Entering AMG Solve
+Level 0 relaxation : 20.439000
+level 0 matvec coarser : 13.692000
+Level 1 relaxation : 17.503000
+level 1 matvec coarser : 14.272000
+Level 2 relaxation : 0.000000
+level 2 matvec coarser : 3.217000
+Level 3 relaxation : 2.324000
+level 3 matvec coarser : 1.388000
+Level 4 relaxation : 1.393000
+level 4 matvec coarser : 0.439000
+Level 5 relaxation : 0.109000
+level 5 matvec coarser : 0.061000
+Level 6 relaxation : 0.007000
+level 6 matvec coarser : 0.006000
+Level 7 relaxation : 0.030000
+level 7 matvec finer : 0.002000
+Level 6 relaxation : 0.006000
+level 6 matvec finer : 0.008000
+Level 5 relaxation : 0.102000
+level 5 matvec finer : 0.063000
+Level 4 relaxation : 0.956000
+level 4 matvec finer : 0.168000
+Level 3 relaxation : 1.875000
+level 3 matvec finer : 0.596000
+Level 2 relaxation : 0.000000
+level 2 matvec finer : 1.731000
+Level 1 relaxation : 17.608000
+level 1 matvec finer : 3.670000
+Level 0 relaxation : 24.214000
+Number of iterations : 1
+Final residual norm : 5.656777e-02
+Entering AMG Solve
+Level 0 relaxation : 23.487000
+level 0 matvec coarser : 11.649000
+Level 1 relaxation : 19.332000
+level 1 matvec coarser : 14.511000
+Level 2 relaxation : 0.001000
+level 2 matvec coarser : 4.687000
+Level 3 relaxation : 1.982000
+level 3 matvec coarser : 1.080000
+Level 4 relaxation : 0.962000
+level 4 matvec coarser : 0.466000
+Level 5 relaxation : 0.115000
+level 5 matvec coarser : 0.062000
+Level 6 relaxation : 0.007000
+level 6 matvec coarser : 0.006000
+Level 7 relaxation : 0.032000
+level 7 matvec finer : 0.002000
+Level 6 relaxation : 0.006000
+level 6 matvec finer : 0.008000
+Level 5 relaxation : 0.106000
+level 5 matvec finer : 0.052000
+Level 4 relaxation : 0.951000
+level 4 matvec finer : 0.170000
+Level 3 relaxation : 1.975000
+level 3 matvec finer : 0.625000
+Level 2 relaxation : 0.001000
+level 2 matvec finer : 2.067000
+Level 1 relaxation : 20.505000
+level 1 matvec finer : 4.896000
+Level 0 relaxation : 21.469000
+Number of iterations : 1
+Final residual norm : 5.656777e-02
+=============================================
+AMG times:
+=============================================
+Multi-grid:
+  wall clock time = 1.456756 seconds
+  cpu clock time  = 1.456646 seconds
+
+AMG Sequoia Benchmark version 1.0
+Iterations = 0
+Final Relative Residual Norm = 0.000000e+00
+
+System Size * Iterations / Solve Phase Time: 0.000000e+00
+
