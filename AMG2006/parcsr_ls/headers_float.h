@@ -24,7 +24,7 @@
  * $Revision: 2.3 $
  ***********************************************************************EHEADER*/
 
-#define PRECISION_MPFR 8
+#define PRECISION_MPFR 64
 
 
 #include <stdlib.h>

@@ -320,7 +320,7 @@ int hypre_GenerateSendMapAndCommPkg ( MPI_Comm comm , int num_sends , int num_re
 
 /* par_relax.c */
 int hypre_BoomerAMGRelax ( hypre_ParCSRMatrix *A , hypre_ParVector *f , int *cf_marker , int relax_type , int relax_points , mpfr_t relax_weight , mpfr_t omega , hypre_ParVector *u , hypre_ParVector *Vtemp );
-int gselim ( float *A , float *x , int n );
+int gselim ( double *A , double *x , int n );
 
 /* par_relax_interface.c */
 int hypre_BoomerAMGRelaxIF ( hypre_ParCSRMatrix *A , hypre_ParVector *f , int *cf_marker , int relax_type , int relax_order , int cycle_type , mpfr_t relax_weight , mpfr_t omega , hypre_ParVector *u , hypre_ParVector *Vtemp );

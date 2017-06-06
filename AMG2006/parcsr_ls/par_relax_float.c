@@ -50,7 +50,6 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         hypre_ParVector    *u,
                         hypre_ParVector    *Vtemp )
 {
-	printf("ENTERING RELAX %f %f\n",mpfr_get_d(relax_weight,MPFR_RNDN),mpfr_get_d(omega,MPFR_RNDN));
    MPI_Comm	   comm = hypre_ParCSRMatrixComm(A);
    hypre_CSRMatrix *A_diag = hypre_ParCSRMatrixDiag(A);
    double         *A_diag_data  = hypre_CSRMatrixData(A_diag);
@@ -76,9 +75,9 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 
    hypre_Vector   *Vtemp_local = hypre_ParVectorLocalVector(Vtemp);
    double         *Vtemp_data = hypre_VectorData(Vtemp_local);
-   float 	  *Vext_data;
-   float 	  *v_buf_data;
-   float 	  *tmp_data;
+   double 	  *Vext_data;
+   double 	  *v_buf_data;
+   double 	  *tmp_data;
 
    hypre_CSRMatrix *A_CSR;
    int		   *A_CSR_i;   
@@ -101,8 +100,8 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
    MPI_Status     *status;
    MPI_Request    *requests;
 
-   float         *A_mat;
-   float         *b_vec;
+   double         *A_mat;
+   double         *b_vec;
 
    double          zero = 0.0;
    mpfr_t	   res, res0, res2;
@@ -150,10 +149,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 	{
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(float, 
+   	v_buf_data = hypre_CTAlloc(double, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(float,num_cols_offd);
+	Vext_data = hypre_CTAlloc(double,num_cols_offd);
         
 	if (num_cols_offd)
 	{
@@ -282,10 +281,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 	{
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(float, 
+   	v_buf_data = hypre_CTAlloc(double, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(float,num_cols_offd);
+	Vext_data = hypre_CTAlloc(double,num_cols_offd);
         
 	if (num_cols_offd)
 	{
@@ -401,10 +400,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 	{
    	  num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
 
-   	  v_buf_data = hypre_CTAlloc(float, 
+   	  v_buf_data = hypre_CTAlloc(double, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	  Vext_data = hypre_CTAlloc(float,num_cols_offd);
+	  Vext_data = hypre_CTAlloc(double,num_cols_offd);
         
 	  if (num_cols_offd)
 	  {
@@ -441,7 +440,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 /*#define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h" */
            for (i = 0; i < n; i++)
@@ -534,7 +533,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -641,7 +640,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -754,7 +753,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -886,10 +885,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
    	num_recvs = hypre_ParCSRCommPkgNumRecvs(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(float, 
+   	v_buf_data = hypre_CTAlloc(double, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(float,num_cols_offd);
+	Vext_data = hypre_CTAlloc(double,num_cols_offd);
         
 	status  = hypre_CTAlloc(MPI_Status,num_recvs+num_sends);
 	requests= hypre_CTAlloc(MPI_Request, num_recvs+num_sends);
@@ -970,7 +969,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                   {
                      ii = A_offd_j[jj];
                      //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * u_data[ii],MPFR_RNDN);
+                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
                }
@@ -1033,10 +1032,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
    	num_recvs = hypre_ParCSRCommPkgNumRecvs(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(float, 
+   	v_buf_data = hypre_CTAlloc(double, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(float,num_cols_offd);
+	Vext_data = hypre_CTAlloc(double,num_cols_offd);
         
 	status  = hypre_CTAlloc(MPI_Status,num_recvs+num_sends);
 	requests= hypre_CTAlloc(MPI_Request, num_recvs+num_sends);
@@ -1230,10 +1229,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 	{
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(float, 
+   	v_buf_data = hypre_CTAlloc(double, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(float,num_cols_offd);
+	Vext_data = hypre_CTAlloc(double,num_cols_offd);
         
 	if (num_cols_offd)
 	{
@@ -1270,7 +1269,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1361,7 +1360,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1466,7 +1465,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1560,7 +1559,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                   {
                      ii = A_offd_j[jj];
                      //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
 		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
@@ -1585,7 +1584,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1720,10 +1719,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 	{
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(float, 
+   	v_buf_data = hypre_CTAlloc(double, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(float,num_cols_offd);
+	Vext_data = hypre_CTAlloc(double,num_cols_offd);
         
 	if (num_cols_offd)
 	{
@@ -1753,16 +1752,13 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
         /*-----------------------------------------------------------------
          * Relax all points.
          *-----------------------------------------------------------------*/
-	printf("%f %f\n",mpfr_get_d(relax_weight,MPFR_RNDN),mpfr_get_d(omega,MPFR_RNDN));
 	if (mpfr_get_flt(relax_weight,MPFR_RNDN) == 1 && mpfr_get_flt(omega,MPFR_RNDN) == 1)
         {
-	 printf("relax_weight=1\n");
          if (relax_points == 0)
          {
-	 printf("relax_points=0\n");
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1802,8 +1798,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                      mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
 		     }
 		     else
+			{
                         //res -= A_diag_data[jj] * tmp_data[ii];
                      mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+			}
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
@@ -1832,9 +1830,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         //res -= A_diag_data[jj] * u_data[ii];
                      mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
 		     }
-		     else
+		     else{
                         //res -= A_diag_data[jj] * tmp_data[ii];
                      mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+			}
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
@@ -1911,7 +1910,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1952,9 +1951,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         //res -= A_diag_data[jj] * u_data[ii];
                      mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
 		     }
-		     else
+		     else{
                         //res -= A_diag_data[jj] * tmp_data[ii];
                      mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+			}
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
@@ -1985,9 +1985,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         //res -= A_diag_data[jj] * u_data[ii];
                      mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
 		     }
-		     else
+		     else{
                         //res -= A_diag_data[jj] * tmp_data[ii];
                      mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+			}
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
@@ -2079,7 +2080,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -2122,9 +2123,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         //res2 += A_diag_data[jj] * Vtemp_data[ii];
                         mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
 		     }
-		     else
+		     else {
                         //res -= A_diag_data[jj] * tmp_data[ii];
                         mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+			}
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
@@ -2166,9 +2168,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         //res2 += A_diag_data[jj] * Vtemp_data[ii];
                         mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
 		     }
-		     else
+		     else{
                         //res -= A_diag_data[jj] * tmp_data[ii];
                         mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+			}
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
@@ -2280,7 +2283,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(float,n);
+	   tmp_data = hypre_CTAlloc(double,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -2325,9 +2328,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         //res0 -= A_diag_data[jj] * u_data[ii];
                         mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
 		     }
-		     else
+		     else{
                         //res -= A_diag_data[jj] * tmp_data[ii];
                         mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+			}
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
@@ -2371,9 +2375,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         //res0 -= A_diag_data[jj] * u_data[ii];
                         mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
 		     }
-		     else
+		     else{
                         //res -= A_diag_data[jj] * tmp_data[ii];
                         mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+			}
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
@@ -2545,8 +2550,8 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
  	    A_CSR_data = hypre_CSRMatrixData(A_CSR);
    	    f_vector_data = hypre_VectorData(f_vector);
 
-            A_mat = hypre_CTAlloc(float, n_global*n_global);
-            b_vec = hypre_CTAlloc(float, n_global);    
+            A_mat = hypre_CTAlloc(double, n_global*n_global);
+            b_vec = hypre_CTAlloc(double, n_global);    
 
             /*---------------------------------------------------------------
              *  Load CSR matrix into A_mat.
@@ -2602,13 +2607,13 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
  *------------------------------------------------------------------------ */
 
 int gselim(A,x,n)
-float *A;
-float *x;
+double *A;
+double *x;
 int n;
 {
    int    err_flag = 0;
    int    j,k,m;
-   float factor;
+   double factor;
    
    if (n==1)                           /* A is 1x1 */  
    {

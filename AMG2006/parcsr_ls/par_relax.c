@@ -1622,7 +1622,6 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          * Relax all points.
          *-----------------------------------------------------------------*/
 
-	printf("%f %f\n",relax_weight,omega);
 	if (relax_weight == 1 && omega == 1)
         {
          if (relax_points == 0)

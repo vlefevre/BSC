@@ -150,12 +150,12 @@ amg2006fast: amg2006.o
 	${CC} -o amg2006fast amg2006.o ${LFLAGSFAST}
 amg2006float: amg2006.o
 	@echo  "Linking" $@ "... "
-	${CC} -o amg2006float amg2006.o ${LFLAGSI}
+	${CC} -o amg2006float amg2006.o -g ${LFLAGSI}
                                                                                                                                          
 ##################################################################
 # Generic rules
 ##################################################################
                                                                                                                                          
 .c.o:
-	${CC} -o $@ -c ${CFLAGS} $<
+	${CC} -o $@ -c ${CFLAGS} $< -g
                                                                

@@ -1,6 +1,7 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsfonts,amsmath,amssymb,amsthm,amstext,latexsym}	
+\usepackage{amsfonts,amsmath,amssymb,amsthm,amstext,latexsym}
+\usepackage{subfig}
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows,shapes}
@@ -16,9 +17,10 @@
 \section{Introduction}
 
 The multi-grid algorithms are a class of linear system solvers.
-The idea is to restrict and interpolate vectors and matrices to have easier problems to solve, that is, problems that we can solve in much less time than the original one.
+The idea is to restrict and interpolate vectors and matrices to smaller spaces to have easier problems to solve, that is, problems that we can solve in much less time than the original one.
 
-We will focus on a quite general and simple multi-grid solver implemented using the HYPRE library.
+This report will investigate the different trade-offs between accuracy and execution time for multi-grid algorithms.
+We will focus on a parallel implementation of a multi-grid solver, BoomerAMG~\cite{boomerAMG}, implemented in the HYPRE library~\cite{Falgout2002}.
 
 \section{Definitions}
 
@@ -28,7 +30,7 @@ We will focus on a quite general and simple multi-grid solver implemented using 
  \item A level is an integer between $1$ and $L$. Level $1$ will be called the finest level, and level $L$ will be called the coarsest level.
  \item The restriction of $A$ (or $b$ or $x$) to level $l$ will be denoted by $A^l$ (or $b^l$ or $x^l$). We have $A^1 = A$ (and $b^1=b,x^1=x$).
  \item We define a set of $L-1$ restriction matrices $R_1,\dots,R_{L-1}$ such that $R_l b^l = b^{l+1}$. We also define some prolongation matrices $P_1,\dots,P_{L-1}$ such that $P_{l}b^{l+1} = b^l$.
- In other words, we have $P_l = {R_l}^T$ and we build the $A^l$ matrices as follows: $A^{l+1} = R_l A^l P_l$.
+ In other words, we have $P_l = {R_l}^{-1}$ and we build the $A^l$ matrices as follows: $A^{l+1} = R_l A^l P_l$.
  \item We denote by $e^l$ the error at level $l$, that is the vector such that $x^l + e^l = \widetilde{x^l}$, that is to say $\widetilde{x^l}-x^l$.
  We also define the residual at level $l$, $r^l = b^l - A^lx^l$. As $b^l = A^l\widetilde{x^l}$, we can also write $r^l = A^le^l$.
  \item We derive the relative residual norm at any step $i$ in the algorithm
@@ -80,8 +82,8 @@ We will focus on a quite general and simple multi-grid solver implemented using 
   
   We will consider 2 types of cycles: the V-cycle and the W-cycle. The V-cycle is actually the algorithm previously described. The W-cycle looks the same but instead of having two parameters
   $\alpha_1$ and $\alpha_2$ we add a new $\alpha_3$ parameter. It will represent the number of relaxation steps done after a second recursive call. In terms of algorithm it is the same
-  algorithm as the V-cycle but the bullets 2 to 7 are repeated. We call these cycles V-cycle and W-cycle because of how we can draw this is we represent each time relaxations are done
-  at a level by a point (see Figure~\ref{fig.cycles}). It is possible to define other types of cycles by adding more and more repeats of these steps (repeat $k$ times those steps) to generalize
+  algorithm as the V-cycle but the bullets 2 to 7 are repeated. We call these cycles V-cycle and W-cycle because of how we can draw them if we represent each time relaxations are done
+  at a level by a point (see Figure~\ref{fig.cycles}). It is possible to define other types of cycles by adding more and more repeats of these steps (do $k$ times those steps) to generalize
   the notion of cycle to a $k$-cycle (where a V-cycle is a $1$-cycle and a W-cycle is a $2$-cycle).
   
  \begin{figure}
@@ -151,12 +153,12 @@ We will focus on a quite general and simple multi-grid solver implemented using 
  \label{fig.cycles}
 \end{figure}
 
-A strategy will be composed of a type of cycle (V or W) and a number of relaxation steps $\alpha$. The default implementation of BomerAMG does not allow to have different for values
+A strategy will be composed of a type of cycle (V or W) and a number of relaxation steps $\alpha$. The default implementation of BomerAMG does not allow to have different values
 for $\alpha_1,\alpha_2,\dots$ so we set them all to this value $\alpha$. We consider a total of 8 different stragies represented in Table~\ref{table.strat1}.
 To compare the different strategies using the BoomerAMG algorithm, we run the algorithm on a predefined matrix of size $512000 \times 512000$ for every
 value of maximum number of iterations (i.e. number of cycles) from 1 to 100 and with a required tolerance of $0$ (meaning
 that the algorithm will stop when the result is exact or the maximum number of iterations is reached). We measure for each experiment the final relative residual norm and the execution time. Each experiment is run 10 times to have an accurate average execution time.
-The results are presented on Figures~\ref{fig.first_tests} and \ref{fig.first_tests_time}.
+The results are presented on Figure~\ref{fig.first_tests}.
 
 \begin{table}
 
@@ -176,15 +178,138 @@ The results are presented on Figures~\ref{fig.first_tests} and \ref{fig.first_te
 
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{figs/convergence_1.pdf}
-  \caption{Execution time and final residual norm as a function of the maximum number of iterations.}
+  \includegraphics[width=0.49\linewidth]{figs/convergence_1.pdf}
+  \includegraphics[width=0.49\linewidth]{figs/time_convergence.pdf}
+  \caption{Execution time and final residual norm of the 8 strategies.}
   \label{fig.first_tests}
 \end{figure} 
 
-\begin{figure}
-  \includegraphics[width=\linewidth]{figs/time_convergence.pdf}
-  \caption{Execution time as a function of the final residual norm.}
-  \label{fig.first_tests_time}
-\end{figure}
+What we can observe is that, as expected, increasing the number of relaxation steps or complexifying the cycle increases the overall time to do one cycle. However, it converges in less iterations.
+We see on the second figure that actually, for a given precision, the simple V-cycle with only 1 relaxation at each step is the fastest way to reach it, followed closely by the W-cycle with $\alpha=1$.\\
+The conclusion is that relaxation steps seem to be too costly for the accuracy they grant. It is better to increase the complexity of your cycle or do more cycles, thus more moves in the grid, than doing more relaxation steps. This at least proves
+that multi-grid is a good alternative to classic iterative methods.
 
+\section{Improving the baseline}
+
+\subsection{Symmetric strategies}
+Following these results, we can wonder how to improve the efficiency of the simple V-cycle with 1 relaxation step.
+The first step is to analyze the time spent in the different parts of a cycle. We measure the time spent doing a relaxation at each level and the time spent computing the next linear system
+(when going down in the grid) or the time spent computing the error term (when going up in the grid). The values where measured for a problem of size 512000 with a 8-level grid and are presented
+in Table~\ref{table.measures}, along with some information on the matrix used at the corresponding level.
+
+\begin{table}
+  \resizebox{\linewidth}{!}{
+ \begin{tabular}{|c|c|c|c|c|c|c|}
+ \hline
+ Level & Matrix size & Non-zero & Relax (down) & Relax (up) & Matvec (down) & Matvec (up) \\
+ \hline
+  0 & 512,000 & 4,042,520 & 20 ms & 20 ms & 15 ms & -\\
+ \hline
+  1 & 256,000 & 6,475,239 & 20 ms & 25 ms & 12 ms & 4 ms\\
+ \hline
+  2 & 58,893 & 2,000,513 & 8 ms & 8 ms & 3 ms & 2 ms\\
+ \hline
+  3 & 14,285 & 788,509 & 2 ms & 2 ms & 1 ms & 0.7 ms\\
+ \hline
+  4 & 4,238 & 386,333 & 1 ms & 1 ms & 0.5 ms & 0.2 ms\\
+ \hline
+  5 & 609 & 53,493 & 0 ms & 0 ms & 0 ms & 0 ms\\
+ \hline
+  6 & 69 & 2,873 & 0 ms & 0 ms & 0 ms & 0 ms\\
+ \hline
+  7 & 2 & 4 & 0 ms & - & - & 0 ms\\
+ \hline
+ \end{tabular}
+ }
+ \caption{Approximate times spent in the different parts of a V-cycle with $\alpha=1$.}
+ \label{table.measures}
+\end{table}
+ In practice, we notice that the number of non-zero entries in the input matrix is correlated to the average time of a relaxation at a given level. Most importantly, in this example we see that, overall,
+ the relaxation represents $\approx66\%$ of the total cost of a V-cycle (while the matrix-vector multiplications are only $\approx30\%$) and that the two first levels are from far the most expensive ones.
+ With this information, there are two ideas: (i) adding more relaxations in the last levels because it is almost free or (ii) removing some relaxations in the first levels to reduce the computational cost.
+ 
+ The following 4 strategies were then tested on this same matrix.
+  \begin{itemize}
+   \item \emph{Fast} : no relaxation at level 2.
+   \item \emph{Fast2} : 10 relaxations at level $L-2$.
+   \item \emph{Fast3} : 2 relaxations at levels $L-2,L-4,\dots,3$.
+   \item \emph{Fast4} : no relaxation at level 3.
+  \end{itemize}
+  The strategy \emph{Fast} aims at reducing the cost of the cycle by removing the penultimate relaxation (hoping the accuracy lost at this point will be compensated by the relaxation at level 0) which is very costly.
+  The strategy \emph{Fast4} is a softer version of \emph{Fast} where the relaxation at level 3 is removed, reaching less improvement of the overall execution time but being more easily compensated by the two relaxations at level 1 and 2.\\
+  The strategy \emph{Fast2} executes a lot of relaxations at level $L-2$, because it should not increase by much the execution time of the V-cycle. Why choose $L-2$ level instead of $L$ or $L-1$?
+  This because the relaxation at level $L$ is actually a direct solve. Thus, the error term is almost exact at level $L-1$, because the only source of error
+  comes from the interpolation of $e^L$ (which is exact) into $e^{L-1}$. This is why, we might expect better results by adding relaxations at level $L-2$.
+  The last strategy \emph{Fast3}, pushes this idea one step further. If we assume that doing more than one relaxation gets an really accurate error estimation at level $l$, then
+  at level $l-1$ we do not need to correct a lot by doing more relaxations. However at level $l-2$ we have been through 2 interpolations since last good estimation of the error vector, hence increasing the number of relaxations again.
+  As we still want not to increase the execution time a lot we stop this recursion for the first levels as they are the two most costly relaxations.
+  
+  In Figure~\ref{fig.newstrat_small}, we present the results of these 4 strategies on a smaller matrix of initial size 64,000 with only a 6-level grid.
+  
+  \begin{figure}
+  \includegraphics[width=0.49\linewidth]{figs/convergence_fast_small.pdf}
+   \includegraphics[width=0.49\linewidth]{figs/time_convergence_fast_small.pdf}
+   \caption{Execution time and final residual norm for the 4 new strategies on a small matrix.}
+   \label{fig.newstrat_small}
+  \end{figure}
+
+  The first thing to observe is that removing the relaxation at level 1 is a disaster. It sure saves time during a cycle but the accuracy loss is tremendous.
+  The other thing to notice is that adding a lot of relaxations in the last levels increases by a little the execution time while being useless on the accuracy side. This is why \emph{Fast2} and  \emph{Fast3} are not really efficient.
+  
+  More tests were performed on the original $512,000\times 512,000$ and are presented in Figure~\ref{fig.newstrat}.
+  
+  \begin{figure}
+  \includegraphics[width=0.49\linewidth]{figs/convergence_fast.pdf}
+   \includegraphics[width=0.49\linewidth]{figs/time_convergence_fast.pdf}
+   \caption{Execution time and final residual norm for the 4 new strategies on the bigger matrix.}
+   \label{fig.newstrat}
+  \end{figure}
+  
+\subsection{An asymmetric strategy}
+  We observe no big improvement compared to the original V-cycle with 1 relaxation at each level with the previous strategies.
+  Their common point is that they all do the same number of relaxations when going down or up in the cycle. However, the main idea of the multi-grid is totally asymmetric.
+  We first compute an approximation at a given level $l$, then we use the level $l+1$ to compute an approximate error term $e^l$ and finally we redo some relaxation to refine the solution. The two relaxations do not have the same goal.
+  What if we could ensure that any value of error vector will be less than $\epsilon$ from the exact value? We would not need to do a relaxation
+  before computing the approximate error term using the next levels in the grid. From that idea we define a new asymmetric strategy: we use a V-cycle with $\alpha_1 = 0$ and $\alpha_2 = 1$. In other words
+  we do one relaxation at each level only when we are going up in the cycle. We call this strategy \emph{Up}.
+  
+  We run \emph{Up} and \emph{Fast4}, as long as the classical V-cycle, on the same matrix of size 512,000 and also on
+  other applications (3D laplace with a 9-pt stencil, 3D laplace with a 27-point stencil, and another 3D partial derivative equation) with the same size of matrix.
+  
+  All results are presented in Figure~\ref{fig.up_comparison}.
+  
+  \begin{figure}
+   \subfloat[Problem 1]{\includegraphics[width=0.49\linewidth]{figs/time_convergence_up_1.pdf}}
+   \subfloat[Problem 2]{\includegraphics[width=0.49\linewidth]{figs/time_convergence_up_2.pdf}}\\
+   \subfloat[Problem 3]{\includegraphics[width=0.49\linewidth]{figs/time_convergence_up_3.pdf}}
+   \subfloat[Problem 4]{\includegraphics[width=0.49\linewidth]{figs/time_convergence_up_4.pdf}}
+   \caption{Comparison of original algorithm with \emph{Fast4} and \emph{Up} strategies.}
+   \label{fig.up_comparison}
+  \end{figure}
+
+   At this point, we see that it is not worth considering the \emph{Fast4} strategy anymore. However, \emph{Up} seems to be
+   quite efficient since it improves by $12\%$,$7\%$,$20\%$ and $22\%$ (for problems 1,2,3 and 4 respectively) the average time needed to reach
+   a $10^{-i}$ precision.
+   However all these runs are sequential and does not guarantee the viability of the \emph{Up} strategy when the algorithm is parallelized.
+   More tests were performed on MinoTauro with bigger matrices and different processor topologies. The total size of the matrix is set to either
+   5,832,000 or 13,824,000, while the topology will be composed of either 27 (3x3x3), 36 (6x6x1) or 64 (4x4x4) processors.
+   The problems tested were the problem 2 and the problem 3 (Laplace equation with either 9 or 27 points stencil).
+   For these 6 possible combinations, we observe an averaged improvement of 18.4\% (ranging from 16.0\% to 28.3\%) for problem 2 and 20.5\% (ranging from 16.2\% to 25.0\%) for problem 3. It seems that \emph{Up} outperforms
+   even more the classical V-cycle when the problem size increases, but seems to cap at around 25\% improvement. Figure~\ref{fig.mtup} presents the results for the matrix size 13,824,000 and problem 3, for the 3 different processor topologies. We have similar figures
+   for the other scenarios.
+   
+   \begin{figure}
+    \subfloat[3x3x3]{\includegraphics[width=0.33\linewidth]{figs/mt_27.pdf}}
+    \subfloat[4x4x4]{\includegraphics[width=0.33\linewidth]{figs/mt_64.pdf}}
+    \subfloat[6x6x1]{\includegraphics[width=0.33\linewidth]{figs/mt_36.pdf}}
+    \caption{Comparison of original algorithm with \emph{Up} strategy for Laplace problem with 27-point stencil on a 240x240x240 grid.}
+    \label{fig.mtup}
+   \end{figure}
+
+   \section{What's next?}
+   
+     The next step is to study how we can reduce the execution time of the relaxations by changing the number of bits used for the intermediate variables. So far, even using MPFR to handle intermediate variables, using 64-bit variables
+     seems to be faster (and of course more accurate), which is quite unexpected.
+   \bibliography{biblio}
+   \bibliographystyle{plain}
 \end{document}
