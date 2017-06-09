@@ -275,7 +275,6 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
    \item \emph{Fast2} : 10 relaxations at level $n-3$.
    \item \emph{Fast3} : 2 relaxations at levels $n-3,n-5,\dots,2$.
    \item \emph{Fast4} : no relaxation at level 2.
-   \item \emph{Up} : relaxation only when going up in the cycle.
   \end{itemize}
 \end{frame}
 
@@ -305,22 +304,86 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
   \end{itemize}
 \end{frame}
 \begin{frame}{Results - 80x80x80}
+ \includegraphics[width=\linewidth]{AMG2006/test/ASUS/convergence_fast.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80}
+ \includegraphics[width=\linewidth]{AMG2006/test/ASUS/time_convergence_fast.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80 - Laplace27pt}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/convergence_fast_10.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80 - Laplace27pt}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/time_convergence_fast_10.pdf}
+\end{frame}
+\begin{frame}{Results - 40x40x40 - Laplace27pt}
  \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/convergence_fast.pdf}
 \end{frame}
-\begin{frame}{Results - 80x80x80}
+\begin{frame}{Results - 40x40x40 - Laplace27pt}
  \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/time_convergence_fast.pdf}
 \end{frame}
-\begin{frame}{Results - 80x80x80}
+\begin{frame}{Results - 80x80x80 - Laplace}
  \includegraphics[width=\linewidth]{AMG2006/test/DELL/laplace/convergence_fast.pdf}
 \end{frame}
-\begin{frame}{Results - 80x80x80}
+\begin{frame}{Results - 80x80x80 - Laplace}
  \includegraphics[width=\linewidth]{AMG2006/test/DELL/laplace/time_convergence_fast.pdf}
 \end{frame}
-\begin{frame}{Results - 80x80x80}
+\begin{frame}{Results - 80x80x80 - Jumps}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/convergence_fast_10.pdf}
+\end{frame}
+\begin{frame}{Results - 80x80x80 - Jumps}
+ \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/time_convergence_fast_10.pdf}
+\end{frame}
+\begin{frame}{Results - 40x40x40 - Jumps}
  \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/convergence_fast.pdf}
 \end{frame}
-\begin{frame}{Results - 80x80x80}
+\begin{frame}{Results - 40x40x40 - Jumps}
  \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/time_convergence_fast.pdf}
 \end{frame}
+
+\begin{frame}{Results on MinoTauro}
+ \begin{itemize}
+  \item Laplace and 27pt only
+  \item Size: 180x180x180 or 240x240x240
+  \item Topology: 3x3x3 or 4x4x4 or 6x6x1
+ \end{itemize}
+ Similar results as before. Between 1 and 30\% improvement.
+ \includegraphics[width=0.33\linewidth]{AMG2006/test/MT/laplace/time_convergence_27.pdf}
+ \includegraphics[width=0.33\linewidth]{AMG2006/test/MT/laplace/time_convergence_36.pdf}
+ \includegraphics[width=0.33\linewidth]{AMG2006/test/MT/laplace/time_convergence_64.pdf}
+\end{frame}
+
+\begin{frame}{Relaxation function analysis}
+  Only a few temporary variables, most of the variables used are the data of the input matrix.
+  \begin{itemize}
+    \item 2 arrays used to receive/send data
+    \item 1 array used as temporary storage
+    \item 2 arrays for the gaussian elimination (direct solve at last level)
+    \item \textbf{3 temporary variables used as intermediate value}
+    \item 5 parameters
+   \end{itemize}
+   MPFR version: only the single variables were changed to \texttt{mpfr\_t} type.\\
+   Float version: all these aforementioned variables and arrays are changed to \texttt{float} and \texttt{float*}.
+\end{frame}
+
+\begin{frame}{Impact on execution time}
+ 
+ The MPFR version adds a very big overhead compared to the original algorithm: about 50 times longer.
+ The float version is longer than the original algorithm too:\\
+ \begin{itemize}
+  \item 0.275s / 0.157s (10x10x10, 1 iteration, 1x1x1) $\rightarrow 1.75x$
+  \item 2.42s / 1.36s (10x10x10, 10 iterations, 1x1x1) $\rightarrow 1.77x$
+  \item 1.54s / 0.955s (10x10x10, 10 iterations, 2x1x1) $\rightarrow 1.61x$
+  \item 12.25s / 7.15s (20x20x20, 10 iterations, 2x1x1) $\rightarrow 1.71x$
+  \item 0.867s / 0.451s (5x5x5, 30 iterations, 1x1x1) $\rightarrow 1.92x$
+  \item 4.96s / 5.00s (20x20x20, 10 iterations, \textbf{2x2x2})  $\rightarrow 0.992x$
+  \item 5.29s / 5.32s (30x30x30, 10 iterations, \textbf{3x3x3})  $\rightarrow 0.994x$
+ \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Impact on accuracy}
+  ON MONDAY
+\end{frame}
+
 
 \end{document}
