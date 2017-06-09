@@ -47,12 +47,6 @@ HEADERS =\
  HYPRE_parcsr_ls.h\
  par_amg.h\
  parcsr_ls.h
-HEADERSFLOAT =\
- aux_interp.h\
- headers_float.h\
- HYPRE_parcsr_ls.h\
- par_amg.h\
- parcsr_ls_float.h
 
 FILES =\
  aux_interp.c\
@@ -141,46 +135,16 @@ FILESUP =\
  par_stats.c\
  par_strength.c\
  pcg_par.c
-FILESFLOAT =\
- aux_interp.c\
- HYPRE_parcsr_amg.c\
- HYPRE_parcsr_gmres.c\
- HYPRE_parcsr_pcg.c\
- par_amg.c\
- par_amg_setup.c\
- par_amg_solve.c\
- par_cg_relax_wt.c\
- par_coarsen.c\
- par_coarse_parms.c\
- par_cycle_float.c\
- par_indepset.c\
- par_interp.c\
- par_jacobi_interp.c\
- par_multi_interp.c\
- par_laplace_27pt.c\
- par_laplace.c\
- par_lr_interp.c\
- par_nodal_systems.c\
- par_rap.c\
- par_rap_communication.c\
- par_vardifconv.c\
- par_relax_float.c\
- par_relax_interface_float.c\
- par_scaled_matnorm.c\
- par_stats.c\
- par_strength.c\
- pcg_par.c
 
 OBJS = ${FILES:.c=.o}
 OBJSFAST = ${FILESFAST:.c=.o}
 OBJSUP = ${FILESUP:.c=.o}
-OBJSFLOAT = ${FILESFLOAT:.c=.o}
 
 ##################################################################
 # Targets
 ##################################################################
 
-all: libparcsr_ls.a libparcsr_ls_fast4.a libparcsr_ls_up.a libparcsr_ls_float.a
+all: libparcsr_ls.a libparcsr_ls_fast4.a libparcsr_ls_up.a
  
 clean:
 	@rm -f *.o *.dxx
@@ -204,19 +168,14 @@ libparcsr_ls_up.a: ${OBJSUP}
 	@echo  "Building $@ ... "
 	ar -rcu $@ ${OBJSUP}
 	${RANLIB} $@
-libparcsr_ls_float.a: ${OBJSFLOAT}
-	@echo  "Building $@ ... "
-	ar -rcu $@ ${OBJSFLOAT}
-	${RANLIB} $@
 
 ${OBJS}: ${HEADERS}
 ${OBJSUP}: ${HEADERS}
 ${OBJSFAST}: ${HEADERS}
-${OBJSFLOAT}: ${HEADERSFLOAT}
 
 ##################################################################
 # Generic rules
 ##################################################################
                                                                                                
 .c.o:
-	${CC} -o $@ -c ${CFLAGS} $< -g
+	${CC} -o $@ -c ${CFLAGS} $<

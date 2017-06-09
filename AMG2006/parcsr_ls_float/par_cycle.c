@@ -34,7 +34,7 @@
  *****************************************************************************/
 
 #include <time.h>
-#include "headers_float.h"
+#include "headers.h"
 #include "par_amg.h"
 /*#include "par_csr_block_matrix.h"*/
 

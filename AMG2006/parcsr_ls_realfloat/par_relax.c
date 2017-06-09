@@ -33,7 +33,7 @@
  *
  *****************************************************************************/
 
-#include "headers_float.h"
+#include "headers.h"
 
 
 /*--------------------------------------------------------------------------
@@ -45,8 +45,8 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         int                *cf_marker,
                         int                 relax_type,
                         int                 relax_points,
-                        mpfr_t              relax_weight,
-                        mpfr_t              omega,
+                        float              relax_weight,
+                        float              omega,
                         hypre_ParVector    *u,
                         hypre_ParVector    *Vtemp )
 {
@@ -75,9 +75,9 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 
    hypre_Vector   *Vtemp_local = hypre_ParVectorLocalVector(Vtemp);
    double         *Vtemp_data = hypre_VectorData(Vtemp_local);
-   double 	  *Vext_data;
-   double 	  *v_buf_data;
-   double 	  *tmp_data;
+   float 	  *Vext_data;
+   float 	  *v_buf_data;
+   float 	  *tmp_data;
 
    hypre_CSRMatrix *A_CSR;
    int		   *A_CSR_i;   
@@ -100,28 +100,17 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
    MPI_Status     *status;
    MPI_Request    *requests;
 
-   double         *A_mat;
-   double         *b_vec;
+   float         *A_mat;
+   float         *b_vec;
 
-   double          zero = 0.0;
-   mpfr_t	   res, res0, res2;
-   mpfr_t          one_minus_weight;
-   mpfr_t          one_minus_omega;
-   mpfr_t          prod;
+   float          zero = 0.0;
+   float	   res, res0, res2;
+   float          one_minus_weight;
+   float          one_minus_omega;
+   float          prod;
 
-	mpfr_init2(one_minus_weight,PRECISION_MPFR);
-	mpfr_init2(one_minus_omega,PRECISION_MPFR);
-	mpfr_init2(prod,PRECISION_MPFR);
-	mpfr_init2(res,PRECISION_MPFR);
-	mpfr_init2(res0,PRECISION_MPFR);
-	mpfr_init2(res2,PRECISION_MPFR);
-
-   //one_minus_weight = 1.0 - relax_weight;
-	mpfr_set_d(one_minus_weight,1.0,MPFR_RNDN);
-	mpfr_sub(one_minus_weight,one_minus_weight,relax_weight,MPFR_RNDN);
-   //one_minus_omega = 1.0 - omega;
-	mpfr_set_d(one_minus_omega,1.0,MPFR_RNDN);
-	mpfr_sub(one_minus_omega,one_minus_omega,omega,MPFR_RNDN);
+   one_minus_weight = 1.0 - relax_weight;
+   one_minus_omega = 1.0 - omega;
    MPI_Comm_size(comm,&num_procs);  
    MPI_Comm_rank(comm,&my_id);  
    num_threads = hypre_NumThreads();
@@ -149,10 +138,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 	{
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(double, 
+   	v_buf_data = hypre_CTAlloc(float, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(double,num_cols_offd);
+	Vext_data = hypre_CTAlloc(float,num_cols_offd);
         
 	if (num_cols_offd)
 	{
@@ -169,7 +158,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                  	= u_data[hypre_ParCSRCommPkgSendMapElmt(comm_pkg,j)];
    	}
  
-   	comm_handle = hypre_ParCSRCommHandleCreate( 1, comm_pkg, v_buf_data, 
+   	comm_handle = hypre_ParCSRCommHandleCreate( 3, comm_pkg, v_buf_data, 
         	Vext_data);
 	}
          /*-----------------------------------------------------------------
@@ -205,23 +194,19 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if (A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * Vtemp_data[ii];
-			mpfr_sub_d(res,res,A_diag_data[jj]*Vtemp_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * Vtemp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-			mpfr_sub_d(res,res,A_offd_data[jj]*Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(one_minus_weight,MPFR_RNDN); 
-			mpfr_mul(res,res,relax_weight,MPFR_RNDN);
-			u_data[i] += mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[ii]];
-                  //u_data[i] += mpfr_get_d(relax_weight,MPFR_RNDN) * res / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= one_minus_weight; 
+                  u_data[i] += relax_weight * res / A_diag_data[A_diag_i[i]];
                }
             }
          }
@@ -245,24 +230,19 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  //mpfr_set_d(res,f_data[i],MPFR_RNDN);
-			mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * Vtemp_data[ii];
-			mpfr_sub_d(res,res,A_diag_data[jj]*Vtemp_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * Vtemp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-			mpfr_sub_d(res,res,A_offd_data[jj]*Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(one_minus_weight,MPFR_RNDN); 
-			mpfr_mul(res,res,relax_weight,MPFR_RNDN);
-			u_data[i] += mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[ii]];
-                  //u_data[i] += mpfr_get_d(relax_weight,MPFR_RNDN) * res / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= one_minus_weight; 
+                  u_data[i] += relax_weight * res / A_diag_data[A_diag_i[i]];
                }
             }     
          }
@@ -281,10 +261,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 	{
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(double, 
+   	v_buf_data = hypre_CTAlloc(float, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(double,num_cols_offd);
+	Vext_data = hypre_CTAlloc(float,num_cols_offd);
         
 	if (num_cols_offd)
 	{
@@ -301,7 +281,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                  	= u_data[hypre_ParCSRCommPkgSendMapElmt(comm_pkg,j)];
    	}
  
-   	comm_handle = hypre_ParCSRCommHandleCreate( 1, comm_pkg, v_buf_data, 
+   	comm_handle = hypre_ParCSRCommHandleCreate( 3, comm_pkg, v_buf_data, 
         	Vext_data);
 
          /*-----------------------------------------------------------------
@@ -328,21 +308,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  //mpfr_set_d(res,f_data[i],MPFR_RNDN);
-			mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-			mpfr_sub_d(res,res,A_diag_data[jj]*u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-			mpfr_sub_d(res,res,A_offd_data[jj]*Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
          }
@@ -366,21 +343,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  //mpfr_set_d(res,f_data[i],MPFR_RNDN);
-		mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-			mpfr_sub_d(res,res,A_diag_data[jj]*u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-			mpfr_sub_d(res,res,A_offd_data[jj]*Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
          }
@@ -400,10 +374,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 	{
    	  num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
 
-   	  v_buf_data = hypre_CTAlloc(double, 
+   	  v_buf_data = hypre_CTAlloc(float, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	  Vext_data = hypre_CTAlloc(double,num_cols_offd);
+	  Vext_data = hypre_CTAlloc(float,num_cols_offd);
         
 	  if (num_cols_offd)
 	  {
@@ -420,7 +394,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                  	= u_data[hypre_ParCSRCommPkgSendMapElmt(comm_pkg,j)];
    	  }
  
-   	  comm_handle = hypre_ParCSRCommHandleCreate( 1, comm_pkg, v_buf_data, 
+   	  comm_handle = hypre_ParCSRCommHandleCreate( 3, comm_pkg, v_buf_data, 
         	Vext_data);
 
           /*-----------------------------------------------------------------
@@ -434,13 +408,13 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          * Relax all points.
          *-----------------------------------------------------------------*/
 
-	if (mpfr_get_flt(relax_weight,MPFR_RNDN) == 1 && mpfr_get_flt(omega,MPFR_RNDN) == 1)
+	if (relax_weight == 1 && omega == 1)
         {
          if (relax_points == 0)
          {
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 /*#define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h" */
            for (i = 0; i < n; i++)
@@ -470,25 +444,21 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  //mpfr_set_d(res,f_data[i],MPFR_RNDN);
-		mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
-                        //res -= A_diag_data[jj] * u_data[ii];
-			mpfr_sub_d(res,res,A_diag_data[jj]*u_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * u_data[ii];
 		     else
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-			mpfr_sub_d(res,res,A_diag_data[jj]*tmp_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-			mpfr_sub_d(res,res,A_offd_data[jj]*Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
            }
@@ -505,21 +475,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  //mpfr_set_d(res,f_data[i],MPFR_RNDN);
-		mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-			mpfr_sub_d(res,res,A_diag_data[jj]*u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-			mpfr_sub_d(res,res,A_offd_data[jj]*Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
           }
@@ -533,7 +500,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -565,25 +532,21 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  //mpfr_set_d(res,f_data[i],MPFR_RNDN);
-			mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
-                        //res -= A_diag_data[jj] * u_data[ii];
-			mpfr_sub_d(res,res,A_diag_data[jj]*u_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * u_data[ii];
 		     else
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-			mpfr_sub_d(res,res,A_diag_data[jj]*tmp_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-			mpfr_sub_d(res,res,A_offd_data[jj]*Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
            }     
@@ -603,21 +566,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  //mpfr_set_d(res,f_data[i],MPFR_RNDN);
-		mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-			mpfr_sub_d(res,res,A_diag_data[jj]*u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-			mpfr_sub_d(res,res,A_offd_data[jj]*Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
 	  }
@@ -631,16 +591,12 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
             Vtemp_data[i] = u_data[i];
          }
-         //prod = (1.0-relax_weight*omega);
-	mpfr_set_d(prod,1.0,MPFR_RNDN);
-	mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR);
-	mpfr_mul(tmp,relax_weight,omega,MPFR_RNDN);
-	mpfr_sub(prod,prod,tmp,MPFR_RNDN);
+         prod = (1.0-relax_weight*omega);
          if (relax_points == 0)
          {
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -670,33 +626,28 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res = f_data[i];
+                  res0 = 0.0;
+                  res2 = 0.0;
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                        mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                        res0 -= A_diag_data[jj] * u_data[ii];
+                        res2 += A_diag_data[jj] * Vtemp_data[ii];
 		     }
 		     else
-                        mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -715,29 +666,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res0 = 0.0;
+                  res2 = 0.0;
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res0 -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                     //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                     mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                     res0 -= A_diag_data[jj] * u_data[ii];
+                     res2 += A_diag_data[jj] * Vtemp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -753,7 +698,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -785,38 +730,28 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res0 = 0.0;
+                  res2 = 0.0;
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        //res0 -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                        //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                     mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                        res0 -= A_diag_data[jj] * u_data[ii];
+                        res2 += A_diag_data[jj] * Vtemp_data[ii];
 		     }
 		     else
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -838,31 +773,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res = f_data[i];
+                  res0 = 0.0;
+                  res2 = 0.0;
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res0 -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                     mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
-                     //res2 += A_diag_data[jj] * Vtemp_data[ii];
+                     res0 -= A_diag_data[jj] * u_data[ii];
+                     res2 += A_diag_data[jj] * Vtemp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                  //u_data[i] += relax_weight*(omega*res + res0 +
-		  //	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -885,10 +812,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
    	num_recvs = hypre_ParCSRCommPkgNumRecvs(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(double, 
+   	v_buf_data = hypre_CTAlloc(float, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(double,num_cols_offd);
+	Vext_data = hypre_CTAlloc(float,num_cols_offd);
         
 	status  = hypre_CTAlloc(MPI_Status,num_recvs+num_sends);
 	requests= hypre_CTAlloc(MPI_Request, num_recvs+num_sends);
@@ -958,20 +885,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
          }
@@ -993,20 +918,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
           }
@@ -1032,10 +955,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
    	num_recvs = hypre_ParCSRCommPkgNumRecvs(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(double, 
+   	v_buf_data = hypre_CTAlloc(float, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(double,num_cols_offd);
+	Vext_data = hypre_CTAlloc(float,num_cols_offd);
         
 	status  = hypre_CTAlloc(MPI_Status,num_recvs+num_sends);
 	requests= hypre_CTAlloc(MPI_Request, num_recvs+num_sends);
@@ -1071,14 +994,13 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if ((A_offd_i[i+1]-A_offd_i[i]) == zero &&
                		A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
           }
@@ -1096,14 +1018,13 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                			&& (A_offd_i[i+1]-A_offd_i[i]) == zero 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
           }
@@ -1154,20 +1075,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if ((A_offd_i[i+1]-A_offd_i[i]) != zero &&
                		A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
          }
@@ -1190,20 +1109,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                			&& (A_offd_i[i+1]-A_offd_i[i]) != zero 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
           }
@@ -1229,10 +1146,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 	{
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(double, 
+   	v_buf_data = hypre_CTAlloc(float, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(double,num_cols_offd);
+	Vext_data = hypre_CTAlloc(float,num_cols_offd);
         
 	if (num_cols_offd)
 	{
@@ -1249,7 +1166,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                  	= u_data[hypre_ParCSRCommPkgSendMapElmt(comm_pkg,j)];
    	}
  
-   	comm_handle = hypre_ParCSRCommHandleCreate( 1, comm_pkg, v_buf_data, 
+   	comm_handle = hypre_ParCSRCommHandleCreate( 3, comm_pkg, v_buf_data, 
         	Vext_data);
 
          /*-----------------------------------------------------------------
@@ -1263,13 +1180,13 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
           * Relax all points.
           *-----------------------------------------------------------------*/
 
-	 if (mpfr_get_flt(relax_weight,MPFR_RNDN) == 1 && mpfr_get_flt(omega,MPFR_RNDN) == 1)
+	 if (relax_weight == 1 && omega == 1)
          {
          if (relax_points == 0)
          {
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1299,24 +1216,21 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
-                        //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * u_data[ii];
 		     else
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
            }
@@ -1333,20 +1247,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
           }
@@ -1360,7 +1272,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1392,24 +1304,21 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
-                        //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * u_data[ii];
 		     else
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
            }     
@@ -1429,20 +1338,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
 	  }
@@ -1456,16 +1363,12 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
             Vtemp_data[i] = u_data[i];
          }
-         //prod = (1.0-relax_weight*omega);
-	mpfr_set_d(prod,1.0,MPFR_RNDN);
-	mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR);
-	mpfr_mul(tmp,relax_weight,omega,MPFR_RNDN);
-	mpfr_sub(prod,prod,tmp,MPFR_RNDN);
+         prod = (1.0-relax_weight*omega);
          if (relax_points == 0)
          {
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1495,37 +1398,28 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res = f_data[i];
+                  res0 = 0.0;
+                  res2 = 0.0;
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        //res0 -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                        //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                     mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                        res0 -= A_diag_data[jj] * u_data[ii];
+                        res2 += A_diag_data[jj] * Vtemp_data[ii];
 		     }
 		     else
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                  //u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -1544,31 +1438,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res0 = 0.0;
+                  res2 = 0.0;
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res0 -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                     //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                     mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                     res0 -= A_diag_data[jj] * u_data[ii];
+                     res2 += A_diag_data[jj] * Vtemp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                  //u_data[i] += relax_weight*(omega*res + res0 +
-		 //	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -1584,7 +1470,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1616,37 +1502,28 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res0 = 0.0;
+                  res2 = 0.0;
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        //res0 -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                        //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                     mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                        res0 -= A_diag_data[jj] * u_data[ii];
+                        res2 += A_diag_data[jj] * Vtemp_data[ii];
 		     }
 		     else
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -1668,31 +1545,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res = f_data[i];
+                  res0 = 0.0;
+                  res2 = 0.0;
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res0 -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                     //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                     mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                     res0 -= A_diag_data[jj] * u_data[ii];
+                     res2 += A_diag_data[jj] * Vtemp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -1719,10 +1588,10 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 	{
    	num_sends = hypre_ParCSRCommPkgNumSends(comm_pkg);
 
-   	v_buf_data = hypre_CTAlloc(double, 
+   	v_buf_data = hypre_CTAlloc(float, 
 			hypre_ParCSRCommPkgSendMapStart(comm_pkg, num_sends));
 
-	Vext_data = hypre_CTAlloc(double,num_cols_offd);
+	Vext_data = hypre_CTAlloc(float,num_cols_offd);
         
 	if (num_cols_offd)
 	{
@@ -1739,7 +1608,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                  	= u_data[hypre_ParCSRCommPkgSendMapElmt(comm_pkg,j)];
    	}
  
-   	comm_handle = hypre_ParCSRCommHandleCreate( 1, comm_pkg, v_buf_data, 
+   	comm_handle = hypre_ParCSRCommHandleCreate( 3, comm_pkg, v_buf_data, 
         	Vext_data);
 
          /*-----------------------------------------------------------------
@@ -1752,13 +1621,14 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
         /*-----------------------------------------------------------------
          * Relax all points.
          *-----------------------------------------------------------------*/
-	if (mpfr_get_flt(relax_weight,MPFR_RNDN) == 1 && mpfr_get_flt(omega,MPFR_RNDN) == 1)
+
+	if (relax_weight == 1 && omega == 1)
         {
          if (relax_points == 0)
          {
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1788,28 +1658,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * u_data[ii];
 		     }
 		     else
-			{
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
-			}
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
             for (i = ne-1; i > ns-1; i--)	/* interior points first */
@@ -1821,27 +1686,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * u_data[ii];
 		     }
-		     else{
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
-			}
+		     else
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
            }
@@ -1858,20 +1719,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
             for (i = n-1; i > -1; i--)	/* interior points first */
@@ -1883,20 +1742,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }
           }
@@ -1910,7 +1767,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -1942,27 +1799,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * u_data[ii];
 		     }
-		     else{
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
-			}
+		     else
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
             for (i = ne-1; i > ns-1; i--) /* relax interior points */
@@ -1976,27 +1829,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                        res -= A_diag_data[jj] * u_data[ii];
 		     }
-		     else{
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
-			}
+		     else
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
            }     
@@ -2016,20 +1865,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
             for (i = n-1; i > -1; i--) /* relax interior points */
@@ -2044,20 +1891,18 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res,res,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                     res -= A_diag_data[jj] * u_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] = mpfr_get_d(res,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
+                  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
 	  }
@@ -2071,16 +1916,12 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
             Vtemp_data[i] = u_data[i];
          }
-         //prod = (1.0-relax_weight*omega);
-	mpfr_set_d(prod,1.0,MPFR_RNDN);
-	mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR);
-	mpfr_mul(tmp,relax_weight,omega,MPFR_RNDN);
-	mpfr_sub(prod,prod,tmp,MPFR_RNDN);
+         prod = (1.0-relax_weight*omega);
          if (relax_points == 0)
          {
 	  if (num_threads > 1)
           {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -2110,38 +1951,28 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res0 = 0.0;
+                  res2 = 0.0;
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        //res0 -= A_diag_data[jj] * u_data[ii];
-                        mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                        //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                        mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                        res0 -= A_diag_data[jj] * u_data[ii];
+                        res2 += A_diag_data[jj] * Vtemp_data[ii];
 		     }
-		     else {
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                        mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
-			}
+		     else
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                        mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -2155,38 +1986,28 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res0 = 0.0;
+                  res2 = 0.0;
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        //res0 -= A_diag_data[jj] * u_data[ii];
-                        mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                        //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                        mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                        res0 -= A_diag_data[jj] * u_data[ii];
+                        res2 += A_diag_data[jj] * Vtemp_data[ii];
 		     }
-		     else{
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                        mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
-			}
+		     else
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                        mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -2205,31 +2026,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res0 = 0.0;
+                  res = f_data[i];
+                  res2 = 0.0;
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res0 -= A_diag_data[jj] * u_data[ii];
-                        mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                     //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                        mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                     res0 -= A_diag_data[jj] * u_data[ii];
+                     res2 += A_diag_data[jj] * Vtemp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                        mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -2243,31 +2056,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
              
                if ( A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res0 = 0.0;
+                  res = f_data[i];
+                  res2 = 0.0;
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res0 -= A_diag_data[jj] * u_data[ii];
-                        mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                     //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                        mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                     res0 -= A_diag_data[jj] * u_data[ii];
+                     res2 += A_diag_data[jj] * Vtemp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                        mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -2283,7 +2088,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          {
 	  if (num_threads > 1)
 	  {
-	   tmp_data = hypre_CTAlloc(double,n);
+	   tmp_data = hypre_CTAlloc(float,n);
 #define HYPRE_SMP_PRIVATE i
 #include "../utilities/hypre_smp_forloop.h"
            for (i = 0; i < n; i++)
@@ -2315,38 +2120,28 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res0 = 0.0;
+                  res2 = 0.0;
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                        mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
-                        //res0 -= A_diag_data[jj] * u_data[ii];
-                        mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                        res2 += A_diag_data[jj] * Vtemp_data[ii];
+                        res0 -= A_diag_data[jj] * u_data[ii];
 		     }
-		     else{
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                        mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
-			}
+		     else
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                        mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -2362,38 +2157,28 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res0 = 0.0;
+                  res2 = 0.0;
+                  res = f_data[i];
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
 		     if (ii >= ns && ii < ne)
 		     {
-                        //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                        mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
-                        //res0 -= A_diag_data[jj] * u_data[ii];
-                        mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
+                        res2 += A_diag_data[jj] * Vtemp_data[ii];
+                        res0 -= A_diag_data[jj] * u_data[ii];
 		     }
-		     else{
-                        //res -= A_diag_data[jj] * tmp_data[ii];
-                        mpfr_sub_d(res,res,A_diag_data[jj] * tmp_data[ii],MPFR_RNDN);
-			}
+		     else
+                        res -= A_diag_data[jj] * tmp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                        mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -2415,31 +2200,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res = f_data[i];
+                  res0 = 0.0;
+                  res2 = 0.0;
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res0 -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                     //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                     mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                     res0 -= A_diag_data[jj] * u_data[ii];
+                     res2 += A_diag_data[jj] * Vtemp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -2456,31 +2233,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  mpfr_set_d(res,f_data[i],MPFR_RNDN);
-                  mpfr_set_d(res0,0.0,MPFR_RNDN);
-                  mpfr_set_d(res2,0.0,MPFR_RNDN);
+                  res = f_data[i];
+                  res0 = 0.0;
+                  res2 = 0.0;
                   for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
                   {
                      ii = A_diag_j[jj];
-                     //res0 -= A_diag_data[jj] * u_data[ii];
-                     mpfr_sub_d(res0,res0,A_diag_data[jj] * u_data[ii],MPFR_RNDN);
-                     //res2 += A_diag_data[jj] * Vtemp_data[ii];
-                     mpfr_add_d(res2,res2,A_diag_data[jj] * Vtemp_data[ii],MPFR_RNDN);
+                     res0 -= A_diag_data[jj] * u_data[ii];
+                     res2 += A_diag_data[jj] * Vtemp_data[ii];
                   }
                   for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
                   {
                      ii = A_offd_j[jj];
-                     //res -= A_offd_data[jj] * Vext_data[ii];
-                     mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
+                     res -= A_offd_data[jj] * Vext_data[ii];
                   }
-                  u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
-		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
-		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
-		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
-                  u_data[i] += mpfr_get_d(tmp,MPFR_RNDN) / A_diag_data[A_diag_i[i]];
-                //  u_data[i] += relax_weight*(omega*res + res0 +
-		//	one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
+                  u_data[i] *= prod;
+                  u_data[i] += relax_weight*(omega*res + res0 +
+			one_minus_omega*res2) / A_diag_data[A_diag_i[i]];
                   /*u_data[i] += omega*(relax_weight*res + res0 +
 			one_minus_weight*res2) / A_diag_data[A_diag_i[i]];*/
                }
@@ -2519,7 +2288,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 
                if (A_diag_data[A_diag_i[i]] != zero)
                {
-                  u_data[i] += mpfr_get_d(relax_weight,MPFR_RNDN) * Vtemp_data[i]
+                  u_data[i] += relax_weight * Vtemp_data[i]
                                 / A_diag_data[A_diag_i[i]];
                }
             }
@@ -2550,8 +2319,8 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
  	    A_CSR_data = hypre_CSRMatrixData(A_CSR);
    	    f_vector_data = hypre_VectorData(f_vector);
 
-            A_mat = hypre_CTAlloc(double, n_global*n_global);
-            b_vec = hypre_CTAlloc(double, n_global);    
+            A_mat = hypre_CTAlloc(float, n_global*n_global);
+            b_vec = hypre_CTAlloc(float, n_global);    
 
             /*---------------------------------------------------------------
              *  Load CSR matrix into A_mat.
@@ -2571,7 +2340,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
 
             for (i = 0; i < n; i++)
             {
-               u_data[i] = (double)b_vec[first_index+i];
+               u_data[i] = b_vec[first_index+i];
             }
 
 	    hypre_TFree(A_mat); 
@@ -2607,13 +2376,13 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
  *------------------------------------------------------------------------ */
 
 int gselim(A,x,n)
-double *A;
-double *x;
+float *A;
+float *x;
 int n;
 {
    int    err_flag = 0;
    int    j,k,m;
-   double factor;
+   float factor;
    
    if (n==1)                           /* A is 1x1 */  
    {

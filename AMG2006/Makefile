@@ -16,7 +16,10 @@ HYPRE_DIRS =\
  krylov\
  IJ_mv\
  parcsr_ls\
+ parcsr_ls_float\
+ parcsr_ls_realfloat\
  parcsr_mv\
+ parcsr_mv_realfloat\
  seq_mv\
  struct_mv\
  sstruct_mv\

@@ -33,7 +33,7 @@
  *
  *****************************************************************************/
 
-#include "headers_float.h"
+#include "headers.h"
 
 
 /*--------------------------------------------------------------------------
@@ -46,8 +46,8 @@ int  hypre_BoomerAMGRelaxIF( hypre_ParCSRMatrix *A,
                              int                 relax_type,
                              int                 relax_order,
                              int                 cycle_type,
-                             mpfr_t              relax_weight,
-                             mpfr_t              omega,
+                             float              relax_weight,
+                             float              omega,
                              hypre_ParVector    *u,
                              hypre_ParVector    *Vtemp )
 {

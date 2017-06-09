@@ -103,7 +103,7 @@ LFLAGSUP =\
  ${INCLUDE_LFLAGS}
 LFLAGSI =\
  -L.\
- -L../parcsr_ls\
+ -L../parcsr_ls_float\
  -L../parcsr_mv\
  -L../IJ_mv\
  -L../seq_mv\
@@ -111,7 +111,28 @@ LFLAGSI =\
  -L../struct_mv\
  -L../krylov\
  -L../utilities\
- -lparcsr_ls_float\
+ -lparcsr_ls\
+ -lparcsr_mv\
+ -lseq_mv\
+ -lsstruct_mv\
+ -lIJ_mv\
+ -lHYPRE_struct_mv\
+ -lkrylov\
+ -lHYPRE_utilities\
+ -lmpfr\
+ -lgmp\
+ ${INCLUDE_LFLAGS}
+LFLAGSRF =\
+ -L.\
+ -L../parcsr_ls_realfloat\
+ -L../parcsr_mv_realfloat\
+ -L../IJ_mv\
+ -L../seq_mv\
+ -L../sstruct_mv\
+ -L../struct_mv\
+ -L../krylov\
+ -L../utilities\
+ -lparcsr_ls\
  -lparcsr_mv\
  -lseq_mv\
  -lsstruct_mv\
@@ -127,13 +148,13 @@ LFLAGSI =\
 # Targets
 ##################################################################
                                                                                                                                          
-all: amg2006 amg2006up amg2006fast amg2006float
+all: amg2006 amg2006up amg2006fast amg2006float amg2006realfloat
                                                                                                                                          
 clean:
 	@rm -f *.o
                                                                                                                                          
 veryclean: clean
-	@rm -f amg2006 amg2006fast amg2006up amg2006float
+	@rm -f amg2006 amg2006fast amg2006up amg2006float amg2006realfloat
                                                                                                                                          
 ##################################################################
 # Rules
@@ -150,12 +171,15 @@ amg2006fast: amg2006.o
 	${CC} -o amg2006fast amg2006.o ${LFLAGSFAST}
 amg2006float: amg2006.o
 	@echo  "Linking" $@ "... "
-	${CC} -o amg2006float amg2006.o -g ${LFLAGSI}
+	${CC} -o amg2006float amg2006.o ${LFLAGSI}
+amg2006realfloat: amg2006.o
+	@echo  "Linking" $@ "... "
+	${CC} -o amg2006realfloat amg2006.o ${LFLAGSRF}
                                                                                                                                          
 ##################################################################
 # Generic rules
 ##################################################################
                                                                                                                                          
 .c.o:
-	${CC} -o $@ -c ${CFLAGS} $< -g
+	${CC} -o $@ -c ${CFLAGS} $<
                                                                

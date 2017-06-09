@@ -21,17 +21,17 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * $Revision: 2.3 $
+ * $Revision: 2.2 $
  ***********************************************************************EHEADER*/
 
-#define PRECISION_MPFR 64
+
 
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include <mpfr.h>
 
-#include "parcsr_ls_float.h"
-/*#include "par_csr_block_matrix.h"*/
+#include "HYPRE.h"
+#include "parcsr_mv.h"
+
 
