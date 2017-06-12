@@ -45,7 +45,8 @@
 int
 hypre_BoomerAMGCycle( void              *amg_vdata, 
                    hypre_ParVector  **F_array,
-                   hypre_ParVector  **U_array   )
+                   hypre_ParVector  **U_array,
+			int precision_MPFR   )
 {
    hypre_ParAMGData *amg_data = amg_vdata;
 
@@ -263,7 +264,8 @@ hypre_BoomerAMGCycle( void              *amg_vdata,
                                             relax_weight_f,
                                             omega_f,
                                             Aux_U,
-                                            Vtemp);
+                                            Vtemp,
+					    precision_MPFR);
 	    }
 	    else 
 	    {
@@ -276,7 +278,8 @@ hypre_BoomerAMGCycle( void              *amg_vdata,
                                                           relax_weight_f,
                                                           omega_f,
                                                           Aux_U,
-                                                          Vtemp);
+                                                          Vtemp,
+							  precision_MPFR);
                
 	    }
  
@@ -285,7 +288,7 @@ hypre_BoomerAMGCycle( void              *amg_vdata,
          }
       }
 	t2 = clock();
-	printf("Level %d relaxation : %f\n",level,(double)(t2-t1)/CLOCKS_PER_SEC*1000.);
+	//printf("Level %d relaxation : %f\n",level,(double)(t2-t1)/CLOCKS_PER_SEC*1000.);
 
       /*------------------------------------------------------------------
        * Decrement the control counter and determine which grid to visit next
@@ -322,7 +325,7 @@ hypre_BoomerAMGCycle( void              *amg_vdata,
          hypre_ParCSRMatrixMatvecT(alpha,R_array[fine_grid],Vtemp,
                                       beta,F_array[coarse_grid]);
 	t4 = clock();
-	printf("level %d matvec coarser : %f\n",level,(double)(t4-t3)/CLOCKS_PER_SEC*1000.);
+	//printf("level %d matvec coarser : %f\n",level,(double)(t4-t3)/CLOCKS_PER_SEC*1000.);
          ++level;
          lev_counter[level] = hypre_max(lev_counter[level],cycle_type);
          cycle_param = 1;
@@ -347,7 +350,7 @@ hypre_BoomerAMGCycle( void              *amg_vdata,
                                      U_array[coarse_grid],
                                      beta, U_array[fine_grid]);            
          t4=clock();
-	printf("level %d matvec finer : %f\n",level,(double)(t4-t3)/CLOCKS_PER_SEC*1000.);
+	//printf("level %d matvec finer : %f\n",level,(double)(t4-t3)/CLOCKS_PER_SEC*1000.);
 	
          --level;
          cycle_param = 2;

@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{default}
 \usepackage{amsfonts,amsmath,amssymb,amsthm,amstext,latexsym}
+\usepackage{listings}
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows,shapes}
@@ -415,8 +416,9 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
   \includegraphics[width=\linewidth]{AMG2006/test/MPFR/bits_convergence.pdf}
 \end{frame}
 
-\begin{frame}{Impact on accuracy}
+\begin{frame}[fragile]{Impact on accuracy}
   $\Rightarrow$ \texttt{res}, \texttt{res0} and \texttt{res2} variables define the accuracy of the relaxation step and the accuracy of the whole algorithm.
+  \resizebox{0.8\linewidth}{!}{\lstinputlisting[language=C, firstline=1832, lastline=1848]{AMG2006/parcsr_ls/par_relax.c}}
 \end{frame}
 
 

@@ -77,6 +77,8 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
    int      max_iter;
    int      num_procs, my_id;
 
+   int	    precision_MPFR = 32;
+
    double   alpha = 1.0;
    double   beta = -1.0;
    double   cycle_op_count;
@@ -219,10 +221,10 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
    if (my_id == 0 && amg_print_level > 1 && tol >= 0.)
    {     
       printf("                                            relative\n");
-      printf("               residual        factor       residual\n");
-      printf("               --------        ------       --------\n");
-      printf("    Initial    %e                 %e\n",resid_nrm_init,
-              relative_resid);
+      printf("               residual        factor       residual     precision\n");
+      printf("               --------        ------       --------     ---------\n");
+      printf("    Initial    %e                 %e    %d\n",resid_nrm_init,
+              relative_resid,precision_MPFR);
    }
 
    /*-----------------------------------------------------------------------
@@ -235,7 +237,7 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
       hypre_ParAMGDataCycleOpCount(amg_data) = 0;   
       /* Op count only needed for one cycle */
 
-      hypre_BoomerAMGCycle(amg_data, F_array, U_array); 
+      hypre_BoomerAMGCycle(amg_data, F_array, U_array,precision_MPFR); 
 
       /*---------------------------------------------------------------
        *    Compute  fine-grid residual and residual norm
@@ -257,6 +259,8 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
         }
 
         conv_factor = resid_nrm / old_resid;
+	if (conv_factor > 0.8)
+		precision_MPFR += 8;
         if (rhs_norm)
         {
            relative_resid = resid_nrm / rhs_norm;
@@ -278,8 +282,8 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
 
       if (my_id == 0 && amg_print_level > 1 && tol >= 0.)
       { 
-         printf("    Cycle %2d   %e    %f     %e \n", cycle_count,
-                 resid_nrm, conv_factor, relative_resid);
+         printf("    Cycle %2d   %e    %f     %e    %d\n", cycle_count,
+                 resid_nrm, conv_factor, relative_resid, precision_MPFR);
       }
    }
 	printf("Number of iterations : %d\n", cycle_count);

@@ -253,7 +253,8 @@ hypre_BoomerAMGCGRelaxWt( void              *amg_vdata,
                                          relax_weight_f,
                                          omega_f,
                                          Ztemp,
-                                         Vtemp);
+                                         Vtemp,
+					64);
 	 }
  
          if (Solve_err_flag != 0)

@@ -271,7 +271,7 @@ int hypre_BoomerAMGCoarsenPMIS ( hypre_ParCSRMatrix *S , hypre_ParCSRMatrix *A ,
 int hypre_BoomerAMGCoarseParms ( MPI_Comm comm , int local_num_variables , int num_functions , int *dof_func , int *CF_marker , int **coarse_dof_func_ptr , HYPRE_BigInt **coarse_pnts_global_ptr );
 
 /* par_cycle.c */
-int hypre_BoomerAMGCycle ( void *amg_vdata , hypre_ParVector **F_array , hypre_ParVector **U_array );
+int hypre_BoomerAMGCycle ( void *amg_vdata , hypre_ParVector **F_array , hypre_ParVector **U_array, int precision_MPFR );
 
 /* par_indepset.c */
 int hypre_BoomerAMGIndepSetInit ( hypre_ParCSRMatrix *S , double *measure_array , int seq_rand );
@@ -319,11 +319,11 @@ int hypre_GetCommPkgRTFromCommPkgA ( hypre_ParCSRMatrix *RT , hypre_ParCSRMatrix
 int hypre_GenerateSendMapAndCommPkg ( MPI_Comm comm , int num_sends , int num_recvs , int *recv_procs , int *send_procs , int *recv_vec_starts , hypre_ParCSRMatrix *A );
 
 /* par_relax.c */
-int hypre_BoomerAMGRelax ( hypre_ParCSRMatrix *A , hypre_ParVector *f , int *cf_marker , int relax_type , int relax_points , mpfr_t relax_weight , mpfr_t omega , hypre_ParVector *u , hypre_ParVector *Vtemp );
+int hypre_BoomerAMGRelax ( hypre_ParCSRMatrix *A , hypre_ParVector *f , int *cf_marker , int relax_type , int relax_points , mpfr_t relax_weight , mpfr_t omega , hypre_ParVector *u , hypre_ParVector *Vtemp,int precision_MPFR );
 int gselim ( double *A , double *x , int n );
 
 /* par_relax_interface.c */
-int hypre_BoomerAMGRelaxIF ( hypre_ParCSRMatrix *A , hypre_ParVector *f , int *cf_marker , int relax_type , int relax_order , int cycle_type , mpfr_t relax_weight , mpfr_t omega , hypre_ParVector *u , hypre_ParVector *Vtemp );
+int hypre_BoomerAMGRelaxIF ( hypre_ParCSRMatrix *A , hypre_ParVector *f , int *cf_marker , int relax_type , int relax_order , int cycle_type , mpfr_t relax_weight , mpfr_t omega , hypre_ParVector *u , hypre_ParVector *Vtemp , int precision_MPFR );
 
 /* par_scaled_matnorm.c */
 int hypre_ParCSRMatrixScaledNorm ( hypre_ParCSRMatrix *A , double *scnorm );

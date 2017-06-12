@@ -48,7 +48,8 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         mpfr_t              relax_weight,
                         mpfr_t              omega,
                         hypre_ParVector    *u,
-                        hypre_ParVector    *Vtemp )
+                        hypre_ParVector    *Vtemp,
+			int	precision_MPFR )
 {
    MPI_Comm	   comm = hypre_ParCSRMatrixComm(A);
    hypre_CSRMatrix *A_diag = hypre_ParCSRMatrixDiag(A);
@@ -109,12 +110,12 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
    mpfr_t          one_minus_omega;
    mpfr_t          prod;
 
-	mpfr_init2(one_minus_weight,PRECISION_MPFR);
-	mpfr_init2(one_minus_omega,PRECISION_MPFR);
-	mpfr_init2(prod,PRECISION_MPFR);
-	mpfr_init2(res,PRECISION_MPFR);
-	mpfr_init2(res0,PRECISION_MPFR);
-	mpfr_init2(res2,PRECISION_MPFR);
+	mpfr_init2(one_minus_weight,precision_MPFR);
+	mpfr_init2(one_minus_omega,precision_MPFR);
+	mpfr_init2(prod,precision_MPFR);
+	mpfr_init2(res,precision_MPFR);
+	mpfr_init2(res0,precision_MPFR);
+	mpfr_init2(res2,precision_MPFR);
 
    //one_minus_weight = 1.0 - relax_weight;
 	mpfr_set_d(one_minus_weight,1.0,MPFR_RNDN);
@@ -633,7 +634,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          }
          //prod = (1.0-relax_weight*omega);
 	mpfr_set_d(prod,1.0,MPFR_RNDN);
-	mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR);
+	mpfr_t tmp; mpfr_init2(tmp,precision_MPFR);
 	mpfr_mul(tmp,relax_weight,omega,MPFR_RNDN);
 	mpfr_sub(prod,prod,tmp,MPFR_RNDN);
          if (relax_points == 0)
@@ -690,7 +691,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                      mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -733,7 +734,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                      mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -810,7 +811,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
 		
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -856,7 +857,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                      mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -1458,7 +1459,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          }
          //prod = (1.0-relax_weight*omega);
 	mpfr_set_d(prod,1.0,MPFR_RNDN);
-	mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR);
+	mpfr_t tmp; mpfr_init2(tmp,precision_MPFR);
 	mpfr_mul(tmp,relax_weight,omega,MPFR_RNDN);
 	mpfr_sub(prod,prod,tmp,MPFR_RNDN);
          if (relax_points == 0)
@@ -1519,7 +1520,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                      mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -1562,7 +1563,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                      mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -1640,7 +1641,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                      mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -1686,7 +1687,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                      mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -2073,7 +2074,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
          }
          //prod = (1.0-relax_weight*omega);
 	mpfr_set_d(prod,1.0,MPFR_RNDN);
-	mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR);
+	mpfr_t tmp; mpfr_init2(tmp,precision_MPFR);
 	mpfr_mul(tmp,relax_weight,omega,MPFR_RNDN);
 	mpfr_sub(prod,prod,tmp,MPFR_RNDN);
          if (relax_points == 0)
@@ -2135,7 +2136,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -2180,7 +2181,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -2223,7 +2224,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -2261,7 +2262,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -2340,7 +2341,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -2387,7 +2388,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                         mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -2433,7 +2434,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                      mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);
@@ -2474,7 +2475,7 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                      mpfr_sub_d(res,res,A_offd_data[jj] * Vext_data[ii],MPFR_RNDN);
                   }
                   u_data[i] *= mpfr_get_d(prod,MPFR_RNDN);
-		mpfr_t tmp; mpfr_init2(tmp,PRECISION_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,PRECISION_MPFR);
+		mpfr_t tmp; mpfr_init2(tmp,precision_MPFR); mpfr_t tmp2; mpfr_init2(tmp2,precision_MPFR);
 		mpfr_mul(tmp,omega,res,MPFR_RNDN); mpfr_add(tmp,tmp,res0,MPFR_RNDN);
 		mpfr_mul(tmp2,one_minus_omega,res2,MPFR_RNDN); mpfr_add(tmp,tmp,tmp2,MPFR_RNDN);
 		mpfr_mul(tmp,tmp,relax_weight,MPFR_RNDN);

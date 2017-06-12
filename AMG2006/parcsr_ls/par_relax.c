@@ -1829,23 +1829,23 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
                if (cf_marker[i] == relax_points 
 				&& A_diag_data[A_diag_i[i]] != zero)
                {
-                  res = f_data[i];
-                  for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
-                  {
-                     ii = A_diag_j[jj];
-		     if (ii >= ns && ii < ne)
-		     {
-                        res -= A_diag_data[jj] * u_data[ii];
-		     }
-		     else
-                        res -= A_diag_data[jj] * tmp_data[ii];
-                  }
-                  for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
-                  {
-                     ii = A_offd_j[jj];
-                     res -= A_offd_data[jj] * Vext_data[ii];
-                  }
-                  u_data[i] = res / A_diag_data[A_diag_i[i]];
+  res = f_data[i];
+  for (jj = A_diag_i[i]+1; jj < A_diag_i[i+1]; jj++)
+  {
+     ii = A_diag_j[jj];
+     if (ii >= ns && ii < ne)
+     {
+	res -= A_diag_data[jj] * u_data[ii];
+     }
+     else
+	res -= A_diag_data[jj] * tmp_data[ii];
+  }
+  for (jj = A_offd_i[i]; jj < A_offd_i[i+1]; jj++)
+  {
+     ii = A_offd_j[jj];
+     res -= A_offd_data[jj] * Vext_data[ii];
+  }
+  u_data[i] = res / A_diag_data[A_diag_i[i]];
                }
             }     
            }     

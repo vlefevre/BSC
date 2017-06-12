@@ -49,7 +49,8 @@ int  hypre_BoomerAMGRelaxIF( hypre_ParCSRMatrix *A,
                              mpfr_t              relax_weight,
                              mpfr_t              omega,
                              hypre_ParVector    *u,
-                             hypre_ParVector    *Vtemp )
+                             hypre_ParVector    *Vtemp,
+				int precision_MPFR )
 {
    int i, Solve_err_flag = 0;
    int relax_points[2];
@@ -115,7 +116,8 @@ int  hypre_BoomerAMGRelaxIF( hypre_ParCSRMatrix *A,
                                             relax_weight,
                                             omega,
                                             u,
-                                            Vtemp); 
+                                            Vtemp,
+						precision_MPFR); 
       }
    }
    else
@@ -128,7 +130,8 @@ int  hypre_BoomerAMGRelaxIF( hypre_ParCSRMatrix *A,
                                             relax_weight,
                                             omega,
                                             u,
-                                            Vtemp); 
+                                            Vtemp,
+						precision_MPFR); 
    }
 
    return Solve_err_flag;
