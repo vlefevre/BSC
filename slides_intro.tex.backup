@@ -367,8 +367,7 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
 
 \begin{frame}{Impact on execution time}
  
- The MPFR version adds a very big overhead compared to the original algorithm: about 50 times longer.
- The float version is longer than the original algorithm too:\\
+ The float version is longer than the original algorithm when sequential:\\
  \begin{itemize}
   \item 0.275s / 0.157s (10x10x10, 1 iteration, 1x1x1) $\rightarrow 1.75x$
   \item 2.42s / 1.36s (10x10x10, 10 iterations, 1x1x1) $\rightarrow 1.77x$
@@ -377,7 +376,16 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
   \item 0.867s / 0.451s (5x5x5, 30 iterations, 1x1x1) $\rightarrow 1.92x$
   \item 4.96s / 5.00s (20x20x20, 10 iterations, \textbf{2x2x2})  $\rightarrow 0.992x$
   \item 5.29s / 5.32s (30x30x30, 10 iterations, \textbf{3x3x3})  $\rightarrow 0.994x$
+  \item 0.590s / 0.606s (10x10x10, 10 iterations, \textbf{2x2x2})  $\rightarrow 0.974x$
  \end{itemize}
+\end{frame}
+
+\begin{frame}{Impact on execution time}
+ The MPFR version adds a very big overhead compared to the original algorithm: about 50 times longer.
+ \begin{tabular}{|c|c|c|c|c|}
+  #iterations \backslash #bits & 8 & 16 & 32 & 64 \\
+  5 & 
+ \end{tabular}
 
 \end{frame}
 

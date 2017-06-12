@@ -367,8 +367,7 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
 
 \begin{frame}{Impact on execution time}
  
- The MPFR version adds a very big overhead compared to the original algorithm: about 50 times longer.
- The float version is longer than the original algorithm too:\\
+ The float version is longer than the original algorithm when sequential:\\
  \begin{itemize}
   \item 0.275s / 0.157s (10x10x10, 1 iteration, 1x1x1) $\rightarrow 1.75x$
   \item 2.42s / 1.36s (10x10x10, 10 iterations, 1x1x1) $\rightarrow 1.77x$
@@ -378,13 +377,48 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
   \item 4.96s / 5.00s (20x20x20, 10 iterations, \textbf{2x2x2})  $\rightarrow 0.992x$
   \item 5.29s / 5.32s (30x30x30, 10 iterations, \textbf{3x3x3})  $\rightarrow 0.994x$
   \item 0.590s / 0.606s (10x10x10, 10 iterations, \textbf{2x2x2})  $\rightarrow 0.974x$
+  \item 1.020s / 1.143s (20x20x20, 10 iterations, \textbf{4x4x4})  $\rightarrow 0.89x$
  \end{itemize}
+\end{frame}
+
+\begin{frame}{Impact on execution time}
+ The MPFR version adds a very big overhead compared to the original algorithm: about 50 times longer.
+ \begin{tabular}{|c|c|c|c|c|}
+  \hline
+  \#iterations $\backslash$ \#bits & 8 & 16 & 32 & 64 \\
+  \hline
+  5 & 116.1 & 113.1 & 117.6 & 114.3\\
+  \hline
+  10 & 235.5 & 240.6 & 234.1 & 232.2\\
+  \hline
+  15 & 358.6 & 376.3 & 359.3 & 346.2\\
+  \hline
+  20 & - & 457.1 & 492.8 & 471.6 \\
+  \hline
+  25 & - & 587.5 & 616.6 & 614.7 \\
+  \hline
+  30 & - & 688.0 & 744.3 & 704.8 \\
+  \hline
+  35 & - & - & 904.9 & 836.9\\
+  \hline
+  40 & - & - & 976.2 & 950.0 \\
+  \hline
+  45 & - & - & - & 1012.9\\
+  \hline
+  50 & - & - & - & 1114.9\\
+  \hline
+ \end{tabular}
 
 \end{frame}
 
 \begin{frame}{Impact on accuracy}
-  ON MONDAY
+  \includegraphics[width=\linewidth]{AMG2006/test/MPFR/bits_convergence.pdf}
 \end{frame}
+
+\begin{frame}{Impact on accuracy}
+  $\Rightarrow$ \texttt{res}, \texttt{res0} and \texttt{res2} variables define the accuracy of the relaxation step and the accuracy of the whole algorithm.
+\end{frame}
+
 
 
 \end{document}
