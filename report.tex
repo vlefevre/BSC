@@ -3,6 +3,7 @@
 \usepackage{amsfonts,amsmath,amssymb,amsthm,amstext,latexsym}
 \usepackage{subfig}
 %\usepackage{mathdots}
+\usepackage{url}
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows,shapes}
@@ -318,7 +319,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    
    To realize these experiments, we use two modified versions of the original algorithm. We modify the function that does the relaxation step (remember it is the costly part of the whole algorithm).
    In this function we can find different internal variables that originally of type \texttt{double}: 5 arrays and 8 scalars. The first version, \emph{AMGfloat}, changes the type of these 13 variables from \texttt{double*} or \texttt{double}
-   to \texttt{float*} or \texttt{float}. For the second version, we use the library MPFR~\cite{MPFR} that introduces a type \texttt{mpfr\_t}. This type has a parameter which is the number of bits in the mantissa of the variable.
+   to \texttt{float*} or \texttt{float}. For the second version, we use the library MPFR~\cite{MPFR,MPFR_link} that introduces a type \texttt{mpfr\_t}. This type has a parameter which is the number of bits in the mantissa of the variable.
    Every computation is done exactly (assuming the inputs are exact) then rounded to a number using exactly the number of bits set as parameter. We build the second version, \emph{AMGmpfr(b)}, by replacing only the 8 scalar variables
    by \texttt{mpfr\_t} variables, all using the same number of $b$ bits for the mantissa. In terms of arithmetic precision, \emph{AMG} behaves similarly to \emph{AMGmpfr(53)} and \emph{AMGfloat} to \emph{AMGmpfr(24)}. There can be small differences
    due to the rounding method used.
@@ -378,7 +379,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
     T_{total}  = k\alpha\left(b_n^2 + \sum\limits_{i=1}^{n-1} (b_i^2 - b_i b_{i+1})\right) + kb_{max}c.
    \end{equation}
    
-   Let us consider the equation $f(x_1,\dots,x_n) = \sum\limits_{i=1}^n x_i^2 - \sum\limits_{i=1}^{n-1} x_ix_{i+1}$. Finding the minimum of $f(x_1,\dots,x_{n-1},1)$ will give
+   Let us consider the function $f(x_1,\dots,x_n) = \sum\limits_{i=1}^n x_i^2 - \sum\limits_{i=1}^{n-1} x_ix_{i+1}$. Finding the minimum of $f(x_1,\dots,x_{n-1},1)$ will give
    us the minimum of the execution time.
    By simple partial derivation:
    \[ \frac{\partial f(x_1,\dots,x_n)}{\partial x_i} = 2x_i - (1-\delta_{i,n})x_{i+1} - (1-\delta_{i,1})x_{i-1} \]
