@@ -2,10 +2,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts,amsmath,amssymb,amsthm,amstext,latexsym}
 \usepackage{subfig}
+%\usepackage{mathdots}
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows,shapes}
 \usetikzlibrary{patterns,snakes}
+\newtheorem{theorem}{Theorem}
 %opening
 \title{Approximating a Multi-Grid Solver}
 \author{Valentin Le Fèvre}
@@ -331,6 +333,85 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
     \caption{Accuracy achievable with different number of bits in mantissa.}
     \label{fig.bits_accuracy}
    \end{figure}
+   
+   The second thing to see is that \emph{AMGfloat} behaves exactly as \emph{AMGmpfr(24)} in terms of accuracy whereas more variables were changed from \texttt{double} to \texttt{float}. It does not degrade more the accuracy, only a few variables
+   from the 8 scalars actually control the final precision as they are temporary variables used for intermediate computations before being plugged back into the input matrix/vector.
+   That being said, we design a new algorithm that adapts the precision of the variables during the execution. It is the same algorithm as \emph{AMGmpfr(b)} except this time the precision can change between two cycles.
+   We fix a threshold on the ratio between the relative residual norm at two consecutive steps to trigger the precision change.
+   Figure~\ref{fig.prec_incr} presents the evolution of accuracy for the original algorithm, and 3 different strategies with increasing precision and threshold of 0.8: start at $b=16$ and do $b=b+8$, start at $b=32$
+   and do $b=b+8$, and start at $b=16$ and do $b=b\times2$, run on a 24Ox240x240 matrix size with 3x3x3 topology for problem 3.
+   
+   \begin{figure}
+    \includegraphics[width=0.8\linewidth]{figs/prec_incr.pdf}
+    \caption{Accuracy of adaptive algorithms compared to the original double-precision.}
+    \label{fig.prec_incr}
+   \end{figure}
+   
+   We see some steps appear, corresponding to the lower bound on the accuracy at the current precision. Then the precision is adapted to be able to improve the overall accuracy. Even if we lose some accuracy by waiting for the ratio
+   between two consecutive relative residual norm to be higher than the threshold, when the precision changes, the gain is more important than that of the original algorithm (i.e. the slope is bigger on the figure), which makes any of
+   the 3 versions able to reach the maximum accuracy (of $4.7\times 10^{-13}$) in the same number of cycles as the original algorithm (20-21 cycles).
+   
+   Two questions arise at this step. How to evaluate the energy/time savings of this adaptive algorithm? Which precisions should be used to optimize these savings?\\
+   The first question is not simple because the use of the MPFR library to do these accuracy experiments introduce a huge overhead in the computations (running \emph{AMGmpfr(53)} is about 20 times longer than running \emph{AMG} whereas it
+   represents the final same algorithm), and this overhead is not highly influenced by the choice of the number of bits. Thus it is impossible just to measure the execution time of the algorithm using MFPR library.
+   
+   \subsection{Optimal set of precisions}
+   
+   \begin{theorem}
+     Given $b_{max}$, a maximum number of bits, $n$ the number of different precisions $b_1,\dots,b_n$ to use, and $T(b)=\alpha b+c$, with $\alpha$ and $c$ two constants, the time to execute a cycle at precision $b$, then
+     the execution time of our adaptive algorithm is minimized for $b_i = \frac{i}{n}b_{max}$.
+   \end{theorem}
+
+   \begin{proof}
+   From the previous experiments we can see that (i) the number of cycles needed to reach the lower bound for a given precision does not depend on the previous cycles (Figure~\ref{fig.prec_incr}) and that (ii) the number of cycles
+   needed to reach the lower bound is proportional to the number of bits $b$ used (Figure~\ref{fig.bits_accuracy}). We then define $\textsc{MaxIter}(b)$ the number of cycles needed so that the ratio between two consecutive
+   relative residual norms is higher than a threshold $t$. We use the two observations to model $\textsc{MaxIter}(b) = \lfloor kb \rfloor$ for some constant $k$.
+   Then we can compute the total execution time of the algorithm \[T_{total} = \textsc{MaxIter}(b_1)T(b_1) + \sum\limits_{i=1}^{n-1} (\textsc{MaxIter}(b_{i+1})-\textsc{MaxIter}(b_i))T(b_{i+1}). \]
+   Indeed, when we reach the number of iterations $\textsc{MaxIter}(b_i)$ we change from precision $b_i$ to precision $b_{i+1}$.
+   We can rewrite $T_{total}$ as
+   \begin{align*}
+    T_{total} &\approx k b_{1} T(b_1) + \sum\limits_{i=1}^{n-1} k(b_{i+1}-b_{i})T(b_{i+1})\\
+	    & \approx k ( b_{n}T(n) + \sum\limits_{i=1}^{n-1} b_i ( T(b_i) - T(b_{i+1})).
+   \end{align*}
+   By plugging the expression of $T(b)$ into the previous equation and considering the maximum precision we want is $b_{max}=b_n$, we finally get:
+   \begin{equation}
+    T_{total}  = k\alpha\left(b_n^2 + \sum\limits_{i=1}^{n-1} (b_i^2 - b_i b_{i+1})\right) + kb_{max}c.
+   \end{equation}
+   
+   Let us consider the equation $f(x_1,\dots,x_n) = \sum\limits_{i=1}^n x_i^2 - \sum\limits_{i=1}^{n-1} x_ix_{i+1}$. Finding the minimum of $f(x_1,\dots,x_{n-1},1)$ will give
+   us the minimum of the execution time.
+   By simple partial derivation:
+   \[ \frac{\partial f(x_1,\dots,x_n)}{\partial x_i} = 2x_i - (1-\delta_{i,n})x_{i+1} - (1-\delta_{i,1})x_{i-1} \]
+   where $\delta_{a,b} $ is equal to 1 if and only if $a=b$, 0 otherwise.
+   
+   This is where the boundary condition $x_n = 1$ is useful: if we do not set it to a number different from 0, the function is minimized for $x_1=\dots=x_n=0$. This applied to our problem
+   has no sens, as we would't be doing any computation. The boundary condition represents the fact that we need to reach a existing precision ($b_{max}$) eventually. By a simple scaling,
+   considering $1$ instead of $b_{max}$ makes computation easier and does not change the resolution of the the following system (up to a factor):
+   
+   \resizebox{0.9\linewidth}{!}{
+   $\left\{
+   \begin{tabular}{rcl cccccccccc cl}
+    $\frac{\partial f(x_1,\dots,x_n)}{\partial x_1}$ & = & $2x_1$ & $-$ & $x_2$  &     &       & & 	 &&     &     &       & = & 0 \\
+    $\frac{\partial f(x_1,\dots,x_n)}{\partial x_2}$ & = & $-x_1$ & $+$ & $2x_2$ & $-$ & $x_3$ & & 	 &&     &     &       & = & 0 \\
+    & \vdots &&&&&&&&&&&&&\\
+    $\frac{\partial f(x_1,\dots,x_{n})}{\partial x_{n-1}}$ & = &        &     &        &     &       & & $-x_{n-2}$ & $+$ & $2x_{n-1}$ & $-$ & $x_n$ & = & 0 \\
+    $x_n$ & = & 1 &&&&&&&&&&&&\\
+   \end{tabular} \right.$
+  }
+  
+  Solving this system of equations is equivalent to solving the linear system $Ax=b$ where
+  \[ A = \begin{bmatrix}
+    2       & -1 &  &  &  \\
+    -1       & 2 & -1 &  &  \\
+    & \ddots & \ddots & \ddots & \\
+    & & -1 & 2 & -1 \\
+           &  &  & -1 & 2
+\end{bmatrix} \textup{ and } b = \begin{bmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix} \]
+   
+   This system has a unique solution which is $\begin{bmatrix} \frac{1}{n} & \dots & \frac{n-1}{n} \end{bmatrix}$.
+   The minimum of $f(x_1,\dots,x_n)$ with boundary condition $x_n=1$ is thus reached for $x_i = \frac{i}{n}$.
+   It is, when multiplied by $b_{max}$, the solution that minimizes our total execution time.
+   \end{proof}
    
    \bibliography{biblio}
    \bibliographystyle{plain}
