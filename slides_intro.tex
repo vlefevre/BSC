@@ -6,6 +6,7 @@
 \usepackage{amsfonts,amsmath,amssymb,amsthm,amstext,latexsym}
 \usepackage{listings}
 \usepackage{tikz}
+\usepackage{lmodern}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows,shapes}
 \usetikzlibrary{patterns,snakes}
@@ -420,6 +421,164 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
   $\Rightarrow$ \texttt{res}, \texttt{res0} and \texttt{res2} variables define the accuracy of the relaxation step and the accuracy of the whole algorithm.
   \resizebox{0.8\linewidth}{!}{\lstinputlisting[language=C, firstline=1832, lastline=1848]{AMG2006/parcsr_ls/par_relax.c}}
 \end{frame}
+
+\begin{frame}{Algorithm with adaptive precision}
+
+  $t$ a threshold, $\textsc{Update}(b)$ a function which returns an integer greater than $b$.
+  
+  \begin{enumerate}
+   \only<1>{\item $b \leftarrow 64$.}
+   \only<2>{\item $b \leftarrow {\color{red} 16}$.}
+   \item \textbf{While} \emph{nb\_iters $<$ max\_iter \textbf{and} rel\_res\_norm $>$ tolerance}
+        \begin{enumerate}
+	  \item Do a cycle at precision $b$.
+	  \item Compute new\_rel\_res\_norm.
+	  \only<2>{\item {\color{red} \textbf{If} \emph{new\_rel\_res\_norm $>$ $t \times$rel\_res\_norm} \textbf{Then} $b \leftarrow \textsc{Update}(b)$.}}
+	  \item rel\_res\_norm $\leftarrow$ new\_rel\_res\_norm.
+	  \item nb\_iters $\leftarrow$ nb\_iters$+1$.
+	  \end{enumerate}
+  \end{enumerate}
+ 
+\end{frame}
+
+\begin{frame}{Accuracy study}
+ \only<1>{\vspace{0.13cm}\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27_original.pdf}}
+ \only<2>{\vspace{0.13cm}\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27_16.pdf}}
+ \only<3>{\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27_32.pdf}}
+ \only<4>{\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27.pdf}}
+\end{frame}
+
+\begin{frame}{Which set of precisions should we choose?}
+  \textbf{Main result}: if something (time, energy consumption, \dots) evolves linearly with the number of bits $b$, then, for a given number of precisions $n$, we can minimize it overall by choosing \textbf{\textit{equally spaced precisions}} $(b_2 = 2b_1, b_3 = 3b_1, \dots)$.
+\end{frame}
+
+\begin{frame}{Proof}
+ From previous observations we can deduce that, for a given precision $b$, the number of cycles needed to reach the threshold $t$ depends linearly on $b$: $\textsc{MaxIter}(b) \approx  kb $ with $k$ a constant.
+ \vspace{0.5cm}
+ Assume: we have a set of $b_1,\dots,b_n$ precisions (such that $b_{i+1} = \textsc{Update}(b_i)$). If $T(b)$ denotes the execution time of a cycle at precision $b$, then the total time spent computing at precision $b_i$ is
+ \[ (\textsc{MaxIter}(b_{i}) - \textsc{MaxIter}(b_{i-1})) \times T(b_i) \]
+\end{frame}
+
+\begin{frame}{Proof}
+  Overall:
+  \[ \resizebox{\textwidth}{!}{ $ T_{total} = \textsc{MaxIter}(b_1)T(b_1) + \sum\limits_{i=1}^{n-1} (\textsc{MaxIter}(b_{i+1})-\textsc{MaxIter}(b_i))T(b_{i+1}). $ } \]
+
+ Assume: $T(b) = \alpha b+c$ ($\alpha$ and $c$ two constants).
+   \begin{equation}
+    T_{total}  = k\alpha\left(b_n^2 + \sum\limits_{i=1}^{n-1} (b_i^2 - b_i b_{i+1})\right) + kb_{n}c.
+   \end{equation}
+   \begin{equation}
+    T_{total}  = k\alpha b_n^2\left(1 + \sum\limits_{i=1}^{n-1} (x_i^2 - x_i x_{i+1})\right) + kb_{n}c,\quad x_i = \frac{b_i}{b_n}.
+   \end{equation}
+ 
+\end{frame}
+
+\begin{frame}{Proof}
+  The goal is to minimize the following function: $f(x_1,\dots,x_n) = \sum\limits_{i=1}^n x_i^2 - \sum\limits_{i=1}^{n-1} x_ix_{i+1}$, with $x_n \neq 0$.
+  
+\vspace{0.7cm}
+We need to solve the following system:
+ \resizebox{\textwidth}{!}{
+   $\left\{
+   \begin{tabular}{rcl cccccccccc cl}
+    $\frac{\partial f(x_1,\dots,x_n)}{\partial x_1}$ & = & $2x_1$ & $-$ & $x_2$  &     &       & & 	 &&     &     &       & = & 0 \\
+    $\frac{\partial f(x_1,\dots,x_n)}{\partial x_2}$ & = & $-x_1$ & $+$ & $2x_2$ & $-$ & $x_3$ & & 	 &&     &     &       & = & 0 \\
+    & \vdots &&&&&&&&&&&&&\\
+    $\frac{\partial f(x_1,\dots,x_{n})}{\partial x_{n-1}}$ & = &        &     &        &     &       & & $-x_{n-2}$ & $+$ & $2x_{n-1}$ & $-$ & $x_n$ & = & 0 \\
+    $x_n$ & = & 1 &&&&&&&&&&&&\\
+   \end{tabular} \right.$
+  }
+\end{frame}
+
+\begin{frame}{Proof}
+ In a matrix form this is solving $Ax=b$ where:\[ A = \begin{bmatrix}
+    2       & -1 &  &  &  \\
+    -1       & 2 & -1 &  &  \\
+    & \ddots & \ddots & \ddots & \\
+    & & -1 & 2 & -1 \\
+           &  &  & -1 & 2
+\end{bmatrix} \textup{ and } b = \begin{bmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix} \]
+\pause
+This system has a unique solution which is $\begin{bmatrix} \frac{1}{n} & \dots & \frac{n-1}{n} \end{bmatrix}$.
+
+\vspace{0.5cm}
+To conclude, if we want to reach the original accuracy (using 64 bits of precision) with 4 different precisions, it is best to use: 16,32,48 and 64.
+\end{frame}
+
+\begin{frame}{Number of precisions}
+\begin{center}
+ \begin{tikzpicture}
+      \draw[->] (0,0) -- (5,0) node[right] {$b$};
+      \draw[->] (0,0) -- (0,5) node[above] {$t$};
+      \draw[-] (4,0.2) -- (4,-0.2) node[below] {64};
+      \draw[red,fill=red!30] (0,0) rectangle (4,4);
+      %\draw[scale=0.5,domain=-3:3,smooth,variable=\x,blue] plot ({\x},{\x*\x});
+      %\draw[scale=0.5,domain=-3:3,smooth,variable=\y,red]  plot ({\y*\y},{\y});
+      \draw[domain=0:5,smooth,variable=\x,black] plot ({\x},{\x});
+    \end{tikzpicture}
+
+\end{center}
+\end{frame}
+\begin{frame}{Number of precisions}
+\begin{center}
+ \begin{tikzpicture}
+      \draw[->] (0,0) -- (5,0) node[right] {$b$};
+      \draw[->] (0,0) -- (0,5) node[above] {$t$};
+      \draw[-] (1,0.2) -- (1,-0.2) node[below] {16};
+      \draw[-] (2,0.2) -- (2,-0.2) node[below] {32};
+      \draw[-] (3,0.2) -- (3,-0.2) node[below] {48};
+      \draw[-] (4,0.2) -- (4,-0.2) node[below] {64};
+      \draw[red,fill=red!30] (0,0) rectangle (1,1);
+      \draw[red,fill=red!30] (1,0) rectangle (2,2);
+      \draw[red,fill=red!30] (2,0) rectangle (3,3);
+      \draw[red,fill=red!30] (3,0) rectangle (4,4);
+      \fill[green!30] (0,1) rectangle (1,4);
+      \fill[green!30] (1,2) rectangle (2,4);
+      \fill[green!30] (2,3) rectangle (3,4);
+      %\draw[scale=0.5,domain=-3:3,smooth,variable=\x,blue] plot ({\x},{\x*\x});
+      %\draw[scale=0.5,domain=-3:3,smooth,variable=\y,red]  plot ({\y*\y},{\y});
+      \draw[domain=0:5,smooth,variable=\x,black] plot ({\x},{\x});
+    \end{tikzpicture}
+
+\end{center}
+\end{frame}
+
+\begin{frame}{Number of precisions}
+\begin{center}
+ \begin{tikzpicture}
+      \draw[->] (0,0) -- (5,0) node[right] {$b$};
+      \draw[->] (0,0) -- (0,5) node[above] {$t$};
+      \draw[-] (1,0.2) -- (1,-0.2) node[below] {16};
+      \draw[-] (2,0.2) -- (2,-0.2) node[below] {32};
+      \draw[-] (3,0.2) -- (3,-0.2) node[below] {48};
+      \draw[-] (4,0.2) -- (4,-0.2) node[below] {64};
+      \draw[-] (0.5,0.2) -- (0.5,-0.2) node[below] {8};
+      \draw[-] (1.5,0.2) -- (1.5,-0.2) node[below] {24};
+      \draw[-] (2.5,0.2) -- (2.5,-0.2) node[below] {40};
+      \draw[-] (3.5,0.2) -- (3.5,-0.2) node[below] {56};
+      \draw[red,fill=red!30] (0,0) rectangle (0.5,0.5);
+      \draw[red,fill=red!30] (0.5,0) rectangle (1,1);
+      \draw[red,fill=red!30] (1,0) rectangle (1.5,1.5);
+      \draw[red,fill=red!30] (1.5,0) rectangle (2,2);
+      \draw[red,fill=red!30] (2,0) rectangle (2.5,2.5);
+      \draw[red,fill=red!30] (2.5,0) rectangle (3,3);
+      \draw[red,fill=red!30] (3,0) rectangle (3.5,3.5);
+      \draw[red,fill=red!30] (3.5,0) rectangle (4,4);
+      \fill[green!30] (0,1) rectangle (1,4);
+      \fill[green!30] (1,2) rectangle (2,4);
+      \fill[green!30] (2,3) rectangle (3,4);
+      \fill[blue!30] (0,0.5) rectangle (0.5,1);
+      \fill[blue!30] (1,1.5) rectangle (1.5,2);
+      \fill[blue!30] (2,2.5) rectangle (2.5,3);
+      \fill[blue!30] (3,3.5) rectangle (3.5,4);
+      %\draw[scale=0.5,domain=-3:3,smooth,variable=\x,blue] plot ({\x},{\x*\x});
+      %\draw[scale=0.5,domain=-3:3,smooth,variable=\y,red]  plot ({\y*\y},{\y});
+      \draw[domain=0:5,smooth,variable=\x,black] plot ({\x},{\x});
+    \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
 
 
 
