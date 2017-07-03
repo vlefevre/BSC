@@ -7,6 +7,7 @@
 \usepackage{listings}
 \usepackage{tikz}
 \usepackage{lmodern}
+\usepackage{bold-extra}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows,shapes}
 \usetikzlibrary{patterns,snakes}
@@ -52,6 +53,75 @@
  Two measures have to be taken into account, the error $e$ and the residual $r$: $u = u_i + e_i \Rightarrow Ae_i = f-Au_i = r_i$.
  
 \end{frame}
+
+\begin{frame}{Grids}
+
+  \begin{tikzpicture}
+      \draw[-] (0,-1) -- (0,5) ;
+      \draw[-] (1,-1) -- (1,5) ;
+      \draw[-] (2,-1) -- (2,5) ;
+      \draw[-] (3,-1) -- (3,5) ;
+      \draw[-] (4,-1) -- (4,5) ;
+      \draw[-] (-1,0) -- (5,0) ;
+      \draw[-] (-1,1) -- (5,1) ;
+      \draw[-] (-1,2) -- (5,2) ;
+      \draw[-] (-1,3) -- (5,3) ;
+      \draw[-] (-1,4) -- (5,4) ;
+      \foreach \x in {0,1,2,3,4}
+    \foreach \y in {0,1,2,3,4}
+      {
+        \fill (\x,\y) circle (0.1cm);
+      }
+      \only<1>{
+      \foreach \x in {0,1,2,3,4}
+    \foreach \y in {0,1,2,3,4}
+      {
+        \fill[red] (\x,\y) circle (0.09cm);
+      }}
+      \only<2>{
+      \foreach \x in {0,2,4}
+    \foreach \y in {0,2,4}
+      {
+        \fill[red] (\x,\y) circle (0.09cm);
+      }
+      }
+      \only<3>{
+      \foreach \x in {0,4}
+    \foreach \y in {0,4}
+      {
+        \fill[red] (\x,\y) circle (0.09cm);
+      }
+      }
+  \end{tikzpicture}
+  \hspace{1cm}
+  \begin{tikzpicture}
+      \draw[-] (0,-1) -- (0,5) ;
+    \foreach \y in {0,1,2,3,4}
+      {
+        \fill (0,\y) circle (0.1cm);
+      }
+      \only<1>{
+    \foreach \y in {0,1,2,3,4}
+      {
+        \fill[red] (0,\y) circle (0.09cm);
+      }}
+      \only<2>{
+    \foreach \y in {0,2,4}
+      {
+        \fill[red] (0,\y) circle (0.09cm);
+      }
+      }
+      \only<3>{
+    \foreach \y in {0,4}
+      {
+        \fill[red] (0,\y) circle (0.09cm);
+      }
+      }
+  \end{tikzpicture}
+
+ 
+\end{frame}
+
 
 \begin{frame}{Multi-grid}
   V-cycle$(h,H,\alpha_1,\alpha_2)$:\\
@@ -165,7 +235,7 @@
   \item V-cycle (1-cycle) costs $\leq \frac{2}{1-2^{-d}} sN^d$
   \item W-cycle (2-cycle) costs $\leq \frac{3}{1-2^{1-d}} sN^d$
   \item $k$-cycle costs $\leq \frac{k+1}{1-k2^{-d}} sN^d$
-  \end{itemize}
+ \end{itemize}
 \end{frame}
 
 \begin{frame}{Results - 80x80x80}
@@ -344,17 +414,20 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
 
 \begin{frame}{Results on MinoTauro}
  \begin{itemize}
-  \item Laplace and 27pt only
-  \item Size: 180x180x180 or 240x240x240
-  \item Topology: 3x3x3 or 4x4x4 or 6x6x1
+  \item \textbf{Laplace} and 27pt only
+  \item Size: 180x180x180 or \textbf{240x240x240}
+  \item Topology: \only<1>{3x3x3}\only<3>{4x4x4}\only<2>{6x6x1}
  \end{itemize}
  Similar results as before. Between 1 and 30\% improvement.
- \includegraphics[width=0.33\linewidth]{AMG2006/test/MT/laplace/time_convergence_27.pdf}
- \includegraphics[width=0.33\linewidth]{AMG2006/test/MT/laplace/time_convergence_36.pdf}
- \includegraphics[width=0.33\linewidth]{AMG2006/test/MT/laplace/time_convergence_64.pdf}
+ \begin{center}
+ \only<1>{\includegraphics[width=0.8\linewidth]{AMG2006/test/MT/laplace/time_convergence_27.pdf}}
+ \only<2>{\includegraphics[width=0.8\linewidth]{AMG2006/test/MT/laplace/time_convergence_36.pdf}}
+ \only<3>{\includegraphics[width=0.8\linewidth]{AMG2006/test/MT/laplace/time_convergence_64.pdf}}
+ \end{center}
 \end{frame}
 
 \begin{frame}{Relaxation function analysis}
+  Let's have a look at the \textbf{variables in the \textsc{Relax}() function}:
   Only a few temporary variables, most of the variables used are the data of the input matrix.
   \begin{itemize}
     \item 2 arrays used to receive/send data
@@ -455,6 +528,8 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
 \begin{frame}{Proof}
  From previous observations we can deduce that, for a given precision $b$, the number of cycles needed to reach the threshold $t$ depends linearly on $b$: $\textsc{MaxIter}(b) \approx  kb $ with $k$ a constant.
  \vspace{0.5cm}
+ \pause
+ 
  Assume: we have a set of $b_1,\dots,b_n$ precisions (such that $b_{i+1} = \textsc{Update}(b_i)$). If $T(b)$ denotes the execution time of a cycle at precision $b$, then the total time spent computing at precision $b_i$ is
  \[ (\textsc{MaxIter}(b_{i}) - \textsc{MaxIter}(b_{i-1})) \times T(b_i) \]
 \end{frame}
@@ -470,11 +545,10 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
    \begin{equation}
     T_{total}  = k\alpha b_n^2\left(1 + \sum\limits_{i=1}^{n-1} (x_i^2 - x_i x_{i+1})\right) + kb_{n}c,\quad x_i = \frac{b_i}{b_n}.
    \end{equation}
- 
 \end{frame}
 
 \begin{frame}{Proof}
-  The goal is to minimize the following function: $f(x_1,\dots,x_n) = \sum\limits_{i=1}^n x_i^2 - \sum\limits_{i=1}^{n-1} x_ix_{i+1}$, with $x_n \neq 0$.
+  The goal is to minimize the following function: $f(x_1,\dots,x_n) = \sum\limits_{i=1}^n x_i^2 - \sum\limits_{i=1}^{n-1} x_ix_{i+1}$\pause, with $x_n \neq 0$.\pause
   
 \vspace{0.7cm}
 We need to solve the following system:
@@ -499,7 +573,7 @@ We need to solve the following system:
            &  &  & -1 & 2
 \end{bmatrix} \textup{ and } b = \begin{bmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix} \]
 \pause
-This system has a unique solution which is $\begin{bmatrix} \frac{1}{n} & \dots & \frac{n-1}{n} \end{bmatrix}$.
+This system has a unique solution ($\Delta_n = 1+n$) which is $\begin{bmatrix} \frac{1}{n} & \dots & \frac{n-1}{n} \end{bmatrix}$.
 
 \vspace{0.5cm}
 To conclude, if we want to reach the original accuracy (using 64 bits of precision) with 4 different precisions, it is best to use: 16,32,48 and 64.
@@ -508,13 +582,13 @@ To conclude, if we want to reach the original accuracy (using 64 bits of precisi
 \begin{frame}{Number of precisions}
 \begin{center}
  \begin{tikzpicture}
-      \draw[->] (0,0) -- (5,0) node[right] {$b$};
+      \draw[->] (0,0) -- (5,0) node[right] {$\frac{\textsc{MaxIter}(b)}{k}$};
       \draw[->] (0,0) -- (0,5) node[above] {$t$};
       \draw[-] (4,0.2) -- (4,-0.2) node[below] {64};
       \draw[red,fill=red!30] (0,0) rectangle (4,4);
       %\draw[scale=0.5,domain=-3:3,smooth,variable=\x,blue] plot ({\x},{\x*\x});
       %\draw[scale=0.5,domain=-3:3,smooth,variable=\y,red]  plot ({\y*\y},{\y});
-      \draw[domain=0:5,smooth,variable=\x,black] plot ({\x},{\x});
+      \draw[domain=0:5,smooth,variable=\x,black] plot ({\x},{\x}) node[right] {$y=\alpha x$};
     \end{tikzpicture}
 
 \end{center}
@@ -522,7 +596,7 @@ To conclude, if we want to reach the original accuracy (using 64 bits of precisi
 \begin{frame}{Number of precisions}
 \begin{center}
  \begin{tikzpicture}
-      \draw[->] (0,0) -- (5,0) node[right] {$b$};
+      \draw[->] (0,0) -- (5,0) node[right] {$\frac{\textsc{MaxIter}(b)}{k}$};
       \draw[->] (0,0) -- (0,5) node[above] {$t$};
       \draw[-] (1,0.2) -- (1,-0.2) node[below] {16};
       \draw[-] (2,0.2) -- (2,-0.2) node[below] {32};
@@ -537,7 +611,7 @@ To conclude, if we want to reach the original accuracy (using 64 bits of precisi
       \fill[green!30] (2,3) rectangle (3,4);
       %\draw[scale=0.5,domain=-3:3,smooth,variable=\x,blue] plot ({\x},{\x*\x});
       %\draw[scale=0.5,domain=-3:3,smooth,variable=\y,red]  plot ({\y*\y},{\y});
-      \draw[domain=0:5,smooth,variable=\x,black] plot ({\x},{\x});
+      \draw[domain=0:5,smooth,variable=\x,black] plot ({\x},{\x}) node[right] {$y=\alpha x$};
     \end{tikzpicture}
 
 \end{center}
@@ -546,16 +620,16 @@ To conclude, if we want to reach the original accuracy (using 64 bits of precisi
 \begin{frame}{Number of precisions}
 \begin{center}
  \begin{tikzpicture}
-      \draw[->] (0,0) -- (5,0) node[right] {$b$};
+      \draw[->] (0,0) -- (5,0) node[right] {$\frac{\textsc{MaxIter}(b)}{k}$};
       \draw[->] (0,0) -- (0,5) node[above] {$t$};
-      \draw[-] (1,0.2) -- (1,-0.2) node[below] {16};
+      {\small \draw[-] (1,0.2) -- (1,-0.2) node[below] {16};
       \draw[-] (2,0.2) -- (2,-0.2) node[below] {32};
       \draw[-] (3,0.2) -- (3,-0.2) node[below] {48};
       \draw[-] (4,0.2) -- (4,-0.2) node[below] {64};
       \draw[-] (0.5,0.2) -- (0.5,-0.2) node[below] {8};
       \draw[-] (1.5,0.2) -- (1.5,-0.2) node[below] {24};
       \draw[-] (2.5,0.2) -- (2.5,-0.2) node[below] {40};
-      \draw[-] (3.5,0.2) -- (3.5,-0.2) node[below] {56};
+      \draw[-] (3.5,0.2) -- (3.5,-0.2) node[below] {56};}
       \draw[red,fill=red!30] (0,0) rectangle (0.5,0.5);
       \draw[red,fill=red!30] (0.5,0) rectangle (1,1);
       \draw[red,fill=red!30] (1,0) rectangle (1.5,1.5);
@@ -573,12 +647,19 @@ To conclude, if we want to reach the original accuracy (using 64 bits of precisi
       \fill[blue!30] (3,3.5) rectangle (3.5,4);
       %\draw[scale=0.5,domain=-3:3,smooth,variable=\x,blue] plot ({\x},{\x*\x});
       %\draw[scale=0.5,domain=-3:3,smooth,variable=\y,red]  plot ({\y*\y},{\y});
-      \draw[domain=0:5,smooth,variable=\x,black] plot ({\x},{\x});
+      \draw[domain=0:5,smooth,variable=\x,black] plot ({\x},{\x}) node[right] {$y=\alpha x$};
     \end{tikzpicture}
  \end{center}
 
 \end{frame}
 
+\begin{frame}{Simulation}
+  \begin{itemize}
+   \item Lots of problems with gem5. Running a simple program is OK but it still does not work with MPI.
+   \item Problem of conversion between gem5 output and McPAT input (lots of parameters, all scripts existing are too old).
+   \item Sniper: McPAT integrated but some test examples do not work. Not tested with MPI yet.
+  \end{itemize}
+\end{frame}
 
 
 
