@@ -77,7 +77,7 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
    int      max_iter;
    int      num_procs, my_id;
 
-   int	    precision_MPFR = 32;
+   int	    precision_MPFR = 17;
 
    double   alpha = 1.0;
    double   beta = -1.0;
@@ -260,7 +260,7 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
 
         conv_factor = resid_nrm / old_resid;
 	if (conv_factor > 0.8)
-		precision_MPFR += 8;
+		precision_MPFR += 18;
         if (rhs_norm)
         {
            relative_resid = resid_nrm / rhs_norm;
