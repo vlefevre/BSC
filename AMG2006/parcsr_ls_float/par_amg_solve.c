@@ -77,10 +77,10 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
    int      max_iter;
    int      num_procs, my_id;
 
-   int	    precision_MPFR = 4;
-   int      MPFR_update_type = 0;
-   int	    MPFR_update_value = 53;
-   double   MPFR_update_threshold = 0.8;
+   int	    precision_MPFR = 32;
+   int      MPFR_update_type = 1;
+   int	    MPFR_update_value = 2;
+   double   MPFR_update_threshold = 0.5;
 
    double   alpha = 1.0;
    double   beta = -1.0;
