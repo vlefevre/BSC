@@ -8,6 +8,7 @@ import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
+import math
 
 #Default parameters
 max_prec = 53
@@ -58,7 +59,8 @@ for f in files:
 	labeltab = [precision]
 	while precision < max_prec:
 		if ftab[2][0] == "x":
-			precision *= int(ftab[2][1:])
+			precision *= float(ftab[2][1:])
+			precision = math.floor(precision)
 		else:
 			precision += int(ftab[2])
 		if precision > max_prec:
@@ -103,6 +105,8 @@ plt.ylabel("Units of time")
 plt.xlabel("Precision sets")
 plt.xticks(pylab.arange(0,len(result)),resultplot[:,0],rotation='vertical')
 plt.title(r"Time to reach accuracy "+str(tolerance)+"\nfor different strategies with threshold "+str(thr)+"\nand time model is $T(b)=b^{"+str(alpha)+"}$.")
+plt.xlim([0,len(files)])
+plt.ylim([0,50])
 plt.tight_layout()
 
 output_file = "timemodel_"+str(thr)+"_"+str(tolerance)+"_"+str(alpha)+".pdf"

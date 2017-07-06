@@ -77,10 +77,11 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
    int      max_iter;
    int      num_procs, my_id;
 
-   int	    precision_MPFR = 32;
+   int	    precision_MPFR = 11;
+   int	    precision_MPFR_max = 200;
    int      MPFR_update_type = 1;
-   int	    MPFR_update_value = 2;
-   double   MPFR_update_threshold = 0.5;
+   float    MPFR_update_value = 2.24;
+   double   MPFR_update_threshold = 0.8;
 
    double   alpha = 1.0;
    double   beta = -1.0;
@@ -269,6 +270,7 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
 		else
 			precision_MPFR += MPFR_update_value;
 	}
+	if (precision_MPFR > precision_MPFR_max) precision_MPFR = precision_MPFR_max;
         if (rhs_norm)
         {
            relative_resid = resid_nrm / rhs_norm;
