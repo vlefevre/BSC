@@ -15,18 +15,19 @@ thr = 0.5
 tolerance = 1e-8
 alpha = 2.0
 exe="./time_estimator"
+order_incr = False
 
 colors={1:'black',2:'blue',3:'red',4:'green',5:'#00CC55',7:'purple',13:'yellow',14:'orange',17:'cyan',46:'#999999'}
 
 #Parse command-line
 try:
-	opts,args = getopt.getopt(sys.argv[1:],"ht:a:s:","")
+	opts,args = getopt.getopt(sys.argv[1:],"ht:a:s:i","")
 except getopt.GetoptError:
-	print 'analyzer.py -t tolerance -a alpha_exponent -s threshold (0.5 or 0.8)'
+	print 'analyzer.py -t tolerance -a alpha_exponent -s threshold (0.5 or 0.8) [-i]'
 	sys.exit(2)
 for opt,arg in opts:
 	if opt == "-h":
-		print 'analyzer.py -t tolerance -a alpha_exponent -s threshold (0.5 or 0.8)'
+		print 'analyzer.py -t tolerance -a alpha_exponent -s threshold (0.5 or 0.8) [-i]'
 		sys.exit()
 	elif opt == "-t":
 		tolerance = float(arg)
@@ -40,7 +41,9 @@ for opt,arg in opts:
 		else:
 			print 'No existing data for threshold '+arg+'. Exiting.'
 			sys.exit(1)
-	
+	elif opt == "-i":
+		order_incr = True
+
 src_dir = "../PREC_INCR_"+str(thr)+"/evaluation/"
 result = []
 files = [f for f in listdir(src_dir) if isfile(join(src_dir, f))]
@@ -79,8 +82,10 @@ for f in files:
 
 print "Minimum time is "+str(minVal)+", for "+minLabel+"."
 
-result.sort(key=lambda x: int((x[0].split("_"))[0])) #sort by increasing starting precision
-#result.sort(key=lambda x: x[1]) #sort by increasing time
+if order_incr:
+	result.sort(key=lambda x: x[1]) #sort by increasing time
+else:
+	result.sort(key=lambda x: int((x[0].split("_"))[0])) #sort by increasing starting precision
 resultplot = np.array(result)
 yval = np.array(resultplot[:,1],dtype='f8')
 cval = np.array(resultplot[:,2],dtype='i8')
