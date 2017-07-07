@@ -1,0 +1,183 @@
+Making utilities ...
+make[1]: Entering directory '/home/vlefevre/Documents/BSC/AMG2006/utilities'
+mpicc -o amg_linklist.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING amg_linklist.c
+mpicc -o binsearch.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING binsearch.c
+mpicc -o exchange_data.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING exchange_data.c
+mpicc -o hypre_memory.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING hypre_memory.c
+mpicc -o hypre_qsort.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING hypre_qsort.c
+mpicc -o memory_dmalloc.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING memory_dmalloc.c
+mpicc -o mpistubs.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING mpistubs.c
+mpicc -o qsplit.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING qsplit.c
+mpicc -o random.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING random.c
+mpicc -o threading.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING threading.c
+mpicc -o thread_mpistubs.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING thread_mpistubs.c
+mpicc -D_POSIX_SOURCE -o timer.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING timer.c
+mpicc -o timing.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING timing.c
+mpicc -o umalloc_local.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING umalloc_local.c
+mpicc -o hypre_error.o -c -I.. -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING hypre_error.c
+Building libHYPRE_utilities.a ... 
+ar -rcu libHYPRE_utilities.a amg_linklist.o binsearch.o exchange_data.o hypre_memory.o hypre_qsort.o memory_dmalloc.o mpistubs.o qsplit.o random.o threading.o thread_mpistubs.o timer.o timing.o umalloc_local.o hypre_error.o
+ranlib libHYPRE_utilities.a
+make[1]: Leaving directory '/home/vlefevre/Documents/BSC/AMG2006/utilities'
+
+Making krylov ...
+make[1]: Entering directory '/home/vlefevre/Documents/BSC/AMG2006/krylov'
+mpicc -o gmres.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp gmres.c
+mpicc -o HYPRE_gmres.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_gmres.c
+mpicc -o HYPRE_pcg.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_pcg.c
+mpicc -o pcg.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp pcg.c
+Building libkrylov.a ... 
+ar -rcu libkrylov.a gmres.o HYPRE_gmres.o HYPRE_pcg.o pcg.o
+ranlib libkrylov.a
+make[1]: Leaving directory '/home/vlefevre/Documents/BSC/AMG2006/krylov'
+
+Making IJ_mv ...
+make[1]: Entering directory '/home/vlefevre/Documents/BSC/AMG2006/IJ_mv'
+mpicc -o aux_parcsr_matrix.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../parcsr_ls -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp aux_parcsr_matrix.c
+mpicc -o aux_par_vector.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../parcsr_ls -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp aux_par_vector.c
+mpicc -o HYPRE_IJMatrix.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../parcsr_ls -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_IJMatrix.c
+mpicc -o HYPRE_IJVector.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../parcsr_ls -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_IJVector.c
+mpicc -o IJMatrix.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../parcsr_ls -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp IJMatrix.c
+mpicc -o IJMatrix_parcsr.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../parcsr_ls -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp IJMatrix_parcsr.c
+mpicc -o IJVector_parcsr.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../parcsr_ls -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp IJVector_parcsr.c
+Building libIJ_mv.a ... 
+ar -rcu libIJ_mv.a aux_parcsr_matrix.o aux_par_vector.o HYPRE_IJMatrix.o HYPRE_IJVector.o IJMatrix.o IJMatrix_parcsr.o IJVector_parcsr.o
+ranlib libIJ_mv.a
+make[1]: Leaving directory '/home/vlefevre/Documents/BSC/AMG2006/IJ_mv'
+
+Making parcsr_ls ...
+make[1]: Entering directory '/home/vlefevre/Documents/BSC/AMG2006/parcsr_ls'
+mpicc -o aux_interp.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp aux_interp.c
+mpicc -o HYPRE_parcsr_amg.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_parcsr_amg.c
+mpicc -o HYPRE_parcsr_gmres.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_parcsr_gmres.c
+mpicc -o HYPRE_parcsr_pcg.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_parcsr_pcg.c
+mpicc -o par_amg.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_amg.c
+mpicc -o par_amg_setup.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_amg_setup.c
+mpicc -o par_amg_solve.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_amg_solve.c
+mpicc -o par_cg_relax_wt.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_cg_relax_wt.c
+mpicc -o par_coarsen.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_coarsen.c
+mpicc -o par_coarse_parms.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_coarse_parms.c
+mpicc -o par_cycle.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_cycle.c
+mpicc -o par_indepset.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_indepset.c
+mpicc -o par_interp.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_interp.c
+mpicc -o par_jacobi_interp.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_jacobi_interp.c
+mpicc -o par_multi_interp.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_multi_interp.c
+mpicc -o par_laplace_27pt.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_laplace_27pt.c
+mpicc -o par_laplace.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_laplace.c
+mpicc -o par_lr_interp.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_lr_interp.c
+mpicc -o par_nodal_systems.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_nodal_systems.c
+mpicc -o par_rap.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_rap.c
+mpicc -o par_rap_communication.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_rap_communication.c
+mpicc -o par_vardifconv.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_vardifconv.c
+mpicc -o par_relax.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_relax.c
+mpicc -o par_relax_interface.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_relax_interface.c
+mpicc -o par_scaled_matnorm.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_scaled_matnorm.c
+mpicc -o par_stats.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_stats.c
+mpicc -o par_strength.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_strength.c
+mpicc -o pcg_par.o -c -I.. -I../utilities -I../krylov -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp pcg_par.c
+Building libparcsr_ls.a ... 
+ar -rcu libparcsr_ls.a aux_interp.o HYPRE_parcsr_amg.o HYPRE_parcsr_gmres.o HYPRE_parcsr_pcg.o par_amg.o par_amg_setup.o par_amg_solve.o par_cg_relax_wt.o par_coarsen.o par_coarse_parms.o par_cycle.o par_indepset.o par_interp.o par_jacobi_interp.o par_multi_interp.o par_laplace_27pt.o par_laplace.o par_lr_interp.o par_nodal_systems.o par_rap.o par_rap_communication.o par_vardifconv.o par_relax.o par_relax_interface.o par_scaled_matnorm.o par_stats.o par_strength.o pcg_par.o
+ranlib libparcsr_ls.a
+make[1]: Leaving directory '/home/vlefevre/Documents/BSC/AMG2006/parcsr_ls'
+
+Making parcsr_mv ...
+make[1]: Entering directory '/home/vlefevre/Documents/BSC/AMG2006/parcsr_mv'
+mpicc -o HYPRE_parcsr_matrix.o -c -I.. -I../utilities -I../seq_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_parcsr_matrix.c
+mpicc -o HYPRE_parcsr_vector.o -c -I.. -I../utilities -I../seq_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_parcsr_vector.c
+mpicc -o new_commpkg.o -c -I.. -I../utilities -I../seq_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp new_commpkg.c
+mpicc -o par_csr_assumed_part.o -c -I.. -I../utilities -I../seq_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_csr_assumed_part.c
+mpicc -o par_csr_communication.o -c -I.. -I../utilities -I../seq_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_csr_communication.c
+mpicc -o par_csr_matop.o -c -I.. -I../utilities -I../seq_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_csr_matop.c
+mpicc -o par_csr_matrix.o -c -I.. -I../utilities -I../seq_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_csr_matrix.c
+mpicc -o par_csr_matop_marked.o -c -I.. -I../utilities -I../seq_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_csr_matop_marked.c
+mpicc -o par_csr_matvec.o -c -I.. -I../utilities -I../seq_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_csr_matvec.c
+mpicc -o par_vector.o -c -I.. -I../utilities -I../seq_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp par_vector.c
+Building libparcsr_mv.a ... 
+ar -rcu libparcsr_mv.a HYPRE_parcsr_matrix.o HYPRE_parcsr_vector.o new_commpkg.o par_csr_assumed_part.o par_csr_communication.o par_csr_matop.o par_csr_matrix.o par_csr_matop_marked.o par_csr_matvec.o par_vector.o
+ranlib libparcsr_mv.a
+make[1]: Leaving directory '/home/vlefevre/Documents/BSC/AMG2006/parcsr_mv'
+
+Making seq_mv ...
+make[1]: Entering directory '/home/vlefevre/Documents/BSC/AMG2006/seq_mv'
+mpicc -o big_csr_matrix.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp big_csr_matrix.c
+mpicc -o csr_matop.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp csr_matop.c
+mpicc -o csr_matrix.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp csr_matrix.c
+mpicc -o csr_matvec.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp csr_matvec.c
+mpicc -o genpart.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp genpart.c
+mpicc -o HYPRE_csr_matrix.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_csr_matrix.c
+mpicc -o HYPRE_vector.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_vector.c
+mpicc -o vector.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp vector.c
+Building libseq_mv.a ... 
+ar -rcu libseq_mv.a big_csr_matrix.o csr_matop.o csr_matrix.o csr_matvec.o genpart.o HYPRE_csr_matrix.o HYPRE_vector.o vector.o
+ranlib libseq_mv.a
+make[1]: Leaving directory '/home/vlefevre/Documents/BSC/AMG2006/seq_mv'
+
+Making struct_mv ...
+make[1]: Entering directory '/home/vlefevre/Documents/BSC/AMG2006/struct_mv'
+mpicc -o assumed_part.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp assumed_part.c
+mpicc -o box_algebra.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp box_algebra.c
+mpicc -o box_alloc.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp box_alloc.c
+mpicc -o box_boundary.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp box_boundary.c
+mpicc -o box.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp box.c
+mpicc -o box_manager.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp box_manager.c
+mpicc -o box_neighbors.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp box_neighbors.c
+mpicc -o communication_info.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp communication_info.c
+mpicc -o computation.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp computation.c
+mpicc -o grow.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp grow.c
+mpicc -o HYPRE_struct_grid.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_struct_grid.c
+mpicc -o HYPRE_struct_matrix.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_struct_matrix.c
+mpicc -o HYPRE_struct_stencil.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_struct_stencil.c
+mpicc -o HYPRE_struct_vector.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_struct_vector.c
+mpicc -o new_assemble.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp new_assemble.c
+mpicc -o new_box_neighbors.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp new_box_neighbors.c
+mpicc -o project.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp project.c
+mpicc -o struct_axpy.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_axpy.c
+mpicc -o struct_communication.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_communication.c
+mpicc -o struct_copy.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_copy.c
+mpicc -o struct_grid.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_grid.c
+mpicc -o struct_innerprod.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_innerprod.c
+mpicc -o struct_io.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_io.c
+mpicc -o struct_matrix.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_matrix.c
+mpicc -o struct_matrix_mask.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_matrix_mask.c
+mpicc -o struct_matvec.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_matvec.c
+mpicc -o struct_overlap_innerprod.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_overlap_innerprod.c
+mpicc -o struct_scale.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_scale.c
+mpicc -o struct_stencil.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_stencil.c
+mpicc -o struct_vector.o -c -I.. -I../utilities -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp struct_vector.c
+Building libHYPRE_struct_mv.a ... 
+ar -rcu libHYPRE_struct_mv.a assumed_part.o box_algebra.o box_alloc.o box_boundary.o box.o box_manager.o box_neighbors.o communication_info.o computation.o grow.o HYPRE_struct_grid.o HYPRE_struct_matrix.o HYPRE_struct_stencil.o HYPRE_struct_vector.o new_assemble.o new_box_neighbors.o project.o struct_axpy.o struct_communication.o struct_copy.o struct_grid.o struct_innerprod.o struct_io.o struct_matrix.o struct_matrix_mask.o struct_matvec.o struct_overlap_innerprod.o struct_scale.o struct_stencil.o struct_vector.o
+ranlib libHYPRE_struct_mv.a
+make[1]: Leaving directory '/home/vlefevre/Documents/BSC/AMG2006/struct_mv'
+
+Making sstruct_mv ...
+make[1]: Entering directory '/home/vlefevre/Documents/BSC/AMG2006/sstruct_mv'
+mpicc -o box_map.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp box_map.c
+mpicc -o HYPRE_sstruct_graph.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_sstruct_graph.c
+mpicc -o HYPRE_sstruct_grid.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_sstruct_grid.c
+mpicc -o HYPRE_sstruct_matrix.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_sstruct_matrix.c
+mpicc -o HYPRE_sstruct_stencil.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_sstruct_stencil.c
+mpicc -o HYPRE_sstruct_vector.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp HYPRE_sstruct_vector.c
+mpicc -o sstruct_axpy.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp sstruct_axpy.c
+mpicc -o sstruct_copy.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp sstruct_copy.c
+mpicc -o sstruct_graph.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp sstruct_graph.c
+mpicc -o sstruct_grid.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp sstruct_grid.c
+mpicc -o sstruct_innerprod.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp sstruct_innerprod.c
+mpicc -o sstruct_matrix.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp sstruct_matrix.c
+mpicc -o sstruct_matvec.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp sstruct_matvec.c
+mpicc -o sstruct_overlap_innerprod.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp sstruct_overlap_innerprod.c
+mpicc -o sstruct_scale.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp sstruct_scale.c
+mpicc -o sstruct_stencil.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp sstruct_stencil.c
+mpicc -o sstruct_vector.o -c -I.. -I../utilities -I../struct_mv -I../seq_mv -I../parcsr_mv -I../IJ_mv -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp sstruct_vector.c
+Building libsstruct_mv.a ... 
+ar -rcu libsstruct_mv.a box_map.o HYPRE_sstruct_graph.o HYPRE_sstruct_grid.o HYPRE_sstruct_matrix.o HYPRE_sstruct_stencil.o HYPRE_sstruct_vector.o sstruct_axpy.o sstruct_copy.o sstruct_graph.o sstruct_grid.o sstruct_innerprod.o sstruct_matrix.o sstruct_matvec.o sstruct_overlap_innerprod.o sstruct_scale.o sstruct_stencil.o sstruct_vector.o
+ranlib libsstruct_mv.a
+make[1]: Leaving directory '/home/vlefevre/Documents/BSC/AMG2006/sstruct_mv'
+
+Making test ...
+make[1]: Entering directory '/home/vlefevre/Documents/BSC/AMG2006/test'
+mpicc -o amg2006.o -c -I.. -I../utilities -I../struct_mv -I../sstruct_mv -I../IJ_mv -I../seq_mv -I../parcsr_mv -I../parcsr_ls -I../krylov -O3 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG -fopenmp -DHYPRE_TIMING amg2006.c
+Linking amg2006 ... 
+mpicc -o amg2006 amg2006.o -L. -L../parcsr_ls -L../parcsr_mv -L../IJ_mv -L../seq_mv -L../sstruct_mv -L../struct_mv -L../krylov -L../utilities -lparcsr_ls -lparcsr_mv -lseq_mv -lsstruct_mv -lIJ_mv -lHYPRE_struct_mv -lkrylov -lHYPRE_utilities -fopenmp
+Makefile:84: recipe for target 'amg2006' failed
+make[1]: Leaving directory '/home/vlefevre/Documents/BSC/AMG2006/test'
+

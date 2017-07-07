@@ -60,7 +60,7 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
    int      cycle_count;
    int      num_levels;
    /* int      num_unknowns; */
-   double   tol;
+   float   tol;
 
 
    hypre_ParCSRMatrix **A_array;
@@ -78,25 +78,25 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
    int      max_iter;
    int      num_procs, my_id;
 
-   double   alpha = 1.0;
-   double   beta = -1.0;
-   double   cycle_op_count;
-   double   total_coeffs;
-   double   total_variables;
-   double  *num_coeffs;
-   double  *num_variables;
-   double   cycle_cmplxty;
-   double   operat_cmplxty;
-   double   grid_cmplxty;
-   double   conv_factor;
-   double   resid_nrm;
-   double   resid_nrm_init;
-   double   relative_resid;
-   double   rhs_norm;
-   double   old_resid;
-   double   ieee_check = 0.;
+   float   alpha = 1.0;
+   float   beta = -1.0;
+   float   cycle_op_count;
+   float   total_coeffs;
+   float   total_variables;
+   float  *num_coeffs;
+   float  *num_variables;
+   float   cycle_cmplxty;
+   float   operat_cmplxty;
+   float   grid_cmplxty;
+   float   conv_factor;
+   float   resid_nrm;
+   float   resid_nrm_init;
+   float   relative_resid;
+   float   rhs_norm;
+   float   old_resid;
+   float   ieee_check = 0.;
 
-   clock_t  t1,t2;
+   clock_t t1,t2;
 
    hypre_ParVector  *Vtemp;
    hypre_ParVector  *Residual;
@@ -118,8 +118,8 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
    min_iter         = hypre_ParAMGDataMinIter(amg_data);
    max_iter         = hypre_ParAMGDataMaxIter(amg_data);
 
-   num_coeffs       = hypre_CTAlloc(double, num_levels);
-   num_variables    = hypre_CTAlloc(double, num_levels);
+   num_coeffs       = hypre_CTAlloc(float, num_levels);
+   num_variables    = hypre_CTAlloc(float, num_levels);
    num_coeffs[0]    = hypre_ParCSRMatrixDNumNonzeros(A);
    num_variables[0] = hypre_ParCSRMatrixGlobalNumRows(A);
  
@@ -132,8 +132,8 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
 
    for (j = 1; j < num_levels; j++)
    {
-      num_coeffs[j]    = (double) hypre_ParCSRMatrixNumNonzeros(A_array[j]);
-      num_variables[j] = (double) hypre_ParCSRMatrixGlobalNumRows(A_array[j]);
+      num_coeffs[j]    = (float) hypre_ParCSRMatrixNumNonzeros(A_array[j]);
+      num_variables[j] = (float) hypre_ParCSRMatrixGlobalNumRows(A_array[j]);
    }
    
 
@@ -238,10 +238,9 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
       hypre_ParAMGDataCycleOpCount(amg_data) = 0;   
       /* Op count only needed for one cycle */
 
-	t1=clock();
+	t1 = clock();
       hypre_BoomerAMGCycle(amg_data, F_array, U_array); 
-	t2=clock();
-
+	t2 = clock();
       /*---------------------------------------------------------------
        *    Compute  fine-grid residual and residual norm
        *----------------------------------------------------------------*/
@@ -276,7 +275,8 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
 
       ++cycle_count;
 
-	double cycle_time = (double)(t2-t1)/CLOCKS_PER_SEC*1000.;
+      double cycle_time = (double)(t2-t1)/CLOCKS_PER_SEC*1000.;
+
 
       hypre_ParAMGDataNumIterations(amg_data) = cycle_count;
 #ifdef CUMNUMIT
@@ -286,7 +286,7 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
       if (my_id == 0 && amg_print_level > 1 && tol >= 0.)
       { 
          printf("    Cycle %2d   %e    %f     %e    %f\n", cycle_count,
-                 resid_nrm, conv_factor, relative_resid,cycle_time);
+                 resid_nrm, conv_factor, relative_resid, cycle_time);
       }
    }
 	printf("Number of iterations : %d\n", cycle_count);
@@ -302,7 +302,7 @@ hypre_BoomerAMGSolve( void               *amg_vdata,
     *-----------------------------------------------------------------------*/
 
    if (cycle_count > 0 && tol >= 0.) 
-     conv_factor = pow((resid_nrm/resid_nrm_init),(1.0/(double) cycle_count));
+     conv_factor = pow((resid_nrm/resid_nrm_init),(1.0/(float) cycle_count));
    else
      conv_factor = 1.;
 
