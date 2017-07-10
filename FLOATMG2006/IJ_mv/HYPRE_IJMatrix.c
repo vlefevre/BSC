@@ -898,9 +898,9 @@ HYPRE_IJMatrixRead( const char     *filename,
 
    ncols = 1;
 #ifdef HYPRE_LONG_LONG
-   while ( fscanf(file, "%lld %lld %le", &I, &J, &value) != EOF )
+   while ( fscanf(file, "%lld %lld %e", &I, &J, &value) != EOF )
 #else
-   while ( fscanf(file, "%d %d %le", &I, &J, &value) != EOF )
+   while ( fscanf(file, "%d %d %e", &I, &J, &value) != EOF )
 #endif
    {
       HYPRE_IJMatrixSetValues(matrix, 1, &ncols, &I, &J, &value);

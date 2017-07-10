@@ -168,7 +168,7 @@ hypre_SeqVectorRead( char *file_name )
    data = hypre_VectorData(vector);
    for (j = 0; j < size; j++)
    {
-      fscanf(fp, "%le", &data[j]);
+      fscanf(fp, "%e", &data[j]);
    }
 
    fclose(fp);

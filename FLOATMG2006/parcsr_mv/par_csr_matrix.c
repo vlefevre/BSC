@@ -863,9 +863,9 @@ hypre_ParCSRMatrixReadIJ( MPI_Comm 	       comm,
    {
       /* read values */
 #ifdef HYPRE_LONG_LONG
-      fscanf(file, "%lld %lld %le", &I, &J, &data);
+      fscanf(file, "%lld %lld %e", &I, &J, &data);
 #else
-      fscanf(file, "%d %d %le", &I, &J, &data);
+      fscanf(file, "%d %d %e", &I, &J, &data);
 #endif
       I = I-base_i-first_row_index;       
       J -= base_j;

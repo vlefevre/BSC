@@ -435,10 +435,8 @@ hypre_PrintTiming( const char     *heading,
       if (hypre_TimingNumRegs(i) > 0)
       {
          local_wall_time = hypre_TimingWallTime(i);
-	printf("(%d)Local wall time: %f\n",myrank,local_wall_time);
          local_cpu_time  = hypre_TimingCPUTime(i);
 	
-		printf("(timing) MPI_FLOAT = %d\n",MPI_FLOAT);
          MPI_Allreduce(&local_wall_time, &wall_time, 1,
                        MPI_FLOAT, MPI_MAX, comm);
          MPI_Allreduce(&local_cpu_time, &cpu_time, 1,

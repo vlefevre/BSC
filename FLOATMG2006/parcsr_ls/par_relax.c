@@ -130,7 +130,6 @@ int  hypre_BoomerAMGRelax( hypre_ParCSRMatrix *A,
     *     relax_type = 7 -> Jacobi (uses Matvec), only needed in CGNR
     *     relax_type = 9 -> Direct Solve
     *-----------------------------------------------------------------------*/
-printf("MPI_FLOAT = %d\n",MPI_FLOAT);	
    switch (relax_type)
    {            
       case 0: /* Weighted Jacobi */

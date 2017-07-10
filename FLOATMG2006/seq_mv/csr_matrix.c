@@ -231,7 +231,7 @@ hypre_CSRMatrixRead( char *file_name )
    matrix_data = hypre_CSRMatrixData(matrix);
    for (j = 0; j < matrix_i[num_rows]; j++)
    {
-      fscanf(fp, "%le", &matrix_data[j]);
+      fscanf(fp, "%e", &matrix_data[j]);
    }
 
    fclose(fp);

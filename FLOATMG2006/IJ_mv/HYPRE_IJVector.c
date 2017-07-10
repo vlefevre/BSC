@@ -632,9 +632,9 @@ HYPRE_IJVectorRead( const char     *filename,
    HYPRE_IJVectorInitialize(vector);
 
 #ifdef HYPRE_LONG_LONG
-   while ( fscanf(file, "%lld %le", &j, &value) != EOF )
+   while ( fscanf(file, "%lld %e", &j, &value) != EOF )
 #else
-   while ( fscanf(file, "%d %le", &j, &value) != EOF )
+   while ( fscanf(file, "%d %e", &j, &value) != EOF )
 #endif
    {
       HYPRE_IJVectorSetValues(vector, 1, &j, &value);

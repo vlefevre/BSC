@@ -277,7 +277,7 @@ hypre_ReadBoxArrayData( FILE            *file,
             {
                for (j = 0; j < num_values; j++)
                {
-                  fscanf(file, "%d: (%d, %d, %d; %d) %le\n",
+                  fscanf(file, "%d: (%d, %d, %d; %d) %e\n",
                          &idummy,
                          &idummy,
                          &idummy,
@@ -347,7 +347,7 @@ hypre_ReadBoxArrayData_CC( FILE            *file,
             excluding ones which are redundant due to symmetry.*/
          for (j=0; j <constant_stencil_size; j++)
          {
-            fscanf(file, "*: (*, *, *; %d) %le\n",
+            fscanf(file, "*: (*, *, *; %d) %e\n",
                    &idummy,
                    &data[j]);
          }
@@ -362,7 +362,7 @@ hypre_ReadBoxArrayData_CC( FILE            *file,
 
             hypre_BoxLoop1For(loopi, loopj, loopk, datai)
                {
-                  fscanf(file, "%d: (%d, %d, %d; %d) %le\n",
+                  fscanf(file, "%d: (%d, %d, %d; %d) %e\n",
                          &idummy,
                          &idummy,
                          &idummy,
