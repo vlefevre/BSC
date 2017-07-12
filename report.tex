@@ -414,7 +414,8 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    The minimum of $f(x_1,\dots,x_n)$ with boundary condition $x_n=1$ is thus reached for $x_i = \frac{i}{n}$.
    It is, when multiplied by $b_{max}$, the solution that minimizes our total execution time.
    \end{proof}
-
+   
+   P1x1x1, 10 iterations, average on ten runs\\
    \begin{tabular}{|l|c|c|c|c|}
    \hline
     \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
@@ -474,9 +475,52 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
      (4) 80x80x80 & 0.720 & 64.5 & 0.810 & 75.5 \\
     \hline
    \end{tabular}
-   
 
+   (1) 64x64x64, 50 iterations, averaged on 10 runs\\
+   \begin{tabular}{|l|c|c|c|c|}
+   \hline
+    \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
+    \cline{2-5}
+    & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
+    \hline
+    1x1x1 & 4.382 & 70-80 & 5.76 & 80-90\\
+    \hline
+    2x1x1 & 2.638 & 40-50 & 3.091 & 50-60\\
+    \hline
+    2x2x1 & 1.659 & 30-40 & 2.511 & 40-50 \\
+    \hline
+    2x2x2 & 0.898 & 10-20 & 1.087 & 10-20 \\
+    \hline
+    4x2x2 & 0.302 & 0-10 & 0.568 & 10 \\
+    \hline
+    4x4x2 & 0.220 & 0-10 & 0.260 & 0-10 \\
+    \hline
+    4x4x4 & 0.252 & 0-10 & 0.315 & 0-10 \\
+    \hline
+   \end{tabular}
    
+   (1) 64x64x64, 50 iterations, averaged on 10 runs\\
+   \begin{tabular}{|l|c|c|c|c|}
+   \hline
+    \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
+    \cline{2-5}
+    & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
+    \hline
+    1x1x1 & 2.627 & 40-50 & 3.895 & 50-60\\
+    \hline
+    2x1x1 & 1.730 & 30 & 2.575 & 40-60\\
+    \hline
+    2x2x1 & 1.079 & 20 & 1.588 & 30-40 \\
+    \hline
+    2x2x2 & 0.560 & 10 & 0.847 & 10-20 \\
+    \hline
+    4x2x2 & 0.217 & 0-10 & 0.273 & 0-10 \\
+    \hline
+    4x4x2 & 0.181 & 0-10 & 0.201 & 0-10 \\
+    \hline
+    4x4x4 & 0.224 & 0-10 & 0.258 & 0-10 \\
+    \hline
+   \end{tabular}
    \bibliography{biblio}
    \bibliographystyle{plain}
 \end{document}

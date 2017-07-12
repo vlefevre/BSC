@@ -100,7 +100,7 @@ handles = []
 for key in sorted(colors):
 	rpatch = mpatches.Patch(color=colors[key], label=str(key))
 	handles.append(rpatch)
-plt.legend(handles=handles,ncol=(len(colors)+1)/2,prop={'size':10},title='Number of precisions used')
+plt.legend(loc=2,handles=handles,ncol=(len(colors)+1)/2,prop={'size':10},title='Number of precisions used')
 plt.ylabel("Units of time")
 plt.xlabel("Precision sets")
 plt.xticks(pylab.arange(0,len(result)),resultplot[:,0],rotation='vertical')

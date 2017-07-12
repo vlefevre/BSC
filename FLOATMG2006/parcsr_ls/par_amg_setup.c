@@ -478,6 +478,7 @@ hypre_BoomerAMGSetup( void               *amg_vdata,
     *  Enter Coarsening Loop
     *-----------------------------------------------------*/
 
+	printf("coarsening\n");
    while (not_finished_coarsening)
    {
       {
@@ -536,7 +537,7 @@ hypre_BoomerAMGSetup( void               *amg_vdata,
                         (HYPRE_ParVector) f,
                         (HYPRE_ParVector) u);
       }*/
-
+	printf("max_levels:\n");
       if (max_levels > 1)
       {
          {
@@ -602,29 +603,40 @@ hypre_BoomerAMGSetup( void               *amg_vdata,
 
          /**** Do the appropriate coarsening ****/ 
 
-
+	printf("do coarsening type switch \n");
          if (coarsen_type == 6)  /* falgout */
          {
+		printf("type 6\n");
             if (nodal == 0) /* nonsystems or unknown approach for systems*/
             {
+		printf("nodal = 0\n");
                hypre_BoomerAMGCoarsenFalgout(S, A_array[level], measure_type,
                                              debug_flag, &CF_marker);
-
+		printf("Falgout done\n");
                if (level < agg_num_levels)
                {
+
+		printf("step1\n");
                  /* set num_functions 1 in CoarseParms, since coarse_dof_func
                     is not needed here */
                   hypre_BoomerAMGCoarseParms(comm, local_num_vars,
                                              1, dof_func_array[level], CF_marker,
                                              &coarse_dof_func,&coarse_pnts_global1);
+		printf("step2\n");
                   hypre_BoomerAMGCreate2ndS (S, CF_marker, num_paths,
                                              coarse_pnts_global1, &S2);
+		printf("step3\n");
                   hypre_BoomerAMGCoarsenFalgout(S2, S2, measure_type,
                                                 debug_flag, &CFN_marker);
+		printf("step4\n");
                   hypre_ParCSRMatrixDestroy(S2);
+		printf("step5\n");
                   hypre_BoomerAMGCorrectCFMarker (CF_marker, local_num_vars, CFN_marker);
+		printf("step6\n");
                   hypre_TFree(coarse_pnts_global1);
+		printf("step7\n");
                   hypre_TFree(CFN_marker);
+		printf("step9\n");
                }
             }
             else if (nodal < 0 || block_mode ) /*       nodal interpolation
@@ -632,6 +644,7 @@ hypre_BoomerAMGSetup( void               *amg_vdata,
                                                        build interpolation normally 
                                                        using the nodal matrix */
             {
+		printf("nodal < 0\n");
                hypre_BoomerAMGCoarsenFalgout(SN, SN, measure_type,
                                     debug_flag, &CF_marker);
             }
@@ -639,6 +652,7 @@ hypre_BoomerAMGSetup( void               *amg_vdata,
             else if (nodal > 0)  /* nodal = 1,2,3: here we convert our nodal coarsening 
                                     so that we can perform regular interpolation */
             {
+		printf("nodal > 0\n");
                hypre_BoomerAMGCoarsenFalgout(SN, SN, measure_type,
                                              debug_flag, &CFN_marker);
                
@@ -1121,7 +1135,7 @@ hypre_BoomerAMGSetup( void               *amg_vdata,
       /*-------------------------------------------------------------
        * Build prolongation matrix, P, and place in P_array[level] 
        *--------------------------------------------------------------*/
-
+	printf("prolongation matrix\n");
       if (debug_flag==1) wall_time = time_getWallclockSeconds();
 
       if (hypre_ParAMGDataInterpType(amg_data) == 4 || (level < agg_num_levels
@@ -1281,7 +1295,7 @@ hypre_BoomerAMGSetup( void               *amg_vdata,
       
       if (S) hypre_ParCSRMatrixDestroy(S);
       S = NULL;
-
+	printf("coarse operator\n");
 
       /*-------------------------------------------------------------
        * Build coarse-grid operator, A_array[level+1] by R*A*P
@@ -1350,7 +1364,7 @@ hypre_BoomerAMGSetup( void               *amg_vdata,
    /*-----------------------------------------------------------------------
     * Setup F and U arrays
     *-----------------------------------------------------------------------*/
-
+	printf("FU setup\n");
    if ( amg_logging > 1 ) {
 
       Residual_array= 
@@ -1370,6 +1384,6 @@ hypre_BoomerAMGSetup( void               *amg_vdata,
 
    if (amg_print_level == 1 || amg_print_level == 3)
       hypre_BoomerAMGSetupStats(amg_data,A);
-
+	printf("SETUP done\n");
    return(Setup_err_flag);
 }  
