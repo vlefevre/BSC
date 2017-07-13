@@ -53,6 +53,7 @@ print "Found "+str(len(files))+" files."
 
 minVal=100000000
 minLabel=""
+maxValue=0
 for f in files:
 	ftab = f.split("_")
 	precision = int(ftab[1])
@@ -78,9 +79,12 @@ for f in files:
 	#label = ",".join(str(x) for x in labeltab)
 	label = "_".join(ftab[1:])
 	result.append([label,value,len(labeltab)])
+	print label+" "+str(value)
 	if value < minVal:
 		minVal = value
 		minLabel = label
+	if value > maxValue:
+		maxValue = value
 
 print "Minimum time is "+str(minVal)+", for "+minLabel+"."
 
@@ -106,7 +110,7 @@ plt.xlabel("Precision sets")
 plt.xticks(pylab.arange(0,len(result)),resultplot[:,0],rotation='vertical')
 plt.title(r"Time to reach accuracy "+str(tolerance)+"\nfor different strategies with threshold "+str(thr)+"\nand time model is $T(b)=b^{"+str(alpha)+"}$.")
 plt.xlim([0,len(files)])
-plt.ylim([0,50])
+plt.ylim([0,maxValue+3])
 plt.tight_layout()
 
 output_file = "timemodel_"+str(thr)+"_"+str(tolerance)+"_"+str(alpha)+".pdf"

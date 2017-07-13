@@ -415,6 +415,15 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    It is, when multiplied by $b_{max}$, the solution that minimizes our total execution time.
    \end{proof}
    
+   \subsection{Modeling time as a function of bits in the mantissa}
+   
+   The previous proof only holds if the time increases linearly with the number of precision bits used. However, we don't know if it is the case in practice.
+   In order to estimate the cost of our algorithm, we want to model the time of an iteration at precision $b$. We model an iteration by the following formula: $\frac{a}{n^\beta}b^\alpha$, where $a,\beta$ and $\alpha$ are constants,
+   $n$ is the number of processors and $b$ the number of bits.
+   
+   To provide numerical values for $a$,$\alpha$ and $\beta$, we measured the execution times of different scenarios. Each scenario computes 50 iterations on a 64x64x64 matrix, on different processor topologies, and using
+   either only single-precision floating point variables or only double-precision floating point variables. We denote by $x_{b,n}$ the empirical value obtained using $b$ bits and $n$ processors. Results are reported in Table~\ref{table.time_measure1}.
+   \iffalse
    P1x1x1, 10 iterations, average on ten runs\\
    \begin{tabular}{|l|c|c|c|c|}
    \hline
@@ -444,7 +453,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
     \hline
      (4) 80x80x80 & 10.258 & 96 & 12.125 & 114 \\
     \hline
-   \end{tabular}	
+   \end{tabular}
    
    Jacobi\begin{tabular}{|l|c|c|c|c|}
    \hline
@@ -475,52 +484,79 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
      (4) 80x80x80 & 0.720 & 64.5 & 0.810 & 75.5 \\
     \hline
    \end{tabular}
-
-   (1) 64x64x64, 50 iterations, averaged on 10 runs\\
+\fi
+  \begin{table}
+  \begin{center}
    \begin{tabular}{|l|c|c|c|c|}
    \hline
     \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
     \cline{2-5}
     & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
     \hline
-    1x1x1 & 3.929 & 70-80 & 4.671 & 90 \\
+    1x1x1 & 2.1853 & 70-80 & 2.6874 & 90 \\
     \hline
-    2x1x1 & 2.459 & 40-50 & 3.091 & 50-60\\
+    2x1x1 & 1.3912 & 40-50 & 1.6476 & 50-60\\
     \hline
-    2x2x1 & 1.659 & 30-40 & 2.511 & 40-50 \\
+    2x2x1 & 0.8544 & 30-40 & 0.9943 & 40-50 \\
     \hline
-    2x2x2 & 0.898 & 10-20 & 1.087 & 10-20 \\
+    2x2x2 & 0.5393 & 10-20 & 0.6935 & 10-20 \\
     \hline
-    4x2x2 & 0.302 & 0-10 & 0.568 & 10 \\
+    4x2x2 & 0.3255 & 0-10 & 0.3802 & 10 \\
     \hline
-    4x4x2 & 0.220 & 0-10 & 0.260 & 0-10 \\
+    4x4x2 & 0.2542 & 0-10 & 0.2815 & 0-10 \\
     \hline
-    4x4x4 & 0.252 & 0-10 & 0.315 & 0-10 \\
+    4x4x4 & 0.3171 & 0-10 & 0.362 & 0-10 \\
     \hline
    \end{tabular}
+   \end{center}
+   \caption{Execution times of AMG solver using either single or double precision.}
+   \label{table.time_measure1}
+ \end{table}
    
-   (1) 64x64x64, 50 iterations, averaged on 10 runs\\
+   The first thing to notice is that increasing the number of processors decreases the execution times, except when going from 32 to 64. This is because the matrix becomes very small and the communication costs become too important.
+   We won't use theses two values for what follows.
+   We now need to find values of $a,\alpha$ and $\beta$ that fit our measures.\\
+   We will change from $a$ to a new $a'$ by setting $f(b,n) = \frac{a'}{n^\beta} \left(\frac{b}{32}\right)^\alpha$. Now if we look only at the 6 points for $b=32$, we just have $f(32,n) = \frac{a'}{n^\beta}$, which does not
+   depend on $\alpha$. To fit our data, we evaluate the least squares sum, that is to say $\sum\limits_{i=0}^5 (f(32,2^i)-x_{32,2^i})^2$. We want it to be minimized, so choosing the best $a$ is done by choosing
+   $\frac{x_{32,1}*1^\beta + \dots + x_{32,32}*32^\beta}{6}$. Then the minimal sum is obtained for $\beta \approx 0.634$, giving $a' \approx 2.099$.\\
+   Finally, we evaluate the least squares sum using all the 12 values to find the value of $\alpha$. The result found in this case is $\alpha \approx 0.3157$. To come back to the original formula we just have to divide $a'$ by $32^\alpha$, and we obtain
+   the final following formula:
+   \[ f(b,n) \approx \frac{0.703}{n^{0.634}} b^{0.3157}. \]
+   
+   Now that we modeled how time increases when $b$ incrases, we can evaluate different strategies that use.
+   
+   \iffalse
+   (1) 64x64x64, 50 iterations, averaged on 100 runs (Jacobi)\\
    \begin{tabular}{|l|c|c|c|c|}
    \hline
     \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
     \cline{2-5}
     & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
     \hline
-    1x1x1 & 2.627 & 40-50 & 3.895 & 50-60\\
+    1x1x1 & 1.3731 & 40-50 & 1.6986 & 50-60\\
     \hline
-    2x1x1 & 1.730 & 30 & 2.575 & 40-60\\
+    2x1x1 & 0.9028 & 30 & 1.1481 & 40-60\\
     \hline
-    2x2x1 & 1.079 & 20 & 1.588 & 30-40 \\
+    2x2x1 & 0.593 & 20 & 0.7015 & 30-40 \\
     \hline
-    2x2x2 & 0.560 & 10 & 0.847 & 10-20 \\
+    2x2x2 & 0.3762 & 10 & 0.5316 & 10-20 \\
     \hline
-    4x2x2 & 0.217 & 0-10 & 0.273 & 0-10 \\
+    4x2x2 & 0.2447 & 0-10 & 0.2681 & 0-10 \\
     \hline
-    4x4x2 & 0.181 & 0-10 & 0.201 & 0-10 \\
+    4x4x2 & 0.2032 & 0-10 & 0.2362 & 0-10 \\
     \hline
-    4x4x4 & 0.224 & 0-10 & 0.258 & 0-10 \\
+    4x4x4 & 0.3086 & 0-10 & 0.3477 & 0-10 \\
     \hline
    \end{tabular}
+  \fi
+  
+    \includegraphics[width=\textwidth]{figs/3157_3.pdf}\\
+    \includegraphics[width=\textwidth]{figs/3157_5.pdf}\\
+    \includegraphics[width=\textwidth]{figs/3157_7.pdf}\\
+    \includegraphics[width=\textwidth]{figs/3157_10.pdf}\\
+    \includegraphics[width=\textwidth]{figs/3157_15.pdf}
+
+   
    \bibliography{biblio}
    \bibliographystyle{plain}
 \end{document}
