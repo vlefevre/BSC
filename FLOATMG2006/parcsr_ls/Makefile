@@ -77,16 +77,44 @@ FILES =\
  par_stats.c\
  par_strength.c\
  pcg_par.c
+FILESUP =\
+ aux_interp.c\
+ HYPRE_parcsr_amg.c\
+ HYPRE_parcsr_gmres.c\
+ HYPRE_parcsr_pcg.c\
+ par_amg.c\
+ par_amg_setup.c\
+ par_amg_solve.c\
+ par_cg_relax_wt.c\
+ par_coarsen.c\
+ par_coarse_parms.c\
+ par_cycle_up.c\
+ par_indepset.c\
+ par_interp.c\
+ par_jacobi_interp.c\
+ par_multi_interp.c\
+ par_laplace_27pt.c\
+ par_laplace.c\
+ par_lr_interp.c\
+ par_nodal_systems.c\
+ par_rap.c\
+ par_rap_communication.c\
+ par_vardifconv.c\
+ par_relax.c\
+ par_relax_interface.c\
+ par_scaled_matnorm.c\
+ par_stats.c\
+ par_strength.c\
+ pcg_par.c
 
 OBJS = ${FILES:.c=.o}
-OBJSFAST = ${FILESFAST:.c=.o}
 OBJSUP = ${FILESUP:.c=.o}
 
 ##################################################################
 # Targets
 ##################################################################
 
-all: libparcsr_ls.a
+all: libparcsr_ls.a libparcsr_ls_up.a
  
 clean:
 	@rm -f *.o *.dxx
@@ -102,8 +130,13 @@ libparcsr_ls.a: ${OBJS}
 	@echo  "Building $@ ... "
 	ar -rcu $@ ${OBJS}
 	${RANLIB} $@
+libparcsr_ls_up.a: ${OBJSUP}
+	@echo  "Building $@ ... "
+	ar -rcu $@ ${OBJSUP}
+	${RANLIB} $@
 
 ${OBJS}: ${HEADERS}
+${OBJSUP}: ${HEADERS}
 
 ##################################################################
 # Generic rules

@@ -63,18 +63,37 @@ LFLAGS =\
  -lkrylov\
  -lHYPRE_utilities\
  ${INCLUDE_LFLAGS}
+LFLAGSUP =\
+ -L.\
+ -L../parcsr_ls\
+ -L../parcsr_mv\
+ -L../IJ_mv\
+ -L../seq_mv\
+ -L../sstruct_mv\
+ -L../struct_mv\
+ -L../krylov\
+ -L../utilities\
+ -lparcsr_ls_up\
+ -lparcsr_mv\
+ -lseq_mv\
+ -lsstruct_mv\
+ -lIJ_mv\
+ -lHYPRE_struct_mv\
+ -lkrylov\
+ -lHYPRE_utilities\
+ ${INCLUDE_LFLAGS}
 
 ##################################################################
 # Targets
 ##################################################################
                                                                                                                                          
-all: amg2006 
+all: amg2006 amg2006up
                                                                                                                                          
 clean:
 	@rm -f *.o
                                                                                                                                          
 veryclean: clean
-	@rm -f amg2006
+	@rm -f amg2006 amg2006up
                                                                                                                                          
 ##################################################################
 # Rules
@@ -83,6 +102,9 @@ veryclean: clean
 amg2006: amg2006.o
 	@echo  "Linking" $@ "... "
 	${CC} -o amg2006 amg2006.o ${LFLAGS}
+amg2006up: amg2006.o
+	@echo  "Linking" $@ "... "
+	${CC} -o amg2006up amg2006.o ${LFLAGSUP}
                                                                                                                                          
 ##################################################################
 # Generic rules

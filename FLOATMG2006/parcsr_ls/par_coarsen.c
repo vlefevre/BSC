@@ -426,12 +426,10 @@ hypre_BoomerAMGCoarsen( hypre_ParCSRMatrix    *S,
          for (ig = 0; ig < graph_size; ig++)
          {
             i = graph_array[ig];
-	printf("%d : %d,%d\n",i,CF_marker[i],measure_array[i]);
             if ( (CF_marker[i] != C_PT) && (measure_array[i] < 1) )
             {
                /* set to be an F-pt */
                CF_marker[i] = F_PT;
-		printf("update to %d\n",CF_marker[i]); 
 	       /* make sure all dependencies have been accounted for */
                for (jS = S_diag_i[i]; jS < S_diag_i[i+1]; jS++)
                {
@@ -528,10 +526,8 @@ hypre_BoomerAMGCoarsen( hypre_ParCSRMatrix    *S,
 
       MPI_Allreduce(&big_graph_size,&global_graph_size,1,MPI_HYPRE_BIG_INT,MPI_SUM,comm);
 
-	printf("global_graph_size=%d\n",global_graph_size);
       if (global_graph_size == 0)
 	{
-		printf("now it stops\n");
          break;
 	}
 
@@ -1952,7 +1948,6 @@ hypre_BoomerAMGCoarsenFalgout( hypre_ParCSRMatrix    *S,
 
    ierr += hypre_BoomerAMGCoarsenRuge (S, A, measure_type, 6, debug_flag, 
 				CF_marker_ptr);
-	printf("ruge done\n");
    ierr += hypre_BoomerAMGCoarsen (S, A, 1, debug_flag, 
 				CF_marker_ptr);
 
