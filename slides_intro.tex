@@ -8,6 +8,8 @@
 \usepackage{tikz}
 \usepackage{lmodern}
 \usepackage{bold-extra}
+\usepackage{multirow}
+\usepackage{verbatim}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows,shapes}
 \usetikzlibrary{patterns,snakes}
@@ -590,9 +592,9 @@ To conclude, if we want to reach the original accuracy (using 64 bits of precisi
       %\draw[scale=0.5,domain=-3:3,smooth,variable=\y,red]  plot ({\y*\y},{\y});
       \draw[domain=0:5,smooth,variable=\x,black] plot ({\x},{\x}) node[right] {$y=\alpha x$};
     \end{tikzpicture}
-
 \end{center}
 \end{frame}
+
 \begin{frame}{Number of precisions}
 \begin{center}
  \begin{tikzpicture}
@@ -661,6 +663,132 @@ To conclude, if we want to reach the original accuracy (using 64 bits of precisi
   \end{itemize}
 \end{frame}
 
+\begin{frame}{More executions times}
+
+  \begin{table}
+  \begin{center}
+   \begin{tabular}{|l|c|c|c|c|}
+   \hline
+    \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
+    \cline{2-5}
+    & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
+    \hline
+    1x1x1 & 2.1853 & 70-80 & 2.6874 & 90 \\
+    \hline
+    2x1x1 & 1.3912 & 40-50 & 1.6476 & 50-60\\
+    \hline
+    2x2x1 & 0.8544 & 30-40 & 0.9943 & 40-50 \\
+    \hline
+    2x2x2 & 0.5393 & 10-20 & 0.6935 & 10-20 \\
+    \hline
+    4x2x2 & 0.3255 & 0-10 & 0.3802 & 10 \\
+    \hline
+    4x4x2 & 0.2542 & 0-10 & 0.2815 & 0-10 \\
+    \hline
+    4x4x4 & 0.3171 & 0-10 & 0.362 & 0-10 \\
+    \hline
+   \end{tabular}
+   \end{center}
+   \caption{Average execution times of AMG solver (50 iterations,64x64x64 matrix) using either single or double precision (default iterative method).}
+   \label{table.time_measure1}
+ \end{table}
+\end{frame}
+
+\begin{frame}{More executions times}
+  \begin{table}
+ \begin{center}
+   \begin{tabular}{|l|c|c|c|c|}
+   \hline
+    \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
+    \cline{2-5}
+    & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
+    \hline
+    1x1x1 & 1.3731 & 40-50 & 1.6986 & 50-60\\
+    \hline
+    2x1x1 & 0.9028 & 30 & 1.1481 & 40-60\\
+    \hline
+    2x2x1 & 0.593 & 20 & 0.7015 & 30-40 \\
+    \hline
+    2x2x2 & 0.3762 & 10 & 0.5316 & 10-20 \\
+    \hline
+    4x2x2 & 0.2447 & 0-10 & 0.2681 & 0-10 \\
+    \hline
+    4x4x2 & 0.2032 & 0-10 & 0.2362 & 0-10 \\
+    \hline
+    4x4x4 & 0.3086 & 0-10 & 0.3477 & 0-10 \\
+    \hline
+   \end{tabular}
+ \end{center}
+   \caption{Average execution times of AMG solver (50 iterations,64x64x64 matrix) using either single or double precision (Jacobi method).}
+   \label{table.time_measure1}
+ \end{table}
+\end{frame}
+
+\begin{frame}{Model}
+  We look for $a,C,\beta$ and especially $\alpha$ values such that:\\
+  \[ \frac{a}{n^\beta}b^\alpha + C. \]
+  
+  Using Python \textit{lmfit} package we find:
+  
+  \only<2-3>{Jacobi:\\
+  \texttt{$a$:       1.35078684 +/- 0.053680 (3.97\%) (init= 1)\\
+    $\alpha$:   0.32214016 +/- 0.038082 (11.82\%) (init= 1)\\
+    $\beta$:    0.62281608 +/- 0.045742 (7.34\%) (init= 1)\\
+    $C$:       0.02152401 +/- 0.048966 (227.50\%) (init= 0)\\
+  }}
+  \only<1>{Default:\\
+  \texttt{$a$:       2.17186895 +/- 0.052564 (2.42\%) (init= 1) \\                                                                                                                                      
+    $\alpha$:   0.29469879 +/- 0.031849 (10.81\%) (init= 1) \\                                                                                                                                      
+    $\beta$:    0.71611502 +/- 0.034215 (4.78\%) (init= 1)  \\
+    $C$:       0.03042093 +/- 0.046562 (153.06\%) (init= 0) \\
+    }}
+    \uncover<3>{
+   \[ \alpha \approx \frac{1}{3} \quad\quad T(b) \sim \sqrt[3]{b} \]}
+\end{frame}
+
+\begin{frame}{Evaluation}
+
+  \includegraphics[width=\textwidth]{figs/eval_3.pdf}
+\end{frame}
+\begin{frame}{Evaluation}
+
+  \includegraphics[width=\textwidth]{figs/eval_5.pdf}
+\end{frame}
+\begin{frame}{Evaluation}
+
+  \includegraphics[width=\textwidth]{figs/eval_7.pdf}
+\end{frame}
+\begin{frame}{Evaluation}
+
+  \includegraphics[width=\textwidth]{figs/eval_10.pdf}
+\end{frame}
+\begin{frame}{Evaluation}
+
+  \includegraphics[width=\textwidth]{figs/eval_15.pdf}
+\end{frame}
+
+\begin{frame}{Final results}
+  Depending on the accuracy we want to reach, the efficiency of our algorithm changes.\\
+  \vspace{0.5cm}
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    Tolerance & Time units (Model) & Time units (Baseline) & Improvement \\
+    \hline
+    \hline
+    1e-3 & 3.1362 & 5 & 37.3\% \\
+    \hline
+    1e-5 & 7.74365 & 11 & 29.6\% \\
+    \hline
+    1e-7 & 12.8153 & 17 & 24.6\% \\
+    \hline
+    1e-10 & 21.8153 & 26 & 16.1\% \\
+    \hline
+    1e-15 & 38.8153 & 43 & 9.7\% \\
+    \hline
+  \end{tabular}}
+
+\end{frame}
 
 
 \end{document}
