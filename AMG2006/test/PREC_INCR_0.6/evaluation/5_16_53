@@ -1,0 +1,187 @@
+SETUPP
+
+BoomerAMG SETUP PARAMETERS:
+
+ Max levels = 25
+ Num levels = 7
+
+ Strength Threshold = 0.000000
+ Interpolation Truncation Factor = 0.300000
+ Maximum Row Sum Threshold for Dependency Weakening = 0.900000
+
+ Coarsening Type = Falgout-CLJP 
+ Hybrid Coarsening (switch to CLJP when coarsening slows)
+ measures are determined locally
+
+
+ No global partition option chosen.
+
+ Interpolation = modified classical interpolation
+
+Operator Matrix Information:
+
+                  nonzero         entries per row        row sums
+lev        rows   entries  sparse  min  max   avg       min         max
+=========================================================================
+ 0        64000   494660  0.000     4    9   7.7  -4.274e-15   1.020e+01
+ 1        32000   769424  0.001     4   40  24.0  -4.274e-15   1.040e+01
+ 2         7785   259476  0.004     6   69  33.3  -1.066e-14   1.015e+01
+ 3         1931    93626  0.025     8  134  48.5  -3.462e-14   1.025e+01
+ 4          540    31178  0.107     9  208  57.7   2.581e-03   1.494e+01
+ 5           84     3652  0.518     1   67  43.5   2.148e+00   1.522e+01
+ 6            8       54  0.844     5    8   6.8   5.807e+00   3.145e+01
+
+
+Interpolation Matrix Information:
+
+                             entries/row    min     max         row sums
+lev        rows x cols          min max     weight   weight     min       max 
+=============================================================================
+ 0        64000 x 32000          1   6   1.667e-01 9.912e-01 3.333e-01 1.000e+00
+ 1        32000 x 7785           1   7   4.040e-02 1.000e+00 1.471e-01 1.000e+00
+ 2         7785 x 1931           0  12   1.237e-02 1.000e+00 0.000e+00 1.000e+00
+ 3         1931 x 540            0  14   9.171e-03 1.000e+00 0.000e+00 1.000e+00
+ 4          540 x 84             0   9   2.500e-02 9.998e-01 0.000e+00 1.000e+00
+ 5           84 x 8              0   3   2.390e-02 6.214e-01 0.000e+00 1.000e+00
+
+
+     Complexity:    grid = 1.661687
+                operator = 3.339809
+
+
+
+
+BoomerAMG SOLVER PARAMETERS:
+
+  Maximum number of cycles:         70 
+  Stopping Tolerance:               0.000000e+00 
+  Cycle type (1 = V, 2 = W, etc.):  1
+
+  Relaxation Parameters:
+   Visiting Grid:                     down   up  coarse
+            Number of partial sweeps:    1    1     1 
+   Type 0=Jac, 3=hGS, 6=hSGS, 9=GE:      6    6     9 
+   Point types, partial sweeps (1=C, -1=F):
+                  Pre-CG relaxation (down):   0
+                   Post-CG relaxation (up):   0
+                             Coarsest grid:   0
+
+Entering AMG Solve
+
+
+BoomerAMG SOLVER PARAMETERS:
+
+  Maximum number of cycles:         70 
+  Stopping Tolerance:               0.000000e+00 
+  Cycle type (1 = V, 2 = W, etc.):  1
+
+  Relaxation Parameters:
+   Visiting Grid:                     down   up  coarse
+   Visiting Grid:                     down   up  coarse
+            Number of partial sweeps:    1    1     1 
+   Type 0=Jac, 3=hGS, 6=hSGS, 9=GE:      6    6     9 
+   Point types, partial sweeps (1=C, -1=F):
+                  Pre-CG relaxation (down):   0
+                   Post-CG relaxation (up):   0
+                             Coarsest grid:   0
+
+ Output flag (print_level): 3 
+                                            relative
+               residual        factor       residual     precision
+               --------        ------       --------     ---------
+    Initial    2.089695e+03                 1.000000e+00    16
+    Cycle  1   2.240457e+02    0.107215     1.072146e-01    16
+    Cycle  2   5.290160e+01    0.236120     2.531547e-02    16
+    Cycle  3   2.032193e+01    0.384146     9.724831e-03    16
+    Cycle  4   1.035080e+01    0.509342     4.953261e-03    16
+    Cycle  5   5.618509e+00    0.542809     2.688674e-03    16
+    Cycle  6   3.092391e+00    0.550394     1.479829e-03    16
+    Cycle  7   1.716463e+00    0.555060     8.213942e-04    16
+    Cycle  8   9.641064e-01    0.561682     4.613623e-04    16
+    Cycle  9   5.576855e-01    0.578448     2.668741e-04    16
+    Cycle 10   3.461888e-01    0.620760     1.656648e-04    69
+    Cycle 11   1.662764e-01    0.480305     7.956968e-05    69
+    Cycle 12   9.247306e-02    0.556141     4.425194e-05    69
+    Cycle 13   5.195820e-02    0.561874     2.486402e-05    69
+    Cycle 14   2.927037e-02    0.563345     1.400701e-05    69
+    Cycle 15   1.651769e-02    0.564314     7.904354e-06    69
+    Cycle 16   9.334835e-03    0.565142     4.467081e-06    69
+    Cycle 17   5.282341e-03    0.565874     2.527805e-06    69
+    Cycle 18   2.992575e-03    0.566524     1.432063e-06    69
+    Cycle 19   1.697098e-03    0.567103     8.121270e-07    69
+    Cycle 20   9.633023e-04    0.567618     4.609775e-07    69
+    Cycle 21   5.472300e-04    0.568077     2.618708e-07    69
+    Cycle 22   3.110941e-04    0.568489     1.488706e-07    69
+    Cycle 23   1.769686e-04    0.568859     8.468634e-08    69
+    Cycle 24   1.007292e-04    0.569193     4.820284e-08    69
+    Cycle 25   5.736479e-05    0.569495     2.745128e-08    69
+    Cycle 26   3.268473e-05    0.569770     1.564091e-08    69
+    Cycle 27   1.863097e-05    0.570021     8.915644e-09    69
+    Cycle 28   1.062432e-05    0.570250     5.084150e-09    69
+    Cycle 29   6.060765e-06    0.570461     2.900311e-09    69
+    Cycle 30   3.458610e-06    0.570656     1.655079e-09    69
+    Cycle 31   1.974297e-06    0.570835     9.447776e-10    69
+    Cycle 32   1.127326e-06    0.571001     5.394694e-10    69
+    Cycle 33   6.438788e-07    0.571156     3.081210e-10    69
+    Cycle 34   3.678474e-07    0.571299     1.760292e-10    69
+    Cycle 35   2.101999e-07    0.571432     1.005888e-10    69
+    Cycle 36   1.201413e-07    0.571557     5.749227e-11    69
+    Cycle 37   6.868159e-08    0.571673     3.286680e-11    69
+    Cycle 38   3.927088e-08    0.571782     1.879264e-11    69
+    Cycle 39   2.245837e-08    0.571883     1.074720e-11    69
+    Cycle 40   1.284575e-08    0.571980     6.147188e-12    69
+    Cycle 41   7.348602e-09    0.572065     3.516591e-12    69
+    Cycle 42   4.204504e-09    0.572150     2.012018e-12    69
+    Cycle 43   2.405968e-09    0.572236     1.151349e-12    69
+    Cycle 44   1.376930e-09    0.572298     6.589146e-13    69
+    Cycle 45   7.881482e-10    0.572395     3.771595e-13    69
+    Cycle 46   4.511673e-10    0.572440     2.159010e-13    69
+    Cycle 47   2.582880e-10    0.572488     1.236008e-13    69
+    Cycle 48   1.478595e-10    0.572460     7.075651e-14    69
+    Cycle 49   8.472003e-11    0.572977     4.054182e-14    69
+    Cycle 50   4.854228e-11    0.572973     2.322937e-14    69
+    Cycle 51   2.782127e-11    0.573135     1.331355e-14    69
+    Cycle 52   1.604030e-11    0.576548     7.675903e-15    69
+    Cycle 53   9.408269e-12    0.586540     4.502222e-15    69
+    Cycle 54   5.619687e-12    0.597314     2.689238e-15    69
+    Cycle 55   3.664296e-12    0.652046     1.753508e-15    122
+    Cycle 56   2.737420e-12    0.747052     1.309961e-15    175
+    Cycle 57   2.344931e-12    0.856621     1.122141e-15    200
+    Cycle 58   2.122017e-12    0.904938     1.015467e-15    200
+    Cycle 59   2.055360e-12    0.968588     9.835697e-16    200
+    Cycle 60   2.037852e-12    0.991481     9.751910e-16    200
+    Cycle 61   2.034358e-12    0.998286     9.735193e-16    200
+    Cycle 62   2.008698e-12    0.987387     9.612401e-16    200
+    Cycle 63   2.031667e-12    1.011435     9.722315e-16    200
+    Cycle 64   2.009450e-12    0.989065     9.615997e-16    200
+    Cycle 65   2.024386e-12    1.007433     9.687470e-16    200
+    Cycle 66   2.021812e-12    0.998729     9.675154e-16    200
+    Cycle 67   2.012347e-12    0.995318     9.629859e-16    200
+    Cycle 68   2.036966e-12    1.012234     9.747672e-16    200
+    Cycle 69   1.999551e-12    0.981632     9.568626e-16    200
+    Cycle 70   2.036641e-12    1.018549     9.746118e-16    200
+Number of iterations : 70
+Final residual norm : 9.746118e-16
+
+
+ Average Convergence Factor = 0.610316
+
+     Complexity:    grid = 1.661687
+                operator = 3.339809
+                   cycle = 3.339809
+
+
+
+=============================================
+AMG times:
+=============================================
+Multi-grid:
+  wall clock time = 35.472960 seconds
+  cpu clock time  = 35.417735 seconds
+
+AMG Sequoia Benchmark version 1.0
+Iterations = 0
+Final Relative Residual Norm = 0.000000e+00
+
+System Size * Iterations / Solve Phase Time: 0.000000e+00
+
