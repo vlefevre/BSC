@@ -6,6 +6,7 @@
 \usepackage{url}
 \usepackage{multirow}
 \usepackage{tikz}
+\usepackage{todonotes}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows,shapes}
 \usetikzlibrary{patterns,snakes}
@@ -313,7 +314,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    \section{Playing with bits}
    
    If we look at the previous section, we see that we have a lower bound (which depends on the topology and the problem considered) on the accuracy we can achieve. This bound comes from the internal limitations of the \texttt{double} type.
-   Indeed, a double uses 8 bytes (52 bits for the mantissa, 11 for the exponent and 1 bit for the sign). This representation does not allow a full description of all rational numbers (for exemple between $2^{52} and 2^{53}$ only integers can be represented).
+   Indeed, a double uses 8 bytes (52 bits for the mantissa, 11 for the exponent and 1 bit for the sign). This representation does not allow a full description of all rational numbers (for example between $2^{52}$ and $2^{53}$ only integers can be represented).
    If we increase the number of bits of the mantissa or the exponent we can describe more and more numbers. In the other way, if we reduce it, we lose accuracy for numbers that are not representable. Considering our algorithm, what if we only want
    a precision of only $10^{-3}$ ? We don't need the 64 bits of a \texttt{double}, to reach it, a smaller number is enough. The advantage of using less bits for the floating point numbers is a faster and energy-saving computation. Thus it is important
    to study the impact of using a representation with smaller mantissa.
@@ -418,144 +419,159 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    \subsection{Modeling time as a function of bits in the mantissa}
    
    The previous proof only holds if the time increases linearly with the number of precision bits used. However, we don't know if it is the case in practice.
-   In order to estimate the cost of our algorithm, we want to model the time of an iteration at precision $b$. We model an iteration by the following formula: $\frac{a}{n^\beta}b^\alpha$, where $a,\beta$ and $\alpha$ are constants,
-   $n$ is the number of processors and $b$ the number of bits.
+   In order to estimate the cost of our algorithm, we want to model the time of an iteration at precision $b$. We model an iteration by the following formula: $an^3b^\alpha+c$, where $a,c$ and $\alpha$ are constants,
+   $n$ is the size of the problem and $b$ the number of bits.
    
-   To provide numerical values for $a$,$\alpha$ and $\beta$, we measured the execution times of different scenarios. Each scenario computes 50 iterations on a 64x64x64 matrix, on different processor topologies, and using
-   either only single-precision floating point variables or only double-precision floating point variables. We denote by $x_{b,n}$ the empirical value obtained using $b$ bits and $n$ processors. Results are reported in Table~\ref{table.time_measure1}.
-   \iffalse
-   P1x1x1, 10 iterations, average on ten runs\\
-   \begin{tabular}{|l|c|c|c|c|}
-   \hline
-    \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
-    \cline{2-5}
-    & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
-    \hline
-    (1) 40x40x40 & 1.308 & 12 & 1.543 & 14\\
-    \hline
-    (1) 80x80x80 & 10.794 & 100 & 13.033 & 121.5\\
-    \hline
-    (2) 20x20x20 & 0.1316 & 1.1 & 0.1411 & 1.2 \\
-    \hline
-    (2) 40x40x40 & 1.026 & 9.5 & 1.195 & 11 \\
-    \hline
-    (2) 80x80x80 & 8.068 & 74 & 9.595 & 88 \\
-    \hline
-     (3) 20x20x20 & 0.170 & 1.4 & 0.179 & 1.5 \\
-    \hline
-     (3) 40x40x40 & 1.396 & 11.5 & 1.646 & 13.7 \\
-    \hline
-     (3) 80x80x80 & 10.644 & 89 & 12.572 & 106 \\
-    \hline
-     (4) 20x20x20 & 0.1405 & 1.2 & 0.149 & 1.3 \\
-    \hline
-     (4) 40x40x40 & 1.192 & 11 & 1.402 & 15\\
-    \hline
-     (4) 80x80x80 & 10.258 & 96 & 12.125 & 114 \\
-    \hline
-   \end{tabular}
-   
-   Jacobi\begin{tabular}{|l|c|c|c|c|}
-   \hline
-    \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
-    \cline{2-5}
-    & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
-    \hline
-    (1) 40x40x40 & 0.0868 & 7.8 & 0.09577 & 8.4\\
-    \hline
-    (1) 80x80x80 & 0.709 & 63 & 0.8757 & 73\\
-    \hline
-    (2) 20x20x20 & 0.00945 & 0.8 & 0.00991 & 0.9 \\
-    \hline
-    (2) 40x40x40 & 0.0755 & 6.5 & 0.0815 & 7.2 \\
-    \hline
-    (2) 80x80x80 & 0.581 & 51 & 0.648 & 57 \\
-    \hline
-     (3) 20x20x20 & 0.0121 & 0.95 & 0.0126 & 1.0 \\
-    \hline
-     (3) 40x40x40 & 0.0990 & 7.8 & 0.105 & 8.2 \\
-    \hline
-     (3) 80x80x80 & 0.759 & 60 & 0.878 & 75 \\
-    \hline
-     (4) 20x20x20 & 0.0104 & 0.92 & 0.0106 & 1.0 \\
-    \hline
-     (4) 40x40x40 & 0.0842 & 7.6 & 0.0972 & 8.8\\
-    \hline
-     (4) 80x80x80 & 0.720 & 64.5 & 0.810 & 75.5 \\
-    \hline
-   \end{tabular}
-\fi
-  \begin{table}
-  \begin{center}
-   \begin{tabular}{|l|c|c|c|c|}
-   \hline
-    \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
-    \cline{2-5}
-    & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
-    \hline
-    1x1x1 & 2.1853 & 70-80 & 2.6874 & 90 \\
-    \hline
-    2x1x1 & 1.3912 & 40-50 & 1.6476 & 50-60\\
-    \hline
-    2x2x1 & 0.8544 & 30-40 & 0.9943 & 40-50 \\
-    \hline
-    2x2x2 & 0.5393 & 10-20 & 0.6935 & 10-20 \\
-    \hline
-    4x2x2 & 0.3255 & 0-10 & 0.3802 & 10 \\
-    \hline
-    4x4x2 & 0.2542 & 0-10 & 0.2815 & 0-10 \\
-    \hline
-    4x4x4 & 0.3171 & 0-10 & 0.362 & 0-10 \\
-    \hline
-   \end{tabular}
-   \end{center}
-   \caption{Execution times of AMG solver using either single or double precision.}
-   \label{table.time_measure1}
- \end{table}
-   
-   The first thing to notice is that increasing the number of processors decreases the execution times, except when going from 32 to 64. This is because the matrix becomes very small and the communication costs become too important.
-   We won't use theses two values for what follows.
-   We now need to find values of $a,\alpha$ and $\beta$ that fit our measures.\\
-   We will change from $a$ to a new $a'$ by setting $f(b,n) = \frac{a'}{n^\beta} \left(\frac{b}{32}\right)^\alpha$. Now if we look only at the 6 points for $b=32$, we just have $f(32,n) = \frac{a'}{n^\beta}$, which does not
-   depend on $\alpha$. To fit our data, we evaluate the least squares sum, that is to say $\sum\limits_{i=0}^5 (f(32,2^i)-x_{32,2^i})^2$. We want it to be minimized, so choosing the best $a$ is done by choosing
-   $\frac{x_{32,1}*1^\beta + \dots + x_{32,32}*32^\beta}{6}$. Then the minimal sum is obtained for $\beta \approx 0.634$, giving $a' \approx 2.099$.\\
-   Finally, we evaluate the least squares sum using all the 12 values to find the value of $\alpha$. The result found in this case is $\alpha \approx 0.3157$. To come back to the original formula we just have to divide $a'$ by $32^\alpha$, and we obtain
-   the final following formula:
-   \[ f(b,n) \approx \frac{0.703}{n^{0.634}} b^{0.3157}. \]
-   
-   Now that we modeled how time increases when $b$ incrases, we can evaluate different strategies that use.
-   
-   \iffalse
-   (1) 64x64x64, 50 iterations, averaged on 100 runs (Jacobi)\\
-   \begin{tabular}{|l|c|c|c|c|}
-   \hline
-    \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
-    \cline{2-5}
-    & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
-    \hline
-    1x1x1 & 1.3731 & 40-50 & 1.6986 & 50-60\\
-    \hline
-    2x1x1 & 0.9028 & 30 & 1.1481 & 40-60\\
-    \hline
-    2x2x1 & 0.593 & 20 & 0.7015 & 30-40 \\
-    \hline
-    2x2x2 & 0.3762 & 10 & 0.5316 & 10-20 \\
-    \hline
-    4x2x2 & 0.2447 & 0-10 & 0.2681 & 0-10 \\
-    \hline
-    4x4x2 & 0.2032 & 0-10 & 0.2362 & 0-10 \\
-    \hline
-    4x4x4 & 0.3086 & 0-10 & 0.3477 & 0-10 \\
-    \hline
-   \end{tabular}
-  \fi
-  
-    \includegraphics[width=\textwidth]{figs/3157_3.pdf}\\
-    \includegraphics[width=\textwidth]{figs/3157_5.pdf}\\
-    \includegraphics[width=\textwidth]{figs/3157_7.pdf}\\
-    \includegraphics[width=\textwidth]{figs/3157_10.pdf}\\
-    \includegraphics[width=\textwidth]{figs/3157_15.pdf}
 
+%    To provide numerical values for $a$,$\alpha$ and $\beta$, we measured the execution times of different scenarios. Each scenario computes 50 iterations on a 64x64x64 matrix, on different processor topologies, and using
+%    either only single-precision floating point variables or only double-precision floating point variables. We denote by $x_{b,n}$ the empirical value obtained using $b$ bits and $n$ processors. Results are reported in Table~\ref{table.time_measure1}.
+%    \iffalse
+%    P1x1x1, 10 iterations, average on ten runs\\
+%    \begin{tabular}{|l|c|c|c|c|}
+%    \hline
+%     \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
+%     \cline{2-5}
+%     & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
+%     \hline
+%     (1) 40x40x40 & 1.308 & 12 & 1.543 & 14\\
+%     \hline
+%     (1) 80x80x80 & 10.794 & 100 & 13.033 & 121.5\\
+%     \hline
+%     (2) 20x20x20 & 0.1316 & 1.1 & 0.1411 & 1.2 \\
+%     \hline
+%     (2) 40x40x40 & 1.026 & 9.5 & 1.195 & 11 \\
+%     \hline
+%     (2) 80x80x80 & 8.068 & 74 & 9.595 & 88 \\
+%     \hline
+%      (3) 20x20x20 & 0.170 & 1.4 & 0.179 & 1.5 \\
+%     \hline
+%      (3) 40x40x40 & 1.396 & 11.5 & 1.646 & 13.7 \\
+%     \hline
+%      (3) 80x80x80 & 10.644 & 89 & 12.572 & 106 \\
+%     \hline
+%      (4) 20x20x20 & 0.1405 & 1.2 & 0.149 & 1.3 \\
+%     \hline
+%      (4) 40x40x40 & 1.192 & 11 & 1.402 & 15\\
+%     \hline
+%      (4) 80x80x80 & 10.258 & 96 & 12.125 & 114 \\
+%     \hline
+%    \end{tabular}
+%    
+%    Jacobi\begin{tabular}{|l|c|c|c|c|}
+%    \hline
+%     \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
+%     \cline{2-5}
+%     & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
+%     \hline
+%     (1) 40x40x40 & 0.0868 & 7.8 & 0.09577 & 8.4\\
+%     \hline
+%     (1) 80x80x80 & 0.709 & 63 & 0.8757 & 73\\
+%     \hline
+%     (2) 20x20x20 & 0.00945 & 0.8 & 0.00991 & 0.9 \\
+%     \hline
+%     (2) 40x40x40 & 0.0755 & 6.5 & 0.0815 & 7.2 \\
+%     \hline
+%     (2) 80x80x80 & 0.581 & 51 & 0.648 & 57 \\
+%     \hline
+%      (3) 20x20x20 & 0.0121 & 0.95 & 0.0126 & 1.0 \\
+%     \hline
+%      (3) 40x40x40 & 0.0990 & 7.8 & 0.105 & 8.2 \\
+%     \hline
+%      (3) 80x80x80 & 0.759 & 60 & 0.878 & 75 \\
+%     \hline
+%      (4) 20x20x20 & 0.0104 & 0.92 & 0.0106 & 1.0 \\
+%     \hline
+%      (4) 40x40x40 & 0.0842 & 7.6 & 0.0972 & 8.8\\
+%     \hline
+%      (4) 80x80x80 & 0.720 & 64.5 & 0.810 & 75.5 \\
+%     \hline
+%    \end{tabular}
+% \fi
+%   \begin{table}
+%   \begin{center}
+%    \begin{tabular}{|l|c|c|c|c|}
+%    \hline
+%     \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
+%     \cline{2-5}
+%     & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
+%     \hline
+%     1x1x1 & 2.1853 & 70-80 & 2.6874 & 90 \\
+%     \hline
+%     2x1x1 & 1.3912 & 40-50 & 1.6476 & 50-60\\
+%     \hline
+%     2x2x1 & 0.8544 & 30-40 & 0.9943 & 40-50 \\
+%     \hline
+%     2x2x2 & 0.5393 & 10-20 & 0.6935 & 10-20 \\
+%     \hline
+%     4x2x2 & 0.3255 & 0-10 & 0.3802 & 10 \\
+%     \hline
+%     4x4x2 & 0.2542 & 0-10 & 0.2815 & 0-10 \\
+%     \hline
+%     4x4x4 & 0.3171 & 0-10 & 0.362 & 0-10 \\
+%     \hline
+%    \end{tabular}
+%    \end{center}
+%    \caption{Execution times of AMG solver using either single or double precision.}
+%    \label{table.time_measure1}
+%  \end{table}
+%    
+%    The first thing to notice is that increasing the number of processors decreases the execution times, except when going from 32 to 64. This is because the matrix becomes very small and the communication costs become too important.
+%    We won't use theses two values for what follows.
+%    We now need to find values of $a,\alpha$ and $\beta$ that fit our measures.\\
+%    We will change from $a$ to a new $a'$ by setting $f(b,n) = \frac{a'}{n^\beta} \left(\frac{b}{32}\right)^\alpha$. Now if we look only at the 6 points for $b=32$, we just have $f(32,n) = \frac{a'}{n^\beta}$, which does not
+%    depend on $\alpha$. To fit our data, we evaluate the least squares sum, that is to say $\sum\limits_{i=0}^5 (f(32,2^i)-x_{32,2^i})^2$. We want it to be minimized, so choosing the best $a$ is done by choosing
+%    $\frac{x_{32,1}*1^\beta + \dots + x_{32,32}*32^\beta}{6}$. Then the minimal sum is obtained for $\beta \approx 0.634$, giving $a' \approx 2.099$.\\
+%    Finally, we evaluate the least squares sum using all the 12 values to find the value of $\alpha$. The result found in this case is $\alpha \approx 0.3157$. To come back to the original formula we just have to divide $a'$ by $32^\alpha$, and we obtain
+%    the final following formula:
+%    \[ f(b,n) \approx \frac{0.703}{n^{0.634}} b^{0.3157}. \]
+%    
+%    Now that we modeled how time increases when $b$ incrases, we can evaluate different strategies that use.
+%    
+%    \iffalse
+%    (1) 64x64x64, 50 iterations, averaged on 100 runs (Jacobi)\\
+%    \begin{tabular}{|l|c|c|c|c|}
+%    \hline
+%     \multirow{2}{*}{Experiment} & \multicolumn{2}{c|}{Single-Precision} & \multicolumn{2}{c|}{Double-precision} \\
+%     \cline{2-5}
+%     & Solve (s) & Cycle (ms) & Solve (s) & Cycle (ms) \\
+%     \hline
+%     1x1x1 & 1.3731 & 40-50 & 1.6986 & 50-60\\
+%     \hline
+%     2x1x1 & 0.9028 & 30 & 1.1481 & 40-60\\
+%     \hline
+%     2x2x1 & 0.593 & 20 & 0.7015 & 30-40 \\
+%     \hline
+%     2x2x2 & 0.3762 & 10 & 0.5316 & 10-20 \\
+%     \hline
+%     4x2x2 & 0.2447 & 0-10 & 0.2681 & 0-10 \\
+%     \hline
+%     4x4x2 & 0.2032 & 0-10 & 0.2362 & 0-10 \\
+%     \hline
+%     4x4x4 & 0.3086 & 0-10 & 0.3477 & 0-10 \\
+%     \hline
+%    \end{tabular}
+%   \fi
+%   
+%     \includegraphics[width=\textwidth]{figs/3157_3.pdf}\\
+%     \includegraphics[width=\textwidth]{figs/3157_5.pdf}\\
+%     \includegraphics[width=\textwidth]{figs/3157_7.pdf}\\
+%     \includegraphics[width=\textwidth]{figs/3157_10.pdf}\\
+%     \includegraphics[width=\textwidth]{figs/3157_15.pdf}
+
+   To provide numerical values for $a,c$ and most importantly $\alpha$, we measure the execution times of different scenarios. Each scenario computes 50 iterations on matrices with different sizes, and using
+   either only single-precision floating point variables or only double-precision floating point variables. We denote by $x_{b,n}$ the empirical value obtained using $b$ bits and a problem of size $n$ (i.e. the matrix
+   considered will be of size $n^3$ as we consider 3D problems). %Results are reported in Table~\ref{table.time_measure1}.
+   
+   Then, using Python's lmfit package, we interpolate the data to find good values for $a,c$ and $\alpha$. We are able to estimate different values of $\alpha$, all between 0.25 and 0.32, using 3
+   different applications and 2 types of cycles (the classic V-cycle and the cycle used in the \emph{Up} strategy).
+   
+   \todo[inline]{Insert figures with $\alpha \sim 0.3$ to show the model + tables with summaries.}
+   
+   \section{Conclusion}
+   
+   Blabla we improve about ~20\% to reach max accuracy.
+   \todo[inline]{Explain why it's useless to use different precisions at different levels in the grid: useless to use higher precisions in low-level, does not save time to reduce the accuracy in the low levels}
+   In the future, what could be done would be ..., and not this because.
    
    \bibliography{biblio}
    \bibliographystyle{plain}
