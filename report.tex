@@ -45,7 +45,7 @@ We will focus on a parallel implementation of a multi-grid solver, BoomerAMG~\ci
  $x \leftarrow Mx + c$ where $M \in \mathcal{M}(\mathbb{R})^{n\times n}$ and $c \in \mathcal{\mathbb{R}}^n$ and are defined depending on the method used.
 \end{itemize}
 
-\section{How it works}
+\section{The multi-grid algorithm}
 
   The goal of the algorithm is to improve the efficiency of iterative methods. Indeed, the choice of the starting vector $x$ on which to apply relaxations has consequences on the convergence
   time of the solver, and depending on the system to solve, the convergence of factor (related to the matrix $M$) can be close to 1.\\
@@ -81,7 +81,9 @@ We will focus on a parallel implementation of a multi-grid solver, BoomerAMG~\ci
 
   In all what follows the iterative method chosen is an hybrid Jacobi/Gauss-Seidel method. The number of levels used will not be studied.
   
-\section{Comparison of existing strategies}
+\section{Investigate important steps in algorithm}
+
+\subsection{Comparison of existing strategies}
 
   In this section, we will compare different types of cycles and study how the number of relaxation steps influence the convergence of the algorithm.
   
@@ -194,9 +196,9 @@ We see on the second figure that actually, for a given precision, the simple V-c
 The conclusion is that relaxation steps seem to be too costly for the accuracy they grant. It is better to increase the complexity of your cycle or do more cycles, thus more moves in the grid, than doing more relaxation steps. This at least proves
 that multi-grid is a good alternative to classic iterative methods.
 
-\section{Improving the baseline}
+\subsection{Improving the baseline}
 
-\subsection{Symmetric strategies}
+\subsubsection{Symmetric strategies}
 Following these results, we can wonder how to improve the efficiency of the simple V-cycle with 1 relaxation step.
 The first step is to analyze the time spent in the different parts of a cycle. We measure the time spent doing a relaxation at each level and the time spent computing the next linear system
 (when going down in the grid) or the time spent computing the error term (when going up in the grid). The values where measured for a problem of size 512000 with a 8-level grid and are presented
@@ -270,7 +272,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    \label{fig.newstrat}
   \end{figure}
   
-\subsection{An asymmetric strategy}
+\subsubsection{An asymmetric strategy}
   We observe no big improvement compared to the original V-cycle with 1 relaxation at each level with the previous strategies.
   Their common point is that they all do the same number of relaxations when going down or up in the cycle. However, the main idea of the multi-grid is totally asymmetric.
   We first compute an approximation at a given level $l$, then we use the level $l+1$ to compute an approximate error term $e^l$ and finally we redo some relaxation to refine the solution. The two relaxations do not have the same goal.
@@ -311,8 +313,9 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
     \label{fig.mtup}
    \end{figure}
 
-   \section{Playing with bits}
+\section{Investigate Time-Accuracy trade-offs}
    
+   \subsection{A new version of multi-grid algorithm}
    If we look at the previous section, we see that we have a lower bound (which depends on the topology and the problem considered) on the accuracy we can achieve. This bound comes from the internal limitations of the \texttt{double} type.
    Indeed, a double uses 8 bytes (52 bits for the mantissa, 11 for the exponent and 1 bit for the sign). This representation does not allow a full description of all rational numbers (for example between $2^{52}$ and $2^{53}$ only integers can be represented).
    If we increase the number of bits of the mantissa or the exponent we can describe more and more numbers. In the other way, if we reduce it, we lose accuracy for numbers that are not representable. Considering our algorithm, what if we only want
@@ -416,7 +419,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    It is, when multiplied by $b_{max}$, the solution that minimizes our total execution time.
    \end{proof}
    
-   \subsection{Modeling time as a function of bits in the mantissa}
+   \subsection{Evaluation}
    
    The previous proof only holds if the time increases linearly with the number of precision bits used. However, we don't know if it is the case in practice.
    In order to estimate the cost of our algorithm, we want to model the time of an iteration at precision $b$. We model an iteration by the following formula: $an^3b^\alpha+c$, where $a,c$ and $\alpha$ are constants,
@@ -563,7 +566,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    considered will be of size $n^3$ as we consider 3D problems). %Results are reported in Table~\ref{table.time_measure1}.
    
    Then, using Python's lmfit package, we interpolate the data to find good values for $a,c$ and $\alpha$. We are able to estimate different values of $\alpha$, all between 0.25 and 0.32, using 3
-   different applications and 2 types of cycles (the classic V-cycle and the cycle used in the \emph{Up} strategy).
+   different applications and 2 types of cycles (the classic V-cycle and the \emph{Up} strategy).
    
    \todo[inline]{Insert figures with $\alpha \sim 0.3$ to show the model + tables with summaries.}
    
