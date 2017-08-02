@@ -17,6 +17,7 @@ tolerance = 1e-8
 alpha = 2.0
 exe="./time_estimator"
 order_incr = False
+coeff=1
 
 colors={1:'black',2:'blue',3:'red',4:'green',5:'#00CC55',7:'purple',13:'yellow',14:'orange',17:'cyan',46:'#999999'}
 
@@ -39,6 +40,9 @@ for opt,arg in opts:
 			thr = 0.5
 		elif arg == "0.8":
 			thr = 0.8
+		elif arg == "0.6":
+			thr = 0.6
+                        coeff = 2./3.
 		else:
 			print 'No existing data for threshold '+arg+'. Exiting.'
 			sys.exit(1)
@@ -48,6 +52,7 @@ for opt,arg in opts:
 src_dir = "../PREC_INCR_"+str(thr)+"/evaluation/"
 result = []
 files = [f for f in listdir(src_dir) if isfile(join(src_dir, f))]
+
 
 print "Found "+str(len(files))+" files."
 
@@ -63,6 +68,8 @@ for f in files:
 			precision *= float(ftab[2][1:])
 			precision = math.floor(precision)
 		else:
+                        if int(ftab[2]) == 0:
+                            break
 			precision += int(ftab[2])
 		if precision > max_prec:
 			precision = max_prec
@@ -74,17 +81,18 @@ for f in files:
 	#print cmd_string
 	data = np.loadtxt("tmp")
 	data = data[data[:,3]<tolerance]
-	value=data[0,2]
-	#print value
-	#label = ",".join(str(x) for x in labeltab)
-	label = "_".join(ftab[1:])
-	result.append([label,value,len(labeltab)])
-	print label+" "+str(value)
-	if value < minVal:
-		minVal = value
-		minLabel = label
-	if value > maxValue:
-		maxValue = value
+        if data.shape != (0,4):
+            value=coeff*data[0,2]
+            #print value
+            #label = ",".join(str(x) for x in labeltab)
+            label = "_".join(ftab[1:])
+            result.append([label,value,len(labeltab)])
+            print label+" "+str(value)
+            if value < minVal:
+                    minVal = value
+                    minLabel = label
+            if value > maxValue:
+                    maxValue = value
 
 print "Minimum time is "+str(minVal)+", for "+minLabel+"."
 

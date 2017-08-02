@@ -273,6 +273,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
   \end{figure}
   
 \subsubsection{An asymmetric strategy}
+\label{sec.assymetric}
   We observe no big improvement compared to the original V-cycle with 1 relaxation at each level with the previous strategies.
   Their common point is that they all do the same number of relaxations when going down or up in the cycle. However, the main idea of the multi-grid is totally asymmetric.
   We first compute an approximation at a given level $l$, then we use the level $l+1$ to compute an approximate error term $e^l$ and finally we redo some relaxation to refine the solution. The two relaxations do not have the same goal.
@@ -565,16 +566,115 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    either only single-precision floating point variables or only double-precision floating point variables. We denote by $x_{b,n}$ the empirical value obtained using $b$ bits and a problem of size $n$ (i.e. the matrix
    considered will be of size $n^3$ as we consider 3D problems). %Results are reported in Table~\ref{table.time_measure1}.
    
-   Then, using Python's lmfit package, we interpolate the data to find good values for $a,c$ and $\alpha$. We are able to estimate different values of $\alpha$, all between 0.25 and 0.32, using 3
-   different applications and 2 types of cycles (the classic V-cycle and the \emph{Up} strategy).
+   Then, using Python's lmfit package, we interpolate the data to find good values for $a,c$ and $\alpha$. We are able to estimate different values of $\alpha$, all between 0.20 and 0.32, using 3
+   different applications, 2 types of cycles (the classic V-cycle and the \emph{Up} strategy) and 2 types of relaxation method (weighted Jacobi and an hybrid method).
+   With these values of $\alpha$, we can estimate the cost of our algorithm in units of time by $\left(\frac{b}{53}\right)^\alpha$ for a cycle (1 unit = 1 V-cycle at double-precision) with $b$ the number of significant
+   bits (i.e. the number of bits in the mantissa plus one, as one bit is always assumed in standard floating point representation). Then using the MPFR library we can create different
+   scenarios that set the number of bits used at each cycle in a different way. We define all these scenarios by the first precision used and how to update it (when the threshold is reached for a given precision).
+   This can be either an addition or a multiplication. In particular, we provide a scenario where the available precisions are 11, 24 and 53 (represented by a starting precision of 11 and a multiplicator of 2.24). This
+   corresponds to the case where half-precision, single-precision and double-precision floating points are available, as it is the case on GPUs.
    
-   \todo[inline]{Insert figures with $\alpha \sim 0.3$ to show the model + tables with summaries.}
+   \begin{figure}
+    \includegraphics[width=\textwidth]{figs/cost_3.pdf}
+    \caption{}
+    \label{fig.estimation1}
+   \end{figure}
+   \begin{figure}
+    \includegraphics[width=\textwidth]{figs/cost_5.pdf}
+    \caption{}
+    \label{fig.estimation2}
+   \end{figure}
+   \begin{figure}
+    \includegraphics[width=\textwidth]{figs/cost_7.pdf}
+    \caption{}
+    \label{fig.estimation3}
+   \end{figure}
+   \begin{figure}
+    \includegraphics[width=\textwidth]{figs/cost_10.pdf}
+    \caption{}
+    \label{fig.estimation4}
+   \end{figure}
+   \begin{figure}
+    \includegraphics[width=\textwidth]{figs/cost_15.pdf}
+    \caption{}
+    \label{fig.estimation5}
+   \end{figure}
+   
+   Figures~\ref{fig.estimation1} to~\ref{fig.estimation5} represents the cost of the algorithm, for these different scenarios, to reach different accuracy in the output (from $10^{-3}$ to $10^{-15}$ here) using
+   a value for the $\alpha$ parameter of 0.3.
+   If we focus on the GPU case (labelled \texttt{11\_x2.24}), we can see that, compared to the original algorithm (which uses only double-precision), we improve by 40\% the time to reach 
+   accuracy $10^{-3}$. Then the improvement slowly decrases when increasing the accuracy to reach 10\%.
+   
+   \subsection{Summary of results}
+   
+   Finally, we want to see how changing the precisions during the algorithm also improves the execution time when we use the \emph{Up} strategy, defined in section~\ref{sec.assymetric}, compared to using the original algorithm (single or double precision).
+   The table~\ref{tab.results1} presents the different estimated times (in time units where 1 time unit is a V-cycle at double precision)
+   for all 4 different algorithms: V-cycle (double precision), \emph{Up}-cycle (double precision), V-cycle (adaptive precisions 11-24-53), \emph{Up}-cycle (adaptive precisions 11-24-53) for Problem 1, using a hybrid relaxation method.
+   We also present the improvement of the best method (i.e. \emph{Up}-cycle with different precisions) compared to the original algorithm (in double-precision and in single-precision when possible).
+  
+  \begin{table}[h]
+   \begin{center}
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    Tolerance & Baseline (DP) & \emph{Up}-cycle (DP) & Adaptive (V-cycle) & Adaptive (\emph{Up}-cycle) & Improvement (DP) & Improvement (SP) \\
+    \hline
+    \hline
+    1e-01 & 1.000 & 1.333 & 0.624 & 0.832 & 16.8\% & -5.5\%\\
+    \hline
+    1e-02 & 3.000 & 2.000 & 1.872 & 1.664 & 44.5\% & 29.7\%\\
+    \hline
+    1e-03 & 5.000 & 4.667 & 3.284 & 3.131 & 37.4\% & 20.6\%\\
+    \hline
+    1e-04 & 8.000 & 7.333 & 5.650 & 5.234 & 34.6\% & 17.0\%\\
+    \hline
+    1e-05 & 11.000 & 10.0 & 8.015 & 7.336 & 33.3\% & 15.4\% \\
+    \hline
+    1e-06 & 14.000 & 12.667 & 10.380 & 9.439 & 32.6\% & 14.5\%\\
+    \hline
+    1e-07 & 17.000 & 15.333 & 13.169 & 11.964 & 29.6\% & -\\
+    \hline
+    1e-08 & 20.000 & 18.000 & 16.169 & 14.631 & 26.8\% & -\\
+    \hline
+    1e-09 & 23.000 & 20.667 & 19.169 & 17.298 & 24.8\% & -\\
+    \hline
+    1e-10 & 26.000 & 24.000 & 22.169 & 20.631 & 20.7\% & -\\
+    \hline
+    1e-11 & 29.000 & 26.667 & 25.169 & 23.298 & 19.7\%& -\\
+    \hline
+    1e-12 & 32.000 & 29.333 & 28.169 & 25.964 & 18.9\% & -\\
+    \hline
+    1e-13 & 35.000 & 32.000 & 31.169 & 28.631 & 18.2\% & -\\
+    \hline
+    1e-14 & 38.000 & 34.667 & 34.169 & 31.298 & 17.6\% & -\\
+    \hline
+    1e-15 & 43.000 & 39.333 & 39.169 & 35.964 & 16.4\% & -\\
+    \hline
+  \end{tabular}
+  }
+  \end{center}
+   \caption{All estimated times for Problem 1, size 40, hybrid relaxation method, on a single processor, with $\alpha = 0.3$. The column `Improvement (DP)' corresponds to
+   the improvement between our adaptive algorithm using a \emph{Up}-cycle (column 5) compared to the original V-cycle with fixed double-precision (column 2). The column `Improvement (SP)' corresponds
+   to the improvement between our adaptive algorithm using a \emph{Up}-cycle (column 5) compared to the original V-cycle with fixed single-precision.}
+   \label{table.results1}
+   \end{table}
+   
+   The main result is that even to reach the maximum precision, we improve the execution time by more than 15\%. When it comes to smaller precisions, this improvement can be as high as 45\% compared to
+   the original algorithm, but still 30\% compared to the single-precision version. We insist to remember that these results for the adaptive algorithm use 3 different precisions (11,24,53)
+   whereas if other architectures would be available it would be possible to improve even more the execution by using more different precisions. For example, as we see on Figure~\ref{fig.estimation5}, using precisions
+   4,8,12,16,\dots,48,52,53 should lead to a faster execution.
    
    \section{Conclusion}
    
-   Blabla we improve about $\approx$20\% to reach max accuracy.
-   \todo[inline]{Explain why it's useless to use different precisions at different levels in the grid: useless to use higher precisions in low-level, does not save time to reduce the accuracy in the low levels}
-   In the future, what could be done would be ..., and not this because.
+   To conclude, we improve the original algorithm by two means. The first one is to remove some relaxation steps in a V-cycle. This leads to faster cycles but it converges in more cycles. All in all,
+   it is usually faster (up to 30\% according to our experiments) but the improvement can be very variable. The second way to improve the algorithm is to adapt the precisions of the floating point
+   operations depending on which accuracy we already got. We use small precisions for the first cycles then when it starts converging, we increase this precision. Repeating this operation until reaching the maximum accuracy available, leads
+   to some economy in some steps of the algorithm, making it faster overall. Then by combining these two techniques, we estimate than using a GPU, we can reduce by 16.4\% the time needed to reach the maximum accuracy using double-precision and by 14.5\% the time needed
+   to reach the maximum accuracy using single-precision.
+   
+   Other ideas to reduce the execution time or increase the convergence could include changing the precision used in different levels of a cycle. However, we think that it is not
+   useful because (1) using a greater precision in the coarse levels than in the fine levels is useless as all the computations would eventually be truncated and (2) using a smaller
+   precision in the coarse levels than in the fine levels would not affect by much the execution time as, according to the measurements done, only the first 2 or 3 levels represent more than 95\% of the relaxation cost of a cycle.
    
    \bibliography{biblio}
    \bibliographystyle{plain}
