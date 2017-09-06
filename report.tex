@@ -335,8 +335,8 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    while the accuracy of the solution is below the threshold using 32 bits, using 32 or any greater number of bits to do the computations will result in the same final accuracy. However, we expect that using only the necessary $32$ bits is 
    more efficient in terms of time, space and energy.
    
-   \begin{figure}
-   % \includegraphics[width=0.8\linewidth]{figs/bits_convergence.pdf}
+   \begin{figure} \centering
+    \includegraphics[width=0.8\linewidth]{figs/bits_convergence.pdf}
     \caption{Accuracy achievable with different number of bits in mantissa.}
     \label{fig.bits_accuracy}
    \end{figure}
@@ -348,8 +348,8 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    Figure~\ref{fig.prec_incr} presents the evolution of accuracy for the original algorithm, and 3 different strategies with increasing precision and threshold of 0.8: start at $b=16$ and do $b=b+8$, start at $b=32$
    and do $b=b+8$, and start at $b=16$ and do $b=b\times2$, run on a 24Ox240x240 matrix size with 3x3x3 topology for problem 3.
    
-   \begin{figure}
-%    \includegraphics[width=0.8\linewidth]{figs/prec_incr.pdf}
+   \begin{figure} \centering
+    \includegraphics[width=0.8\linewidth]{figs/prec_incr.pdf}
     \caption{Accuracy of adaptive algorithms compared to the original double-precision.}
     \label{fig.prec_incr}
    \end{figure}
