@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[sigplan]{acmart}
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts,amsmath,amssymb,amsthm,amstext,latexsym}
 \usepackage{subfig}
@@ -9,11 +9,34 @@
 \usepackage{todonotes}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows,shapes}
-\usetikzlibrary{patterns,snakes}
+\usetikzlibrary{patterns,decorations}
 \newtheorem{theorem}{Theorem}
 %opening
 \title{Approximating a Multi-Grid Solver}
+
+\acmConference[CGO’18]{International Symposium on Code Generation and Optimization}{February 24--28}{Vienna, Austria}
+
+\author{Leonardo Bautista-Gomez}
+\affiliation{%
+  \institution{Barcelona Supercomputing Center}
+  \country{Spain}
+}
+\email{leonardo.bautista@bsc.es}
+\author{Marc Casas}
+\affiliation{%
+  \institution{Barcelona Supercomputing Center}
+  \country{Spain}
+}
+\email{marc.casas@bsc.es}
 \author{Valentin Le Fèvre}
+\affiliation{%
+\institution{ENS de Lyon}
+\country{France}}
+\affiliation{%
+  \institution{Barcelona Supercomputing Center}
+  \country{Spain}
+}
+\email{valentin.le-fevre@ens-lyon.fr}
 
 \begin{document}
 
@@ -68,7 +91,7 @@ We will focus on a parallel implementation of a multi-grid solver, BoomerAMG~\ci
       \item Relax $x$ $\alpha_2$ times using an iterative method (matrix $A^l$, right hand side $f$);
    \end{enumerate}
   \end{itemize}
-  The algorihtm is then executed by setting $x^l \leftarrow 0$ and then executing MG$(1,x^l,b^l,\alpha_1,\alpha_2)$.
+  The algorithm is then executed by setting $x^l \leftarrow 0$ and then executing MG$(1,x^l,b^l,\alpha_1,\alpha_2)$.
 
   Then several ways of modifying the algorithm appear:
   \begin{itemize}
@@ -94,10 +117,9 @@ We will focus on a parallel implementation of a multi-grid solver, BoomerAMG~\ci
   the notion of cycle to a $k$-cycle (where a V-cycle is a $1$-cycle and a W-cycle is a $2$-cycle).
   
  \begin{figure}
- %\resizebox{\linewidth}{4cm}{
+ \resizebox{\linewidth}{!}{
  \begin{tikzpicture}
- 
- 
+  
 \begin{scope}[xscale=2/5]
 
   \node (sh) at (-5,3) { $l=0$ };
@@ -155,7 +177,7 @@ We will focus on a parallel implementation of a multi-grid solver, BoomerAMG~\ci
     \draw[->] (an) -- (ao);
     \end{scope}
     
- \end{tikzpicture}
+ \end{tikzpicture}}
  \caption{V-cycle and W-cycle on 4-level grid.}
  \label{fig.cycles}
 \end{figure}
@@ -189,7 +211,7 @@ The results are presented on Figure~\ref{fig.first_tests}.
   \includegraphics[width=0.49\linewidth]{figs/time_convergence.pdf}
   \caption{Execution time and final residual norm of the 8 strategies.}
   \label{fig.first_tests}
-\end{figure} 
+\end{figure}
 
 What we can observe is that, as expected, increasing the number of relaxation steps or complexifying the cycle increases the overall time to do one cycle. However, it converges in less iterations.
 We see on the second figure that actually, for a given precision, the simple V-cycle with only 1 relaxation at each step is the fastest way to reach it, followed closely by the W-cycle with $\alpha=1$.\\
@@ -575,27 +597,27 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    corresponds to the case where half-precision, single-precision and double-precision floating points are available, as it is the case on GPUs.
    
    \begin{figure}
-    \includegraphics[width=\textwidth]{figs/cost_3.pdf}
+    \includegraphics[width=\linewidth]{figs/cost_3.pdf}
     \caption{}
     \label{fig.estimation1}
    \end{figure}
    \begin{figure}
-    \includegraphics[width=\textwidth]{figs/cost_5.pdf}
+    \includegraphics[width=\linewidth]{figs/cost_5.pdf}
     \caption{}
     \label{fig.estimation2}
    \end{figure}
    \begin{figure}
-    \includegraphics[width=\textwidth]{figs/cost_7.pdf}
+    \includegraphics[width=\linewidth]{figs/cost_7.pdf}
     \caption{}
     \label{fig.estimation3}
    \end{figure}
    \begin{figure}
-    \includegraphics[width=\textwidth]{figs/cost_10.pdf}
+    \includegraphics[width=\linewidth]{figs/cost_10.pdf}
     \caption{}
     \label{fig.estimation4}
    \end{figure}
    \begin{figure}
-    \includegraphics[width=\textwidth]{figs/cost_15.pdf}
+    \includegraphics[width=\linewidth]{figs/cost_15.pdf}
     \caption{}
     \label{fig.estimation5}
    \end{figure}
@@ -608,11 +630,11 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    \subsection{Summary of results}
    
    Finally, we want to see how changing the precisions during the algorithm also improves the execution time when we use the \emph{Up} strategy, defined in section~\ref{sec.assymetric}, compared to using the original algorithm (single or double precision).
-   The table~\ref{tab.results1} presents the different estimated times (in time units where 1 time unit is a V-cycle at double precision)
+   The table~\ref{table.results1} presents the different estimated times (in time units where 1 time unit is a V-cycle at double precision)
    for all 4 different algorithms: V-cycle (double precision), \emph{Up}-cycle (double precision), V-cycle (adaptive precisions 11-24-53), \emph{Up}-cycle (adaptive precisions 11-24-53) for Problem 1, using a hybrid relaxation method.
    We also present the improvement of the best method (i.e. \emph{Up}-cycle with different precisions) compared to the original algorithm (in double-precision and in single-precision when possible).
   
-  \begin{table}[h]
+  \begin{table*}[t]
    \begin{center}
   \resizebox{\textwidth}{!}{
   \begin{tabular}{|c|c|c|c|c|c|c|}
@@ -657,7 +679,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    the improvement between our adaptive algorithm using a \emph{Up}-cycle (column 5) compared to the original V-cycle with fixed double-precision (column 2). The column `Improvement (SP)' corresponds
    to the improvement between our adaptive algorithm using a \emph{Up}-cycle (column 5) compared to the original V-cycle with fixed single-precision.}
    \label{table.results1}
-   \end{table}
+   \end{table*}
    
    The main result is that even to reach the maximum precision, we improve the execution time by more than 15\%. When it comes to smaller precisions, this improvement can be as high as 45\% compared to
    the original algorithm, but still 30\% compared to the single-precision version. We insist to remember that these results for the adaptive algorithm use 3 different precisions (11,24,53)
