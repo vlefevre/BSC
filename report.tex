@@ -279,11 +279,9 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
   The strategy \emph{Fast2} executes a lot of relaxations at level $L-2$, because it should not increase by much the execution time of the V-cycle. Why choose $L-2$ level instead of $L$ or $L-1$?
   This because the relaxation at level $L$ is actually a direct solve. Thus, the error term is almost exact at level $L-1$, because the only source of error
   comes from the interpolation of $e^L$ (which is exact) into $e^{L-1}$. This is why, we might expect better results by adding relaxations at level $L-2$.
-  The last strategy \emph{Fast3}, pushes this idea one step further. If we assume that doing more than one relaxation gets an really accurate error estimation at level $l$, then
+  The last strategy \emph{Fast3}, pushes this idea one step further. If we assume that doing more than one relaxation gets a really accurate error estimation at level $l$, then
   at level $l-1$ we do not need to correct a lot by doing more relaxations. However at level $l-2$ we have been through 2 interpolations since last good estimation of the error vector, hence increasing the number of relaxations again.
   As we still want not to increase the execution time a lot we stop this recursion for the first levels as they are the two most costly relaxations.
-  
-  In Figure~\ref{fig.newstrat_small}, we present the results of these 4 strategies on a smaller matrix of initial size 64,000 with only a 6-level grid.
   
   \begin{figure}
   \includegraphics[width=0.49\linewidth]{figs/convergence_fast_small.pdf}
@@ -292,10 +290,11 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    \label{fig.newstrat_small}
   \end{figure}
 
+  In Figure~\ref{fig.newstrat_small}, we present the results of these 4 strategies on a smaller matrix of initial size 64,000 with only a 6-level grid.
   The first thing to observe is that removing the relaxation at level 1 is a disaster. It sure saves time during a cycle but the accuracy loss is tremendous.
   The other thing to notice is that adding a lot of relaxations in the last levels increases by a little the execution time while being useless on the accuracy side. This is why \emph{Fast2} and  \emph{Fast3} are not really efficient.
   
-  More tests were performed on the original $512,000\times 512,000$ and are presented in Figure~\ref{fig.newstrat}.
+  More tests were performed on the original $512,000\times 512,000$ matrix and are presented in Figure~\ref{fig.newstrat}.
   
   \begin{figure}
   \includegraphics[width=0.49\linewidth]{figs/convergence_fast.pdf}
