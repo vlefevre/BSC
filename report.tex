@@ -44,11 +44,18 @@
 
 \section{Introduction}
 
-The multi-grid algorithms are a class of linear system solvers.
-The idea is to restrict and interpolate vectors and matrices to smaller spaces to have easier problems to solve, that is, problems that we can solve in much less time than the original one.
+Multi-grid algorithms are a class of linear system solvers~\cite{Hackbusch1991} that emerged in the 80's to increase the convergence rate of more classical iterative methods, in order to solve
+efficiently huge physics applications (for example, see~\cite{Ashby1996}). They rely on a grid whose goal is to discretize continuous equations. This grid can be more or less accurate (i.e.
+the number of evaluation points can vary) and the main idea of the multi-grid algorithms is to use a solution of an inaccurate problem as the starting point of a more accurate solver.
+Different parameters, such as the iterative method used at each step or the fineness of the grid, affect the convergence rate of the algorithm. For example, using a grid with only a few
+evaluation points decreases the execution time but deteriotates the accuracy of the final result. In the other way, it is possible to increase the quality of the result by using a finer
+grid but at the cost of a performance degradation.
 
-This report will investigate the different trade-offs between accuracy and execution time for multi-grid algorithms.
-We will focus on a parallel implementation of a multi-grid solver, BoomerAMG~\cite{boomerAMG}, implemented in the HYPRE library~\cite{Falgout2002}.
+In this context, we investigate different trade-offs between accuracy and execution time for multi-grid algorithms. This paper will only focus on a parallel implementation of a multi-grid solver,
+BoomerAMG~\cite{boomerAMG}, implemented in the HYPRE library~\cite{Falgout2002}. We will first have a look at the parameters of the solver such as the shape of cycles in the grid and the
+number of iterations. We will describe a particular cycle that proved to be at least as efficient as the original algorithm. Then we will investigate how changing the bit-width of
+some values makes the execution time vary with the maximum accuracy reachable. We give an algorithm that dynamically changes the bit-width of the variables to reduce by 15\% the execution
+time needed to reach a same-quality result as the original algorithm (which uses only double-precision floating points) and reducing up to 30\% the execution time for smaller accuracies.
 
 \section{Definitions}
 
