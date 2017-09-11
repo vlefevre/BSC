@@ -44,8 +44,9 @@
 
 \section{Introduction}
 
-Multi-grid algorithms are a class of linear system solvers~\cite{Hackbusch1991} that emerged in the 80's to increase the convergence rate of more classical iterative methods, in order to solve
-efficiently huge physics applications (for example, see~\cite{Ashby1996}). They rely on a grid whose goal is to discretize continuous equations. This grid can be more or less accurate (i.e.
+Multi-grid algorithms are a class of linear system solvers~\cite{Hackbusch1991} that emerged in the 80's to increase the convergence rate of more classical iterative methods. They became even more
+interested as huge scientific applications started to appear (for example, see~\cite{Ashby1996}), thus needed more adapted algorithms. Multi-grid algorithms rely on a grid whose goal is to discretize continuous equations.
+This grid can be more or less accurate (i.e.
 the number of evaluation points can vary) and the main idea of the multi-grid algorithms is to use a solution of an inaccurate problem as the starting point of a more accurate solver.
 Different parameters, such as the iterative method used at each step or the fineness of the grid, affect the convergence rate of the algorithm. For example, using a grid with only a few
 evaluation points decreases the execution time but deteriotates the accuracy of the final result. In the other way, it is possible to increase the quality of the result by using a finer
@@ -57,7 +58,9 @@ number of iterations. We will describe a particular cycle that proved to be at l
 some values makes the execution time vary with the maximum accuracy reachable. We give an algorithm that dynamically changes the bit-width of the variables to reduce by 15\% the execution
 time needed to reach a same-quality result as the original algorithm (which uses only double-precision floating points) and reducing up to 30\% the execution time for smaller accuracies.
 
-\section{Definitions}
+\section{The multi-grid algorithm}
+
+\subsection{Definitions}
 
 \begin{itemize}
  \item A system of equations is represented by the following equation: $Ax=b$, where $A \in \mathcal{M}(\mathbb{R})^{n\times n}$ and $b \in \mathcal{\mathbb{R}}^n$ are given and
@@ -75,11 +78,11 @@ time needed to reach a same-quality result as the original algorithm (which uses
  $x \leftarrow Mx + c$ where $M \in \mathcal{M}(\mathbb{R})^{n\times n}$ and $c \in \mathcal{\mathbb{R}}^n$ and are defined depending on the method used.
 \end{itemize}
 
-\section{The multi-grid algorithm}
+\subsection{The V-cycle}
 
   The goal of the algorithm is to improve the efficiency of iterative methods. Indeed, the choice of the starting vector $x$ on which to apply relaxations has consequences on the convergence
-  time of the solver, and depending on the system to solve, the convergence of factor (related to the matrix $M$) can be close to 1.\\
-  Here the idea is to do some relaxations and then correct the value of $x$ by adding it the corresponding error term. However, this error term cannot be computed easily (otherwise,
+  time of the solver, and depending on the system to solve, the factor of convergence (related to the matrix $M$) can be close to 1.\\
+  Here the idea is to do some relaxations and then correct the value of $x$ by adding to it the corresponding error term. However, this error term cannot be computed easily (otherwise,
   solving the problem would be done by computing the error term and adding it to $x$). Multi-grid solvers instead use recursion to compute the error term. The stopping parameter for the
   recursion will be determined by decreasing the sizes of vectors and matrices (thus loosing on precision but saving time).
   Formally, we can sum up the algorithm as follows:
@@ -335,13 +338,13 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    even more the classical V-cycle when the problem size increases, but seems to cap at around 25\% improvement. Figure~\ref{fig.mtup} presents the results for the matrix size 13,824,000 and problem 3, for the 3 different processor topologies. We have similar figures
    for the other scenarios.
    
-   \begin{figure}
+   \begin{figure*}[t]
     \subfloat[3x3x3]{\includegraphics[width=0.33\linewidth]{figs/mt_27.pdf}}
     \subfloat[4x4x4]{\includegraphics[width=0.33\linewidth]{figs/mt_64.pdf}}
     \subfloat[6x6x1]{\includegraphics[width=0.33\linewidth]{figs/mt_36.pdf}}
     \caption{Comparison of original algorithm with \emph{Up} strategy for Laplace problem with 27-point stencil on a 240x240x240 grid.}
     \label{fig.mtup}
-   \end{figure}
+   \end{figure*}
 
 \section{Investigate Time-Accuracy trade-offs}
    
@@ -366,7 +369,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    
    \begin{figure} \centering
     \includegraphics[width=0.8\linewidth]{figs/bits_convergence.pdf}
-    \caption{Accuracy achievable with different number of bits in mantissa.}
+    \caption{Accuracy achievable with different number of bits in mantissa. Points were obtained only for multiples of 5 iterations, but it is enough to see the thresholds appear.}
     \label{fig.bits_accuracy}
    \end{figure}
    
@@ -402,7 +405,11 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    From the previous experiments we can see that (i) the number of cycles needed to reach the lower bound for a given precision does not depend on the previous cycles (Figure~\ref{fig.prec_incr}) and that (ii) the number of cycles
    needed to reach the lower bound is proportional to the number of bits $b$ used (Figure~\ref{fig.bits_accuracy}). We then define $\textsc{MaxIter}(b)$ the number of cycles needed so that the ratio between two consecutive
    relative residual norms is higher than a threshold $t$. We use the two observations to model $\textsc{MaxIter}(b) = \lfloor kb \rfloor$ for some constant $k$.
-   Then we can compute the total execution time of the algorithm \[T_{total} = \textsc{MaxIter}(b_1)T(b_1) + \sum\limits_{i=1}^{n-1} (\textsc{MaxIter}(b_{i+1})-\textsc{MaxIter}(b_i))T(b_{i+1}). \]
+   Then we can compute the total execution time of the algorithm
+   \begin{align*}
+   T_{total}& = \textsc{MaxIter}(b_1)T(b_1)\\
+   & +  \sum\limits_{i=1}^{n-1} (\textsc{MaxIter}(b_{i+1})-\textsc{MaxIter}(b_i))T(b_{i+1}).
+   \end{align*}
    Indeed, when we reach the number of iterations $\textsc{MaxIter}(b_i)$ we change from precision $b_i$ to precision $b_{i+1}$.
    We can rewrite $T_{total}$ as
    \begin{align*}
@@ -693,6 +700,14 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    whereas if other architectures would be available it would be possible to improve even more the execution by using more different precisions. For example, as we see on Figure~\ref{fig.estimation5}, using precisions
    4,8,12,16,\dots,48,52,53 should lead to a faster execution.
    
+   \section{Related Work}
+   
+   Some approximate computing techniques at hardware level exist and could be applied in addition to our ideas. They include fast but slightly incorrect adders~\cite{Gupta:2011}, or voltage-scaling (in SRAM, reducing
+   the voltage by 80\% increases the probability of an unexpected bit flip by around $10^{-5}$~\cite{Sampson:2011})
+   if we are more interested in reducing the energy consumption instead of the execution time.
+   Dynamically changing the bit-width of some variables has been done in~\cite{Park:2010} but it is there applied on some part of the data as they are not involved in the same way in the algorithm,
+   which is not the case in a multi-grid solver (all the evaluation points on the grid represent the continuous solution).
+   
    \section{Conclusion}
    
    To conclude, we improve the original algorithm by two means. The first one is to remove some relaxation steps in a V-cycle. This leads to faster cycles but it converges in more cycles. All in all,
@@ -704,6 +719,8 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    Other ideas to reduce the execution time or increase the convergence could include changing the precision used in different levels of a cycle. However, we think that it is not
    useful because (1) using a greater precision in the coarse levels than in the fine levels is useless as all the computations would eventually be truncated and (2) using a smaller
    precision in the coarse levels than in the fine levels would not affect by much the execution time as, according to the measurements done, only the first 2 or 3 levels represent more than 95\% of the relaxation cost of a cycle.
+   Finally, it would be interesting to estimate the impact of our algorithm on the energy consumption, or at least have some real measurements and evaluate the energy consumption with our
+   same model but a different value of the $\alpha$ parameter.
    
    \bibliography{biblio}
    \bibliographystyle{plain}
