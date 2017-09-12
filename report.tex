@@ -54,10 +54,12 @@
 \section{Introduction}
 
 Multi-grid algorithms are a class of linear system solvers~\cite{Hackbusch1991} that emerged in the 80's to increase the convergence rate of more classical iterative methods. They became even more
-interested as huge scientific applications started to appear (for example, see~\cite{Ashby1996}), thus needed more adapted algorithms. Multi-grid algorithms rely on a grid whose goal is to discretize continuous equations.
+interesting as huge scientific applications started to appear (for example, see~\cite{Ashby1996}), thus needed more adapted algorithms. Multi-grid algorithms rely on a grid of evaluation points whose goal is to discretize continuous equations.
 This grid can be more or less accurate (i.e.
-the number of evaluation points can vary) and the main idea of the multi-grid algorithms is to use a solution of an inaccurate problem as the starting point of a more accurate solver.
-Different parameters, such as the iterative method used at each step or the fineness of the grid, affect the convergence rate of the algorithm. For example, using a grid with only a few
+the number of evaluation points can vary) and the main idea of the multi-grid algorithms is to use different grids to determine a solution on an inaccurate grid that will be then used as the starting point of a solution on a more accurate grid. More precisely, a multi-grid algorithm has a parameter which is the cycle shape.
+The cycle shape determines in which order and on which coarsening of the grid an iterative method is used. The classical cycle shape is the V-cycle where we first iterate on the finest grid, then the second finest grid and so on until reaching
+the coarsest grid where a direct solve is used instead of an iterative method as the problem size has become smaller. Then we iterate again on all the other grids in the reverse order to have a solution expressed with the initial fineness of the grid.
+Different parameters, such as the iterative method used at each step or the fineness of the grid and the previously mentioned cycle shape, affect the convergence rate of the algorithm. For example, using a grid with only a few
 evaluation points decreases the execution time but deteriotates the accuracy of the final result. In the other way, it is possible to increase the quality of the result by using a finer
 grid but at the cost of a performance degradation.
 
