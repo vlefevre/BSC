@@ -38,6 +38,15 @@
 }
 \email{valentin.le-fevre@ens-lyon.fr}
 
+\begin{abstract}
+  This paper studies trade-offs between accuracy and execution time in a multi-grid solver: BoomerAMG. As a linear system solver is never really exact, it is actually relevant to
+  investigate whether it is possible or not to save time while keeping results that are not to far from their exact value. We first find a different cycle shape than the classic V-cycle used
+  in multi-grid solvers that provides a usually faster convergence rate. Then we propose a dynamic bit-width changing algorithm that is able to adapt the execution time of floating-point operations
+  according to the accuracy needed. In particular, we are able to reach the same results as a double-precision floating point algorithm with an expected 15\% improvement of the execution
+  time on a GPU.
+\end{abstract}
+
+
 \begin{document}
 
 \maketitle
@@ -315,7 +324,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
   We run \emph{Up} and \emph{Fast4}, as long as the classical V-cycle, on the same matrix of size 512,000 and also on
   other applications (3D laplace with a 9-pt stencil, 3D laplace with a 27-point stencil, and another 3D partial derivative equation) with the same size of matrix.
   
-  All results are presented in Figure~\ref{fig.up_comparison}.
+  All results are presented in Figure~\ref{fig.up_comparison			}.
   
   \begin{figure}
    \subfloat[Problem 1]{\includegraphics[width=0.49\linewidth]{figs/time_convergence_up_1.pdf}}
