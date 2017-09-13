@@ -1,4 +1,4 @@
-\documentclass[sigplan]{acmart}
+\documentclass[10pt,conference]{IEEEtran}
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts,amsmath,amssymb,amsthm,amstext,latexsym}
 \usepackage{subfig}
@@ -14,42 +14,31 @@
 %opening
 \title{Approximating a Multi-Grid Solver}
 
-\acmConference[CGO’18]{International Symposium on Code Generation and Optimization}{February 24--28}{Vienna, Austria}
-
-\author{Leonardo Bautista-Gomez}
-\affiliation{%
-  \institution{Barcelona Supercomputing Center}
-  \country{Spain}
+\author{\IEEEauthorblockN{Leonardo Bautista-Gomez}
+    \IEEEauthorblockA{Barcelona Supercomputing Center\\
+                    Spain\\
+                    Email: leonardo.bautista@bsc.es}
+    \and
+    \IEEEauthorblockN{Marc Casas}
+    \IEEEauthorblockA{Barcelona Supercomputing Center\\
+                    Spain\\
+                    Email: leonardo.bautista@bsc.es}
+    \and
+        \IEEEauthorblockN{Valentin Le F\`{e}vre}
+\IEEEauthorblockA{Barcelona Supercomputing Center\\Spain\\\'{E}cole Normale Supérieure de Lyon\\France\\Email: valentin.le-fevre@ens-lyon.fr}
 }
-\email{leonardo.bautista@bsc.es}
-\author{Marc Casas}
-\affiliation{%
-  \institution{Barcelona Supercomputing Center}
-  \country{Spain}
-}
-\email{marc.casas@bsc.es}
-\author{Valentin Le Fèvre}
-\affiliation{%
-\institution{ENS de Lyon}
-\country{France}}
-\affiliation{%
-  \institution{Barcelona Supercomputing Center}
-  \country{Spain}
-}
-\email{valentin.le-fevre@ens-lyon.fr}
-
-\begin{abstract}
-  This paper studies trade-offs between accuracy and execution time in a multi-grid solver: BoomerAMG. As a linear system solver is never really exact, it is actually relevant to
-  investigate whether it is possible or not to save time while keeping results that are not to far from their exact value. We first find a different cycle shape than the classic V-cycle used
-  in multi-grid solvers that provides a usually faster convergence rate. Then we propose a dynamic bit-width changing algorithm that is able to adapt the execution time of floating-point operations
-  according to the accuracy needed. In particular, we are able to reach the same results as a double-precision floating point algorithm with an expected 15\% improvement of the execution
-  time on a GPU.
-\end{abstract}
 
 
 \begin{document}
 
 \maketitle
+\begin{abstract}
+  This paper studies trade-offs between accuracy and execution time in a multi-grid solver: BoomerAMG. As a linear system solver is never really exact, it is actually relevant to
+  investigate whether it is possible or not to save time while keeping results that are not too far from their exact value. We first find a different cycle shape than the classic V-cycle used
+  in multi-grid solvers that provides a usually faster convergence rate. Then we propose a dynamic bit-width changing algorithm that is able to adapt the execution time of floating-point operations
+  according to the accuracy needed. In particular, we are able to reach the same results as a double-precision floating point algorithm with an expected 15\% improvement of the execution
+  time on a GPU.
+\end{abstract}
 
 \section{Introduction}
 
