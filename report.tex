@@ -34,8 +34,8 @@
 \maketitle
 \begin{abstract}
   This paper studies trade-offs between accuracy and execution time in a multi-grid solver: BoomerAMG. As a linear system solver is never really exact, it is actually relevant to
-  investigate whether it is possible or not to save time while keeping results that are not too far from their exact value. We first find a different cycle shape than the classic V-cycle used
-  in multi-grid solvers that provides a usually faster convergence rate. Then we propose a dynamic bit-width changing algorithm that is able to adapt the execution time of floating-point operations
+  investigate whether it is possible or not to save time while keeping results that are not too far from their exact value. We first introduce a different cycle shape than the classic V-cycle used
+  in multi-grid solvers. We show that it provides a usually faster convergence rate by running some tests on a distributed system with huge input problems. Then we propose a dynamic bit-width changing algorithm that is able to adapt the execution time of floating-point operations
   according to the accuracy needed. In particular, we are able to reach the same results as a double-precision floating point algorithm with an expected 15\% improvement of the execution
   time on a GPU.
 \end{abstract}
@@ -68,14 +68,14 @@ time needed to reach a same-quality result as the original algorithm (which uses
  \item A level is an integer between $1$ and $L$. Level $1$ will be called the finest level, and level $L$ will be called the coarsest level.
  \item The restriction of $A$ (or $b$ or $x$) to level $l$ will be denoted by $A^l$ (or $b^l$ or $x^l$). We have $A^1 = A$ (and $b^1=b,x^1=x$).
  \item We define a set of $L-1$ restriction matrices $R_1,\dots,R_{L-1}$ such that $R_l b^l = b^{l+1}$. We also define some prolongation matrices $P_1,\dots,P_{L-1}$ such that $P_{l}b^{l+1} = b^l$.
- In other words, we have $P_l = {R_l}^{-1}$ and we build the $A^l$ matrices as follows: $A^{l+1} = R_l A^l P_l$.
+ In other words, we have $P_l = {R_l}^{-1}$ (left inverse) and we build the $A^l$ matrices as follows: $A^{l+1} = R_l A^l P_l$.
  \item We denote by $e^l$ the error at level $l$, that is the vector such that $x^l + e^l = \widetilde{x^l}$, that is to say $\widetilde{x^l}-x^l$.
  We also define the residual at level $l$, $r^l = b^l - A^lx^l$. As $b^l = A^l\widetilde{x^l}$, we can also write $r^l = A^le^l$.
  \item We derive the relative residual norm at any step $i$ in the algorithm
  by the norm of the residual at this step, $||b^l - A^lx^l_i||$, divided by the norm of the initial residual, $|| b^l - A^lx^l_0||$.\\ We also define the notion of \emph{tolerance}
  as an real value between 0 and 1, which is a threshold for stopping an algorithm. In multi-grid algorithms, this threshold will be on the residual norm.
  \item We call relaxation a step of an iterative method for solving linear systems (such as Jacobi, Gauss-Sneidel, \dots). Formally, for a vector $x \in \mathbb{R}^n$, it represents the computation of
- $x \leftarrow Mx + c$ where $M \in \mathcal{M}(\mathbb{R})^{n\times n}$ and $c \in \mathcal{\mathbb{R}}^n$ and are defined depending on the method used.
+ $x \leftarrow Mx + c$ where $M \in \mathcal{M}(\mathbb{R})^{n\times n}$ and $c \in \mathcal{\mathbb{R}}^n$ are defined depending on the method used.
 \end{itemize}
 
 \subsection{The V-cycle}
@@ -84,7 +84,7 @@ time needed to reach a same-quality result as the original algorithm (which uses
   time of the solver, and depending on the system to solve, the factor of convergence (related to the matrix $M$) can be close to 1.\\
   Here the idea is to do some relaxations and then correct the value of $x$ by adding to it the corresponding error term. However, this error term cannot be computed easily (otherwise,
   solving the problem would be done by computing the error term and adding it to $x$). Multi-grid solvers instead use recursion to compute the error term. The stopping parameter for the
-  recursion will be determined by decreasing the sizes of vectors and matrices (thus loosing on precision but saving time).
+  recursion will be determined by decreasing the sizes of vectors and matrices (thus loosing some accuracy but saving time).
   Formally, we can sum up the algorithm as follows:
   
   MG$(l,x,f,\alpha_1,\alpha_2)$:
@@ -106,7 +106,7 @@ time needed to reach a same-quality result as the original algorithm (which uses
   Then several ways of modifying the algorithm appear:
   \begin{itemize}
    \item Which iterative method to use?
-   \item Do we want only one recursion or more?
+   \item Do we want only one recursive call at each level or more?
    \item How many times do we need to apply the algorithm?
    \item How to determine good $\alpha_1$ and $\alpha_2$ parameters?
    \item How many levels should be defined?
@@ -219,13 +219,13 @@ The results are presented on Figure~\ref{fig.first_tests}.
 \begin{figure}
   \includegraphics[width=0.49\linewidth]{figs/convergence_1.pdf}
   \includegraphics[width=0.49\linewidth]{figs/time_convergence.pdf}
-  \caption{Execution time and final residual norm of the 8 strategies.}
+  \caption{Execution time and final residual norm of the 8 strategies per iteration (left) and convergence time as a function of the tolerance (right).}
   \label{fig.first_tests}
 \end{figure}
 
 What we can observe is that, as expected, increasing the number of relaxation steps or complexifying the cycle increases the overall time to do one cycle. However, it converges in less iterations.
-We see on the second figure that actually, for a given precision, the simple V-cycle with only 1 relaxation at each step is the fastest way to reach it, followed closely by the W-cycle with $\alpha=1$.\\
-The conclusion is that relaxation steps seem to be too costly for the accuracy they grant. It is better to increase the complexity of your cycle or do more cycles, thus more moves in the grid, than doing more relaxation steps. This at least proves
+We see on the right figure that actually, for a given precision, the simple V-cycle with only 1 relaxation at each step is the fastest way to reach it, followed closely by the W-cycle with $\alpha=1$.\\
+The conclusion is that relaxation steps seem to be too costly for the accuracy they grant. It is better to increase the complexity of the cycle or do more cycles, thus more moves in the grid, than doing more relaxation steps. This at least proves
 that multi-grid is a good alternative to classic iterative methods.
 
 \subsection{Improving the baseline}
@@ -242,21 +242,21 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
  \hline
  Level & Matrix size & Non-zero & Relax (down) & Relax (up) & Matvec (down) & Matvec (up) \\
  \hline
-  0 & 512,000 & 4,042,520 & 20 ms & 20 ms & 15 ms & -\\
+  1 & 512,000 & 4,042,520 & 20 ms & 20 ms & 15 ms & -\\
  \hline
-  1 & 256,000 & 6,475,239 & 20 ms & 25 ms & 12 ms & 4 ms\\
+  2 & 256,000 & 6,475,239 & 20 ms & 25 ms & 12 ms & 4 ms\\
  \hline
-  2 & 58,893 & 2,000,513 & 8 ms & 8 ms & 3 ms & 2 ms\\
+  3 & 58,893 & 2,000,513 & 8 ms & 8 ms & 3 ms & 2 ms\\
  \hline
-  3 & 14,285 & 788,509 & 2 ms & 2 ms & 1 ms & 0.7 ms\\
+  4 & 14,285 & 788,509 & 2 ms & 2 ms & 1 ms & 0.7 ms\\
  \hline
-  4 & 4,238 & 386,333 & 1 ms & 1 ms & 0.5 ms & 0.2 ms\\
+  5 & 4,238 & 386,333 & 1 ms & 1 ms & 0.5 ms & 0.2 ms\\
  \hline
-  5 & 609 & 53,493 & 0 ms & 0 ms & 0 ms & 0 ms\\
+  6 & 609 & 53,493 & 0 ms & 0 ms & 0 ms & 0 ms\\
  \hline
-  6 & 69 & 2,873 & 0 ms & 0 ms & 0 ms & 0 ms\\
+  7 & 69 & 2,873 & 0 ms & 0 ms & 0 ms & 0 ms\\
  \hline
-  7 & 2 & 4 & 0 ms & - & - & 0 ms\\
+  8 & 2 & 4 & 0 ms & - & - & 0 ms\\
  \hline
  \end{tabular}
  }
@@ -308,14 +308,14 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
   We observe no big improvement compared to the original V-cycle with 1 relaxation at each level with the previous strategies.
   Their common point is that they all do the same number of relaxations when going down or up in the cycle. However, the main idea of the multi-grid is totally asymmetric.
   We first compute an approximation at a given level $l$, then we use the level $l+1$ to compute an approximate error term $e^l$ and finally we redo some relaxation to refine the solution. The two relaxations do not have the same goal.
-  What if we could ensure that any value of error vector will be less than $\epsilon$ from the exact value? We would not need to do a relaxation
-  before computing the approximate error term using the next levels in the grid. From that idea we define a new asymmetric strategy: we use a V-cycle with $\alpha_1 = 0$ and $\alpha_2 = 1$. In other words
+  What if we could ensure that any value of the error vectors will be less than $\epsilon$ from the exact value just by doing a relaxation step? We would not need to do a relaxation
+  before computing the approximate error term using the next levels in the grid but compute directly the error term when we go back up in the cycle. From that idea we define a new asymmetric strategy: we use a V-cycle with $\alpha_1 = 0$ and $\alpha_2 = 1$. In other words
   we do one relaxation at each level only when we are going up in the cycle. We call this strategy \emph{Up}.
   
   We run \emph{Up} and \emph{Fast4}, as long as the classical V-cycle, on the same matrix of size 512,000 and also on
   other applications (3D laplace with a 9-pt stencil, 3D laplace with a 27-point stencil, and another 3D partial derivative equation) with the same size of matrix.
   
-  All results are presented in Figure~\ref{fig.up_comparison			}.
+  All results are presented in Figure~\ref{fig.up_comparison}.
   
   \begin{figure}
    \subfloat[Problem 1]{\includegraphics[width=0.49\linewidth]{figs/time_convergence_up_1.pdf}}
@@ -355,7 +355,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    to study the impact of using a representation with smaller mantissa.
    
    To realize these experiments, we use two modified versions of the original algorithm. We modify the function that does the relaxation step (remember it is the costly part of the whole algorithm).
-   In this function we can find different internal variables that originally of type \texttt{double}: 5 arrays and 8 scalars. The first version, \emph{AMGfloat}, changes the type of these 13 variables from \texttt{double*} or \texttt{double}
+   In this function we can find different internal variables that are originally of type \texttt{double}: 5 arrays and 8 scalars. We will denote by \emph{AMG} this original algorithm. The first version, \emph{AMGfloat}, changes the type of these 13 variables from \texttt{double*} or \texttt{double}
    to \texttt{float*} or \texttt{float}. For the second version, we use the library MPFR~\cite{MPFR,MPFR_link} that introduces a type \texttt{mpfr\_t}. This type has a parameter which is the number of bits in the mantissa of the variable.
    Every computation is done exactly (assuming the inputs are exact) then rounded to a number using exactly the number of bits set as parameter. We build the second version, \emph{AMGmpfr(b)}, by replacing only the 8 scalar variables
    by \texttt{mpfr\_t} variables, all using the same number of $b$ bits for the mantissa. In terms of arithmetic precision, \emph{AMG} behaves similarly to \emph{AMGmpfr(53)} and \emph{AMGfloat} to \emph{AMGmpfr(24)}. There can be small differences
@@ -368,7 +368,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    
    \begin{figure} \centering
     \includegraphics[width=0.8\linewidth]{figs/bits_convergence.pdf}
-    \caption{Accuracy achievable with different number of bits in mantissa. Points were obtained only for multiples of 5 iterations, but it is enough to see the thresholds appear.}
+    \caption{Accuracy achievable with different number of bits in mantissa. Points (except for 24 bits) were obtained only for multiples of 5 iterations, but it is enough to see the thresholds appear.}
     \label{fig.bits_accuracy}
    \end{figure}
    
@@ -376,12 +376,12 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    from the 8 scalars actually control the final precision as they are temporary variables used for intermediate computations before being plugged back into the input matrix/vector.
    That being said, we design a new algorithm that adapts the precision of the variables during the execution. It is the same algorithm as \emph{AMGmpfr(b)} except this time the precision can change between two cycles.
    We fix a threshold on the ratio between the relative residual norm at two consecutive steps to trigger the precision change.
-   Figure~\ref{fig.prec_incr} presents the evolution of accuracy for the original algorithm, and 3 different strategies with increasing precision and threshold of 0.8: start at $b=16$ and do $b=b+8$, start at $b=32$
-   and do $b=b+8$, and start at $b=16$ and do $b=b\times2$, run on a 24Ox240x240 matrix size with 3x3x3 topology for problem 3.
+   Figure~\ref{fig.prec_incr} presents the evolution of accuracy for the original algorithm, 3 different strategies with increasing precision and a threshold of 0.8: start at $b=16$ and do $b=b+8$, start at $b=32$
+   and do $b=b+8$, and start at $b=16$ and do $b=b\times2$. We run these strategies on a 240x240x240 matrix size with a 3x3x3 topology for problem 3.
    
    \begin{figure} \centering
     \includegraphics[width=0.8\linewidth]{figs/prec_incr.pdf}
-    \caption{Accuracy of adaptive algorithms compared to the original double-precision.}
+    \caption{Accuracy of adaptive algorithms compared to the original double-precision with a threshold for updating the precision of $0.8$.}
     \label{fig.prec_incr}
    \end{figure}
    
@@ -394,6 +394,8 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    represents the final same algorithm), and this overhead is not highly influenced by the choice of the number of bits. Thus it is impossible just to measure the execution time of the algorithm using MFPR library.
    
    \subsection{Optimal set of precisions}
+   
+   In this subsection, we provide an optimal set of precisions to minimize the total execution time, under the assumption that the time evolves linearly with $b$ the number of precision bits.
    
    \begin{theorem}
      Given $b_{max}$, a maximum number of bits, $n$ the number of different precisions $b_1,\dots,b_n$ to use, and $T(b)=\alpha b+c$, with $\alpha$ and $c$ two constants, the time to execute a cycle at precision $b$, then
@@ -427,7 +429,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    where $\delta_{a,b} $ is equal to 1 if and only if $a=b$, 0 otherwise.
    
    This is where the boundary condition $x_n = 1$ is useful: if we do not set it to a number different from 0, the function is minimized for $x_1=\dots=x_n=0$. This applied to our problem
-   has no sens, as we would't be doing any computation. The boundary condition represents the fact that we need to reach a existing precision ($b_{max}$) eventually. By a simple scaling,
+   makes no sense, as we would't be doing any computation. The boundary condition represents the fact that we need to reach a existing precision ($b_{max}$) eventually. By a simple scaling,
    considering $1$ instead of $b_{max}$ makes computation easier and does not change the resolution of the the following system (up to a factor):
    
    \resizebox{0.9\linewidth}{!}{
@@ -455,9 +457,11 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    It is, when multiplied by $b_{max}$, the solution that minimizes our total execution time.
    \end{proof}
    
+   This proof holds only if the time evolves linearly with $b$, but \textit{we could also apply it to minimize the energy consumption} assuming that the energy consumption of one cycle increases linearly with $b$. The next section will investigate whether
+   this assumption holds.
+   
    \subsection{Evaluation}
    
-   The previous proof only holds if the time increases linearly with the number of precision bits used. However, we don't know if it is the case in practice.
    In order to estimate the cost of our algorithm, we want to model the time of an iteration at precision $b$. We model an iteration by the following formula: $an^3b^\alpha+c$, where $a,c$ and $\alpha$ are constants,
    $n$ is the size of the problem and $b$ the number of bits.
    
@@ -636,9 +640,11 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    \end{figure}
    
    Figures~\ref{fig.estimation1} to~\ref{fig.estimation5} represents the cost of the algorithm, for these different scenarios, to reach different accuracy in the output (from $10^{-3}$ to $10^{-15}$ here) using
-   a value for the $\alpha$ parameter of 0.3.
-   If we focus on the GPU case (labelled \texttt{11\_x2.24}), we can see that, compared to the original algorithm (which uses only double-precision), we improve by 40\% the time to reach 
-   accuracy $10^{-3}$. Then the improvement slowly decrases when increasing the accuracy to reach 10\%.
+   a value for the $\alpha$ parameter of 0.3. We can see that the strategy that increases by only 1 the number of mantissa bits (labelled \texttt{8\_1}) takes more time than the original algorithm (labelled \texttt{53\_0}). This is because, in the previous experiments we saw
+   there is usually the same number of cycles in all our strategies (see Figure~\ref{fig.prec_incr}). Here, the convergence rate is limited by the slowly increasing number of precision bits: by adding one bit we can divide by at most 2 the 
+   accuracy on the residual norm while the original algorithm can divide by more than that in one cycle if it is not limited by the bitwidth of the variables.
+   If we focus on the GPU case (labelled \texttt{11\_x2.24}), we can see that, compared to the original algorithm (which uses only double-precision), we improve by 35\% the time to reach 
+   accuracy $10^{-3}$. If one adapts the algorithm to use only single-precision variables (labelled \texttt{24\_0}) as it would be sufficient to reach this accuracy, we would still reduce the time by 17\%. Then the improvement slowly decreases when increasing the accuracy to reach 10\%.
    
    \subsection{Summary of results}
    
@@ -703,7 +709,8 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    
    Some approximate computing techniques at hardware level exist and could be applied in addition to our ideas. They include fast but slightly incorrect adders~\cite{Gupta:2011}, or voltage-scaling (in SRAM, reducing
    the voltage by 80\% increases the probability of an unexpected bit flip by around $10^{-5}$~\cite{Sampson:2011})
-   if we are more interested in reducing the energy consumption instead of the execution time.
+   if we are more interested in reducing the energy consumption instead of the execution time.\\
+   Concerning multi-grid algorithms, the opposite of our \emph{Up} strategy has been considered in~\cite{JAMESON}: they do some actual computation when going down in the grid and then simply interpolate to retrieve the solution on the finest grid.
    Dynamically changing the bit-width of some variables has been done in~\cite{Park:2010} but it is there applied on some part of the data as they are not involved in the same way in the algorithm,
    which is not the case in a multi-grid solver (all the evaluation points on the grid represent the continuous solution).
    
