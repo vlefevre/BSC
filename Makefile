@@ -13,7 +13,8 @@ TARGET:
 	$(TEX) $(SRC);\
 	$(BIB) $(AUX); \
 	$(TEX) $(SRC);\
-	$(TEX) $(SRC)
+	$(TEX) $(SRC); \
+        mv $(TARGET) ..
 
 
 .PHONY: clean
