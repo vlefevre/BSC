@@ -10,6 +10,12 @@ Steven~F. Ashby and Robert~D. Falgout.
   groundwater flow simulations.
 \newblock {\em Nuclear Science and Engineering}, 124(1):145--159, 1996.
 
+\bibitem{Casas12}
+Marc Casas, Bronis~R. de~Supinski, Greg Bronevetsky, and Martin Schulz.
+\newblock Fault resilience of the algebraic multi-grid solver.
+\newblock In {\em Proceedings of the 26th ACM International Conference on
+  Supercomputing}, ICS '12, pages 91--100, New York, NY, USA, 2012. ACM.
+
 \bibitem{Falgout2002}
 Robert~D. Falgout and Ulrike~Meier Yang.
 \newblock {\em hypre: A Library of High Performance Preconditioners}, pages
@@ -22,6 +28,14 @@ Laurent Fousse, Guillaume Hanrot, Vincent Lef\`{e}vre, Patrick P{\'e}lissier,
 \newblock Mpfr: A multiple-precision binary floating-point library with correct
   rounding.
 \newblock {\em ACM Trans. Math. Softw.}, 33(2), June 2007.
+
+\bibitem{Gahvari11}
+Hormozd Gahvari, Allison~H. Baker, Martin Schulz, Ulrike~Meier Yang, Kirk~E.
+  Jordan, and William Gropp.
+\newblock Modeling the performance of an algebraic multigrid cycle on hpc
+  platforms.
+\newblock In {\em Proceedings of the International Conference on
+  Supercomputing}, ICS '11, pages 172--181, New York, NY, USA, 2011. ACM.
 
 \bibitem{Gupta:2011}
 Vaibhav Gupta, Debabrata Mohapatra, Sang~Phill Park, Anand Raghunathan, and

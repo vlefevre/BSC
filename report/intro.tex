@@ -15,7 +15,7 @@ Solutions obtained on the inaccurate and coarse grids are used on the more accur
 %Typically, multi-grid schemes are defined by coarsening a fine-grain grid until reaching a small enough set of evaluation points on which a direct solve would be fast.
 Multi-grid solvers typically consist of three phases: The \textit{Relaxation}, \textit{Restriction} and \textit{Interpolation} phases.
 The relaxation phase applies a few steps of
-an iterative solver like Jacobi or Gauss-Seidelat a certain coarseness level. 
+an iterative solver like Jacobi or Gauss-Seidel at a certain coarseness level. 
 The restriction phase propagates the algorithmic state to a coarser grid by means of linear transformations while the interpolation phase
 maps the coarser estimate to the finer version and adjusts the current solution x with the new error information.
 

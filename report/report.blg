@@ -3,50 +3,48 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: report.aux
 The style file: plain.bst
 Database file #1: biblio.bib
-Warning--I didn't find a database entry for "Gahvari11"
-Warning--I didn't find a database entry for "Casas12"
 Warning--to sort, need author or key in MPFR_link
 Warning--can't use both author and editor fields in Falgout2002
 Warning--can't use both author and editor fields in Hackbusch1991
-You've used 10 entries,
+You've used 12 entries,
             2118 wiz_defined-function locations,
-            583 strings with 6321 characters,
-and the built_in function-call counts, 3857 in all, are:
-= -- 389
-> -- 161
-< -- 4
-+ -- 66
-- -- 54
-* -- 278
-:= -- 602
-add.period$ -- 31
-call.type$ -- 10
-change.case$ -- 55
+            594 strings with 6807 characters,
+and the built_in function-call counts, 4950 in all, are:
+= -- 505
+> -- 217
+< -- 6
++ -- 88
+- -- 74
+* -- 357
+:= -- 768
+add.period$ -- 39
+call.type$ -- 12
+change.case$ -- 71
 chr.to.int$ -- 0
-cite$ -- 13
-duplicate$ -- 151
-empty$ -- 306
-format.name$ -- 54
-if$ -- 837
+cite$ -- 15
+duplicate$ -- 195
+empty$ -- 382
+format.name$ -- 74
+if$ -- 1081
 int.to.chr$ -- 0
-int.to.str$ -- 10
-missing$ -- 11
-newline$ -- 52
-num.names$ -- 18
-pop$ -- 61
+int.to.str$ -- 12
+missing$ -- 13
+newline$ -- 62
+num.names$ -- 22
+pop$ -- 77
 preamble$ -- 1
-purify$ -- 47
+purify$ -- 61
 quote$ -- 0
-skip$ -- 118
+skip$ -- 153
 stack$ -- 0
-substring$ -- 274
-swap$ -- 48
-text.length$ -- 4
+substring$ -- 343
+swap$ -- 66
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 36
+type$ -- 44
 warning$ -- 3
-while$ -- 35
-width$ -- 12
-write$ -- 116
-(There were 5 warnings)
+while$ -- 45
+width$ -- 14
+write$ -- 144
+(There were 3 warnings)
