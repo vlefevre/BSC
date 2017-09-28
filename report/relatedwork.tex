@@ -1,0 +1,9 @@
+
+   
+   Some approximate computing techniques at hardware level exist and could be applied in addition to our ideas. They include fast but slightly incorrect adders~\cite{Gupta:2011}, or voltage-scaling (in SRAM, reducing
+   the voltage by 80\% increases the probability of an unexpected bit flip by around $10^{-5}$~\cite{Sampson:2011})
+   if we are more interested in reducing the energy consumption instead of the execution time.\\
+   Concerning multi-grid algorithms, the opposite of our \emph{Up} strategy has been considered in~\cite{JAMESON}: they do some actual computation when going down in the grid and then simply interpolate to retrieve the solution on the finest grid. The reason for that is that they
+   address a specific problem where some perturbations need to damped quite efficiently, which is why as soon as they perform some computation on the fine grid they need to use coarse grids even if interpolating directly introduces some errors.
+   Dynamically changing the bit-width of some variables has been done in~\cite{Park:2010} but it is there applied on some part of the data as they are not involved in the same way in the algorithm,
+   which is not the case in a multi-grid solver (all the evaluation points on the grid represent the continuous solution).

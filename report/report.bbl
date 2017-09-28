@@ -1,0 +1,66 @@
+\begin{thebibliography}{10}
+
+\bibitem{MPFR_link}
+The gnu mpfr library.
+\newblock \url{http://www.mpfr.org}.
+
+\bibitem{Ashby1996}
+Steven~F. Ashby and Robert~D. Falgout.
+\newblock A parallel multigrid preconditioned conjugate gradient algorithm for
+  groundwater flow simulations.
+\newblock {\em Nuclear Science and Engineering}, 124(1):145--159, 1996.
+
+\bibitem{Falgout2002}
+Robert~D. Falgout and Ulrike~Meier Yang.
+\newblock {\em hypre: A Library of High Performance Preconditioners}, pages
+  632--641.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2002.
+
+\bibitem{MPFR}
+Laurent Fousse, Guillaume Hanrot, Vincent Lef\`{e}vre, Patrick P{\'e}lissier,
+  and Paul Zimmermann.
+\newblock Mpfr: A multiple-precision binary floating-point library with correct
+  rounding.
+\newblock {\em ACM Trans. Math. Softw.}, 33(2), June 2007.
+
+\bibitem{Gupta:2011}
+Vaibhav Gupta, Debabrata Mohapatra, Sang~Phill Park, Anand Raghunathan, and
+  Kaushik Roy.
+\newblock Impact: Imprecise adders for low-power approximate computing.
+\newblock In {\em Proceedings of the 17th IEEE/ACM International Symposium on
+  Low-power Electronics and Design}, ISLPED '11, pages 409--414, Piscataway,
+  NJ, USA, 2011. IEEE Press.
+
+\bibitem{Hackbusch1991}
+W.~Hackbusch.
+\newblock {\em Multi-Grid Algorithms}, pages 133--160.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1991.
+
+\bibitem{boomerAMG}
+Van~Emden Henson and Ulrike~Meier Yang.
+\newblock Boomeramg: a parallel algebraic multigrid solver and preconditioner.
+\newblock {\em Applied Numerical Mathematics}, 41(5):155--177, 2002.
+
+\bibitem{JAMESON}
+Antony Jameson.
+\newblock Solution of the euler equations for two dimensional transonic flow by
+  a multigrid method.
+\newblock {\em Applied Mathematics and Computation}, 13(3):327 -- 355, 1983.
+
+\bibitem{Park:2010}
+Jongsun Park, Jung~Hwan Choi, and Kaushik Roy.
+\newblock Dynamic bit-width adaptation in dct: An approach to trade off image
+  quality and computation energy.
+\newblock {\em IEEE Trans. Very Large Scale Integr. Syst.}, 18(5):787--793, May
+  2010.
+
+\bibitem{Sampson:2011}
+Adrian Sampson, Werner Dietl, Emily Fortuna, Danushen Gnanapragasam, Luis Ceze,
+  and Dan Grossman.
+\newblock Enerj: Approximate data types for safe and general low-power
+  computation.
+\newblock In {\em Proceedings of the 32Nd ACM SIGPLAN Conference on Programming
+  Language Design and Implementation}, PLDI '11, pages 164--174, New York, NY,
+  USA, 2011. ACM.
+
+\end{thebibliography}

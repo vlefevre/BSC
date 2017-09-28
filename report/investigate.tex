@@ -1,0 +1,112 @@
+
+\subsection{Comparison of existing strategies}
+
+  In this section, we will compare different types of cycles and study how the number of relaxation steps influence the convergence of the algorithm.
+  
+  We will consider 2 types of cycles: the V-cycle and the W-cycle. The V-cycle is actually the algorithm previously described. The W-cycle looks the same but instead of having two parameters
+  $\alpha_1$ and $\alpha_2$ we add a new $\alpha_3$ parameter. It will represent the number of relaxation steps done after a second recursive call. In terms of algorithm it is the same
+  algorithm as the V-cycle but the bullets 2 to 7 are repeated. We call these cycles V-cycle and W-cycle because of how we can draw them if we represent each time relaxations are done
+  at a level by a point (see Figure~\ref{fig.cycles}). It is possible to define other types of cycles by adding more and more repeats of these steps (do $k$ times those steps) to generalize
+  the notion of cycle to a $k$-cycle (where a V-cycle is a $1$-cycle and a W-cycle is a $2$-cycle).
+  
+ \begin{figure}
+ \resizebox{\linewidth}{!}{
+ \begin{tikzpicture}
+  
+\begin{scope}[xscale=2/5]
+
+  \node (sh) at (-5,3) { $l=0$ };
+  \node (shh) at (-5,2) { $l=1$ };
+  \node (shhh) at (-5,1) { $l=2$ };
+  \node (shhhh) at (-5,0) { $l=3$};
+  
+  \node (title) at (0,5) { V-cycle k=1};
+  \node (title2) at (14,5) {W-cycle k=2};
+
+    \node[circle,fill=blue] (a) at (-3,3) { };
+    \node[circle,fill=blue] (b) at (-2,2) {};
+    \node[circle,fill=blue] (c) at (-1,1) {};
+    \node[circle,fill=red] (d) at (0,0) {};
+    \node[circle,fill=blue] (e) at (1,1) {};
+    \node[circle,fill=blue] (f) at (2,2) {};
+    \node[circle,fill=blue] (g) at (3,3) {};
+    
+    \draw[->] (a) -- (b);
+    \draw[->] (b) -- (c);
+    \draw[->] (c) -- (d);
+    \draw[->] (d) -- (e);
+    \draw[->] (e) -- (f);
+    \draw[->] (f) -- (g);
+    
+    \node[circle,fill=blue] (aa) at (7,3) { };
+    \node[circle,fill=blue] (ab) at (8,2) {};
+    \node[circle,fill=blue] (ac) at (9,1) {};
+    \node[circle,fill=red] (ad) at (10,0) {};
+    \node[circle,fill=blue] (ae) at (11,1) {};
+    \node[circle,fill=red] (af) at (12,0) {};
+    \node[circle,fill=blue] (ag) at (13,1) {};
+    \node[circle,fill=blue] (ah) at (14,2) {};
+    \node[circle,fill=blue] (ai) at (15,1) {};
+    \node[circle,fill=red] (aj) at (16,0) {};
+    \node[circle,fill=blue] (ak) at (17,1) {};
+    \node[circle,fill=red] (al) at (18,0) {};
+    \node[circle,fill=blue] (am) at (19,1) {};
+    \node[circle,fill=blue] (an) at (20,2) {};
+    \node[circle,fill=blue] (ao) at (21,3) {};
+    
+    \draw[->] (aa) -- (ab);
+    \draw[->] (ab) -- (ac);
+    \draw[->] (ac) -- (ad);
+    \draw[->] (ad) -- (ae);
+    \draw[->] (ae) -- (af);
+    \draw[->] (af) -- (ag);
+    \draw[->] (ag) -- (ah);
+    \draw[->] (ah) -- (ai);
+    \draw[->] (ai) -- (aj);
+    \draw[->] (aj) -- (ak);
+    \draw[->] (ak) -- (al);
+    \draw[->] (al) -- (am);
+    \draw[->] (am) -- (an);
+    \draw[->] (an) -- (ao);
+    \end{scope}
+    
+ \end{tikzpicture}}
+ \caption{V-cycle and W-cycle on 4-level grid.}
+ \label{fig.cycles}
+\end{figure}
+
+A strategy will be composed of a type of cycle (V or W) and a number of relaxation steps $\alpha$. The default implementation of BomerAMG does not allow to have different values
+for $\alpha_1,\alpha_2,\dots$ so we set them all to this value $\alpha$. We consider a total of 8 different stragies represented in Table~\ref{table.strat1}.
+To compare the different strategies using the BoomerAMG algorithm, we run the algorithm on a predefined matrix of size $512000 \times 512000$ for every
+value of maximum number of iterations (i.e. number of cycles) from 1 to 100 and with a required tolerance of $0$ (meaning
+that the algorithm will stop when the result is exact or the maximum number of iterations is reached). We measure for each experiment the final relative residual norm and the execution time. Each experiment is run 10 times to have an accurate average execution time.
+The results are presented on Figure~\ref{fig.first_tests}.
+
+\begin{table}
+
+\begin{center}
+ \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+   \hline
+   Type of cycle & V & V & V & V & W & W & W & W \\
+   \hline
+   $\alpha$ & 1 & 2 & 3 & 10 & 1 & 2 & 3 & 10 \\
+   \hline
+ \end{tabular}
+\end{center}
+ \caption{8 strategies.}
+ \label{table.strat1}
+
+\end{table}
+
+
+\begin{figure}
+  \includegraphics[width=0.49\linewidth]{figs/convergence_1.pdf}
+  \includegraphics[width=0.49\linewidth]{figs/time_convergence.pdf}
+  \caption{Execution time and final residual norm of the 8 strategies per iteration (left) and convergence time as a function of the tolerance (right).}
+  \label{fig.first_tests}
+\end{figure}
+
+What we can observe is that, as expected, increasing the number of relaxation steps or complexifying the cycle increases the overall time to do one cycle. However, it converges in less iterations.
+We see on the right figure that actually, for a given precision, the simple V-cycle with only 1 relaxation at each step is the fastest way to reach it, followed closely by the W-cycle with $\alpha=1$.\\
+The conclusion is that relaxation steps seem to be too costly for the accuracy they grant. It is better to increase the complexity of the cycle or do more cycles, thus more moves in the grid, than doing more relaxation steps. This at least proves
+that multi-grid is a good alternative to classic iterative methods.

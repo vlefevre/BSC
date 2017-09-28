@@ -14,11 +14,7 @@
 %opening
 \title{Approximating a Multi-Grid Solver}
 
-\author{
-        \IEEEauthorblockN{Valentin Le F\`{e}vre}
-\IEEEauthorblockA{Barcelona Supercomputing Center\\Spain\\\'{E}cole Normale Supérieure de Lyon\\France\\Email: valentin.le-fevre@ens-lyon.fr}
-    \and
-    \IEEEauthorblockN{Leonardo Bautista-Gomez}
+\author{\IEEEauthorblockN{Leonardo Bautista-Gomez}
     \IEEEauthorblockA{Barcelona Supercomputing Center\\
                     Spain\\
                     Email: leonardo.bautista@bsc.es}
@@ -26,7 +22,10 @@
     \IEEEauthorblockN{Marc Casas}
     \IEEEauthorblockA{Barcelona Supercomputing Center\\
                     Spain\\
-                    Email: marc.casas@bsc.es}
+                    Email: leonardo.bautista@bsc.es}
+    \and
+        \IEEEauthorblockN{Valentin Le F\`{e}vre}
+\IEEEauthorblockA{Barcelona Supercomputing Center\\Spain\\\'{E}cole Normale Supérieure de Lyon\\France\\Email: valentin.le-fevre@ens-lyon.fr}
 }
 
 
@@ -43,54 +42,21 @@
 
 \section{Introduction}
 
-Multi-Grid (MG) solvers are a class of linear methods~\cite{Hackbusch1991} that emerged in the 80's to increase the convergence rate of more classical iterative methods. 
-They became even more important with the advent of very complex scientific applications~\cite{Ashby1996}, which required very powerful linear solvers. 
-The usage of MG solvers has become a common practice in today's parallel systems due to the good scalability properties this methods display, which have been detailedly analyzed and modeled~\cite{Gahvari11}.
-Also, MG solvers have been reported to display more robustness against silent data corruptions than traditional iterative methods deployed over a single grid~\cite{Casas12}, which also implies they behave well under reduced accuracy scenarios.
+Multi-grid algorithms are a class of linear system solvers~\cite{Hackbusch1991} that emerged in the 80's to increase the convergence rate of more classical iterative methods. They became even more
+interesting as huge scientific applications started to appear (for example, see~\cite{Ashby1996}), thus needed more adapted algorithms. Multi-grid algorithms rely on a grid of evaluation points whose goal is to discretize continuous equations.
+This grid can be more or less accurate (i.e.
+the number of evaluation points can vary) and the main idea of the multi-grid algorithms is to use different grids to determine a solution on an inaccurate grid that will be then used as the starting point of a solution on a more accurate grid. More precisely, a multi-grid algorithm has a parameter which is the cycle shape.
+The cycle shape determines in which order and on which coarsening of the grid an iterative method is used. The classical cycle shape is the V-cycle where we first iterate on the finest grid, then the second finest grid and so on until reaching
+the coarsest grid where a direct solve is used instead of an iterative method as the problem size has become smaller. Then we iterate again on all the other grids in the reverse order to have a solution expressed with the initial fineness of the grid.
+Different parameters, such as the iterative method used at each step or the fineness of the grid and the previously mentioned cycle shape, affect the convergence rate of the algorithm. For example, using a grid with only a few
+evaluation points decreases the execution time but deteriotates the accuracy of the final result. In the other way, it is possible to increase the quality of the result by using a finer
+grid but at the cost of a performance degradation.
 
-Multi-Grid algorithms rely on a grid of evaluation points that discretize the domain of a continuous differential equation.
-Typically, MG schemes are defined by coarsening a fine-grain grid until reaching a small set of evaluation points where a direct method can be applied.
-%This grid is represented using different granularity levels that are used to determine a solution on the inaccurate and coarse grids.
-Solutions obtained on the inaccurate and coarse grids are used on the more accurate and fine-grain levels to accelerate the process of obtaining the final solution of the system. 
-%For example, if we want to solve an equation of the form:
-%\[ -u^{''}(x)+au(x) = f(x),\quad 0<x<1, \quad u(0)=u(1)=0, \]
-%where $a$ is some constant, $f$ a function and $u$ an unkown function, we can transform it into a discrete problem by selecting $N$ evaluation points $x_1,\dots,x_N$ and using taylor expansion to express the second derivative term $u^{''}(x_i)$ as a weighted sum of $u(x_j)$ for some values of $j$. 
-%Then
-%to define coarser grids, a simple way to do it is to divide the number of evaluation points and transform the original equation into another discrete problem (thus using evaluation points $x_1,x_3,\dots,x_N$). 
-%Typically, multi-grid schemes are defined by coarsening a fine-grain grid until reaching a small enough set of evaluation points on which a direct solve would be fast.
-Multi-grid solvers typically consist of three phases: The \textit{Relaxation}, \textit{Restriction} and \textit{Interpolation} phases.
-The relaxation phase applies a few steps of
-an iterative solver like Jacobi or Gauss-Seidelat a certain coarseness level. 
-The restriction phase propagates the algorithmic state to a coarser grid by means of linear transformations while the interpolation phase
-maps the coarser estimate to the finer version and adjusts the current solution x with the new error information.
-
-One common way of orchestrating a Multi-Grid Solver execution is via a V-cycle where we first iterate on the finest grid, then the second finest grid and so on until reaching
-the coarsest grid where a direct solve is used instead of an iterative method as the problem size has become smaller. 
-Then we iterate again on all the other grids in the reverse order to have a solution expressed with the initial fineness of the grid.
-Different parameters, such as the iterative method used at each step or the fineness of the grid and the previously mentioned cycle shape, affect the convergence rate of the algorithm.
-
-%Typically, multi-grid schemes are defined by coarsening a fine-grain grid until reaching a small enough set of evaluation points on which a direct solve would be fast. 
-%Multi-grid solvers then perform several steps of an iterative method like Jacobi~\cite{} or Gauss-Seidel~\cite{} switching between the different grids by interpolating or restricting the solution of the previous step.
-%More precisely, a multi-grid algorithm has a parameter which is the cycle shape.
-%The cycle shape determines in which order and on which coarsening of the grid an iterative method is used. The classical cycle shape is the V-cycle where we first iterate on the finest grid, then the second finest grid and so on until reaching
-%the coarsest grid where a direct solve is used instead of an iterative method as the problem size has become smaller. Then we iterate again on all the other grids in the reverse order to have a solution expressed with the initial fineness of the grid.
-%Different parameters, such as the iterative method used at each step or the fineness of the grid and the previously mentioned cycle shape, affect the convergence rate of the algorithm. For example, using a grid with only a few
-%evaluation points decreases the execution time but deteriotates the accuracy of the final result. In the other way, it is possible to increase the quality of the result by using a finer
-%grid but at the cost of a performance degradation.
-
-In this context, this paper investigates different trade-offs between accuracy and execution time for multi-grid algorithms. 
-This paper focuses its effort on one of the most popular parallel implementation of a multi-grid solver,
-the BoomerAMG~\cite{boomerAMG}, implemented in the HYPRE library~\cite{Falgout2002}. 
-This paper makes the following contributions beyond the state-of-the-art:
-
-\begin{itemize}
-\item We evaluate the impact of parameters of the solver such as the shape of cycles in the grid and the
-number of iterations. 
-\item We describe a particular cycle that is proved to be at least as efficient as the original algorithm. 
-\item Then we investigate how changing the bit-width of some values makes the execution time vary with the maximum accuracy reachable.
-\item We give an algorithm that dynamically changes the bit-width of the variables to reduce by 15\% the execution
+In this context, we investigate different trade-offs between accuracy and execution time for multi-grid algorithms. This paper will only focus on a parallel implementation of a multi-grid solver,
+BoomerAMG~\cite{boomerAMG}, implemented in the HYPRE library~\cite{Falgout2002}. We will first have a look at the parameters of the solver such as the shape of cycles in the grid and the
+number of iterations. We will describe a particular cycle that proved to be at least as efficient as the original algorithm. Then we will investigate how changing the bit-width of
+some values makes the execution time vary with the maximum accuracy reachable. We give an algorithm that dynamically changes the bit-width of the variables to reduce by 15\% the execution
 time needed to reach a same-quality result as the original algorithm (which uses only double-precision floating points) and reducing up to 30\% the execution time for smaller accuracies.
-\end{itemize}
 
 \section{The multi-grid algorithm}
 
@@ -677,8 +643,8 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    a value for the $\alpha$ parameter of 0.3. We can see that the strategy that increases by only 1 the number of mantissa bits (labelled \texttt{8\_1}) takes more time than the original algorithm (labelled \texttt{53\_0}). This is because, in the previous experiments we saw
    there is usually the same number of cycles in all our strategies (see Figure~\ref{fig.prec_incr}). Here, the convergence rate is limited by the slowly increasing number of precision bits: by adding one bit we can divide by at most 2 the 
    accuracy on the residual norm while the original algorithm can divide by more than that in one cycle if it is not limited by the bitwidth of the variables.
-   If we focus on the GPU case (labelled \texttt{11\_x2.24}), we can see that, compared to the original algorithm (which uses only double-precision), we improve by 35\% the time to reach 
-   accuracy $10^{-3}$. If one adapts the algorithm to use only single-precision variables (labelled \texttt{24\_0}) as it would be sufficient to reach this accuracy, we would still reduce the time by 17\%. Then the improvement slowly decreases when increasing the accuracy to reach 10\%.
+   If we focus on the GPU case (labelled \texttt{11\_x2.24}), we can see that, compared to the original algorithm (which uses only double-precision), we improve by 40\% the time to reach 
+   accuracy $10^{-3}$. If one adapts the algorithm to use only single-precision variables (labelled \texttt{24\_0}) as it would be sufficient to reach this accuracy, we would still reduce the time by 20\%. Then the improvement slowly decreases when increasing the accuracy to reach 10\%.
    
    \subsection{Summary of results}
    
@@ -734,8 +700,8 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    \label{table.results1}
    \end{table*}
    
-   The main result is that even to reach the maximum precision, we improve the execution time by more than 15\%. When it comes to smaller precisions, this improvement can be as high as 30\% compared to
-   a single-precision algorithm and it even goes up to 45\% compared to the original double-precision version. We insist to remember that these results for the adaptive algorithm use 3 different precisions (11,24,53)
+   The main result is that even to reach the maximum precision, we improve the execution time by more than 15\%. When it comes to smaller precisions, this improvement can be as high as 45\% compared to
+   the original algorithm, but still 30\% compared to the single-precision version. We insist to remember that these results for the adaptive algorithm use 3 different precisions (11,24,53)
    whereas if other architectures would be available it would be possible to improve even more the execution by using more different precisions. For example, as we see on Figure~\ref{fig.estimation5}, using precisions
    4,8,12,16,\dots,48,52,53 should lead to a faster execution.
    
@@ -743,9 +709,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
    
    Some approximate computing techniques at hardware level exist and could be applied in addition to our ideas. They include fast but slightly incorrect adders~\cite{Gupta:2011}, or voltage-scaling (in SRAM, reducing
    the voltage by 80\% increases the probability of an unexpected bit flip by around $10^{-5}$~\cite{Sampson:2011})
-   if we are more interested in reducing the energy consumption instead of the execution time.\\
-   Concerning multi-grid algorithms, the opposite of our \emph{Up} strategy has been considered in~\cite{JAMESON}: they do some actual computation when going down in the grid and then simply interpolate to retrieve the solution on the finest grid. The reason for that is that they
-   address a specific problem where some perturbations need to damped quite efficiently, which is why as soon as they perform some computation on the fine grid they need to use coarse grids even if interpolating directly introduces some errors.
+   if we are more interested in reducing the energy consumption instead of the execution time.
    Dynamically changing the bit-width of some variables has been done in~\cite{Park:2010} but it is there applied on some part of the data as they are not involved in the same way in the algorithm,
    which is not the case in a multi-grid solver (all the evaluation points on the grid represent the continuous solution).
    
