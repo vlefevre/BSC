@@ -12,65 +12,86 @@
 \usetikzlibrary{patterns,decorations}
 \newtheorem{theorem}{Theorem}
 %opening
+
 \title{Approximating a Multi-Grid Solver}
 
 \author{
-        \IEEEauthorblockN{Valentin Le F\`{e}vre}
-\IEEEauthorblockA{Barcelona Supercomputing Center\\Spain\\\'{E}cole Normale Supérieure de Lyon\\France\\Email: valentin.le-fevre@ens-lyon.fr}
+
+    \IEEEauthorblockN{Valentin Le F\`{e}vre}
+    \IEEEauthorblockA{
+        %Barcelona Supercomputing Center\\i
+        %Spain\\
+        \'{E}cole Normale Supérieure de Lyon\\
+        %France\\
+        valentin.le-fevre@ens-lyon.fr}
     \and
     \IEEEauthorblockN{Leonardo Bautista-Gomez}
-    \IEEEauthorblockA{Barcelona Supercomputing Center\\
-                    Spain\\
-                    Email: leonardo.bautista@bsc.es}
+    \IEEEauthorblockA{
+        Barcelona Supercomputing Center (BSC)\\
+        %Spain\\
+        leonardo.bautista@bsc.es}
     \and
     \IEEEauthorblockN{Marc Casas}
-    \IEEEauthorblockA{Barcelona Supercomputing Center\\
-                    Spain\\
-                    Email: marc.casas@bsc.es}
+    \IEEEauthorblockA{
+        Barcelona Supercomputing Center (BSC)\\
+        %Spain\\
+        marc.casas@bsc.es}
 }
-
 
 \begin{document}
 
 \maketitle
 \begin{abstract}
-  This paper studies trade-offs between accuracy and execution time in a multi-grid solver: BoomerAMG. As a linear system solver is never really exact, it is actually relevant to
-  investigate whether it is possible or not to save time while keeping results that are not too far from their exact value. We first introduce a different cycle shape than the classic V-cycle used
-  in multi-grid solvers. We show that it provides a usually faster convergence rate by running some tests on a distributed system with huge input problems. Then we propose a dynamic bit-width changing algorithm that is able to adapt the execution time of floating-point operations
-  according to the accuracy needed. In particular, we are able to reach the same results as a double-precision floating point algorithm with an expected 15\% improvement of the execution
-  time on a GPU.
+    This paper studies trade-offs between accuracy and execution time in a
+    multi-grid solver: BoomerAMG. Since a linear system solver is never really
+    exact, it is actually relevant to investigate whether it is possible to
+    save time and energy by reducing precision during some steps while keeping
+    results within the targeted accuracy . We first introduce a different cycle
+    shape than the classic V-cycle used in multi-grid solvers. We show that it
+    provides a usually faster convergence rate by running some tests on a
+    distributed system with large input problems. Then, we propose a dynamic
+    bit-width changing algorithm that is able to adapt the execution time of
+    floating-point operations according to the accuracy needed. In particular,
+    we are able to reach the same results as a double-precision floating point
+    algorithm while gaining 15\% improvement of the execution time on a GPU.
 \end{abstract}
 
 \section{Introduction}
+\label{sec:intro}
 
 \input{intro.tex}
 
 % \section{The multi-grid algorithm}
-% 
+%
 %\input{algo.tex}
 
 \section{Investigate important steps in algorithm}
+\label{sec:algo}
 
 \input{investigate.tex}
 
 \input{cycles.tex}
 
 \section{Investigate Time-Accuracy trade-offs}
-   
+\label{sec:accuracy}
+
 \input{newalgo.tex}
-   
+
 \input{proof.tex}
 
 \input{eval.tex}
-   
-   \section{Related Work}
-   
-   \input{relatedwork.tex}
-   
-   \section{Conclusion}
-   
-   \input{conclusion.tex}
-   
-   \bibliography{biblio}
-   \bibliographystyle{plain}
+
+\section{Related Work}
+\label{sec:related}
+
+\input{relatedwork.tex}
+
+\section{Conclusion}
+\label{sec:conclusions}
+
+\input{conclusion.tex}
+
+\bibliography{biblio}
+\bibliographystyle{plain}
+
 \end{document}
