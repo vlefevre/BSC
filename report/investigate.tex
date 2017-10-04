@@ -1,11 +1,14 @@
 
 \subsection{Comparison of existing strategies}
 
-  In this section, we will compare different types of cycles and study how the number of relaxation steps influence the convergence of the algorithm.
+  A level is an integer between $1$ and $L$. Level $1$ will be called the finest level, and level $L$ will be called the coarsest level. In the multi-grid algorithm, we
+  consider computations at every different level in a determined order. The order used is called a cycle. For example, the simplest cycle is the V-cycle where one iteration
+  of an iterative method (the \textit{Relaxation} step) is performed at every level from the finest to the coarsest level and then in the reverse order. Then, the effect of different parameters can be
+  studied such as the iterative method used, the type of cycle, the number of repetitions of this cycle, the number of \textit{Relaxation} at each level or the number of different levels
+  to define. In this subsection we will focus on comparing different types of cycles and study how the number of \textit{Relaxation} steps influence the convergence of the algorithm.
   
-  We will consider 2 types of cycles: the V-cycle and the W-cycle. The V-cycle is actually the algorithm previously described. The W-cycle looks the same but instead of having two parameters
-  $\alpha_1$ and $\alpha_2$ we add a new $\alpha_3$ parameter. It will represent the number of relaxation steps done after a second recursive call. In terms of algorithm it is the same
-  algorithm as the V-cycle but the bullets 2 to 7 are repeated. We call these cycles V-cycle and W-cycle because of how we can draw them if we represent each time relaxations are done
+  We will consider 2 types of cycles: the V-cycle and the W-cycle. The V-cycle is actually the algorithm previously described. The W-cycle looks the same but the recursive call
+  to a coarser grid will be made twice instead of one before going back to a finer level. We call these cycles V-cycle and W-cycle because of how we can draw them if we represent each time relaxations are done
   at a level by a point (see Figure~\ref{fig.cycles}). It is possible to define other types of cycles by adding more and more repeats of these steps (do $k$ times those steps) to generalize
   the notion of cycle to a $k$-cycle (where a V-cycle is a $1$-cycle and a W-cycle is a $2$-cycle).
   
