@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: report.aux
+The style file: plain.bst
+Database file #1: biblio.bib
+Warning--to sort, need author or key in MPFR_link
+Warning--can't use both author and editor fields in Falgout2002
+Warning--can't use both author and editor fields in Hackbusch1991
+You've used 12 entries,
+            2118 wiz_defined-function locations,
+            594 strings with 6807 characters,
+and the built_in function-call counts, 4950 in all, are:
+= -- 505
+> -- 217
+< -- 6
++ -- 88
+- -- 74
+* -- 357
+:= -- 768
+add.period$ -- 39
+call.type$ -- 12
+change.case$ -- 71
+chr.to.int$ -- 0
+cite$ -- 15
+duplicate$ -- 195
+empty$ -- 382
+format.name$ -- 74
+if$ -- 1081
+int.to.chr$ -- 0
+int.to.str$ -- 12
+missing$ -- 13
+newline$ -- 62
+num.names$ -- 22
+pop$ -- 77
+preamble$ -- 1
+purify$ -- 61
+quote$ -- 0
+skip$ -- 153
+stack$ -- 0
+substring$ -- 343
+swap$ -- 66
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 44
+warning$ -- 3
+while$ -- 45
+width$ -- 14
+write$ -- 144
+(There were 3 warnings)

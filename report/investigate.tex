@@ -1,16 +1,28 @@
 
-\subsection{Comparison of existing strategies}
+\subsection{Comparing Different Kinds of Cycles}
 
-  A level is an integer between $1$ and $L$. Level $1$ will be called the finest level, and level $L$ will be called the coarsest level. In the multi-grid algorithm, we
-  consider computations at every different level in a determined order. The order used is called a cycle. For example, the simplest cycle is the V-cycle where one iteration
-  of an iterative method (the \textit{Relaxation} step) is performed at every level from the finest to the coarsest level and then in the reverse order. Then, the effect of different parameters can be
-  studied such as the iterative method used, the type of cycle, the number of repetitions of this cycle, the number of \textit{Relaxation} at each level or the number of different levels
-  to define. In this subsection we will focus on comparing different types of cycles and study how the number of \textit{Relaxation} steps influence the convergence of the algorithm.
+%  A level is an integer between $1$ and $L$. Level $1$ will be called the finest level, and level $L$ will be called the coarsest level. In the multi-grid algorithm, we
+%  consider computations at every different level in a determined order. 
+In this Section we compare different types of cycles and study how the number of \textit{Relaxation} steps influence MG's convergence.
+MG's cycles start and end on the finest grained grid and are defined by the order in which its different coarseness levels are applied.
+The simplest cycle is the V-cycle, already described in Section~\ref{sec:intro}, where a few iterations
+  of an iterative method (the \textit{Relaxation} step) is performed at each level from the finest to the coarsest level and then in the reverse order. 
+Another common approach is the W-cycle scheme where the coarsest grid level is reached twice before going back to the finest grid level.
+It is possible to generalize the notion of cycle to a $k$-cycle (where a V-cycle is a $1$-cycle and a W-cycle is a $2$-cycle).
+Figure~\ref{fig.cycles} shows a representation of the V- and the W-cyles with 4 levels where we can see how the W-scheme goes back and forth the coarsest level 4 times before reaching again the finest level of the grid.
+
+%In this context, the MG algorithm makes use of many different input parameters 
+% such as the iterative method used, the type of cycle and its number of repetitions, the number of \textit{Relaxation} at each level or the number of different levels to define.
+%In this subsection we focus on comparing different types of cycles and study how the number of \textit{Relaxation} steps influence the convergence of the algorithm.
   
-  We will consider 2 types of cycles: the V-cycle and the W-cycle. The V-cycle is actually the algorithm previously described. The W-cycle looks the same but the recursive call
-  to a coarser grid will be made twice instead of one before going back to a finer level. We call these cycles V-cycle and W-cycle because of how we can draw them if we represent each time relaxations are done
-  at a level by a point (see Figure~\ref{fig.cycles}). It is possible to define other types of cycles by adding more and more repeats of these steps (do $k$ times those steps) to generalize
-  the notion of cycle to a $k$-cycle (where a V-cycle is a $1$-cycle and a W-cycle is a $2$-cycle).
+%We consider 2 types of cycles: the V-cycle and the W-cycle. 
+%The main difference between them is that in the W-cycle the recursive call
+%to a coarser grid is made twice instead of one before going back to a finer level. 
+%We call these cycles V-cycle and W-cycle because of how we can draw them if we represent each time relaxations are done
+%  at a level by a point (see Figure~\ref{fig.cycles}). 
+%Figure~\ref{fig.cycles} shows a representation of the V- and the W-cyles.
+%It is possible to define other types of cycles by adding more and more repeats of these steps (do $k$ times those steps) to generalize
+%  the notion of cycle to a $k$-cycle (where a V-cycle is a $1$-cycle and a W-cycle is a $2$-cycle).
   
  \begin{figure}
  \resizebox{\linewidth}{!}{
@@ -78,13 +90,6 @@
  \label{fig.cycles}
 \end{figure}
 
-A strategy will be composed of a type of cycle (V or W) and a number of relaxation steps $\alpha$. The default implementation of BomerAMG does not allow to have different values
-for $\alpha_1,\alpha_2,\dots$ so we set them all to this value $\alpha$. We consider a total of 8 different stragies represented in Table~\ref{table.strat1}.
-To compare the different strategies using the BoomerAMG algorithm, we run the algorithm on a predefined matrix of size $512000 \times 512000$ for every
-value of maximum number of iterations (i.e. number of cycles) from 1 to 100 and with a required tolerance of $0$ (meaning
-that the algorithm will stop when the result is exact or the maximum number of iterations is reached). We measure for each experiment the final relative residual norm and the execution time. Each experiment is run 10 times to have an accurate average execution time.
-The results are presented on Figure~\ref{fig.first_tests}.
-
 \begin{table}
 
 \begin{center}
@@ -102,13 +107,30 @@ The results are presented on Figure~\ref{fig.first_tests}.
 \end{table}
 
 
-\begin{figure}
+\begin{figure*}
   \includegraphics[width=0.49\linewidth]{figs/convergence_1.pdf}
   \includegraphics[width=0.49\linewidth]{figs/time_convergence.pdf}
   \caption{Execution time and final residual norm of the 8 strategies per iteration (left) and convergence time as a function of the tolerance (right).}
   \label{fig.first_tests}
-\end{figure}
+\end{figure*}
 
+
+The MG algorithm makes use of many different input parameters that have an impact on its success. 
+% such as the iterative method used, the type of cycle and its number of repetitions, the number of \textit{Relaxation} steps per level or the number of different levels to define.
+In our context, we define a strategy as a combination of values of the most relevant parameters: The type of cycle (V or W), the number of relaxation steps $\alpha$, and the total number of coarseness levels of the grid. 
+%The default implementation of BomerAMG does not allow to have different values
+%for $\alpha_1,\alpha_2,\dots$ so we set them all to this value $\alpha$. 
+We consider a total of 8 different strategies represented in Table~\ref{table.strat1} where we consider V- and W-cycles and we perform 1, 2, 3 and 10 relaxation steps for eack kind of cycles, having a total of 8 configurations. 
+{\bf The number of different coarseness levels of the grid is ...}.
+To compare the different strategies we consider an input matrix of size $512000 \times 512000$, 
+and a maximum number of iterations from 1 to 100.
+The algorithm's tolerance is set to $0$ to always reach the maximum number of cycles. 
+{\bf MARC: I do not understand how many iterations you used (1 or 100). Which is the maximum number of cycles?}
+We measure for each experiment the final relative residual norm and the execution time. 
+Each experiment is run 10 times to have an accurate average execution time.
+
+The results are presented on Figure~\ref{fig.first_tests}.
+{\bf It is not clear to me what the Figures represent, the axis, etc. We need a description of the Figures here.}
 What we can observe is that, as expected, increasing the number of relaxation steps or complexifying the cycle increases the overall time to do one cycle. However, it converges in less iterations.
 We see on the right figure that actually, for a given precision, the simple V-cycle with only 1 relaxation at each step is the fastest way to reach it, followed closely by the W-cycle with $\alpha=1$.\\
 The conclusion is that relaxation steps seem to be too costly for the accuracy they grant. It is better to increase the complexity of the cycle or do more cycles, thus more moves in the grid, than doing more relaxation steps. This at least proves
