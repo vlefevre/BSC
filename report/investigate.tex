@@ -121,16 +121,16 @@ In our context, we define a strategy as a combination of values of the most rele
 %The default implementation of BomerAMG does not allow to have different values
 %for $\alpha_1,\alpha_2,\dots$ so we set them all to this value $\alpha$. 
 We consider a total of 8 different strategies represented in Table~\ref{table.strat1} where we consider V- and W-cycles and we perform 1, 2, 3 and 10 relaxation steps for eack kind of cycles, having a total of 8 configurations. 
-{\bf The number of different coarseness levels of the grid is ...}.
+The number of different coarseness levels of the grid is 8.
 To compare the different strategies we consider an input matrix of size $512000 \times 512000$, 
-and a maximum number of iterations from 1 to 100.
-The algorithm's tolerance is set to $0$ to always reach the maximum number of cycles. 
-{\bf MARC: I do not understand how many iterations you used (1 or 100). Which is the maximum number of cycles?}
+and a maximum number of cycles from 1 to 100.
+The algorithm's tolerance is set to $0$ to always reach the maximum number of cycles (1 to 100 depending on the experiments).
 We measure for each experiment the final relative residual norm and the execution time. 
 Each experiment is run 10 times to have an accurate average execution time.
 
 The results are presented on Figure~\ref{fig.first_tests}.
-{\bf It is not clear to me what the Figures represent, the axis, etc. We need a description of the Figures here.}
+The left figure shows how the accuracy evolve with the number of cycles performed (plain lines) while also showing the total execution time (dashed lines). The right figure expresses the cost of reaching
+a given accuracy (left of the x-axis is a small tolerance i.e. correspond to accurate results while the right of the x-axis represent inaccurate (but fast) results).
 What we can observe is that, as expected, increasing the number of relaxation steps or complexifying the cycle increases the overall time to do one cycle. However, it converges in less iterations.
 We see on the right figure that actually, for a given precision, the simple V-cycle with only 1 relaxation at each step is the fastest way to reach it, followed closely by the W-cycle with $\alpha=1$.\\
 The conclusion is that relaxation steps seem to be too costly for the accuracy they grant. It is better to increase the complexity of the cycle or do more cycles, thus more moves in the grid, than doing more relaxation steps. This at least proves
