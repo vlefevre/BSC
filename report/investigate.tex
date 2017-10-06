@@ -129,8 +129,8 @@ We measure for each experiment the final relative residual norm and the executio
 Each experiment is run 10 times to have an accurate average execution time.
 
 The results are presented on Figure~\ref{fig.first_tests}.
-The left figure shows how the accuracy evolve with the number of cycles performed (plain lines) while also showing the total execution time (dashed lines). The right figure expresses the cost of reaching
-a given accuracy (left of the x-axis is a small tolerance i.e. correspond to accurate results while the right of the x-axis represent inaccurate (but fast) results).
+The left figure shows how the accuracy evolve with the number of cycles performed (plain lines) while also showing the total execution time (dashed lines). For example, we see that the V cycle with 1 relaxation step (in red) is less costly in term of execution time but converges with more cycles than the other strategies. To be able compare the convergence speed, we present the cost of reaching
+a given accuracy on the right figure (left of the x-axis is a small tolerance i.e. correspond to accurate results while the right of the x-axis represent inaccurate (but fast) results).
 What we can observe is that, as expected, increasing the number of relaxation steps or complexifying the cycle increases the overall time to do one cycle. However, it converges in less iterations.
 We see on the right figure that actually, for a given precision, the simple V-cycle with only 1 relaxation at each step is the fastest way to reach it, followed closely by the W-cycle with $\alpha=1$.\\
 The conclusion is that relaxation steps seem to be too costly for the accuracy they grant. It is better to increase the complexity of the cycle or do more cycles, thus more moves in the grid, than doing more relaxation steps. This at least proves
