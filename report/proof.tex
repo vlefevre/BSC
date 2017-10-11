@@ -1,6 +1,6 @@
    \subsection{Optimal set of precisions}
    
-   In this subsection, we provide an optimal set of precisions to minimize the total execution time, under the assumption that the time evolves linearly with $b$ the number of precision bits.
+   In this subsection, we provide an optimal set of precisions to minimize the total execution time, under the assumption that the time evolves linearly with $b$ the number of precision bits: $T(b) = \alpha b + c$.
    
    \begin{theorem}
      Given $b_{max}$, a maximum number of bits, $n$ the number of different precisions $b_1,\dots,b_n$ to use, and $T(b)=\alpha b+c$, with $\alpha$ and $c$ two constants, the time to execute a cycle at precision $b$, then
@@ -8,7 +8,8 @@
    \end{theorem}
 
    \begin{proof}
-   From the previous experiments we can see that (i) the number of cycles needed to reach the lower bound for a given precision does not depend on the previous cycles (Figure~\ref{fig.prec_incr}) and that (ii) the number of cycles
+   From the previous experiments we can see that (i) the number of cycles needed to reach the lower bound for a given precision does not depend on the previous cycles (Figure~\ref{fig.prec_incr}), i.e.
+if you start with cycles at precision $16$ then $32$, you will need the same number of cycles to reach the lower bound with $32$ bits as if you used only cycles with $32$ bits since the beginning of the algorithm; and that (ii) the number of cycles 
    needed to reach the lower bound is proportional to the number of bits $b$ used (Figure~\ref{fig.bits_accuracy}). We then define $\textsc{MaxIter}(b)$ the number of cycles needed so that the ratio between two consecutive
    relative residual norms is higher than a threshold $t$. We use the two observations to model $\textsc{MaxIter}(b) = \lfloor kb \rfloor$ for some constant $k$.
    Then we can compute the total execution time of the algorithm
@@ -34,7 +35,7 @@
    where $\delta_{a,b} $ is equal to 1 if and only if $a=b$, 0 otherwise.
    
    This is where the boundary condition $x_n = 1$ is useful: if we do not set it to a number different from 0, the function is minimized for $x_1=\dots=x_n=0$. This applied to our problem
-   makes no sense, as we would't be doing any computation. The boundary condition represents the fact that we need to reach a existing precision ($b_{max}$) eventually. By a simple scaling,
+   makes no sense, as we would't be doing any computation. The boundary condition represents the fact that we need to reach an existing precision ($b_{max}$) eventually. By a simple scaling,
    considering $1$ instead of $b_{max}$ makes computation easier and does not change the resolution of the the following system (up to a factor):
    
    \resizebox{0.9\linewidth}{!}{

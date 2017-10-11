@@ -1,7 +1,7 @@
 \subsection{Evaluation}
    
    In order to estimate the cost of our algorithm, we want to model the time of an iteration at precision $b$. We model an iteration by the following formula: $an^3b^\alpha+c$, where $a,c$ and $\alpha$ are constants,
-   $n$ is the size of the problem and $b$ the number of bits.
+   $n$ is the size of the problem and $b$ the number of bits. Indeed, we expect the time to be proportional to the cube of the problem size as we deal with 3D problems, and the parameter $\alpha$ will characterize how the time evolves when we double the number of bits: if $\alpha = 1$, then multiplying by two the number of bits will multiply by two the cost of an iteration. Maybe the reality should be described by a more complicated polynomial in $b$, but we want to keep the model simple enough and see if the data can fit it.
    
 
 %    To provide numerical values for $a$,$\alpha$ and $\beta$, we measured the execution times of different scenarios. Each scenario computes 50 iterations on a 64x64x64 matrix, on different processor topologies, and using
