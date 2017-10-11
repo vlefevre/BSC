@@ -141,7 +141,7 @@
 
    To provide numerical values for $a,c$ and most importantly $\alpha$, we measure the execution times of different scenarios. Each scenario computes 50 iterations on matrices with different sizes, and using
    either only single-precision floating point variables or only double-precision floating point variables. We denote by $x_{b,n}$ the empirical value obtained using $b$ bits and a problem of size $n$ (i.e. the matrix
-   considered will be of size $n^3$ as we consider 3D problems). %Results are reported in Table~\ref{table.time_measure1}.
+   considered will be of size $n^3 \times n^3$ as we consider 3D problems). %Results are reported in Table~\ref{table.time_measure1}.
    
    Then, using Python's lmfit package, we interpolate the data to find good values for $a,c$ and $\alpha$. We are able to estimate different values of $\alpha$, all between 0.20 and 0.32, using 3
    different applications, 2 types of cycles (the classic V-cycle and the \emph{Up} strategy) and 2 types of relaxation method (weighted Jacobi and an hybrid method).
@@ -178,11 +178,11 @@
    \end{figure}
    
    Figures~\ref{fig.estimation1} to~\ref{fig.estimation5} represents the cost of the algorithm, for these different scenarios, to reach different accuracy in the output (from $10^{-3}$ to $10^{-15}$ here) using
-   a value for the $\alpha$ parameter of 0.3. We can see that the strategy that increases by only 1 the number of mantissa bits (labelled \texttt{8\_1}) takes more time than the original algorithm (labelled \texttt{53\_0}). This is because, in the previous experiments we saw
+   a value for the $\alpha$ parameter of 0.3. We can see that the strategy that increases by only 1 the number of mantissa bits (labelled \texttt{8\_1}) takes more time than the original algorithm (labelled \texttt{53\_0}) for the 5 different accuracies presented. This is because, in the previous experiments we saw
    there is usually the same number of cycles in all our strategies (see Figure~\ref{fig.prec_incr}). Here, the convergence rate is limited by the slowly increasing number of precision bits: by adding one bit we can divide by at most 2 the 
    accuracy on the residual norm while the original algorithm can divide by more than that in one cycle if it is not limited by the bitwidth of the variables.
    If we focus on the GPU case (labelled \texttt{11\_x2.24}), we can see that, compared to the original algorithm (which uses only double-precision), we improve by 35\% the time to reach 
-   accuracy $10^{-3}$. If one adapts the algorithm to use only single-precision variables (labelled \texttt{24\_0}) as it would be sufficient to reach this accuracy, we would still reduce the time by 17\%. Then the improvement slowly decreases when increasing the accuracy to reach 10\%.
+   accuracy $10^{-3}$ (see Figure~\ref{fig.estimation1}). If one adapts the algorithm to use only single-precision variables (labelled \texttt{24\_0}) as it would be sufficient to reach this accuracy, we would still reduce the time by 17\% (still Figure~\ref{fig.estimation1}). Then the improvement slowly decreases when increasing the accuracy to reach 10\% (on Figure~\ref{fig.estimation5}).
    
    \subsection{Summary of results}
    
