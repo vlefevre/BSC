@@ -12,7 +12,7 @@
    by \texttt{mpfr\_t} variables, all using the same number of $b$ bits for the mantissa. In terms of arithmetic precision, \emph{AMG} behaves similarly to \emph{AMGmpfr(53)} and \emph{AMGfloat} to \emph{AMGmpfr(24)}. There can be small differences
    due to the rounding method used.
    
-   The Figure~\ref{fig.bits_accuracy} represent the accuracy we reach using either \emph{AMGmpfr(8)}, \emph{AMGmpfr(16)}, \emph{AMGfloat}, \emph{AMGmpfr(32)} or \emph{AMGmpfr(64)}. The problem is problem 1, with 2x2x2 processor topology and 20x20x20 matrix size.
+   The Figure~\ref{fig.bits_accuracy} represent the accuracy we reach using either \emph{AMGmpfr(8)}, \emph{AMGmpfr(16)}, \emph{AMGfloat}, \emph{AMGmpfr(32)} or \emph{AMGmpfr(64)}. The problem used is \textsc{Unstructured-Anisotropy}, with 2x2x2 processor topology and 20x20x20 matrix size.
    What we actually see on this figure is the threshold reachable depending on the number of bits used. However, until this threshold is reach, the accuracy obtained using any number of bits is the same. This means that, for example,
    while the accuracy of the solution is below the threshold using 32 bits, using 32 or any greater number of bits to do the computations will result in the same final accuracy. However, we expect that using only the necessary $32$ bits is 
    more efficient in terms of time, space and energy.
@@ -28,7 +28,7 @@
    That being said, we design a new algorithm that adapts the precision of the variables during the execution. It is the same algorithm as \emph{AMGmpfr(b)} except this time the precision can change between two cycles.
    We fix a threshold on the ratio between the relative residual norm at two consecutive steps to trigger the precision change.
    Figure~\ref{fig.prec_incr} presents the evolution of accuracy for the original algorithm, 3 different strategies with increasing precision and a threshold of 0.8: start at $b=16$ and do $b=b+8$, start at $b=32$
-   and do $b=b+8$, and start at $b=16$ and do $b=b\times2$. We run these strategies on a 240x240x240 matrix size with a 3x3x3 topology for problem 3.
+   and do $b=b+8$, and start at $b=16$ and do $b=b\times2$. We run these strategies on a 240x240x240 matrix size with a 3x3x3 topology for \textsc{3DLaplace-27pt}.
    
    \begin{figure} \centering
     \includegraphics[width=0.8\linewidth]{figs/prec_incr.pdf}
