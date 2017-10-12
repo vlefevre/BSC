@@ -64,7 +64,7 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
   The first thing to observe is that removing the relaxation at level 1 does not provide any benefit. It sure saves time during a cycle but the accuracy loss is tremendous.
   The other thing to notice is that adding a lot of relaxations in the last levels increases by a little the execution time while being useless on the accuracy side. This is why \emph{Fast2} and  \emph{Fast3} are not really efficient.
   
-  More tests were performed on the original $512,000\times 512,000$ matrix and are presented in Figure~\ref{fig.newstrat}.
+  More tests were performed on the original $512,000\times 512,000$ matrix and are presented in Figure~\ref{fig.newstrat}. We find again that the original V cycle seems to be the best as \emph{Fast3} converges in slightly less cycles, but this strategy is clearly too expensive with a bigger matrix so overall it is not as efficient as the baseline. Only the strategy \emph{Fast4} seems to be more or less equivalent to the original V cycle as it reduces a bit the cost of a cycle but the convergence rate per cycle is also slightly smaller. We also confirm that \emph{Fast} takes a lot more time to reach the maximum accuracy than any of the other strategies.
   
   \begin{figure}
   \includegraphics[width=0.49\linewidth]{figs/convergence_fast.pdf}
