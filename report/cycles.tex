@@ -53,12 +53,13 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
   at level $l-1$ we do not need to correct a lot by doing more relaxations. However at level $l-2$ we have been through 2 interpolations since last good estimation of the error vector, hence increasing the number of relaxations again.
   As we still want not to increase the execution time a lot we stop this recursion for the first levels as they are the two most costly relaxations.
   
-  \begin{figure}
-  \includegraphics[width=0.49\linewidth]{figs/convergence_fast_small.pdf}
-   \includegraphics[width=0.49\linewidth]{figs/time_convergence_fast_small.pdf}
-   \caption{Execution time and final residual norm for the 4 new strategies on a small matrix.}
+  \begin{figure*}
+  \includegraphics[width=0.33\linewidth]{figs/convergence_fast_small_norm.pdf}
+  \includegraphics[width=0.33\linewidth]{figs/convergence_fast_small_time.pdf}
+   \includegraphics[width=0.33\linewidth]{figs/time_convergence_fast_small.pdf}
+  \caption{Final residual norm of the 4 new strategies per iteration (left), interpolated execution time per iteration (middle) and convergence time as a function of the tolerance (right) on a small matrix.}
    \label{fig.newstrat_small}
-  \end{figure}
+  \end{figure*}
 
   In Figure~\ref{fig.newstrat_small}, we present the results of these 4 strategies on a smaller matrix of initial size 64,000 with only a 6-level grid.
   The first thing to observe is that removing the relaxation at level 1 does not provide any benefit. It sure saves time during a cycle but the accuracy loss is tremendous.
@@ -66,12 +67,13 @@ in Table~\ref{table.measures}, along with some information on the matrix used at
   
   More tests were performed on the original $512,000\times 512,000$ matrix and are presented in Figure~\ref{fig.newstrat}. We find again that the original V cycle seems to be the best as \emph{Fast3} converges in slightly less cycles, but this strategy is clearly too expensive with a bigger matrix so overall it is not as efficient as the baseline. Only the strategy \emph{Fast4} seems to be more or less equivalent to the original V cycle as it reduces a bit the cost of a cycle but the convergence rate per cycle is also slightly smaller. We also confirm that \emph{Fast} takes a lot more time to reach the maximum accuracy than any of the other strategies.
   
-  \begin{figure}
-  \includegraphics[width=0.49\linewidth]{figs/convergence_fast.pdf}
-   \includegraphics[width=0.49\linewidth]{figs/time_convergence_fast.pdf}
-   \caption{Execution time and final residual norm for the 4 new strategies on the bigger matrix.}
+  \begin{figure*}
+  \includegraphics[width=0.33\linewidth]{figs/convergence_fast_norm.pdf}
+  \includegraphics[width=0.33\linewidth]{figs/convergence_fast_time.pdf}
+   \includegraphics[width=0.33\linewidth]{figs/time_convergence_fast.pdf}
+  \caption{Final residual norm of 3 new strategies per iteration (left), interpolated execution time per iteration (middle) and convergence time as a function of the tolerance (right) on a bigger matrix.}
    \label{fig.newstrat}
-  \end{figure}
+  \end{figure*}
   
 \subsubsection{An asymmetric strategy}
 \label{sec.assymetric}
