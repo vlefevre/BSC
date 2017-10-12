@@ -90,14 +90,15 @@ going to a coarser level is there to compute a first approximate solution to the
   
   All results are presented in Figure~\ref{fig.up_comparison}.
   
-  \begin{figure}
-   \subfloat[\textsc{Unstructured-Anisotropy}]{\includegraphics[width=0.49\linewidth]{figs/time_convergence_up_1.pdf}}
-   \subfloat[\textsc{3DLaplace-9pt}]{\includegraphics[width=0.49\linewidth]{figs/time_convergence_up_2.pdf}}\\
-   \subfloat[\textsc{3DLaplace-27pt}]{\includegraphics[width=0.49\linewidth]{figs/time_convergence_up_3.pdf}}
-   \subfloat[\textsc{PDE-Dirichlet}]{\includegraphics[width=0.49\linewidth]{figs/time_convergence_up_4.pdf}}
+  \begin{figure*}
+    \centering
+   \subfloat[\textsc{Unstructured-Anisotropy}]{\includegraphics[width=0.4\linewidth]{figs/time_convergence_up_1.pdf}}
+   \subfloat[\textsc{3DLaplace-9pt}]{\includegraphics[width=0.4\linewidth]{figs/time_convergence_up_2.pdf}}\\
+   \subfloat[\textsc{3DLaplace-27pt}]{\includegraphics[width=0.4\linewidth]{figs/time_convergence_up_3.pdf}}
+   \subfloat[\textsc{PDE-Dirichlet}]{\includegraphics[width=0.4\linewidth]{figs/time_convergence_up_4.pdf}}
    \caption{Comparison of original algorithm with \emph{Fast4} and \emph{Up} strategies.}
    \label{fig.up_comparison}
-  \end{figure}
+  \end{figure*}
 
    At this point, we see that it is not worth considering the \emph{Fast4} strategy anymore. However, \emph{Up} seems to be
    quite efficient since it improves by $12\%$,$7\%$,$20\%$ and $22\%$ (for \textsc{Unstructured-Anisotropy}, \textsc{3DLaplace-9pt}, \textsc{3DLaplace-27pt} and \textsc{PDE-Dirichlet} respectively) the average time needed to reach

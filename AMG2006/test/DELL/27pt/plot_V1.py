@@ -34,8 +34,8 @@ pylab.clf()
 
 
 pylab.semilogx(V_1[:,1],V_1[:,2],color='r',label='V_1')
-pylab.semilogx(V_1_fast4[:,1],V_1_fast4[:,2],color='g',label='V_1_fast4')
-pylab.semilogx(V_1_up[:,1],V_1_up[:,2],color='b',label='V_1_up')
+pylab.semilogx(V_1_fast4[:,1],V_1_fast4[:,2],color='g',linestyle='--',label='V_1_fast4')
+pylab.semilogx(V_1_up[:,1],V_1_up[:,2],color='b',linestyle=':',label='V_1_up')
 pylab.xlabel("relative residual norm")
 pylab.ylabel("time")
 pylab.ylim([0,0.4])

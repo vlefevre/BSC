@@ -34,11 +34,11 @@ pylab.clf()
 
 
 pylab.semilogx(V_1[:,1],V_1[:,2],color='r',label='V_1')
-pylab.semilogx(V_1_fast4[:,1],V_1_fast4[:,2],color='g',label='V_1_fast4')
-pylab.semilogx(V_1_up[:,1],V_1_up[:,2],color='b',label='V_1_up')
+pylab.semilogx(V_1_fast4[:,1],V_1_fast4[:,2],color='r',linestyle='--',label='V_1_fast4')
+pylab.semilogx(V_1_up[:,1],V_1_up[:,2],color='r',linestyle=':',label='V_1_up')
 pylab.ylim([0,3])
-pylab.xlabel("relative residual norm")
-pylab.ylabel("time")
+pylab.xlabel("relative residual norm",fontsize=20)
+pylab.ylabel("time (s)",fontsize=20)
 pylab.legend()
 pylab.savefig("time_convergence_fast_10.pdf")
 
