@@ -6,7 +6,7 @@
 \usepackage{url}
 \usepackage{multirow}
 \usepackage{tikz}
-\usepackage{todonotes}
+\usepackage[textwidth=2cm]{todonotes}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows,shapes}
 \usetikzlibrary{patterns,decorations}
@@ -14,7 +14,7 @@
 %opening
 
 \newcommand\leo[1]{\textcolor{blue}{#1}}
-\newcommand\ldo[1]{\todo[inline, size=\tiny, backgroundcolor=cyan]{#1}}
+\newcommand\ldo[1]{\todo[fancyline, size=\tiny, backgroundcolor=cyan]{#1}{}}
 
 %\newcommand\leo[1]{\textcolor{black}{#1}}
 %\newcommand\ldo[1]{\ignorespaces}
