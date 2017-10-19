@@ -3,12 +3,13 @@ BIB=bibtex
 
 STEM=report
 DIR=report
+INC= $(wildcard report/*.tex)
 
 TARGET=$(STEM).pdf
 SRC = $(STEM).tex
 AUX = $(STEM).aux
 
-$(TARGET):	$(DIR)/$(SRC)
+$(TARGET):	$(DIR)/$(SRC) $(INC)
 		cd $(DIR); \
 		$(TEX) $(SRC);\
 		$(BIB) $(AUX); \
