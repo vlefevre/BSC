@@ -13,6 +13,14 @@
 \newtheorem{theorem}{Theorem}
 %opening
 
+\newcommand\leo[1]{\textcolor{blue}{#1}}
+\newcommand\ldo[1]{\todo[inline, size=\tiny, backgroundcolor=cyan]{#1}}
+
+%\newcommand\leo[1]{\textcolor{black}{#1}}
+%\newcommand\ldo[1]{\ignorespaces}
+
+
+
 \pagestyle{plain}
 
 \title{Approximating a Multi-Grid Solver}
@@ -44,18 +52,29 @@
 
 \maketitle
 \begin{abstract}
-    This paper studies trade-offs between accuracy and execution time in a
-    multi-grid solver: BoomerAMG. Since a linear system solver is never really
-    exact, it is actually relevant to investigate whether it is possible to
-    save time and energy by reducing precision during some steps while keeping
-    results within the targeted accuracy. We first introduce a different cycle
-    shape than the classic V-cycle used in multi-grid solvers. We show that it
-    provides a usually faster convergence rate by running some tests on a
-    distributed system with large input problems. Then, we propose a dynamic
-    bit-width changing algorithm that is able to adapt the execution time of
-    floating-point operations according to the accuracy needed. In particular,
-    we are able to reach the same results as a double-precision floating point
-    algorithm while gaining 15\% improvement of the execution time on a GPU.
+
+    \leo{Multi-grid methods are numerical algorithms used in parallel and
+    distributed processing. The main idea of multi-grid solvers is to speedup
+    the convergence of an iterative method by reducing the problem to a coarser
+    grid a number of times. Multi-grid methods are widely exploited in many
+    application domains, thus it is important to improve  their performance and
+    energy efficiency. This paper aims to reach this objective based on the
+    following observation: Given that the intermediary steps do not require
+    full accuracy,} it is possible to save time and energy by reducing
+    precision during some steps while keeping the final result within the
+    targeted accuracy.
+
+    \leo{To achieve this goal,} we first introduce a cycle shape different from
+    the classic V-cycle used in multi-grid solvers.  Then, we propose to
+    \leo{dynamically change the floating-point precision used during runtime}
+    according to the accuracy needed for each intermediary step.  \leo{Our
+    large scale evaluation with the } BoomerAMG multi-grid solver demonstrates
+    that it is possible to trade temporary precision for time to completion.
+    In particular, we are able to reach the same accuracy results as a
+    double-precision floating-point algorithm while gaining 15\% improvement of
+    the execution time on a GPU.\ldo{Did we actually execute it on a GPU or
+    just as abstract in the model?}
+
 \end{abstract}
 
 \section{Introduction}
