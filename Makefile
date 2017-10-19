@@ -8,16 +8,16 @@ TARGET=$(STEM).pdf
 SRC = $(STEM).tex
 AUX = $(STEM).aux
 
-TARGET:
-	cd $(DIR); \
-	$(TEX) $(SRC);\
-	$(BIB) $(AUX); \
-	$(TEX) $(SRC);\
-	$(TEX) $(SRC); \
-        mv $(TARGET) ..
+$(TARGET):	$(DIR)/$(SRC)
+		cd $(DIR); \
+		$(TEX) $(SRC);\
+		$(BIB) $(AUX); \
+		$(TEX) $(SRC);\
+		$(TEX) $(SRC); \
+        	mv $(TARGET) ..
 
-view:
-	evince $(TARGET)
+view:		$(TARGET)
+		evince $(TARGET)
 
 .PHONY: clean
 clean:
