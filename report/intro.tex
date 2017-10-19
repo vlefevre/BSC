@@ -22,7 +22,7 @@ accurate and fine-grain levels to accelerate the process of obtaining the final
 solution of the system.
 %For example, if we want to solve an equation of the form: \[ -u^{''}(x)+au(x)
 %= f(x),\quad 0<x<1, \quad u(0)=u(1)=0, \] where $a$ is some constant, $f$ a
-%function and $u$ an unkown function, we can transform it into a discrete
+%function and $u$ an unknown function, we can transform it into a discrete
 %problem by selecting $N$ evaluation points $x_1,\dots,x_N$ and using taylor
 %expansion to express the second derivative term $u^{''}(x_i)$ as a weighted
 %sum of $u(x_j)$ for some values of $j$.  Then to define coarser grids, a
@@ -37,9 +37,9 @@ applies a few steps of an iterative solver like Jacobi or Gauss-Seidel at a
 certain coarseness level.  The restriction phase propagates the algorithmic
 state to a coarser grid by means of linear transformations while the
 interpolation phase maps the coarser estimate to the finer version and adjusts
-the current solution x with the new error information.
+the current solution with the new error.
 
-One common way of orchestrating a Multi-Grid Solver execution is via a V-cycle
+One common way of orchestrating a Multi-Grid Solver execution is via a V-cycle,
 where we first iterate on the finest grid, then the second finest grid and so
 on until reaching the coarsest grid where a direct solve is used instead of an
 iterative method as the problem size has become smaller.  Then we iterate again
@@ -64,25 +64,45 @@ mentioned cycle shape, affect the convergence rate of the algorithm.
 %parameters, such as the iterative method used at each step or the fineness of
 %the grid and the previously mentioned cycle shape, affect the convergence rate
 %of the algorithm. For example, using a grid with only a few evaluation points
-%decreases the execution time but deteriotates the accuracy of the final
+%decreases the execution time but deteriorates the accuracy of the final
 %result. In the other way, it is possible to increase the quality of the result
 %by using a finer grid but at the cost of a performance degradation.
 
 In this context, this paper investigates different trade-offs between accuracy
-and execution time for multi-grid algorithms.  This paper focuses its effort on
+and execution time for MG algorithms. This paper focuses its effort on
 one of the most popular parallel implementation of a multi-grid solver, the
 BoomerAMG~\cite{boomerAMG}, implemented in the HYPRE
 library~\cite{Falgout2002}.  This paper makes the following contributions
 beyond the state-of-the-art:
 
-\begin{itemize} \item We evaluate the impact of parameters of the solver such
-        as the shape of cycles in the grid and the number of iterations.  \item
-            We describe a particular cycle that is proved to be at least as
-            efficient as the original algorithm.  \item Then we investigate how
-            changing the bit-width of some values makes the execution time vary
-        with the maximum accuracy reachable.  \item We give an algorithm that
-            dynamically changes the bit-width of the variables to reduce by
-            15\% the execution time needed to reach a same-quality result as
-            the original algorithm (which uses only double-precision floating
-            points) and reducing up to 30\% the execution time for smaller
-accuracies.  \end{itemize}
+\begin{itemize}
+
+    \item We evaluate the impact of parameters of the solver such as the shape
+        of cycles and the number of iterations.
+
+    \item We propose a cycle configuration and show that it is equally or more
+        efficient than the original algorithm.
+
+    \item We \leo{evaluate the impact of different floating-point precisions on
+        the time to completion while reaching full accuracy on the final
+        result.}
+
+    \item We propose an algorithm that dynamically adapts the precision of the
+        MG algorithm variables to increase performance and efficiency.
+
+    \item We \leo{perform a large evaluation and demonstrate the we can reduce by
+        15\% the execution time needed to reach the same quality result as the
+        original double-precision algorithm and up to 30\% for smaller
+        accuracies.}
+
+\end{itemize}
+
+
+\leo{The reminder of this paper is organized as follows: Section~\ref{sec:}
+introduces the MG algorithm briefly. Section~\ref{sec:} investigates the impact
+of different parameters on the time to completion. Section~\ref{sec:} explores
+precision-performance trade-offs. Section~\ref{sec:} presents an analytical
+model to determine the optimal set of precisions to use. Section~\ref{sec:}
+shows our evaluation and results. Section~\ref{sec:} discuss other related
+works and Section~\ref{sec:} concludes this paper.}
+
