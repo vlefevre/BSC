@@ -1,4 +1,4 @@
-TEX=pdflatex 
+TEX=pdflatex
 BIB=bibtex
 
 STEM=report
@@ -16,7 +16,9 @@ TARGET:
 	$(TEX) $(SRC); \
         mv $(TARGET) ..
 
+view:
+	evince $(TARGET)
 
 .PHONY: clean
 clean:
-	rm -f $(DIR)/$(TARGET) $(DIR)/$(AUX) $(DIR)/*.bbl $(DIR)/*.blg $(DIR)/*.log $(DIR)/*.out
+	rm -f $(TARGET) $(DIR)/$(AUX) $(DIR)/*.bbl $(DIR)/*.blg $(DIR)/*.log $(DIR)/*.out
