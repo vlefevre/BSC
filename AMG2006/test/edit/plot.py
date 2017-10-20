@@ -95,6 +95,6 @@ pylab.semilogx(time_W_10[:,0],time_W_10[:,2],color='b',linestyle=':',label='W_10
 pylab.xlabel("relative residual norm",fontsize=20)
 pylab.ylabel("time (s)",fontsize=20)
 pylab.gca().invert_xaxis()
-pylab.legend()
+pylab.legend(loc=2)
 pylab.savefig("time_convergence.pdf")
 
