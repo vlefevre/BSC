@@ -39,6 +39,7 @@ pylab.semilogx(V_1_up[:,1],V_1_up[:,2],color='r',linestyle=':',label='V_1_up')
 pylab.ylim([0,3])
 pylab.xlabel("relative residual norm",fontsize=20)
 pylab.ylabel("time (s)",fontsize=20)
+pylab.gca().invert_xaxis()
 pylab.legend()
 pylab.savefig("time_convergence_fast_10.pdf")
 
