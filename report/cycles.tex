@@ -12,7 +12,7 @@ restricting the solution to a coarser grid, which corresponds to a sparse
 matrix-vector computation; and \emph{going up} by interpolating the error term
 which also corresponds to another sparse matrix-vector computation.
 
-\begin{table}
+\begin{table}[htb]
  \resizebox{\linewidth}{!}{
  \begin{tabular}{|c|c|c|c|c|c|c|}
   \hline
@@ -42,70 +42,98 @@ which also corresponds to another sparse matrix-vector computation.
 
 To study the internal time breakdown of a V-cycle we chose as problem an
 unstructured domain with some anisotropy (denoted as Unstructured-Anisotropy)
-of size 512,000 with a 8-level grid. The results are depicted in
-Table~\ref{table.measures}, along with information on the matrix used at the
-corresponding level, such as matrix size and the number of non-zero elements.
-Our first observation is that there is a direct correlation between the time
-spent on relaxations at each given level and the number of non-zero entries in
-the input matrix. Most importantly, in this results we observe that relaxations
-represent $\approx66\%$ of the total cost of a V-cycle, while the matrix-vector
-multiplications are only $\approx30\%$. In addition, we notice that the two
-first levels are the most expensive ones.
+of size 512,000 with a 8-level grid. The results of this evaluations are
+depicted in Table~\ref{table.measures}, along with information on the matrix
+used at the corresponding level, such as matrix size and the number of non-zero
+elements.  Our first observation is that there is a direct correlation between
+the time spent on relaxations at each given level and the number of non-zero
+entries in the input matrix. Most importantly, in this results we observe that
+relaxations represent $\approx66\%$ of the total cost of a V-cycle, while the
+matrix-vector multiplications are only $\approx30\%$. In addition, we notice
+that the two first levels are the most expensive ones.  It is important to
+highlight that in the experiments depicted in Figure~\ref{fig.first_tests},
+although different number of relaxations were evaluated, all levels executed
+the \emph{same} number of relaxations.
 
-With this information, there are two ideas: (i) adding more relaxations in the
-last levels because it is almost free or (ii) removing some relaxations in the
-first levels to reduce the computational cost.The following 4 strategies were
-then tested on this same matrix.
+\subsection{\leo{Level-Dependent Relaxation Tuning}}
+
+Based on this information, we propose to reduce the execution time of a V-cycle
+by tuning the number of relaxations differently for each level. More precisely
+we propose the following two ideas: (i) to add more relaxations in the last
+levels because their cost is negligible and they could potentially reduce the
+time to convergence or (ii) to remove some relaxations in the first levels to
+reduce the computational cost, and see how that affects convergence. We
+translate these ideas into the four following strategies (based on a 8-level
+grid):
 
 \begin{itemize}
-    \item \emph{Fast} : no relaxation at level 2.
-    \item \emph{Fast4} : no relaxation at level 3.
-    \item \emph{Fast2} : 10 relaxations at level $L-2$.
-    \item \emph{Fast3} : 2 relaxations at levels $L-2,L-4,\dots,3$.
+    \item \emph{Fast } : no relaxations at level 2.
+    \item \emph{Fast2} : 10 relaxations at level 6.
+    \item \emph{Fast3} :  2 relaxations at levels 6 and 4.
+    \item \emph{Fast4} : no relaxations at level 3.
 \end{itemize}
 
+\begin{figure*}
+    \includegraphics[width=0.33\linewidth]{figs/convergence_fast_norm.pdf}
+    \includegraphics[width=0.33\linewidth]{figs/convergence_fast_time.pdf}
+    \includegraphics[width=0.33\linewidth]{figs/time_convergence_fast.pdf}
+    \caption{Evaluation of 4 level-dependent relaxation tuning strategies.
+    Residual norm per cycle (left), time spent in each cycle (middle) and
+    convergence time in function of the error tolerance (right).}
+    \label{fig.newstrat}
+\end{figure*}
+
 The strategy \emph{Fast} aims at reducing the cost of the cycle by removing the
-penultimate relaxation (hoping the accuracy lost at this point will be
-compensated by the relaxation at level 0) which is very costly.  The strategy
-\emph{Fast4} is a softer version of \emph{Fast} where the relaxation at level 3
-is removed, reaching less improvement of the overall execution time but being
-more easily compensated by the two relaxations at level 1 and 2.\\ The strategy
-\emph{Fast2} executes a lot of relaxations at level $L-2$, because it should
-not increase by much the execution time of the V-cycle. Why choose $L-2$ level
-instead of $L$ or $L-1$?  This because the relaxation at level $L$ is actually
-a direct solve. Thus, the error term is almost exact at level $L-1$, because
-the only source of error comes from the interpolation of $e^L$ (which is exact)
-into $e^{L-1}$. This is why, we might expect better results by adding
-relaxations at level $L-2$.  The last strategy \emph{Fast3}, pushes this idea
-one step further. If we assume that doing more than one relaxation gets a
-really accurate error estimation at level $l$, then at level $l-1$ we do not
-need to correct a lot by doing more relaxations. However at level $l-2$ we have
-been through 2 interpolations since last good estimation of the error vector,
-hence increasing the number of relaxations again.  As we still want not to
-increase the execution time a lot we stop this recursion for the first levels
-as they are the two most costly relaxations.
+penultimate relaxation which is very expensive, and expecting that the accuracy
+lost at this point can be compensated by the relaxation at level 1.  The
+strategy \emph{Fast2} executes a lot of relaxations at level 6, because it
+should not increase by much the execution time of the V-cycle.  The reason to
+choose level 6 instead of level 7 or 8 is that the relaxation at level 8 is
+actually a direct solve. Thus, the result term is almost exact at level 7,
+because the only source of error comes from the interpolation of $e^8$ (which
+is exact) into $e^7$. This is why, we might expect better results by adding
+relaxations at level 6. The strategy \emph{Fast3}, pushes the previous idea one
+step further. If we assume that doing more than one relaxation gets a more
+accurate error estimation at level $l$, then at level $l-1$ we do not need to
+correct a lot by doing more relaxations. However at level $l-2$ we have been
+through 2 interpolations since the last good estimation of the error vector,
+therefore we increasing the number of relaxations again. Since the first levels
+are very expensive, we stop this recursion at level 3.  Finally, we propose one
+last strategy \emph{Fast4} which is a softer version of \emph{Fast} where the
+relaxation at level 3 is removed, producing a less accurate result at that
+point, but expecting it can be compensated by the two relaxations at level 1
+and 2.
 
-  \begin{figure*}
-  \includegraphics[width=0.33\linewidth]{figs/convergence_fast_small_norm.pdf}
-  \includegraphics[width=0.33\linewidth]{figs/convergence_fast_small_time.pdf}
-   \includegraphics[width=0.33\linewidth]{figs/time_convergence_fast_small.pdf}
-  \caption{Final residual norm of the 4 new strategies per iteration (left), interpolated execution time per iteration (middle) and convergence time as a function of the tolerance (right) on a small matrix.}
-   \label{fig.newstrat_small}
-  \end{figure*}
+%\begin{figure*}
+%    \includegraphics[width=0.33\linewidth]{figs/convergence_fast_small_norm.pdf}
+%    \includegraphics[width=0.33\linewidth]{figs/convergence_fast_small_time.pdf}
+%    \includegraphics[width=0.33\linewidth]{figs/time_convergence_fast_small.pdf}
+%    \caption{Final residual norm of the 4 new strategies per iteration (left),
+%    interpolated execution time per iteration (middle) and convergence time as
+%    a function of the tolerance (right) on a small matrix.}
+%    \label{fig.newstrat_small}
+%\end{figure*}
 
-  In Figure~\ref{fig.newstrat_small}, we present the results of these 4 strategies on a smaller matrix of initial size 64,000 with only a 6-level grid.
-  The first thing to observe is that removing the relaxation at level 1 does not provide any benefit. It sure saves time during a cycle but the accuracy loss is tremendous.
-  The other thing to notice is that adding a lot of relaxations in the last levels increases by a little the execution time while being useless on the accuracy side. This is why \emph{Fast2} and  \emph{Fast3} are not really efficient.
+We evaluated these 4 proposed strategies in the original $512,000\times
+512,000$ matrix.  The results are shown in Figure~\ref{fig.newstrat}.  The
+first thing to observe is that removing the relaxation at level 1 does not
+provide any benefit. It does saves time during each cycle but the accuracy loss
+too high in each cycle, leading to a much slower convergence rate (i.e., more
+cylces needed for convergence).  The other thing to notice is that adding more
+relaxations in the last levels slightly increases the execution time but it
+does not provide any benefit on the accuracy side. Thus, strategies
+\emph{Fast2} and \emph{Fast3} are not really efficient.  Only the strategy
+\emph{Fast4} seems to be more or less equivalent to the original V cycle as it
+reduces a bit the cost of each cycle and the convergence rate per cycle is also
+slightly smaller.  More tests were performed on a smaller matrix with an
+initial matrix size of 64,000 with only a 6-level grid.  The results were
+similar and are not shown in this paper for brevity.
 
-  More tests were performed on the original $512,000\times 512,000$ matrix and are presented in Figure~\ref{fig.newstrat}. We find again that the original V cycle seems to be the best as \emph{Fast3} converges in slightly less cycles, but this strategy is clearly too expensive with a bigger matrix so overall it is not as efficient as the baseline. Only the strategy \emph{Fast4} seems to be more or less equivalent to the original V cycle as it reduces a bit the cost of a cycle but the convergence rate per cycle is also slightly smaller. We also confirm that \emph{Fast} takes a lot more time to reach the maximum accuracy than any of the other strategies.
 
-  \begin{figure*}
-  \includegraphics[width=0.33\linewidth]{figs/convergence_fast_norm.pdf}
-  \includegraphics[width=0.33\linewidth]{figs/convergence_fast_time.pdf}
-   \includegraphics[width=0.33\linewidth]{figs/time_convergence_fast.pdf}
-  \caption{Final residual norm of 3 new strategies per iteration (left), interpolated execution time per iteration (middle) and convergence time as a function of the tolerance (right) on a bigger matrix.}
-   \label{fig.newstrat}
-  \end{figure*}
+%We find again that the original V cycle seems to be the best as \emph{Fast3}
+%converges in slightly less cycles, but this strategy is clearly too expensive
+%with a bigger matrix so overall it is not as efficient as the baseline.
+
 
 \subsubsection{An asymmetric strategy}
 \label{sec.assymetric}
