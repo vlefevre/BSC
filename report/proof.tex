@@ -1,67 +1,110 @@
-   \subsection{Optimal set of precisions}
-   
-   In this subsection, we provide an optimal set of precisions to minimize the total execution time, under the assumption that the time evolves linearly with $b$ the number of precision bits: $T(b) = \alpha b + c$.
-   
+\subsection{Optimal set of precisions}
+
+In this subsection, we provide an optimal set of precisions to minimize the
+total execution time, under the assumption that the time evolves linearly with
+$b$ the number of precision bits: $T(b) = \alpha b + c$. \leo{This assumption
+is supported by current technologies, in which double precision executions take
+twice the time to complete than single precision executions. This is due to
+processors having more low precision FPUs than high precision FPUs (See
+previous section).}
+
    \begin{theorem}
-     Given $b_{max}$, a maximum number of bits, $n$ the number of different precisions $b_1,\dots,b_n$ to use, and $T(b)=\alpha b+c$, with $\alpha$ and $c$ two constants, the time to execute a cycle at precision $b$, then
-     the execution time of our adaptive algorithm is minimized for $b_i = \frac{i}{n}b_{max}$.
+
+       Given $b_{max}$, a maximum number of bits, $n$ the number of different
+       precisions $b_1,\dots,b_n$ to use, and $T(b)=\alpha b+c$, with $\alpha$
+       and $c$ two constants, the time to execute a cycle at precision $b$,
+       then the execution time of our adaptive algorithm is minimized for $b_i
+       = \frac{i}{n}b_{max}$.
+
    \end{theorem}
 
-   \begin{proof}
-   From the previous experiments we can see that (i) the number of cycles needed to reach the lower bound for a given precision does not depend on the previous cycles (Figure~\ref{fig.prec_incr}), i.e.
-if you start with cycles at precision $16$ then $32$, you will need the same number of cycles to reach the lower bound with $32$ bits as if you used only cycles with $32$ bits since the beginning of the algorithm; and that (ii) the number of cycles 
-   needed to reach the lower bound is proportional to the number of bits $b$ used (Figure~\ref{fig.bits_accuracy}). We then define $\textsc{MaxIter}(b)$ the number of cycles needed so that the ratio between two consecutive
-   relative residual norms is higher than a threshold $t$. We use the two observations to model $\textsc{MaxIter}(b) = \lfloor kb \rfloor$ for some constant $k$.
-   Then we can compute the total execution time of the algorithm
-   \begin{align*}
-   T_{total}& = \textsc{MaxIter}(b_1)T(b_1)\\
-   & +  \sum\limits_{i=1}^{n-1} (\textsc{MaxIter}(b_{i+1})-\textsc{MaxIter}(b_i))T(b_{i+1}).
-   \end{align*}
-   Indeed, when we reach the number of iterations $\textsc{MaxIter}(b_i)$ we change from precision $b_i$ to precision $b_{i+1}$.
-   We can rewrite $T_{total}$ as
-   \begin{align*}
-    T_{total} &\approx k b_{1} T(b_1) + \sum\limits_{i=1}^{n-1} k(b_{i+1}-b_{i})T(b_{i+1})\\
-	    & \approx k ( b_{n}T(n) + \sum\limits_{i=1}^{n-1} b_i ( T(b_i) - T(b_{i+1})).
-   \end{align*}
-   By plugging the expression of $T(b)$ into the previous equation and considering the maximum precision we want is $b_{max}=b_n$, we finally get:
-   \begin{equation}
-    T_{total}  = k\alpha\left(b_n^2 + \sum\limits_{i=1}^{n-1} (b_i^2 - b_i b_{i+1})\right) + kb_{max}c.
-   \end{equation}
-   
-   Let us consider the function $f(x_1,\dots,x_n) = \sum\limits_{i=1}^n x_i^2 - \sum\limits_{i=1}^{n-1} x_ix_{i+1}$. Finding the minimum of $f(x_1,\dots,x_{n-1},1)$ will give
-   us the minimum of the execution time.
-   By simple partial derivation:
-   \[ \frac{\partial f(x_1,\dots,x_n)}{\partial x_i} = 2x_i - (1-\delta_{i,n})x_{i+1} - (1-\delta_{i,1})x_{i-1} \]
-   where $\delta_{a,b} $ is equal to 1 if and only if $a=b$, 0 otherwise.
-   
-   This is where the boundary condition $x_n = 1$ is useful: if we do not set it to a number different from 0, the function is minimized for $x_1=\dots=x_n=0$. This applied to our problem
-   makes no sense, as we would't be doing any computation. The boundary condition represents the fact that we need to reach an existing precision ($b_{max}$) eventually. By a simple scaling,
-   considering $1$ instead of $b_{max}$ makes computation easier and does not change the resolution of the the following system (up to a factor):
-   
-   \resizebox{0.9\linewidth}{!}{
-   $\left\{
-   \begin{tabular}{rcl cccccccccc cl}
+\begin{proof}
+
+    From the previous experiments we can see that (i) the number of cycles
+    needed to reach the lower bound for a given precision does not depend on
+    the previous cycles (Figure~\ref{fig.prec_incr}), i.e.  if you start with
+    cycles at precision $16$ then $32$, you will need the same number of cycles
+    to reach the lower bound with $32$ bits as if you used only cycles with
+    $32$ bits since the beginning of the algorithm; and that (ii) the number of
+    cycles needed to reach the lower bound is proportional to the number of
+    bits $b$ used (Figure~\ref{fig.bits_accuracy}). We then define
+    $\textsc{MaxIter}(b)$ the number of cycles needed so that the ratio between
+    two consecutive relative residual norms is higher than a threshold $t$. We
+    use the two observations to model $\textsc{MaxIter}(b) = \lfloor kb
+    \rfloor$ for some constant $k$.  Then we can compute the total execution
+    time of the algorithm
+
+    \begin{align*}
+        T_{total}& = \textsc{MaxIter}(b_1)T(b_1)\\ & +  \sum\limits_{i=1}^{n-1}
+        (\textsc{MaxIter}(b_{i+1})-\textsc{MaxIter}(b_i))T(b_{i+1}).
+    \end{align*}
+
+    Indeed, when we reach the number of iterations $\textsc{MaxIter}(b_i)$ we
+    change from precision $b_i$ to precision $b_{i+1}$.  We can rewrite
+    $T_{total}$ as
+
+    \begin{align*}
+        T_{total} &\approx k b_{1} T(b_1) + \sum\limits_{i=1}^{n-1}
+        k(b_{i+1}-b_{i})T(b_{i+1})\\ & \approx k ( b_{n}T(n) +
+        \sum\limits_{i=1}^{n-1} b_i ( T(b_i) - T(b_{i+1})).
+    \end{align*}
+
+    By plugging the expression of $T(b)$ into the previous equation and considering
+    the maximum precision we want is $b_{max}=b_n$, we finally get:
+
+    \begin{equation}
+        T_{total}  = k\alpha\left(b_n^2 + \sum\limits_{i=1}^{n-1} (b_i^2 - b_i b_{i+1})\right) + kb_{max}c.
+    \end{equation}
+
+    Let us consider the function $f(x_1,\dots,x_n) = \sum\limits_{i=1}^n x_i^2
+    - \sum\limits_{i=1}^{n-1} x_ix_{i+1}$. Finding the minimum of
+    $f(x_1,\dots,x_{n-1},1)$ will give us the minimum of the execution time.
+
+    By simple partial derivation: \[ \frac{\partial f(x_1,\dots,x_n)}{\partial
+    x_i} = 2x_i - (1-\delta_{i,n})x_{i+1} - (1-\delta_{i,1})x_{i-1} \] where
+    $\delta_{a,b} $ is equal to 1 if and only if $a=b$, 0 otherwise.
+
+    This is where the boundary condition $x_n = 1$ is useful: if we do not set it
+    to a number different from 0, the function is minimized for
+    $x_1=\dots=x_n=0$. This applied to our problem makes no sense, as we
+    would't be doing any computation. The boundary condition represents the
+    fact that we need to reach an existing precision ($b_{max}$) eventually. By
+    a simple scaling, considering $1$ instead of $b_{max}$ makes computation
+    easier and does not change the resolution of the the following system (up
+    to a factor):
+
+    \resizebox{0.9\linewidth}{!}{
+    $\left\{
+    \begin{tabular}{rcl cccccccccc cl}
     $\frac{\partial f(x_1,\dots,x_n)}{\partial x_1}$ & = & $2x_1$ & $-$ & $x_2$  &     &       & & 	 &&     &     &       & = & 0 \\
     $\frac{\partial f(x_1,\dots,x_n)}{\partial x_2}$ & = & $-x_1$ & $+$ & $2x_2$ & $-$ & $x_3$ & & 	 &&     &     &       & = & 0 \\
     & \vdots &&&&&&&&&&&&&\\
     $\frac{\partial f(x_1,\dots,x_{n})}{\partial x_{n-1}}$ & = &        &     &        &     &       & & $-x_{n-2}$ & $+$ & $2x_{n-1}$ & $-$ & $x_n$ & = & 0 \\
     $x_n$ & = & 1 &&&&&&&&&&&&\\
-   \end{tabular} \right.$
-  }
-  
-  Solving this system of equations is equivalent to solving the linear system $Ax=b$ where
-  \[ A = \begin{bmatrix}
+    \end{tabular} \right.$
+    }
+
+    Solving this system of equations is equivalent to solving the linear system $Ax=b$ where
+    \[ A =
+    \begin{bmatrix}
     2       & -1 &  &  &  \\
     -1       & 2 & -1 &  &  \\
     & \ddots & \ddots & \ddots & \\
     & & -1 & 2 & -1 \\
            &  &  & -1 & 2
-\end{bmatrix} \textup{ and } b = \begin{bmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix} \]
-   
-   This system has a unique solution which is $\begin{bmatrix} \frac{1}{n} & \dots & \frac{n-1}{n} \end{bmatrix}$.
-   The minimum of $f(x_1,\dots,x_n)$ with boundary condition $x_n=1$ is thus reached for $x_i = \frac{i}{n}$.
-   It is, when multiplied by $b_{max}$, the solution that minimizes our total execution time.
-   \end{proof}
-   
-   This proof holds only if the time evolves linearly with $b$, but \textit{we could also apply it to minimize the energy consumption} assuming that the energy consumption of one cycle increases linearly with $b$. The next section will investigate whether
-   this assumption holds.
+    \end{bmatrix}
+    \textup{ and } b = \begin{bmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix} \]
+
+    This system has a unique solution which is $\begin{bmatrix} \frac{1}{n} & \dots
+    & \frac{n-1}{n} \end{bmatrix}$.  The minimum of $f(x_1,\dots,x_n)$ with
+    boundary condition $x_n=1$ is thus reached for $x_i = \frac{i}{n}$.  It
+    is, when multiplied by $b_{max}$, the solution that minimizes our total
+    execution time.
+
+\end{proof}
+
+   This proof holds only if the time evolves linearly with $b$, but \textit{we
+   could also apply it to minimize the energy consumption} assuming that the
+   energy consumption of one cycle increases linearly with $b$. The next
+   section will investigate whether this assumption holds.
+
