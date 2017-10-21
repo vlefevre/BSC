@@ -2414,7 +2414,7 @@ main( int   argc,
          HYPRE_BoomerAMGSetCoarsenType(par_precond, 6);
          HYPRE_BoomerAMGSetStrongThreshold(par_precond, 0.0);
          HYPRE_BoomerAMGSetTruncFactor(par_precond, 0.3);
-         HYPRE_BoomerAMGSetRelaxType(par_precond, 0);
+         HYPRE_BoomerAMGSetRelaxType(par_precond, 6);
          HYPRE_BoomerAMGSetRelaxOrder(par_precond, 0);
          HYPRE_BoomerAMGSetTol(par_precond, val_tolerance);
          HYPRE_BoomerAMGSetPrintLevel(par_precond, print_level);

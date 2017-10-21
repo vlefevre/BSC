@@ -428,7 +428,6 @@ hypre_BoomerAMGCoarsen( hypre_ParCSRMatrix    *S,
          {
             i = graph_array[ig];
 
-	printf("%d : %d,%d\n",i,CF_marker[i],measure_array[i]);
             if ( (CF_marker[i] != C_PT) && (measure_array[i] < 1) )
             {
                /* set to be an F-pt */
