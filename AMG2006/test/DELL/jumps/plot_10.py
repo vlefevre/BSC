@@ -40,6 +40,6 @@ pylab.xlabel("relative residual norm",fontsize=20)
 pylab.ylabel("time (s)",fontsize=20)
 pylab.ylim([0,2])
 pylab.gca().invert_xaxis()
-pylab.legend()
+pylab.legend(loc=2)
 pylab.savefig("time_convergence_fast_10.pdf")
 

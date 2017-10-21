@@ -210,6 +210,7 @@ hypre_BoomerAMGCycle( void              *amg_vdata,
       /*------------------------------------------------------------------
        * Do the relaxation num_sweep times
        *-----------------------------------------------------------------*/
+if (level != 1) {
       for (jj = 0; jj < cg_num_sweep; jj++)
       {
 
@@ -280,6 +281,7 @@ hypre_BoomerAMGCycle( void              *amg_vdata,
                return(Solve_err_flag);
          }
       }
+}
 	t2 = clock();
 	//printf("Level %d relaxation : %f\n",level,(double)(t2-t1)/CLOCKS_PER_SEC*1000.);
 
