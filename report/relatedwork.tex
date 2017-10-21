@@ -1,12 +1,17 @@
 \section{Related Work}
 \label{sec:related}
 
-   Some approximate computing techniques at hardware level exist and could be applied in addition to our ideas. They include fast but slightly incorrect adders~\cite{Gupta:2011}, or voltage-scaling (in SRAM, reducing
-   the voltage by 80\% increases the probability of an unexpected bit flip by around $10^{-5}$~\cite{Sampson:2011})
-   if we are more interested in reducing the energy consumption instead of the execution time.\\
-   Concerning multi-grid algorithms, the opposite of our \emph{Up} strategy has been considered in~\cite{JAMESON}: they do some actual computation when going down in the grid and then simply interpolate to retrieve the solution on the finest grid. The reason for that is that they
-   address a specific problem where some perturbations need to be damped quite efficiently, which is why as soon as they perform some computation on the fine grid they need to use coarse grids even if interpolating directly introduces some errors.
-   Dynamically changing the bit-width of some variables has been done in~\cite{Park:2010} but it is there applied on some part of the data as they are not involved in the same way in the algorithm,
-   which is not the case in a multi-grid solver (all the evaluation points on the grid represent the continuous solution).
+Approximate computing proposals exploit in many different ways the capacity of some computer programs to deliver correct results while operating at low accuracy scenarios: 
+Precision scaling consists in reducing the precision of inputs or intermediate values to reduce storage or computing operands~\cite{Yeh2007, Tian2015}. 
+Other techniques consist in skipping some loop iterations to reduce computational load~\cite{Sidiroglou2011}.
+Load Value Approximation (LVA) consists in exploiting the redundant nature of some computer codes to predict load values and let the execution to progess without stalling~\cite{Miguel2014}.
+Memoization, which is an approach consisting in storing function results to predict the result of subsequent computations, it is being used to achieve performance enhancements and energy consumption reductions~\cite{Alvarez2005, Brumar2017}.  
+Fast but slightly incorrect hardware adders have also been explored~\cite{Gupta:2011}, as well as voltage-scaling to reduce energy consumption at the SRAM level, which increases the probability of bit flips~\cite{Sampson:2011}. 
+Changing the bit-width of some variables has been proposed~\cite{Park:2010} to trade image quality for bandwidth.
+
+Some techniques have been proposed to accelerate MG algorithms. 
+A strategy consisting in   
+carrying out some relaxation steps while going down the V-cycle and interpolating them to finer grid levels has been proposed~\cite{JAMESON}.
+It is aimed at damping perturbations in the linear system solution, even if direct interpolation introduces some degree of error.
 
 
