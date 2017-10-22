@@ -122,12 +122,12 @@ too high in each cycle, leading to a much slower convergence rate (i.e., more
 cycles needed for convergence).  The other thing to notice is that adding more
 relaxations in the last levels slightly increases the execution time but it
 does not provide any benefit on the accuracy side. Thus, strategies
-\emph{Fast2} and \emph{Fast3} are not really efficient.  Only the strategy
-\emph{Fast4} seems to be more or less equivalent to the original V cycle as it
+\emph{Fast2} and \emph{Fast3} are not really efficient.  Overall, strategy \emph{Fast} and strategy
+\emph{Fast4} seem to be more or less equivalent to the original V cycle as it
 reduces a bit the cost of each cycle and the convergence rate per cycle is also
 slightly smaller.  More tests were performed on a smaller matrix with an
-initial matrix size of 64,000 with only a 6-level grid.  The results were
-similar and are not shown in this paper for brevity.
+initial matrix size of 64,000 with only a 6-level grid. The results were
+similar (all strategies except \emph{Fast4} were less efficient than the original algorithm) and are not shown in this paper for brevity.
 
 
 %We find again that the original V cycle seems to be the best as \emph{Fast3}
