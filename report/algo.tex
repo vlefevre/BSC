@@ -1,11 +1,11 @@
-\section{Motivations}
+\section{Motivation and Background}
 \label{sec:motivation}
 
-\leo{In high performance computing (HPC), maximizing performance is the main
+In high performance computing (HPC), maximizing performance is the main
 objective. However, in order to reach extreme scale computing, it is necessary
 to also improve the energy efficiency of current applications and algorithms.
 This section explains why approximate computing is potential solution and why
-MG algorithms are a good candidate for this type of optimizations.}
+MG solvers are a good candidate for this type of optimizations.
 
 \subsection{Approximate Computing}
 \label{sec:approx}
@@ -22,8 +22,8 @@ Also, an approximate approach based on neural networks can speedup an inverse ki
 
 Despite its potential, approximate computing must be applied in an extremely careful way.
 For example, reducing the accuracy of control flow instructions or memory addresses computations may cause segmentation faults.
-Also, applying approximate techniques to floating point computations can potentially bring wrong results or cause iterative algorithms to stall of they are blindly applied.
-The success of approximate approaches requires them to be judicisouly applied to the most low accuracy-tolerant phases of numerical algorithms.
+Also, applying approximate techniques to floating point computations can potentially bring wrong results or cause iterative algorithms to stall if they are blindly applied.
+The success of approximate approaches requires them to be judicisouly applied to the most low-accuracy tolerant phases of numerical algorithms.
 In this paper we apply approximate computing approaches to the MG solver in several different ways.
 Some of them reduce the amount of computations of certain routines while keep the accuracy of each computation, like reducing on the number of relaxation iterations (Section~\ref{sec:pruning}).
 Other approaches keep the number of computations but reduce their accuracy, like using floating point representations with less bits devoted to store the mantissa (Section~\ref{sec:precision}).
@@ -50,7 +50,7 @@ is the V-cycle, already described in Section~\ref{sec:intro}, where a few
 iterations of an iterative method (the \textit{Relaxation} step) is performed
 at each level from the finest to the coarsest level and then in the reverse
 order.  Another common approach is the W-cycle scheme where the coarsest grid
-level is reached twice before going back to the finest grid level.  It is
+level is reached several times before going back to the finest grid level.  It is
 possible to generalize the notion of cycle to a $k$-cycle (where a V-cycle is a
 $1$-cycle and a W-cycle is a $2$-cycle).  Figure~\ref{fig.cycles} shows a
 representation of the V- and the W-cyles with 4 levels where we can see how the
