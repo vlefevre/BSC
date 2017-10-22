@@ -57,27 +57,31 @@
 \maketitle
 \begin{abstract}
 
-    \leo{Multi-grid methods are numerical algorithms used in parallel and
+    Multi-grid methods are numerical algorithms used in parallel and
     distributed processing. The main idea of multi-grid solvers is to speedup
     the convergence of an iterative method by reducing the problem to a coarser
     grid a number of times. Multi-grid methods are widely exploited in many
     application domains, thus it is important to improve  their performance and
     energy efficiency. This paper aims to reach this objective based on the
     following observation: Given that the intermediary steps do not require
-    full accuracy,} it is possible to save time and energy by reducing
+    full accuracy, it is possible to save time and energy by reducing
     precision during some steps while keeping the final result within the
     targeted accuracy.
 
-    \leo{To achieve this goal,} we first introduce a cycle shape different from
+    To achieve this goal, we first introduce a cycle shape different from
     the classic V-cycle used in multi-grid solvers.  Then, we propose to
-    \leo{dynamically change the floating-point precision used during runtime}
-    according to the accuracy needed for each intermediary step.  \leo{Our
-    large scale evaluation with the } BoomerAMG multi-grid solver demonstrates
-    that it is possible to trade temporary precision for time to completion.
+    dynamically change the floating-point precision used during runtime
+    according to the accuracy needed for each intermediary step. Our
+    large scale evaluation with the BoomerAMG multi-grid solver demonstrates
+    that it is possible to trade temporary precision for time to completion without 
+    hurting the quality if the final result.
     In particular, we are able to reach the same accuracy results as a
-    double-precision floating-point algorithm while gaining 15\% improvement of
-    the execution time on a GPU.\ldo{Did we actually execute it on a GPU or
-    just as abstract in the model?}
+    double-precision floating-point algorithm while gaining 15\% execution time 
+    improvement. 
+%of
+%    the execution time on a GPU.
+%\ldo{Did we actually execute it on a GPU or
+%    just as abstract in the model?}
 
 \end{abstract}
 

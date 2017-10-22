@@ -13,8 +13,7 @@ data corruptions than traditional iterative methods deployed over a single
 grid~\cite{Casas12}, which also implies they behave well under reduced accuracy
 scenarios.
 
-Multi-Grid\ldo{Are we going to use MG or Multi-Grid? We should be consistent}
-algorithms rely on a grid of evaluation points that discretize the
+MG solvers rely on a grid of evaluation points that discretize the
 domain of a continuous differential equation.  Typically, MG schemes are
 defined by coarsening a fine-grain grid until reaching a small set of
 evaluation points where a direct method can be applied.
@@ -47,8 +46,8 @@ where we first iterate on the finest grid, then the second finest grid and so
 on until reaching the coarsest grid where a direct solve is used instead of an
 iterative method as the problem size has become smaller.  Then we iterate again
 on all the other grids in the reverse order to have a solution expressed with
-the initial fineness of the grid.  Different parameters, such as the iterative
-method used at each step or the fineness of the grid and the previously
+the initial granularity of the grid.  Different parameters, such as the iterative
+method used at each step or the granularity of the grid and the previously
 mentioned cycle shape, affect the convergence rate of the algorithm.
 
 %Typically, multi-grid schemes are defined by coarsening a fine-grain grid
@@ -80,31 +79,31 @@ beyond the state-of-the-art:
 
 \begin{itemize}
 
-    \item We evaluate the impact of parameters of the solver such as the shape
+    \item We evaluate the performance impact of parameters of the solver such as the shape
         of cycles and the number of iterations.
 
-    \item We propose a cycle configuration and show that it is equally or more
-        efficient than the original algorithm.
+    \item We propose a new cycle configuration and show that it is more
+        efficient than the state-of-the-art configurations by up to 28.3\%.
 
-    \item We \leo{evaluate the impact of different floating-point precisions on
+    \item We evaluate the impact of different floating-point precisions on
         the time to completion while reaching full accuracy on the final
-        result.}
+        result.
 
     \item We propose an algorithm that dynamically adapts the precision of the
         MG algorithm variables to increase performance and efficiency.
 
-    \item We \leo{perform a large evaluation and demonstrate the we can reduce by
+    \item We perform a large evaluation and demonstrate the we can reduce by
         15\% the execution time needed to reach the same quality result as the
         original double-precision algorithm and up to 30\% for smaller
-        accuracies.}
+        accuracies.
 
 \end{itemize}
 
 
-\leo{The reminder of this paper is organized as follows:
+The reminder of this paper is organized as follows:
 Section~\ref{sec:motivation} introduces the motivations for this work.
 Section~\ref{sec:pruning} investigates the impact of different parameters on
 the time to completion.  Section~\ref{sec:precision} explores
 precision-performance trade-offs.  Section~\ref{sec:related} discuss other
-related works and Section~\ref{sec:conclusions} concludes this paper.}
+related works and Section~\ref{sec:conclusions} concludes this paper.
 
