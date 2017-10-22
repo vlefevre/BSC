@@ -3,11 +3,11 @@
 
 \subsection{A new version of multi-grid algorithm}
 
-\leo{Observing the initial results presented on Figure~\ref{fig.first_tests},
+Observing the initial results presented on Figure~\ref{fig.first_tests},
 one can notice that independently of how many relaxations are performed, or
 which cycle shape is used, and more importantly, of how many cycles are
 executed, the residual norm of the algorithm reaches a lower bound (it is
-around $10^{-15}$).} This bound comes from the internal limitations of the
+around $10^{-15}$). This bound comes from the internal limitations of the
 \texttt{double} floating-point representation.  Indeed, a double uses 8 bytes
 (52 bits for the mantissa, 11 for the exponent and 1 bit for the sign).
 Naturally, a space-constrained representation does not allow a full description
@@ -85,20 +85,20 @@ higher precisions in terms of time, space and energy.
     \label{fig.bits_accuracy}
 \end{figure}
 
-The second thing we observe is that \emph{AMGfloat} \ldo{You use different
-labels in the legend} behaves exactly as what we would expect from
+The second thing we observe is that \emph{AMGfloat} 
+behaves exactly as what we would expect from
 \emph{AMGmpfr(24)} in terms of accuracy: it shows the same accuracy as versions
 with more precision in the beginning, then it reaches a threshold between that
-of \emph{AMGmpfr(16)} and that of \emph{AMGmpfr(32)}. \leo{It is important to
+of \emph{AMGmpfr(16)} and that of \emph{AMGmpfr(32)}. It is important to
 notice that in the \emph{AMGfloat} version more variables were changed from
 \texttt{double} to \texttt{float}, however in the \emph{AMGmpfr(24)} version we
-do not observe more accuracy degradation. This is because only} a few
+do not observe more accuracy degradation. This is because only a few
 variables from the 8 scalars control the final precision as they are temporary
 variables used for intermediate computations before being plugged back into the
 input matrix/vector.
 
 Given this analysis, we design a new algorithm that adapts the precision of the
-variables during the execution. It is the same algorithm as \emph{AMGmpfr(b)}
+variables during the execution. It is close to the \emph{AMGmpfr(b)} technique
 except this time the precision can change between two cycles.  We fix a
 threshold on the ratio between the relative residual norm of two consecutive
 steps to trigger the precision change if the gradient is lower than the
@@ -137,9 +137,9 @@ cycles).
     \label{fig.prec_incr}
 \end{figure}
 
-\leo{These results demonstrate that adaptive precision can be used to reach the
+These results demonstrate that adaptive precision can be used to reach the
 same accuracy in the same number of cycles, while each cycle is expected to be
-less energy and time consuming because of lower precision.} At this point two
+less energy and time consuming because of lower precision. At this point two
 questions arise. How to evaluate the energy/time savings of this adaptive
 algorithm in a hypothetical hardware with multiple precisions available? Which
 precisions should be used to maximize these savings? The complexity to answer
@@ -148,9 +148,9 @@ accuracy experiments introduces a huge overhead in the computation. For
 instance, running \emph{AMGmpfr(53)} is about 20 times more time consuming than
 running the classic \emph{AMG}, whereas it represents the same double-precision
 algorithm.  Moreover, this overhead is not influenced by the choice of the
-number of bits.  \leo{Therefore, we cannot use the execution times of the
+number of bits. Therefore, we cannot use the execution times of the
 computations done with MPFR as representatives of performance differences at
-different precisions.}
+different precisions.
 
 
 

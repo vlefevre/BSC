@@ -29,8 +29,9 @@ previous section).}
     of the algorithm; and that (ii) the number of cycles needed to reach the
     lower bound is proportional to the number of bits $b$ used (See
     Figure~\ref{fig.bits_accuracy}). We then define $\textsc{MaxIter}(b)$ the
-    number of cycles needed so that the ratio between two consecutive relative
-    residual norms is higher than a threshold $t$. We use the two observations
+    number of cycles needed so that the ratio between the relative
+    residual norms computed before and after these cycles is higher than a threshold $t$. 
+    We use the two observations
     to model $\textsc{MaxIter}(b) = \lfloor kb \rfloor$ for some constant $k$.
     Then we can compute the total execution time:
 
