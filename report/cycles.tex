@@ -116,10 +116,11 @@ and 2.
 
 We evaluated these 4 proposed strategies in the original $512,000\times
 512,000$ matrix.  The results are shown in Figure~\ref{fig.newstrat}.  The
-first thing to observe is that removing the relaxation at level 1 does not
+first thing to observe is that removing the relaxation at level 2 (i.e. the \emph{Fast} approach) does not
 provide any benefit. It does saves time during each cycle but the accuracy loss
-too high in each cycle, leading to a much slower convergence rate (i.e., more
-cycles needed for convergence).  The other thing to notice is that adding more
+per cycle is too high (i.e., more
+cycles needed for convergence), leading to a convergence rate close to the baseline configuration. 
+The other thing to notice is that adding more
 relaxations in the last levels slightly increases the execution time but it
 does not provide any benefit on the accuracy side. Thus, strategies
 \emph{Fast2} and \emph{Fast3} are not really efficient.  Overall, strategy \emph{Fast} and strategy
@@ -146,10 +147,10 @@ relaxations for different level. However, all these strategies share something
 in common: for a given level they do the same number of relaxations when going
 down or up in the cycle, following a very symmetric behaviour.
 
-\leo{In contrast, the main idea behind a MG algorithm is rather asymmetric. More
+In contrast, the main idea behind a MG algorithm is rather asymmetric. More
 precisely, in MG algorithms the types of computations performed when moving to
 a coarser grid level are different than the type of computations done when
-going back to a finer grid level. In the first case, the objective is } to
+going back to a finer grid level. In the first case, the objective is to
 compute a first approximate solution to the current system while in the second
 case the objective is to refine the error term. In other terms, we first
 compute an approximation at level $l$, then we use the level $l+1$ to compute
@@ -158,20 +159,20 @@ the solution. The two relaxations do not have the same goal.
 
 This analysis opens the door for strategies in which grid levels have a
 different number of relaxations when going down than when going up in the
-cycle.  \leo{In fact, assuming that the values of the error vectors are smaller
+cycle.  In fact, assuming that the values of the error vectors are smaller
 than a given $\epsilon$ from the exact value after just a relaxation step, one
 would not need to do a relaxation before computing the approximate error term
 for the next level, but just compute directly the error term when going back up
 in the cycle. In other words, the relaxations done when going up could
 potentially compensate inaccuracies obtained after removing relaxations when
-going down.} From that idea we define a new asymmetric strategy: we use a
+going down. From that idea we define a new asymmetric strategy: we use a
 V-cycle in which we do one relaxation at each level only when we are going up
 in the cycle (i.e., no relaxations when going down).  We call this strategy
 \emph{Up}.
 
 We run \emph{Up} and \emph{Fast4}, as long as the classical V-cycle, on the
 same matrix of size 512,000. For generality purposes, this time we also
-evaluate other applications: i) 3D laplace with a 9-pt stencil, ii) 3D laplace
+evaluate matrices generated from other physical problems: i) 3D Laplace equation with a 9-pt stencil, ii) 3D Laplace
 with a 27-point stencil, and another iii) 3D partial derivative equation with
 Dirichlet boundary conditions. All problems use the same size of matrix. The
 results are presented in Figure~\ref{fig.up_comparison}.
@@ -186,25 +187,27 @@ results are presented in Figure~\ref{fig.up_comparison}.
     \label{fig.up_comparison}
 \end{figure*}
 
-\leo{The first thing we observe is that the \emph{Fast4} strategy does not
-always performs well. In fact, for two of these four applications the
-convergence rate is significantly slower than the classic V1 strategy.}
+The first thing we observe is that the \emph{Fast4} strategy does not
+always perform well. In fact, for two of these four applications the
+convergence rate is significantly slower than the classic V1 strategy.
 However, the \emph{Up} strategy seems to be quite efficient; it improves
 convergence speed by $12\%$,$7\%$,$20\%$ and $22\%$ for
 \textsc{Unstructured-Anisotropy}, \textsc{3DLaplace-9pt},
 \textsc{3DLaplace-27pt} and \textsc{PDE-Dirichlet} respectively.
 
-\leo{Given these positive results, we extended further our evaluation from
+Given these positive results, we extended further our evaluation from
 single-node runs to distributed executions in multiple nodes, in order to test
 the viability of the \emph{Up} strategy when the algorithm is parallelized and
-distributed.  Larger cases where tested on a cluster with 100 compute nodes.}
+distributed. Larger cases where tested on a cluster with 100 compute nodes, 
+each node equippred with 2 Intel Xeon E5-2630 v3 Haswell 8-core processors, 
+each core at 2.4 GHz, and with 20 MB L3 cache.
 %Each node is equipped with 2 Intel processors, 2 nvidia GPUs, over 20GB of DRAM
 %and all connected through an Infiniband network.}
 
 The total size of the matrix is set to either 5,832,000 or 13,824,000, while
 the topology will be composed of either 27 (3x3x3), 36 (6x6x1) or 64 (4x4x4)
 processors, where each processor holds 1 MPI process and runs 1 OpenMP
-thread per process. The problems tested were \textsc{3DLaplace-9pt} and
+thread per process. The problems tested are \textsc{3DLaplace-9pt} and
 \textsc{3DLaplace-27pt}.  For these 6 possible combinations, we observe an
 average improvement of 18.4\% (ranging from 16.0\% to 28.3\%) for
 \textsc{3DLaplace-9pt} and 20.5\% (ranging from 16.2\% to 25.0\%) for
@@ -212,7 +215,7 @@ average improvement of 18.4\% (ranging from 16.0\% to 28.3\%) for
 classical V-cycle when the problem size increases, but seems to cap at around
 25\% improvement. Figure~\ref{fig.mtup} presents the results for the matrix
 size 13,824,000 and \textsc{3DLaplace-27pt}, for the 3 different processor
-topologies. Similar results were observed for the other application but are not
+topologies. Similar results are obtained for the other application but are not
 shown here for brevity.
 
 \begin{figure*}[t]
