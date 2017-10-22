@@ -151,38 +151,40 @@
    This can be either an addition or a multiplication. In particular, we provide a scenario where the available precisions are 11, 24 and 53 (represented by a starting precision of 11 and a multiplicator of 2.24). This
    corresponds to the case where half-precision, single-precision and double-precision floating points are available, as it is the case on GPUs.
    
-   \begin{figure}
-    \includegraphics[width=\linewidth]{figs/cost_3.pdf}
+   \begin{figure*}
+    \includegraphics[width=0.33\linewidth]{figs/cost_3.pdf}
+    \includegraphics[width=0.33\linewidth]{figs/cost_7.pdf}
+    \includegraphics[width=0.33\linewidth]{figs/cost_15.pdf}
     \caption{}
     \label{fig.estimation1}
-   \end{figure}
+   \end{figure*}
    %\begin{figure}
    % \includegraphics[width=\linewidth]{figs/cost_5.pdf}
    % \caption{}
    % \label{fig.estimation2}
    %\end{figure}
-   \begin{figure}
-    \includegraphics[width=\linewidth]{figs/cost_7.pdf}
-    \caption{}
-    \label{fig.estimation3}
-   \end{figure}
+   %\begin{figure}
+   % \includegraphics[width=\linewidth]{figs/cost_7.pdf}
+   % \caption{}
+   % \label{fig.estimation3}
+   %\end{figure}
    %\begin{figure}
    % \includegraphics[width=\linewidth]{figs/cost_10.pdf}
    % \caption{}
    % \label{fig.estimation4}
    %\end{figure}
-   \begin{figure}
-    \includegraphics[width=\linewidth]{figs/cost_15.pdf}
-    \caption{}
-    \label{fig.estimation5}
-   \end{figure}
+   %\begin{figure}
+   % \includegraphics[width=\linewidth]{figs/cost_15.pdf}
+   % \caption{}
+   % \label{fig.estimation5}
+   %\end{figure}
    
-   Figures~\ref{fig.estimation1} to~\ref{fig.estimation5} represents the cost of the algorithm, for these different scenarios, to reach different accuracy in the output ($10^{-3}$, $10^{-7}$ and $10^{-15}$ here) using
+   Figure~\ref{fig.estimation1} represents the cost of the algorithm, for these different scenarios, to reach different accuracy in the output ($10^{-3}$ on the left, $10^{-7}$ in the middle and $10^{-15}$ on the right) using
    a value for the $\alpha$ parameter of 0.3. We can see that the strategy that increases by only 1 the number of mantissa bits (labelled \texttt{8\_1}) takes more time than the original algorithm (labelled \texttt{53\_0}) for the 5 different accuracies presented. This is because, in the previous experiments we saw
    there is usually the same number of cycles in all our strategies (see Figure~\ref{fig.prec_incr}). Here, the convergence rate is limited by the slowly increasing number of precision bits: by adding one bit we can divide by at most 2 the 
    accuracy on the residual norm while the original algorithm can divide by more than that in one cycle if it is not limited by the bitwidth of the variables.
    If we focus on the GPU case (labelled \texttt{11\_x2.24}), we can see that, compared to the original algorithm (which uses only double-precision), we improve by 35\% the time to reach 
-   accuracy $10^{-3}$ (see Figure~\ref{fig.estimation1}). If one adapts the algorithm to use only single-precision variables (labelled \texttt{24\_0}) as it would be sufficient to reach this accuracy, we would still reduce the time by 17\% (still Figure~\ref{fig.estimation1}). Then the improvement slowly decreases when increasing the accuracy to reach 10\% (on Figure~\ref{fig.estimation5}).
+   accuracy $10^{-3}$ (see Figure~\ref{fig.estimation1}). If one adapts the algorithm to use only single-precision variables (labelled \texttt{24\_0}) as it would be sufficient to reach this accuracy, we would still reduce the time by 17\% (still Figure~\ref{fig.estimation1}). Then the improvement slowly decreases when increasing the accuracy to reach 10\% (for $10^{-15}$ on Figure~\ref{fig.estimation1}).
    
    \subsection{Summary of results}
    
@@ -240,5 +242,5 @@
    
    The main result is that even to reach the maximum precision, we improve the execution time by more than 15\%. When it comes to smaller precisions, this improvement can be as high as 30\% compared to
    a single-precision algorithm and it even goes up to 45\% compared to the original double-precision version. We insist to remember that these results for the adaptive algorithm use 3 different precisions (11,24,53)
-   whereas if other architectures would be available it would be possible to improve even more the execution by using more different precisions. For example, as we see on Figure~\ref{fig.estimation5}, using precisions
-   4,8,12,16,\dots,48,52,53 should lead to a faster execution.
+   whereas if other architectures would be available it would be possible to improve even more the execution by using more different precisions. For example, as we see on Figure~\ref{fig.estimation1}, using precisions
+   4,8,12,16,\dots,48,52,53 should lead to a faster execution for reaching $10^{-15}$.
