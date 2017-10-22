@@ -8,7 +8,7 @@ The second way to improve the algorithm is to adapt the precisions of the floati
 We use low precisions levels during the very first MG's cycles and we increase them as the execution progresses. 
 Repeating this operation until reaching the maximum available accuracy available leads to significant speedups.
 We estimate the benefits of these two approaches combined on different scenarios. 
-When using a GPU, we can reduce by 16.4\% and 14.5\% the execution using double- and single-precision, respectively. 
+When combining half-, single- and double-precisions, we can reduce by 16.4\% and 14.5\% the execution time using double- or single-precision, respectively, during the whole execution. 
 
 In the future we plan to explore additional ideas to reduce the execution time even more like changing the precision used in different levels of a cycle. 
 %However, we think that it is not
