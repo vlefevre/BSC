@@ -156,28 +156,28 @@
     \caption{}
     \label{fig.estimation1}
    \end{figure}
-   \begin{figure}
-    \includegraphics[width=\linewidth]{figs/cost_5.pdf}
-    \caption{}
-    \label{fig.estimation2}
-   \end{figure}
+   %\begin{figure}
+   % \includegraphics[width=\linewidth]{figs/cost_5.pdf}
+   % \caption{}
+   % \label{fig.estimation2}
+   %\end{figure}
    \begin{figure}
     \includegraphics[width=\linewidth]{figs/cost_7.pdf}
     \caption{}
     \label{fig.estimation3}
    \end{figure}
-   \begin{figure}
-    \includegraphics[width=\linewidth]{figs/cost_10.pdf}
-    \caption{}
-    \label{fig.estimation4}
-   \end{figure}
+   %\begin{figure}
+   % \includegraphics[width=\linewidth]{figs/cost_10.pdf}
+   % \caption{}
+   % \label{fig.estimation4}
+   %\end{figure}
    \begin{figure}
     \includegraphics[width=\linewidth]{figs/cost_15.pdf}
     \caption{}
     \label{fig.estimation5}
    \end{figure}
    
-   Figures~\ref{fig.estimation1} to~\ref{fig.estimation5} represents the cost of the algorithm, for these different scenarios, to reach different accuracy in the output (from $10^{-3}$ to $10^{-15}$ here) using
+   Figures~\ref{fig.estimation1} to~\ref{fig.estimation5} represents the cost of the algorithm, for these different scenarios, to reach different accuracy in the output ($10^{-3}$, $10^{-7}$ and $10^{-15}$ here) using
    a value for the $\alpha$ parameter of 0.3. We can see that the strategy that increases by only 1 the number of mantissa bits (labelled \texttt{8\_1}) takes more time than the original algorithm (labelled \texttt{53\_0}) for the 5 different accuracies presented. This is because, in the previous experiments we saw
    there is usually the same number of cycles in all our strategies (see Figure~\ref{fig.prec_incr}). Here, the convergence rate is limited by the slowly increasing number of precision bits: by adding one bit we can divide by at most 2 the 
    accuracy on the residual norm while the original algorithm can divide by more than that in one cycle if it is not limited by the bitwidth of the variables.
