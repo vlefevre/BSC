@@ -1,6 +1,11 @@
 import pylab
 from scipy import stats
 
+font = {'family' : 'normal',
+        'size'   : 15}
+
+pylab.rc('font', **font)
+
 V_1 = pylab.loadtxt("tol_0_orig_240_27",skiprows=1)
 V_1_up = pylab.loadtxt("tol_0_up_240_27",skiprows=1)
 
