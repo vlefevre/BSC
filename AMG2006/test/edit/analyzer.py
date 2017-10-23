@@ -10,6 +10,11 @@ import matplotlib.patches as mpatches
 import numpy as np
 import math
 
+font = {'family' : 'normal',
+        'size'   : 15}
+
+pylab.rc('font', **font)
+
 #Default parameters
 max_prec = 53
 thr = 0.5
@@ -113,8 +118,8 @@ for key in sorted(colors):
 	rpatch = mpatches.Patch(color=colors[key], label=str(key))
 	handles.append(rpatch)
 plt.legend(loc=2,handles=handles,ncol=(len(colors)+1)/2,prop={'size':10},title='Number of precisions used')
-plt.ylabel("Units of time")
-plt.xlabel("Precision sets")
+plt.ylabel("Units of time",fontsize=20)
+plt.xlabel("Precision sets",fontsize=20)
 plt.xticks(pylab.arange(0,len(result)),resultplot[:,0],rotation='vertical')
 plt.title(r"Time to reach accuracy "+str(tolerance)+"\nfor different strategies with threshold "+str(thr)+"\nand time model is $T(b)=b^{"+str(alpha)+"}$.")
 plt.xlim([0,len(files)])
