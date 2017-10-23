@@ -144,7 +144,7 @@
    considered will be of size $n^3 \times n^3$ as we consider 3D problems). %Results are reported in Table~\ref{table.time_measure1}.
    
    Then, using Python's lmfit package, we interpolate the data to find good values for $a,c$ and $\alpha$. We are able to estimate different values of $\alpha$, all between 0.20 and 0.32, using 3
-   different applications, 2 types of cycles (the classic V-cycle and the \emph{Up} strategy) and 2 types of relaxation method (weighted Jacobi and an hybrid method).
+   different applications, 2 types of cycles (the classic V-cycle and the \emph{Up} strategy) and 2 types of relaxation method (weighted Jacobi and an hybrid method). Each data-fitting was done on either 30 or 40 points.
    With these values of $\alpha$, we can estimate the cost of our algorithm in units of time by $\left(\frac{b}{53}\right)^\alpha$ for a cycle (1 unit = 1 V-cycle at double-precision) with $b$ the number of significant
    bits (i.e. the number of bits in the mantissa plus one, as one bit is always assumed in standard floating point representation). Then using the MPFR library we can create different
    scenarios that set the number of bits used at each cycle in a different way. We define all these scenarios by the first precision ($b$ in the manstissa)) used and how to update it ($delta$ bits added in the mantissa when the threshold is reached for a given precision).
