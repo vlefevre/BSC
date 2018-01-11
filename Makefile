@@ -2,8 +2,8 @@ TEX=pdflatex
 BIB=bibtex
 
 STEM=report
-DIR=report
-INC= $(wildcard report/*.tex)
+DIR=ICS
+INC= $(wildcard $(DIR)/*.tex)
 
 TARGET=$(STEM).pdf
 SRC = $(STEM).tex
