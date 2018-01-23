@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 	    }
         }
     }
-    for (int i=0; i<norm.size(); i++)
+    for (int i=0; i<50; i++)
     {
         norm[i]/=100;
         val[i]/=100;

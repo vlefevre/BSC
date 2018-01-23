@@ -1,12 +1,12 @@
 \subsection{\leo{Cycle Complexity Breakdown}}
 
-Given the previous results, we plan to investigate how to improve the
+Given the previous results, we embarked to investigate how to improve the
 efficiency of the simple V-cycle with 1 relaxation step. The first step is to
 breakdown the time spent in the different parts of a cycle. Note that all the
 matrices for each level are computed in a setup phase and it is not necessary
 to analyze that setup time. We only focus on measuring the following two
 computations: (i) the time spent doing a relaxation at each level and (ii) the
-time spent computing the next linear system. The later (i.e., computing the
+time spent computing the next linear system. The latter (i.e., computing the
 next linear system) can be divided in two options: \emph{going down} by
 restricting the solution to a coarser grid, which corresponds to a sparse
 matrix-vector computation; and \emph{going up} by interpolating the error term
@@ -28,11 +28,11 @@ which also corresponds to another sparse matrix-vector computation.
   \hline
   5 & 4,238 & 386,333 & 1 ms & 1 ms & 0.5 ms & 0.2 ms\\
   \hline
-  6 & 609 & 53,493 & 0 ms & 0 ms & 0 ms & 0 ms\\
+  6 & 609 & 53,493 & $< 0.1$ ms & $< 0.1$ ms & $< 0.1$ ms & $< 0.1$ ms\\
   \hline
-  7 & 69 & 2,873 & 0 ms & 0 ms & 0 ms & 0 ms\\
+  7 & 69 & 2,873 & $< 0.1$ ms & $< 0.1$ ms & $< 0.1$ ms & $< 0.1$ ms\\
   \hline
-  8 & 2 & 4 & 0 ms & - & - & 0 ms\\
+  8 & 2 & 4 & $< 0.1$ ms & - & - & $< 0.1$ ms\\
   \hline
  \end{tabular}
  }
@@ -47,7 +47,7 @@ depicted in Table~\ref{table.measures}, along with information on the matrix
 used at the corresponding level, such as matrix size and the number of non-zero
 elements.  Our first observation is that there is a direct correlation between
 the time spent on relaxations at each given level and the number of non-zero
-entries in the input matrix. Most importantly, in this results we observe that
+entries in the input matrix. Most importantly, in these results we observe that
 relaxations represent $\approx66\%$ of the total cost of a V-cycle, while the
 matrix-vector multiplications are only $\approx30\%$. In addition, we notice
 that the two first levels are the most expensive ones.  It is important to
@@ -97,7 +97,7 @@ step further. If we assume that doing more than one relaxation gets a more
 accurate error estimation at level $l$, then at level $l-1$ we do not need to
 correct a lot by doing more relaxations. However at level $l-2$ we have been
 through 2 interpolations since the last good estimation of the error vector,
-therefore we increasing the number of relaxations again. Since the first levels
+therefore we increase the number of relaxations again. Since the first levels
 are very expensive, we stop this recursion at level 3.  Finally, we propose one
 last strategy \emph{Fast4} which is a softer version of \emph{Fast} where the
 relaxation at level 3 is removed, producing a less accurate result at that
@@ -117,7 +117,7 @@ and 2.
 We evaluated these 4 proposed strategies in the original $512,000\times
 512,000$ matrix.  The results are shown in Figure~\ref{fig.newstrat}.  The
 first thing to observe is that removing the relaxation at level 2 (i.e. the \emph{Fast} approach) does not
-provide any benefit. It does saves time during each cycle but the accuracy loss
+provide any benefit. It does save time during each cycle but the accuracy loss
 per cycle is too high (i.e., more
 cycles needed for convergence), leading to a convergence rate close to the baseline configuration. 
 The other thing to notice is that adding more
@@ -142,8 +142,8 @@ similar (all strategies except \emph{Fast4} were less efficient than the origina
 In the previous section, we observed no big improvement compared to the
 original V-cycle with 1 relaxation at each level, except for strategy
 \emph{Fast4} which did show some slight improvement. Initially, we applied the
-same number of relaxations at all levels; then we tried different number of
-relaxations for different level. However, all these strategies share something
+same number of relaxations at all levels; then we tried different numbers of
+relaxations for different levels. However, all these strategies share something
 in common: for a given level they do the same number of relaxations when going
 down or up in the cycle, following a very symmetric behaviour.
 
@@ -198,24 +198,24 @@ convergence speed by $12\%$,$7\%$,$20\%$ and $22\%$ for
 Given these positive results, we extended further our evaluation from
 single-node runs to distributed executions in multiple nodes, in order to test
 the viability of the \emph{Up} strategy when the algorithm is parallelized and
-distributed. Larger cases where tested on a cluster with 100 compute nodes, 
+distributed. Larger cases were tested on a cluster with 100 compute nodes, 
 each node equippred with 2 Intel Xeon E5-2630 v3 Haswell 8-core processors, 
 each core at 2.4 GHz, and with 20 MB L3 cache.
 %Each node is equipped with 2 Intel processors, 2 nvidia GPUs, over 20GB of DRAM
 %and all connected through an Infiniband network.}
 
 The total size of the matrix is set to either 5,832,000 or 13,824,000, while
-the topology will be composed of either 27 (3x3x3), 36 (6x6x1) or 64 (4x4x4)
+the topology is composed of either 27 (3x3x3), 36 (6x6x1) or 64 (4x4x4)
 processors, where each processor holds 1 MPI process and runs 1 OpenMP
 thread per process. The problems tested are \textsc{3DLaplace-9pt} and
 \textsc{3DLaplace-27pt}.  For these 6 possible combinations, we observe an
 average improvement of 18.4\% (ranging from 16.0\% to 28.3\%) for
 \textsc{3DLaplace-9pt} and 20.5\% (ranging from 16.2\% to 25.0\%) for
-\textsc{3DLaplace-27pt}. It seems that \emph{Up} outperforms even more the
-classical V-cycle when the problem size increases, but seems to cap at around
+\textsc{3DLaplace-27pt}. It seems that \emph{Up} outperforms the
+classical V-cycle even more when the problem size increases, but seems to cap at around
 25\% improvement. Figure~\ref{fig.mtup} presents the results for the matrix
 size 13,824,000 and \textsc{3DLaplace-27pt}, for the 3 different processor
-topologies. Similar results are obtained for the other application but are not
+topologies. Similar results are obtained for the other applications but are not
 shown here for brevity.
 
 \begin{figure*}[t]

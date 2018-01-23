@@ -20,7 +20,7 @@ that are not fully representable.
 The advantage of using lower precision for the floating point operations is a
 faster and more energy-efficient computation. \leo{The reason for these gains
 is that floating-point units (FPUs) require more circuit logic (silicon for
-ASICs, LABs/DSPs for FPGAs) for high precision operators. Thus, reducing
+ASICs, LABs/DSPs for FPGAs) for high precision operators (the required area for a FPU increases at least linearly with the number of bits~\cite{govindu:2003}). FPUs Thus, reducing
 precision allows more low precision FPUs, which increases the Instruction-Level
 Parallelism (ILP) or Vectorization that the processor can reach, hence
 increasing its peak performance.}
@@ -31,12 +31,12 @@ an accuracy} of only $10^{-3}$ then the 64 bits \texttt{double} floating-point
 representation is not needed to reach it, a lower precision is enough.
 Moreover, analysing the presented results, it seems clear than during the first
 cycles the accuracy is low and it does not require the full precision offered by
-the double floating-point representation. This observation opens to door for
+the double floating-point representation. This observation opens the door for
 making use of lower precisions temporarily during the first cycles. Therefore, it
 is important to study the impact of precision on performance for MG algorithms.
 
 \leo{To study the trade-off between precision and performance,} we modify the
-relaxations step of the algorithm (remind that it is the more time consuming
+relaxations step of the algorithm (note that it is the more time consuming
 part of the algorithm). In this function we can find 13 internal variables that
 are originally of type \texttt{double}: 5 arrays and 8 scalars. We then propose
 the following two modified versions of the MG algorithm.
@@ -121,7 +121,7 @@ accuracy for the original algorithm and the 3 new adaptive strategies
 introduced.  We see some steps appear, corresponding to the lower bound on the
 accuracy at the current precision. Then, the precision is adapted to be able to
 improve the overall accuracy. Even if we lose some accuracy when waiting for
-the ratio between two consecutive relative residual norm to reach the
+the ratio between two consecutive relative residual norms to reach the
 threshold; when the precision changes the convergence rate is more important
 (for one cycle) than that of the original double-precision algorithm (i.e. the
 slope is bigger), allowing the adaptive strategies to quickly \emph{catch-up}

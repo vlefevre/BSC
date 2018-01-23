@@ -4,7 +4,7 @@
 In high performance computing (HPC), maximizing performance is the main
 objective. However, in order to reach extreme scale computing, it is necessary
 to also improve the energy efficiency of current applications and algorithms.
-This section explains why approximate computing is potential solution and why
+This section explains why approximate computing is a potential solution and why
 MG solvers are a good candidate for this type of optimizations.
 
 \subsection{Approximate Computing}
@@ -13,11 +13,11 @@ MG solvers are a good candidate for this type of optimizations.
 %\leo{A very brief introduction to approximate computing.. }
 %\marc{
 
-Approximate computing categorizes a wide set of techniques aimed at trading off computation's quality with cost.
+Approximate computing categorizes a wide set of techniques aimed at trading off computation quality with performance and/or energy.
 It is based on the intuition that operating at peak level accuracy may produce significant resource waste without adding any valuable information to the numerical data.
 The increasing restrictions that parallel architectures are suffering in terms of power and circuitry area have made the approximate computing field an appealing and cost-effective approach that can be potentially applied to a wide range of application domains like data analytics, scientific computing, multimedia or signal
 processing~\cite{Mittal2016}.
-Indeed, recent approaches demonstrate how up to 50x enery savings can be achieved when applying approximate computations to the k-means clustering algorithm while only losing 5\% classificatin accuracy~\cite{Chippa2013}.
+Indeed, recent approaches demonstrate how up to 50x energy savings can be achieved when applying approximate computations to the k-means clustering algorithm while only losing 5\% classification accuracy~\cite{Chippa2013}.
 Also, an approximate approach based on neural networks can speedup an inverse kinematics application by more than 20x by allowing a final application error of just 5\%~\cite{Grigorian2015}.
 
 Despite its potential, approximate computing must be applied in an extremely careful way.
@@ -25,8 +25,9 @@ For example, reducing the accuracy of control flow instructions or memory addres
 Also, applying approximate techniques to floating point computations can potentially bring wrong results or cause iterative algorithms to stall if they are blindly applied.
 The success of approximate approaches requires them to be judicisouly applied to the most low-accuracy tolerant phases of numerical algorithms.
 In this paper we apply approximate computing approaches to the MG solver in several different ways.
-Some of them reduce the amount of computations of certain routines while keep the accuracy of each computation, like reducing on the number of relaxation iterations (Section~\ref{sec:pruning}).
-Other approaches keep the number of computations but reduce their accuracy, like using floating point representations with less bits devoted to store the mantissa (Section~\ref{sec:precision}).
+Some of them reduce the amount of computations of certain routines while keeping the accuracy of each computation, like reducing on the number of relaxation iterations (Section~\ref{sec:pruning}).
+Other approaches keep the number of computations but reduce their accuracy, like using floating point representations with less bits devoted to store the mantissa (Section~\ref{sec:precision}), only at some points in the computation so that
+the impact on the final solution stays minimal.
 
  
 

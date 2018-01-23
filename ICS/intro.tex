@@ -6,8 +6,8 @@ emerged in the 80's to increase the convergence rate of more classical
 iterative methods.  They became even more important with the advent of very
 complex scientific applications~\cite{Ashby1996}, which required very powerful
 linear solvers.  The usage of MG solvers has become a common practice in
-today's parallel systems due to the good scalability properties this methods
-display, which have been detailedly analyzed and modeled~\cite{Gahvari11}.
+today's parallel systems due to the good scalability properties of these methods,
+which have been analyzed and modeled in detail~\cite{Gahvari11}.
 Also, MG solvers have been reported to display more robustness against silent
 data corruptions than traditional iterative methods deployed over a single
 grid~\cite{Casas12}, which also implies they behave well under reduced accuracy
@@ -71,10 +71,12 @@ mentioned cycle shape, affect the convergence rate of the algorithm.
 %by using a finer grid but at the cost of a performance degradation.
 
 In this context, this paper investigates different trade-offs between accuracy
-and execution time for MG algorithms. This paper focuses its effort on
+and execution time for MG algorithms. We focus our efforts on
 one of the most popular parallel implementation of a multi-grid solver, the
 BoomerAMG~\cite{boomerAMG}, implemented in the HYPRE
-library~\cite{Falgout2002}.  This paper makes the following contributions
+library~\cite{Falgout2002}. Basically, we change the shape of the V-cycle and adapt the number of relaxations at each cycle for performance. Additionnally,
+we also propose a multi-grid algorithm to dynamically optimize the floating-point precision to increase performance while maintaining the quality of the solution.
+This paper makes the following contributions
 beyond the state-of-the-art:
 
 \begin{itemize}
@@ -94,8 +96,7 @@ beyond the state-of-the-art:
 
     \item We perform a large evaluation and demonstrate the we can reduce by
         15\% the execution time needed to reach the same quality result as the
-        original double-precision algorithm and up to 30\% for smaller
-        accuracies.
+        original double-precision algorithm and up to 30\% for accuracies smaller than max single-precision accuracy.
 
 \end{itemize}
 
