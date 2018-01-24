@@ -71,11 +71,11 @@ mentioned cycle shape, affect the convergence rate of the algorithm.
 %by using a finer grid but at the cost of a performance degradation.
 
 In this context, this paper investigates different trade-offs between accuracy
-and execution time for MG algorithms. We focus our efforts on
+and execution time (or energy consumption) for MG algorithms. We focus our efforts on
 one of the most popular parallel implementation of a multi-grid solver, the
 BoomerAMG~\cite{boomerAMG}, implemented in the HYPRE
 library~\cite{Falgout2002}. Basically, we change the shape of the V-cycle and adapt the number of relaxations at each cycle for performance. Additionnally,
-we also propose a multi-grid algorithm to dynamically optimize the floating-point precision to increase performance while maintaining the quality of the solution.
+we also propose a multi-grid algorithm to dynamically optimize the floating-point precision to increase the performance (or to reduce the energy consumption) while maintaining the quality of the solution.
 This paper makes the following contributions
 beyond the state-of-the-art:
 
