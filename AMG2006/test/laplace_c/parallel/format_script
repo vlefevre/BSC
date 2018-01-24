@@ -1,0 +1,12 @@
+rm mi_inf_*
+rm tol_0_*
+for f in *
+do
+    if [ $f != "format_script" ]
+    then
+        ff="tol_0_$f"
+        fff="mi_inf_$f"
+        ../../edit/iter_filter2 $f > $ff
+        ../../edit/convert2iter $ff > $fff
+    fi
+done
