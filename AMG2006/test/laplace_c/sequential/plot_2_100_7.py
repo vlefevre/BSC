@@ -6,9 +6,9 @@ font = {'family' : 'normal',
 
 pylab.rc('font', **font)
 
-V_1 = pylab.loadtxt("tol_0_10_1_1_80",skiprows=1)
-V_1_fast4 = pylab.loadtxt("tol_0_fast_10_1_1_80",skiprows=1)
-V_1_up = pylab.loadtxt("tol_0_up_10_1_1_80",skiprows=1)
+V_1 = pylab.loadtxt("tol_0_2_100_7_80",skiprows=1)
+V_1_fast4 = pylab.loadtxt("tol_0_fast_2_100_7_80",skiprows=1)
+V_1_up = pylab.loadtxt("tol_0_up_2_100_7_80",skiprows=1)
 
 fig, ax1 = pylab.subplots()
 ax1.semilogy(V_1[:,0],V_1[:,1],color='r',label='V_1')
@@ -34,7 +34,7 @@ ax1.set_xlabel("#iterations")
 ax1.set_xlim([0,80])
 
 fig.tight_layout()
-pylab.savefig('convergence_fast_10_1_1.pdf')
+pylab.savefig('convergence_fast_2_100_7.pdf')
 pylab.clf()
 
 
@@ -46,5 +46,5 @@ pylab.xlabel("relative residual norm",fontsize=20)
 pylab.ylabel("time (s)",fontsize=20)
 pylab.gca().invert_xaxis()
 pylab.legend(loc=2)
-pylab.savefig("time_convergence_fast_10_1_1.pdf")
+pylab.savefig("time_convergence_fast_2_100_7.pdf")
 
