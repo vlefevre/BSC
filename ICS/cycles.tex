@@ -171,10 +171,10 @@ in the cycle (i.e., no relaxations when going down).  We call this strategy
 \emph{Up}.
 
 We run \emph{Up} and \emph{Fast4}, as long as the classical V-cycle, on the
-same matrix of size 512,000. For generality purposes, this time we 
+same inputs. For generality purposes, this time we 
 evaluate matrices generated from other physical problems besides the Unstructured-Anisotropy one: i) 3D Laplace equation with a 9-pt stencil (considering three diffrent configurations of the $c_x,c_y,c_z$ anisotropy parameters), ii) 3D Laplace
 with a 27-point stencil and iii) 3D Laplace partial derivative equation with
-Dirichlet boundary conditions. All problems use the same domain size. The
+Dirichlet boundary conditions. All problems use the same matrix size of 512,000. The
 results are presented in Figure~\ref{fig.up_comparison}.
 
 \begin{figure*}
@@ -193,9 +193,9 @@ The first thing we observe is that the \emph{Fast4} strategy does not
 always perform well. In fact, for two of these four applications the
 convergence rate is significantly slower than the classic V1 strategy.
 However, the \emph{Up} strategy seems to be quite efficient; it improves
-convergence speed by $12\%$, $7\%$, $20\%$ and $22\%$ for
-\textsc{Unstructured-Anisotropy}, \textsc{3DLaplace-9pt},
-\textsc{3DLaplace-27pt(1,1,1)} and \textsc{PDE-Dirichlet} respectively.
+convergence speed by $12\%$, $7\%$, $26\%$, $7\%$, $20\%$ and $22\%$ for
+\textsc{Unstructured-Anisotropy}, \textsc{3DLaplace-9pt(1,1,1)}, \textsc{3DLaplace-9pt(0.1,0.1,0.01)}, \textsc{3DLaplace-9pt(5,5,5)},
+\textsc{3DLaplace-27pt} and \textsc{PDE-Dirichlet} respectively.
 
 Given these positive results, we extended further our evaluation from
 single-node runs to distributed memory executions in multiple nodes, in order to test
