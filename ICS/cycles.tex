@@ -119,7 +119,7 @@ We evaluated these 4 proposed strategies in the original $512,000\times
 first thing to observe is that removing the relaxation at level 2 (i.e. the \emph{Fast} approach) does not
 provide any benefit. It does save time during each cycle but the accuracy loss
 per cycle is too high (i.e., more
-cycles needed for convergence), leading to a convergence rate close to the baseline configuration. 
+cycles needed for convergence), leading to a convergence rate close to the baseline configuration.
 The other thing to notice is that adding more
 relaxations in the last levels slightly increases the execution time but it
 does not provide any benefit on the accuracy side. Thus, strategies
@@ -179,12 +179,12 @@ results are presented in Figure~\ref{fig.up_comparison}.
 
 \begin{figure*}
     \centering
-    \subfloat[\textsc{Unstructured-Anisotropy}]{\includegraphics[width=0.45\linewidth]{figs/time_convergence_up_1.pdf}}
-    \subfloat[\textsc{3DLaplace-9pt(1,1,1)}]{\includegraphics[width=0.45\linewidth]{figs/time_convergence_up_2.pdf}}\\
-    \subfloat[\textsc{3DLaplace-9pt(0.1,0.1,0.01)}]{\includegraphics[width=0.45\linewidth]{figs/time_convergence_up_5.pdf}}
-    \subfloat[\textsc{3DLaplace-9pt(5,5,5)}]{\includegraphics[width=0.45\linewidth]{figs/time_convergence_up_6.pdf}}\\
-    \subfloat[\textsc{3DLaplace-27pt}]{\includegraphics[width=0.45\linewidth]{figs/time_convergence_up_3.pdf}}
-    \subfloat[\textsc{PDE-Dirichlet}]{\includegraphics[width=0.45\linewidth]{figs/time_convergence_up_4.pdf}}
+    \subfloat[\textsc{Unstructured-Anisotropy}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_1.pdf}}
+    \subfloat[\textsc{3DLaplace-9pt(1,1,1)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_2.pdf}}
+    \subfloat[\textsc{3DLaplace-9pt(0.1,0.1,0.01)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_5.pdf}}\\
+    \subfloat[\textsc{3DLaplace-9pt(5,5,5)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_6.pdf}}
+    \subfloat[\textsc{3DLaplace-27pt}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_3.pdf}}
+    \subfloat[\textsc{PDE-Dirichlet}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_4.pdf}}
     \caption{Comparison of the original algorithm V1 with \emph{Fast4} and \emph{Up} strategies.}
     \label{fig.up_comparison}
 \end{figure*}
@@ -200,8 +200,8 @@ convergence speed by $12\%$,$7\%$,$20\%$ and $22\%$ for
 Given these positive results, we extended further our evaluation from
 single-node runs to distributed executions in multiple nodes, in order to test
 the viability of the \emph{Up} strategy when the algorithm is parallelized and
-distributed. Larger cases were tested on a cluster with 100 compute nodes, 
-each node equippred with 2 Intel Xeon E5-2630 v3 Haswell 8-core processors, 
+distributed. Larger cases were tested on a cluster with 100 compute nodes,
+each node equippred with 2 Intel Xeon E5-2630 v3 Haswell 8-core processors,
 each core at 2.4 GHz, and with 20 MB L3 cache.
 %Each node is equipped with 2 Intel processors, 2 nvidia GPUs, over 20GB of DRAM
 %and all connected through an Infiniband network.}

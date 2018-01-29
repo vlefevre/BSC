@@ -147,6 +147,17 @@ want to keep the model simple enough and see if the data can fit it.
 %     \includegraphics[width=\textwidth]{figs/3157_10.pdf}\\
 %     \includegraphics[width=\textwidth]{figs/3157_15.pdf}
 
+\begin{figure*}
+    \includegraphics[width=0.33\linewidth]{figs/cost_3.pdf}
+    \includegraphics[width=0.33\linewidth]{figs/cost_7.pdf}
+    \includegraphics[width=0.33\linewidth]{figs/cost_15.pdf}
+    \caption{Cost of the MG solver considering several different dynamic
+    precision scenarios to reach different error degrees in the output:
+    $10^{-3}$ on the left, $10^{-7}$ in the middle and $10^{-15}$ on the
+    right.}
+    \label{fig.estimation1}
+\end{figure*}
+
 To provide numerical values for $a,c$ and most importantly $\alpha$, we measure
 the execution times of different scenarios. Each scenario computes 50
 iterations on matrices with different sizes, and using either only
@@ -156,6 +167,58 @@ bits and a problem of size $n$ (i.e. the matrix considered will be of size $n^3
 \times n^3$ as we consider 3D problems).
 
 %Results are reported in Table~\ref{table.time_measure1}.
+
+\begin{table*}[t]
+    \begin{center}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    Tolerance & Baseline (DP) & \emph{Up}-cycle (DP) & Adaptive (V-cycle) & Adaptive (\emph{Up}-cycle) & Improvement (DP) & Improvement (SP) \\
+    \hline
+    \hline
+    1e-01 & 1.000 & 1.333 & 0.624 & 0.832 & 16.8\% & -5.5\%\\
+    \hline
+    1e-02 & 3.000 & 2.000 & 1.872 & 1.664 & 44.5\% & 29.7\%\\
+    \hline
+    1e-03 & 5.000 & 4.667 & 3.284 & 3.131 & 37.4\% & 20.6\%\\
+    \hline
+    1e-04 & 8.000 & 7.333 & 5.650 & 5.234 & 34.6\% & 17.0\%\\
+    \hline
+    1e-05 & 11.000 & 10.0 & 8.015 & 7.336 & 33.3\% & 15.4\% \\
+    \hline
+    1e-06 & 14.000 & 12.667 & 10.380 & 9.439 & 32.6\% & 14.5\%\\
+    \hline
+    1e-07 & 17.000 & 15.333 & 13.169 & 11.964 & 29.6\% & -\\
+    \hline
+    1e-08 & 20.000 & 18.000 & 16.169 & 14.631 & 26.8\% & -\\
+    \hline
+    1e-09 & 23.000 & 20.667 & 19.169 & 17.298 & 24.8\% & -\\
+    \hline
+    1e-10 & 26.000 & 24.000 & 22.169 & 20.631 & 20.7\% & -\\
+    \hline
+    1e-11 & 29.000 & 26.667 & 25.169 & 23.298 & 19.7\%& -\\
+    \hline
+    1e-12 & 32.000 & 29.333 & 28.169 & 25.964 & 18.9\% & -\\
+    \hline
+    1e-13 & 35.000 & 32.000 & 31.169 & 28.631 & 18.2\% & -\\
+    \hline
+    1e-14 & 38.000 & 34.667 & 34.169 & 31.298 & 17.6\% & -\\
+    \hline
+    1e-15 & 43.000 & 39.333 & 39.169 & 35.964 & 16.4\% & -\\
+    \hline
+    \end{tabular}
+    }
+    \end{center}
+    \caption{All estimated times for \textsc{Unstructured-Anisotropy}, size 40,
+    hybrid relaxation method, on a single processor, with $\alpha = 0.3$. The
+    column `Improvement (DP)' corresponds to the improvement between the
+    adaptive algorithm using a \emph{Up}-cycle (column 5) compared to the
+    original V-cycle with fixed double-precision (column 2). The column
+    `Improvement (SP)' corresponds to the improvement between the adaptive
+    algorithm using a \emph{Up}-cycle (column 5) compared to the original
+    V-cycle with fixed single-precision.}
+    \label{table.results1}
+\end{table*}
 
 Then, using Python's lmfit package, we interpolate the data to find good values
 for $a,c$ and $\alpha$. We are able to estimate different values of $\alpha$,
@@ -179,17 +242,6 @@ where the computation starts in half-precision, then switches to
 single-precision and finally to double-precision. This scenario is particularly
 relevant because those precisions are already available in architectures such
 as the recent Volta GPUs which integrates Tensor cores in half-precision.
-
-\begin{figure*}
-    \includegraphics[width=0.33\linewidth]{figs/cost_3.pdf}
-    \includegraphics[width=0.33\linewidth]{figs/cost_7.pdf}
-    \includegraphics[width=0.33\linewidth]{figs/cost_15.pdf}
-    \caption{Cost of the MG solver considering several different dynamic
-    precision scenarios to reach different error degrees in the output:
-    $10^{-3}$ on the left, $10^{-7}$ in the middle and $10^{-15}$ on the
-    right.}
-    \label{fig.estimation1}
-\end{figure*}
 
 %\begin{figure}
    % \includegraphics[width=\linewidth]{figs/cost_5.pdf}
@@ -252,58 +304,6 @@ precision) for all 4 different algorithms: V-cycle (double precision),
 relaxation method.  We also present the improvement of the best method (i.e.
 \emph{Up}-cycle with different precisions) compared to the original algorithm
 (in double-precision and in single-precision when possible).
-
-\begin{table*}[t]
-    \begin{center}
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{|c|c|c|c|c|c|c|}
-    \hline
-    Tolerance & Baseline (DP) & \emph{Up}-cycle (DP) & Adaptive (V-cycle) & Adaptive (\emph{Up}-cycle) & Improvement (DP) & Improvement (SP) \\
-    \hline
-    \hline
-    1e-01 & 1.000 & 1.333 & 0.624 & 0.832 & 16.8\% & -5.5\%\\
-    \hline
-    1e-02 & 3.000 & 2.000 & 1.872 & 1.664 & 44.5\% & 29.7\%\\
-    \hline
-    1e-03 & 5.000 & 4.667 & 3.284 & 3.131 & 37.4\% & 20.6\%\\
-    \hline
-    1e-04 & 8.000 & 7.333 & 5.650 & 5.234 & 34.6\% & 17.0\%\\
-    \hline
-    1e-05 & 11.000 & 10.0 & 8.015 & 7.336 & 33.3\% & 15.4\% \\
-    \hline
-    1e-06 & 14.000 & 12.667 & 10.380 & 9.439 & 32.6\% & 14.5\%\\
-    \hline
-    1e-07 & 17.000 & 15.333 & 13.169 & 11.964 & 29.6\% & -\\
-    \hline
-    1e-08 & 20.000 & 18.000 & 16.169 & 14.631 & 26.8\% & -\\
-    \hline
-    1e-09 & 23.000 & 20.667 & 19.169 & 17.298 & 24.8\% & -\\
-    \hline
-    1e-10 & 26.000 & 24.000 & 22.169 & 20.631 & 20.7\% & -\\
-    \hline
-    1e-11 & 29.000 & 26.667 & 25.169 & 23.298 & 19.7\%& -\\
-    \hline
-    1e-12 & 32.000 & 29.333 & 28.169 & 25.964 & 18.9\% & -\\
-    \hline
-    1e-13 & 35.000 & 32.000 & 31.169 & 28.631 & 18.2\% & -\\
-    \hline
-    1e-14 & 38.000 & 34.667 & 34.169 & 31.298 & 17.6\% & -\\
-    \hline
-    1e-15 & 43.000 & 39.333 & 39.169 & 35.964 & 16.4\% & -\\
-    \hline
-    \end{tabular}
-    }
-    \end{center}
-    \caption{All estimated times for \textsc{Unstructured-Anisotropy}, size 40,
-    hybrid relaxation method, on a single processor, with $\alpha = 0.3$. The
-    column `Improvement (DP)' corresponds to the improvement between the
-    adaptive algorithm using a \emph{Up}-cycle (column 5) compared to the
-    original V-cycle with fixed double-precision (column 2). The column
-    `Improvement (SP)' corresponds to the improvement between the adaptive
-    algorithm using a \emph{Up}-cycle (column 5) compared to the original
-    V-cycle with fixed single-precision.}
-    \label{table.results1}
-\end{table*}
 
 The main result is that even to reach the maximum precision, we improve the
 execution time by more than 15\%. When it comes to smaller precisions, this
