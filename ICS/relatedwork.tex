@@ -6,16 +6,24 @@ some computer programs to deliver correct results while operating at low
 accuracy scenarios: Precision scaling consists in reducing the precision of
 inputs or intermediate values to reduce storage or computing
 operands~\cite{Yeh2007, Tian2015}.  Other techniques consist in skipping some
-loop iterations to reduce computational load~\cite{Sidiroglou2011}.  Load Value
+loop iterations to reduce computational load~\cite{Sidiroglou2011}.  
+Such approaches are reported to provide performance improvements over a factor of two
+while impacting the final application's accuracy by less than 10\%.
+Load Value
 Approximation (LVA) consists in exploiting the redundant nature of some
 computer codes to predict load values and let the execution to progess without
-stalling~\cite{Miguel2014}.  Memorization, which is an approach consisting in
+stalling~\cite{Miguel2014}.  Memoization, which is an approach consisting in
 storing function results to predict the result of subsequent computations, it
 is being used to achieve performance enhancements and energy consumption
-reductions~\cite{Alvarez2005, Brumar2017}.  Fast but slightly incorrect
-hardware adders have also been explored~\cite{Gupta:2011}, as well as
-voltage-scaling to reduce energy consumption at the SRAM level, which increases
-the probability of bit flips~\cite{Sampson:2011}.  Changing the bit-width of
+reductions~\cite{Alvarez2005, Brumar2017}. 
+Fast but slightly incorrect
+hardware adders have also been explored 
+for video and image compression algorithms~\cite{Gupta:2011}. 
+Post-layout simulations show improvements of up to 60\% in terms of power and area savings of up to 37\%
+without significant output quality loss.
+Voltage-scaling techniques have also been explored to reduce energy consumption at the SRAM level, which increases
+the probability of bit flips~\cite{Sampson:2011}. 
+Changing the bit-width of
 some variables has been proposed~\cite{Park:2010} to trade image quality for
 bandwidth.
 

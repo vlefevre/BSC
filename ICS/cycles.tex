@@ -42,7 +42,7 @@ which also corresponds to another sparse matrix-vector computation.
 
 To study the internal time breakdown of a V-cycle we chose as problem an
 unstructured domain with some anisotropy (denoted as Unstructured-Anisotropy)
-of size 512,000 with a 8-level grid. The results of this evaluations are
+of size 512,000 with a 8-level grid. The results of these evaluations are
 depicted in Table~\ref{table.measures}, along with information on the matrix
 used at the corresponding level, such as matrix size and the number of non-zero
 elements.  Our first observation is that there is a direct correlation between
@@ -114,7 +114,7 @@ and 2.
 %    \label{fig.newstrat_small}
 %\end{figure*}
 
-We evaluated these 4 proposed strategies in the original $512,000\times
+We evaluate these 4 proposed strategies in the original $512,000\times
 512,000$ matrix.  The results are shown in Figure~\ref{fig.newstrat}.  The
 first thing to observe is that removing the relaxation at level 2 (i.e. the \emph{Fast} approach) does not
 provide any benefit. It does save time during each cycle but the accuracy loss
@@ -171,10 +171,10 @@ in the cycle (i.e., no relaxations when going down).  We call this strategy
 \emph{Up}.
 
 We run \emph{Up} and \emph{Fast4}, as long as the classical V-cycle, on the
-same matrix of size 512,000. For generality purposes, this time we also
-evaluate matrices generated from other physical problems: i) 3D Laplace equation with a 9-pt stencil (with $c_x,c_y,c_z$ anisotropy parameters), ii) 3D Laplace
-with a 27-point stencil, and another iii) 3D partial derivative equation with
-Dirichlet boundary conditions. All problems use the same size of matrix. The
+same matrix of size 512,000. For generality purposes, this time we 
+evaluate matrices generated from other physical problems besides the Unstructured-Anisotropy one: i) 3D Laplace equation with a 9-pt stencil (considering three diffrent configurations of the $c_x,c_y,c_z$ anisotropy parameters), ii) 3D Laplace
+with a 27-point stencil and iii) 3D Laplace partial derivative equation with
+Dirichlet boundary conditions. All problems use the same domain size. The
 results are presented in Figure~\ref{fig.up_comparison}.
 
 \begin{figure*}
@@ -193,12 +193,12 @@ The first thing we observe is that the \emph{Fast4} strategy does not
 always perform well. In fact, for two of these four applications the
 convergence rate is significantly slower than the classic V1 strategy.
 However, the \emph{Up} strategy seems to be quite efficient; it improves
-convergence speed by $12\%$,$7\%$,$20\%$ and $22\%$ for
+convergence speed by $12\%$, $7\%$, $20\%$ and $22\%$ for
 \textsc{Unstructured-Anisotropy}, \textsc{3DLaplace-9pt},
 \textsc{3DLaplace-27pt(1,1,1)} and \textsc{PDE-Dirichlet} respectively.
 
 Given these positive results, we extended further our evaluation from
-single-node runs to distributed executions in multiple nodes, in order to test
+single-node runs to distributed memory executions in multiple nodes, in order to test
 the viability of the \emph{Up} strategy when the algorithm is parallelized and
 distributed. Larger cases were tested on a cluster with 100 compute nodes,
 each node equippred with 2 Intel Xeon E5-2630 v3 Haswell 8-core processors,
@@ -206,18 +206,20 @@ each core at 2.4 GHz, and with 20 MB L3 cache.
 %Each node is equipped with 2 Intel processors, 2 nvidia GPUs, over 20GB of DRAM
 %and all connected through an Infiniband network.}
 
+The problems tested are \textsc{3DLaplace-9pt} and
+\textsc{3DLaplace-27pt}.
 The total size of the matrix is set to either 5,832,000 or 13,824,000, while
 the topology is composed of either 27 (3x3x3), 36 (6x6x1) or 64 (4x4x4)
 processors, where each processor holds 1 MPI process and runs 1 OpenMP
-thread per process. The problems tested are \textsc{3DLaplace-9pt} and
-\textsc{3DLaplace-27pt}.  For these 6 possible combinations, we observe an
+thread per process. 
+For these 6 possible combinations, we observe an
 average improvement of 18.4\% (ranging from 16.0\% to 28.3\%) for
 \textsc{3DLaplace-9pt} and 20.5\% (ranging from 16.2\% to 25.0\%) for
 \textsc{3DLaplace-27pt}. It seems that \emph{Up} outperforms the
 classical V-cycle even more when the problem size increases, but seems to cap at around
 25\% improvement. Figure~\ref{fig.mtup} presents the results for the matrix
 size 13,824,000 and \textsc{3DLaplace-27pt}, for the 3 different processor
-topologies. Similar results are obtained for the other applications but are not
+topologies. Similar results are obtained for the other physical problems but are not
 shown here for brevity.
 
 \begin{figure*}[t]

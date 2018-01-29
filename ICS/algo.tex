@@ -32,7 +32,7 @@ than 20x by allowing a final application error of just
 Despite its potential, approximate computing must be applied in an extremely
 careful way.  For example, reducing the accuracy of control flow instructions
 or memory addresses computations may cause segmentation faults.  Also, applying
-approximate techniques to floating point computations can potentially bring
+approximate techniques to floating point computations can potentially lead to 
 wrong results or cause iterative algorithms to stall if they are blindly
 applied.  The success of approximate approaches requires them to be judicisouly
 applied to the most low-accuracy tolerant phases of numerical algorithms.  In
@@ -62,8 +62,8 @@ so that the impact on the final solution stays minimal.
 MG's cycles start and end on the finest grained grid and are defined by the
 order in which its different coarseness levels are applied.  The simplest cycle
 is the V-cycle, already described in Section~\ref{sec:intro}, where a few
-iterations of an iterative method (the \textit{Relaxation} step) is performed
-at each level from the finest to the coarsest level and then in the reverse
+iterations of an iterative method (the \textit{Relaxation} step) are performed
+at each level from the finest to the coarsest levels and then in the reverse
 order.  Another common approach is the W-cycle scheme where the coarsest grid
 level is reached several times before going back to the finest grid level.  It is
 possible to generalize the notion of cycle to a $k$-cycle (where a V-cycle is a
