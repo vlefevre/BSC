@@ -71,35 +71,42 @@ mentioned cycle shape, affect the convergence rate of the algorithm.
 %by using a finer grid but at the cost of a performance degradation.
 
 In this context, this paper investigates different trade-offs between accuracy
-and execution time (or energy consumption) for MG algorithms. We focus our efforts on
-one of the most popular parallel implementation of a multi-grid solver, the
-BoomerAMG~\cite{boomerAMG}, implemented in the HYPRE
-library~\cite{Falgout2002}. Basically, we change the shape of the V-cycle and adapt the number of relaxations at each cycle for performance. Additionnally,
-we also propose a multi-grid algorithm to dynamically optimize the floating-point precision to increase the performance (or to reduce the energy consumption) while maintaining the quality of the solution.
-This paper makes the following contributions
+and execution time (or energy consumption) for MG algorithms. We focus our
+efforts on one of the most popular parallel implementation of a multi-grid
+solver, the BoomerAMG~\cite{boomerAMG}, implemented in the HYPRE
+library~\cite{Falgout2002}. We change the shape of the V-cycle and adapt the
+number of relaxations at each cycle for performance. In addition, we propose a
+multi-grid algorithm to dynamically optimize the floating-point precision to
+increase the performance and to reduce the energy consumption while maintaining
+the quality of the solution.  This paper makes the following contributions
 beyond the state-of-the-art:
 
 \begin{itemize}
 
-    \item We evaluate the performance impact of parameters of the solver such as the shape
-        of cycles and the number of iterations.
+    \item We evaluate the performance impact of solver's parameters such
+        as the shape of cycles and the number of iterations.
 
     \item We propose a new cycle configuration and show that it is more
-        efficient than the state-of-the-art configurations by up to 28.3\%. We stress that we present only a few results because of lack of space but more measures were performed (and were consistent with the previous ones) to conclude on the \textsc{Up}-strategy: we run the experiments on a total of 9 different matrices, with number of MPI processes ranging from 1 to 64, ech MPI process having only 1 OpenMP thread.
+        efficient than the state-of-the-art configurations by up to 28.3\%. We
+        run the experiments on a total of 9 different matrices and demonstrate
+        that our technique can be applied to a wide number of applications.
 
-    \item We evaluate the impact of different floating-point precisions on
-        the time to completion while reaching full accuracy on the final
-        result.
+        %We stress that we present only a few results because of lack of space
+        %but more measures were performed (and were consistent with the previous
+        %ones) to conclude on the \textsc{Up}-strategy:
+
+    \item We evaluate the impact of different floating-point precisions on the
+        time to completion while reaching full accuracy on the final result.
 
     \item We propose an algorithm that dynamically adapts the precision of the
         MG algorithm variables to increase performance and efficiency.
 
     \item We perform a large evaluation and demonstrate the we can reduce by
         15\% the execution time needed to reach the same quality result as the
-        original double-precision algorithm and up to 30\% for accuracies smaller than max single-precision accuracy.
+        original double-precision algorithm and up to 30\% for single-precision
+        accuracy.
 
 \end{itemize}
-
 
 The reminder of this paper is organized as follows:
 Section~\ref{sec:motivation} introduces the motivations for this work.
