@@ -33,7 +33,7 @@ solution of the system.
 %points $x_1,x_3,\dots,x_N$).  Typically, multi-grid schemes are defined by
 %coarsening a fine-grain grid until reaching a small enough set of evaluation
 %points on which a direct solve would be fast.
-Multi-grid solvers typically consist of three phases: The \textit{Relaxation},
+Multi-grid solvers typically consist of three components: The \textit{Relaxation},
 \textit{Restriction} and \textit{Interpolation} phases.  The relaxation phase
 applies a few steps of an iterative solver like Jacobi or Gauss-Seidel at a
 certain coarseness level.  The restriction phase propagates the algorithmic
@@ -97,7 +97,7 @@ beyond the state-of-the-art:
         %ones) to conclude on the \textsc{Up}-strategy:
 
     \item We evaluate the impact of different floating-point precisions on the
-        time to completion while reaching full accuracy on the final result.
+        time-to-solution while reaching full accuracy on the final result.
 
     \item We propose an algorithm that dynamically adapts the precision of the
         MG algorithm variables to increase performance and efficiency.

@@ -16,7 +16,7 @@ which also corresponds to another sparse matrix-vector computation.
  \resizebox{\linewidth}{!}{
  \begin{tabular}{|c|c|c|c|c|c|c|}
   \hline
-  Level & \makecell{Matrix \\ size} & \makecell{Non-zero \\ elements} & \makecell{Relax \\ (down)} & \makecell{Relax \\ (up)} & \makecell{MatVec \\ (down)} & \makecell{MatVec \\ (up)} \\
+  Level & \makecell{Matrix \\ size} & \makecell{Non-zero \\ elements} & \makecell{Relax \\ (down)} & \makecell{Relax \\ (up)} & \makecell{Restriction} & \makecell{Interpolation} \\
   \hline
   1 & 512,000 & 4,042,520 & 20 ms & 20 ms & 15 ms & -\\
   \hline
@@ -180,9 +180,9 @@ results are presented in Figure~\ref{fig.up_comparison}.
 \begin{figure*}
     \centering
     \subfloat[\textsc{Unstructured-Anisotropy}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_1.pdf}}
-    \subfloat[\textsc{3DLaplace-9pt(1,1,1)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_2.pdf}}
-    \subfloat[\textsc{3DLaplace-9pt(0.1,0.1,0.01)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_5.pdf}}\\
-    \subfloat[\textsc{3DLaplace-9pt(5,5,5)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_6.pdf}}
+    \subfloat[\textsc{3DLaplace-7pt(1,1,1)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_2.pdf}}
+    \subfloat[\textsc{3DLaplace-7pt(0.1,0.1,0.01)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_5.pdf}}\\
+    \subfloat[\textsc{3DLaplace-7pt(5,5,5)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_6.pdf}}
     \subfloat[\textsc{3DLaplace-27pt}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_3.pdf}}
     \subfloat[\textsc{PDE-Dirichlet}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_4.pdf}}
     \caption{Comparison of the original algorithm V1 with \emph{Fast4} and \emph{Up} strategies.}
@@ -194,7 +194,7 @@ always perform well. In fact, for two of these four applications the
 convergence rate is significantly slower than the classic V1 strategy.
 However, the \emph{Up} strategy seems to be quite efficient; it improves
 convergence speed by $12\%$, $7\%$, $26\%$, $7\%$, $20\%$ and $22\%$ for
-\textsc{Unstructured-Anisotropy}, \textsc{3DLaplace-9pt(1,1,1)}, \textsc{3DLaplace-9pt(0.1,0.1,0.01)}, \textsc{3DLaplace-9pt(5,5,5)},
+\textsc{Unstructured-Anisotropy}, \textsc{3DLaplace-7pt(1,1,1)}, \textsc{3DLaplace-7pt(0.1,0.1,0.01)}, \textsc{3DLaplace-7pt(5,5,5)},
 \textsc{3DLaplace-27pt} and \textsc{PDE-Dirichlet} respectively.
 
 Given these positive results, we extended further our evaluation from
@@ -206,7 +206,7 @@ each core at 2.4 GHz, and with 20 MB L3 cache.
 %Each node is equipped with 2 Intel processors, 2 nvidia GPUs, over 20GB of DRAM
 %and all connected through an Infiniband network.}
 
-The problems tested are \textsc{3DLaplace-9pt} and
+The problems tested are \textsc{3DLaplace-7pt} and
 \textsc{3DLaplace-27pt}.
 The total size of the matrix is set to either 5,832,000 or 13,824,000, while
 the topology is composed of either 27 (3x3x3), 36 (6x6x1) or 64 (4x4x4)
@@ -214,7 +214,7 @@ processors, where each processor holds 1 MPI process and runs 1 OpenMP
 thread per process. 
 For these 6 possible combinations, we observe an
 average improvement of 18.4\% (ranging from 16.0\% to 28.3\%) for
-\textsc{3DLaplace-9pt} and 20.5\% (ranging from 16.2\% to 25.0\%) for
+\textsc{3DLaplace-7pt} and 20.5\% (ranging from 16.2\% to 25.0\%) for
 \textsc{3DLaplace-27pt}. It seems that \emph{Up} outperforms the
 classical V-cycle even more when the problem size increases, but seems to cap at around
 25\% improvement. Figure~\ref{fig.mtup} presents the results for the matrix
