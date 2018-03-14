@@ -1,0 +1,8 @@
+For reviewer A:
+We will take into account your comments on the paper.
+However, we would like to justify the following points:
+Issue 3: we did not analyze the setup part because on our tests it was actually negligible. We do acknowledge that it may not be the case, but that does not impact our work on optimizing the main phase.
+Issue 5: I still disagree with the author, what should I say?
+Issue 7: because of lack of space we cannot put every figure and it was more natural to present the time needed to reach a given accuracy.
+Issue 8: ???
+Issue 9: V_1_32 behaves just as V_1 at the beginning and just as V_1_16 after 10 cycles, that is why it is hard to see the curve.
