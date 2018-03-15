@@ -27,7 +27,7 @@ For reviewer C:
 We tried with the applications that were available for us, and we think that the different inputs we present are enough to say that the optimizations are not useless.
 
 For reviewer D:
-
+Changing to a V-cycle indeed increases the number of iterations to do, but as it is also faster, it can produce benefit for reaching a given accuracy, as the paper demonstrates.
 
 We have asked for other reviews to the PC and more reviewers will be added before the PC meeting.
 We look forward to hearing from you regarding our paper and we would be glad to answer any further questions and comments.
