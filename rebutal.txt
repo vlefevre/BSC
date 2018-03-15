@@ -1,10 +1,33 @@
+First, we would like to thank the reviewers for their useful comments.
+We will now try to answer point by point to each of them.
+
 For reviewer A:
-We will take into account your comments on the paper.
-However, we would like to justify the following points:
-Issue 3: we did not analyze the setup part because on our tests it was actually negligible. We do acknowledge that it may not be the case, but that does not impact our work on optimizing the main phase.
-Issue 5: I still disagree with the author, what should I say?
-Issue 7: because of lack of space we cannot put every figure and it was more natural to present the time needed to reach a given accuracy.
-Issue 8: ???
-Issue 9: V_1_32 behaves just as V_1 at the beginning and just as V_1_16 after 10 cycles, that is why it is hard to see the curve.
+About the 3 main concerns:
+1)We agree that depending on the input matrices the efficiency of the Up-cycle is not always better than the V-cycle. However, for every test we did, it was at least as good. When trying some very big values as coefficients of Laplace-7pt, we tend to reach the same time-to-solution for both cycles.
+2)We couldn't test it on real architectures for every bit length so we considered creating this model from real data.
+3)We are going to proof-read the manuscrit again and correct the typos.
+About the issues:
+1)we changed the term used, thank you.
+2)same as previous point
+3)we did not analyze the setup part because on our tests it was actually negligible. We do acknowledge that it may not be the case, but that does not impact our work on optimizing the main phase.
+4)We changed the terms to Restriction and Interpolation to avoid confusion.
+5)The relaxations done while going down in the multi-grid scheme produce a residual that is then restricted to a coarser grid. Contrarily, relaxations down when going up in the grid produce an error factor that is then interpolated to the finer level and added to the intermediate solution x as a correction factor. In this sense, there are differences in these two kinds of relaxation steps. This is what the 2nd paragraph in section 3.4 explains. Of course, the whole purpose of the whole multi-grid scheme is to reduce error components with high frequency, as the reviewer states."
+6)It is actually a 7pt stencil, we corrected that, thank you.
+7)We couldn't put every figure because of lack of space and we chose to present only the time needed to reach a given accuracy, as it is what matters most.
+8)We don't understand your remark, the time for V_1_up is clearly smaller than V_1.
+9)V_1_32 behaves just as V_1 at hte beginning and just as V_1_16 after 10 cycles, which is why it is hard to see.
+10)We are going to detail a bit more the x-axis but here is the main point: x_y describes the strategy where the initial bit length is x and is incremented by y each time the threshold is reached.
+
+For reviewer B:
+1)it is not a typo, the number of relaxations alpha is different from the number of levels in the grid: at each level we do alpha relaxations.
+2)the x_i are the values b_i/b_n (and b_n/b_n = 1) so it will give the minimum execution time up to a constant, we will add this information to be clearer, thanks for pointing this out.
+3)Depending on the input, it can be 4042520 (unstructured-anisotropy), 3545600 (laplace-7pt and pde-dirichlet), 13481272 (laplace-27pt).
+
+For reviewer C:
+We tried with the applications that were available for us, and we think that the different inputs we present are enough to say that the optimizations are not useless.
+
+For reviewer D:
+
 
 We have asked for other reviews to the PC and more reviewers will be added before the PC meeting.
+We look forward to hearing from you regarding our paper and we would be glad to answer any further questions and comments.

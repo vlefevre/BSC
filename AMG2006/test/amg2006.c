@@ -2431,7 +2431,7 @@ main( int   argc,
       time_index = hypre_InitializeTiming("Multi-grid");
       hypre_BeginTiming(time_index);
 	int valentin_cpt = 0;
-	for (valentin_cpt=0; valentin_cpt < 100; valentin_cpt++)
+	for (valentin_cpt=0; valentin_cpt < 1; valentin_cpt++)
 	{
 		 HYPRE_ParCSRMatrixMatvec(0.0, par_A, par_b, 0.0, par_x );
 	      HYPRE_BoomerAMGSolve( par_precond, (void*) par_A,
