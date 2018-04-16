@@ -162,71 +162,7 @@
 \end{frame}
 
 \begin{frame}{Types of cycle}
- \begin{figure}
- %\resizebox{\linewidth}{4cm}{
- \begin{tikzpicture}
  
- 
-\begin{scope}[xscale=2/5]
-
-  \node (sh) at (-5,3) { h };
-  \node (shh) at (-5,2) { 2h };
-  \node (shhh) at (-5,1) { 4h };
-  \node (shhhh) at (-5,0) { H };
-  
-  \node (title) at (0,5) { V-cycle k=1};
-  \node (title2) at (14,5) {W-cycle k=2};
-
-    \node[circle,fill=blue] (a) at (-3,3) { };
-    \node[circle,fill=blue] (b) at (-2,2) {};
-    \node[circle,fill=blue] (c) at (-1,1) {};
-    \node[circle,fill=red] (d) at (0,0) {};
-    \node[circle,fill=blue] (e) at (1,1) {};
-    \node[circle,fill=blue] (f) at (2,2) {};
-    \node[circle,fill=blue] (g) at (3,3) {};
-    
-    \draw[->] (a) -- (b);
-    \draw[->] (b) -- (c);
-    \draw[->] (c) -- (d);
-    \draw[->] (d) -- (e);
-    \draw[->] (e) -- (f);
-    \draw[->] (f) -- (g);
-    
-    \node[circle,fill=blue] (aa) at (7,3) { };
-    \node[circle,fill=blue] (ab) at (8,2) {};
-    \node[circle,fill=blue] (ac) at (9,1) {};
-    \node[circle,fill=red] (ad) at (10,0) {};
-    \node[circle,fill=blue] (ae) at (11,1) {};
-    \node[circle,fill=red] (af) at (12,0) {};
-    \node[circle,fill=blue] (ag) at (13,1) {};
-    \node[circle,fill=blue] (ah) at (14,2) {};
-    \node[circle,fill=blue] (ai) at (15,1) {};
-    \node[circle,fill=red] (aj) at (16,0) {};
-    \node[circle,fill=blue] (ak) at (17,1) {};
-    \node[circle,fill=red] (al) at (18,0) {};
-    \node[circle,fill=blue] (am) at (19,1) {};
-    \node[circle,fill=blue] (an) at (20,2) {};
-    \node[circle,fill=blue] (ao) at (21,3) {};
-    
-    \draw[->] (aa) -- (ab);
-    \draw[->] (ab) -- (ac);
-    \draw[->] (ac) -- (ad);
-    \draw[->] (ad) -- (ae);
-    \draw[->] (ae) -- (af);
-    \draw[->] (af) -- (ag);
-    \draw[->] (ag) -- (ah);
-    \draw[->] (ah) -- (ai);
-    \draw[->] (ai) -- (aj);
-    \draw[->] (aj) -- (ak);
-    \draw[->] (ak) -- (al);
-    \draw[->] (al) -- (am);
-    \draw[->] (am) -- (an);
-    \draw[->] (an) -- (ao);
-    \end{scope}
-    
- \end{tikzpicture}
- %}
-\end{figure}
  
 \end{frame}
 
@@ -241,16 +177,16 @@
 \end{frame}
 
 \begin{frame}{Results - 80x80x80}
- \includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_1.pdf}
+ %\includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_1.pdf}
 \end{frame}
 \begin{frame}{Results - 80x80x80}
- \includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence.pdf}
+% \includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence.pdf}
 \end{frame}
 \begin{frame}{Results - 40x40x40}
- \includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_1_small.pdf}
+ %\includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_1_small.pdf}
 \end{frame}
 \begin{frame}{Results - 40x40x40}
- \includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence_small.pdf}
+ %\includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence_small.pdf}
 \end{frame}
 
 \begin{frame}{Results}
@@ -352,18 +288,18 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Results - 40x40x40}
- \includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_fast_small.pdf}
-\end{frame}
-\begin{frame}{Results - 40x40x40}
- \includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence_fast_small.pdf}
-\end{frame}
-\begin{frame}{Results - 80x80x80}
- \includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_fast.pdf}
-\end{frame}
-\begin{frame}{Results - 80x80x80}
- \includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence_fast.pdf}
-\end{frame}
+% \begin{frame}{Results - 40x40x40}
+%  \includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_fast_small.pdf}
+% \end{frame}
+% \begin{frame}{Results - 40x40x40}
+%  \includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence_fast_small.pdf}
+% \end{frame}
+% \begin{frame}{Results - 80x80x80}
+%  \includegraphics[width=\linewidth]{AMG2006/test/edit/convergence_fast.pdf}
+% \end{frame}
+% \begin{frame}{Results - 80x80x80}
+%  \includegraphics[width=\linewidth]{AMG2006/test/edit/time_convergence_fast.pdf}
+% \end{frame}
 
 \begin{frame}{Ideas}
   Idea: remove or add relaxation steps at given levels $l \in 0,\dots,n-1$.\\
@@ -376,43 +312,43 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
    \item \emph{Fast4} : no relaxation at level 2.
    \item \emph{Up} : relaxation only when going up in the cycle.
   \end{itemize}
-\end{frame}
-\begin{frame}{Results - 80x80x80}
- \includegraphics[width=\linewidth]{AMG2006/test/ASUS/convergence_fast.pdf}
-\end{frame}
-\begin{frame}{Results - 80x80x80}
- \includegraphics[width=\linewidth]{AMG2006/test/ASUS/time_convergence_fast.pdf}
-\end{frame}
-\begin{frame}{Results - 80x80x80 - Laplace27pt}
- \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/convergence_fast_10.pdf}
-\end{frame}
-\begin{frame}{Results - 80x80x80 - Laplace27pt}
- \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/time_convergence_fast_10.pdf}
-\end{frame}
-\begin{frame}{Results - 40x40x40 - Laplace27pt}
- \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/convergence_fast.pdf}
-\end{frame}
-\begin{frame}{Results - 40x40x40 - Laplace27pt}
- \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/time_convergence_fast.pdf}
-\end{frame}
-\begin{frame}{Results - 80x80x80 - Laplace}
- \includegraphics[width=\linewidth]{AMG2006/test/DELL/laplace/convergence_fast.pdf}
-\end{frame}
-\begin{frame}{Results - 80x80x80 - Laplace}
- \includegraphics[width=\linewidth]{AMG2006/test/DELL/laplace/time_convergence_fast.pdf}
-\end{frame}
-\begin{frame}{Results - 80x80x80 - Jumps}
- \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/convergence_fast_10.pdf}
-\end{frame}
-\begin{frame}{Results - 80x80x80 - Jumps}
- \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/time_convergence_fast_10.pdf}
-\end{frame}
-\begin{frame}{Results - 40x40x40 - Jumps}
- \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/convergence_fast.pdf}
-\end{frame}
-\begin{frame}{Results - 40x40x40 - Jumps}
- \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/time_convergence_fast.pdf}
-\end{frame}
+ \end{frame}
+% \begin{frame}{Results - 80x80x80}
+%  \includegraphics[width=\linewidth]{AMG2006/test/ASUS/convergence_fast.pdf}
+% \end{frame}
+% \begin{frame}{Results - 80x80x80}
+%  \includegraphics[width=\linewidth]{AMG2006/test/ASUS/time_convergence_fast.pdf}
+% \end{frame}
+% \begin{frame}{Results - 80x80x80 - Laplace27pt}
+%  \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/convergence_fast_10.pdf}
+% \end{frame}
+% \begin{frame}{Results - 80x80x80 - Laplace27pt}
+%  \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/time_convergence_fast_10.pdf}
+% \end{frame}
+% \begin{frame}{Results - 40x40x40 - Laplace27pt}
+%  \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/convergence_fast.pdf}
+% \end{frame}
+% \begin{frame}{Results - 40x40x40 - Laplace27pt}
+% % \includegraphics[width=\linewidth]{AMG2006/test/DELL/27pt/time_convergence_fast.pdf}
+% \end{frame}
+% \begin{frame}{Results - 80x80x80 - Laplace}
+%  \includegraphics[width=\linewidth]{AMG2006/test/DELL/laplace/convergence_fast.pdf}
+% \end{frame}
+% \begin{frame}{Results - 80x80x80 - Laplace}
+%  \includegraphics[width=\linewidth]{AMG2006/test/DELL/laplace/time_convergence_fast.pdf}
+% \end{frame}
+% \begin{frame}{Results - 80x80x80 - Jumps}
+%  \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/convergence_fast_10.pdf}
+% \end{frame}
+% \begin{frame}{Results - 80x80x80 - Jumps}
+%  \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/time_convergence_fast_10.pdf}
+% \end{frame}
+% \begin{frame}{Results - 40x40x40 - Jumps}
+%  \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/convergence_fast.pdf}
+% \end{frame}
+% \begin{frame}{Results - 40x40x40 - Jumps}
+%  \includegraphics[width=\linewidth]{AMG2006/test/DELL/jumps/time_convergence_fast.pdf}
+% \end{frame}
 
 \begin{frame}{Results on MinoTauro}
  \begin{itemize}
@@ -421,11 +357,11 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
   \item Topology: \only<1>{3x3x3}\only<3>{4x4x4}\only<2>{6x6x1}
  \end{itemize}
  Similar results as before. Between 1 and 30\% improvement.
- \begin{center}
- \only<1>{\includegraphics[width=0.8\linewidth]{AMG2006/test/MT/laplace/time_convergence_27.pdf}}
- \only<2>{\includegraphics[width=0.8\linewidth]{AMG2006/test/MT/laplace/time_convergence_36.pdf}}
- \only<3>{\includegraphics[width=0.8\linewidth]{AMG2006/test/MT/laplace/time_convergence_64.pdf}}
- \end{center}
+%  \begin{center}
+%  \only<1>{\includegraphics[width=0.8\linewidth]{AMG2006/test/MT/laplace/time_convergence_27.pdf}}
+%  \only<2>{\includegraphics[width=0.8\linewidth]{AMG2006/test/MT/laplace/time_convergence_36.pdf}}
+%  \only<3>{\includegraphics[width=0.8\linewidth]{AMG2006/test/MT/laplace/time_convergence_64.pdf}}
+%  \end{center}
 \end{frame}
 
 \begin{frame}{Relaxation function analysis}
@@ -489,12 +425,12 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
 \end{frame}
 
 \begin{frame}{Impact on accuracy}
-  \includegraphics[width=\linewidth]{AMG2006/test/MPFR/bits_convergence.pdf}
+  %\includegraphics[width=\linewidth]{AMG2006/test/MPFR/bits_convergence.pdf}
 \end{frame}
 
 \begin{frame}[fragile]{Impact on accuracy}
   $\Rightarrow$ \texttt{res}, \texttt{res0} and \texttt{res2} variables define the accuracy of the relaxation step and the accuracy of the whole algorithm.
-  \resizebox{0.8\linewidth}{!}{\lstinputlisting[language=C, firstline=1832, lastline=1848]{AMG2006/parcsr_ls/par_relax.c}}
+  %\resizebox{0.8\linewidth}{!}{\lstinputlisting[language=C, firstline=1832, lastline=1848]{AMG2006/parcsr_ls/par_relax.c}}
 \end{frame}
 
 \begin{frame}{Algorithm with adaptive precision}
@@ -517,10 +453,10 @@ Globally, relaxation represents $\approx$66\% of the time of a V-cycle, and matr
 \end{frame}
 
 \begin{frame}{Accuracy study}
- \only<1>{\vspace{0.13cm}\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27_original.pdf}}
- \only<2>{\vspace{0.13cm}\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27_16.pdf}}
- \only<3>{\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27_32.pdf}}
- \only<4>{\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27.pdf}}
+%  \only<1>{\vspace{0.13cm}\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27_original.pdf}}
+%  \only<2>{\vspace{0.13cm}\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27_16.pdf}}
+%  \only<3>{\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27_32.pdf}}
+%  \only<4>{\includegraphics[width=\linewidth]{AMG2006/test/PREC_INCR_0.8/laplace/convergence_27.pdf}}
 \end{frame}
 
 \begin{frame}{Which set of precisions should we choose?}
@@ -748,23 +684,23 @@ To conclude, if we want to reach the original accuracy (using 64 bits of precisi
 
 \begin{frame}{Evaluation}
 
-  \includegraphics[width=\textwidth]{figs/eval_3.pdf}
+%  \includegraphics[width=\textwidth]{figs/eval_3.pdf}
 \end{frame}
 \begin{frame}{Evaluation}
 
-  \includegraphics[width=\textwidth]{figs/eval_5.pdf}
+%  \includegraphics[width=\textwidth]{figs/eval_5.pdf}
 \end{frame}
 \begin{frame}{Evaluation}
 
-  \includegraphics[width=\textwidth]{figs/eval_7.pdf}
+ % \includegraphics[width=\textwidth]{figs/eval_7.pdf}
 \end{frame}
 \begin{frame}{Evaluation}
 
-  \includegraphics[width=\textwidth]{figs/eval_10.pdf}
+%  \includegraphics[width=\textwidth]{figs/eval_10.pdf}
 \end{frame}
 \begin{frame}{Evaluation}
 
-  \includegraphics[width=\textwidth]{figs/eval_15.pdf}
+ % \includegraphics[width=\textwidth]{figs/eval_15.pdf}
 \end{frame}
 
 \begin{frame}{Final results}
