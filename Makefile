@@ -2,7 +2,7 @@ TEX=pdflatex
 BIB=bibtex
 
 STEM=report
-DIR=ICS
+DIR=cluster2018
 INC= $(wildcard $(DIR)/*.tex)
 
 TARGET=$(STEM).pdf

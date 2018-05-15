@@ -1,0 +1,32 @@
+\section{Conclusion}
+\label{sec:conclusions}
+
+This paper improves the original MG algorithm through two distinct approaches: The first
+one is to remove some relaxation steps in a V-cycle, which leads to faster
+cycles although requires more of them to converge.  Overall, this solution
+achieves up to 30\% improvement although its performance enhancements vary a
+lot depending on the workload, The second way to improve the algorithm is to
+adapt the precisions of the floating point depending on MG's precision
+requirements, We use low precisions levels during the very first MG's cycles
+and we increase them as the execution progresses.  Repeating this operation
+until reaching the maximum available accuracy available leads to significant
+speedups.  We estimate the benefits of these two approaches combined on
+different scenarios.  When combining half-, single- and double-precisions, we
+can reduce by 16.4\% and 14.5\% the execution time compared to using double- or
+single-precision, respectively, during the whole execution.
+
+In the future we plan to explore additional ideas to further reduce the
+execution time such as changing the precision used in different levels of a
+cycle.  Also, we plan to estimate the energy efficiency of our technique by
+evaluating the energy consumption using different values of the $\alpha$
+parameter.
+
+
+%However, we think that it is not useful because (1) using a greater precision
+%in the coarse levels than in the fine levels is useless as all the
+%computations would eventually be truncated and (2) using a smaller precision
+%in the coarse levels than in the fine levels would not affect by much the
+%execution time as, according to the measurements done, only the first 2 or 3
+%levels represent more than 95\% of the relaxation cost of a cycle.
+
+

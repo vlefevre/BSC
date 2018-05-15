@@ -1,0 +1,118 @@
+\section{Introduction}
+\label{sec:intro}
+
+Multi-Grid (MG) solvers are a class of linear methods~\cite{Hackbusch1991} that
+emerged in the 80's to increase the convergence rate of more classical
+iterative methods.  They became even more important with the advent of very
+complex scientific applications~\cite{Ashby1996}, which required very powerful
+linear solvers.  The usage of MG solvers has become a common practice in
+today's parallel systems due to the good scalability properties of these methods,
+which have been analyzed and modeled in detail~\cite{Gahvari11}.
+Also, MG solvers have been reported to display more robustness against silent
+data corruptions than traditional iterative methods deployed over a single
+grid~\cite{Casas12}, which also implies they behave well under reduced accuracy
+scenarios.
+
+MG solvers rely on a grid of evaluation points that discretize the
+domain of a continuous differential equation.  Typically, MG schemes are
+defined by coarsening a fine-grain grid until reaching a small set of
+evaluation points where a direct method can be applied.
+%This grid is represented using different granularity levels that are used to
+%determine a solution on the inaccurate and coarse grids.
+Solutions obtained on the inaccurate and coarse grids are used on the more
+accurate and fine-grain levels to accelerate the process of obtaining the final
+solution of the system.
+%For example, if we want to solve an equation of the form: \[ -u^{''}(x)+au(x)
+%= f(x),\quad 0<x<1, \quad u(0)=u(1)=0, \] where $a$ is some constant, $f$ a
+%function and $u$ an unknown function, we can transform it into a discrete
+%problem by selecting $N$ evaluation points $x_1,\dots,x_N$ and using taylor
+%expansion to express the second derivative term $u^{''}(x_i)$ as a weighted
+%sum of $u(x_j)$ for some values of $j$.  Then to define coarser grids, a
+%simple way to do it is to divide the number of evaluation points and transform
+%the original equation into another discrete problem (thus using evaluation
+%points $x_1,x_3,\dots,x_N$).  Typically, multi-grid schemes are defined by
+%coarsening a fine-grain grid until reaching a small enough set of evaluation
+%points on which a direct solve would be fast.
+Multi-grid solvers typically consist of three components: The \textit{Relaxation},
+\textit{Restriction} and \textit{Interpolation} phases.  The relaxation phase
+applies a few steps of an iterative solver like Jacobi or Gauss-Seidel at a
+certain coarseness level.  The restriction phase propagates the algorithmic
+state to a coarser grid by means of linear transformations while the
+interpolation phase maps the coarser estimate to the finer version and adjusts
+the current solution with the new error.
+
+One common way of orchestrating a Multi-Grid Solver execution is via a V-cycle,
+where we first iterate on the finest grid, then the second finest grid and so
+on until reaching the coarsest grid where a direct solve is used instead of an
+iterative method as the problem size has become smaller.  Then we iterate again
+on all the other grids in the reverse order to have a solution expressed with
+the initial granularity of the grid.  Different parameters, such as the iterative
+method used at each step or the granularity of the grid and the previously
+mentioned cycle shape, affect the convergence rate of the algorithm.
+
+%Typically, multi-grid schemes are defined by coarsening a fine-grain grid
+%until reaching a small enough set of evaluation points on which a direct solve
+%would be fast.  Multi-grid solvers then perform several steps of an iterative
+%method like Jacobi~\cite{} or Gauss-Seidel~\cite{} switching between the
+%different grids by interpolating or restricting the solution of the previous
+%step.  More precisely, a multi-grid algorithm has a parameter which is the
+%cycle shape.  The cycle shape determines in which order and on which
+%coarsening of the grid an iterative method is used. The classical cycle shape
+%is the V-cycle where we first iterate on the finest grid, then the second
+%finest grid and so on until reaching the coarsest grid where a direct solve is
+%used instead of an iterative method as the problem size has become smaller.
+%Then we iterate again on all the other grids in the reverse order to have a
+%solution expressed with the initial fineness of the grid.  Different
+%parameters, such as the iterative method used at each step or the fineness of
+%the grid and the previously mentioned cycle shape, affect the convergence rate
+%of the algorithm. For example, using a grid with only a few evaluation points
+%decreases the execution time but deteriorates the accuracy of the final
+%result. In the other way, it is possible to increase the quality of the result
+%by using a finer grid but at the cost of a performance degradation.
+
+In this context, this paper investigates different trade-offs between accuracy
+and execution time (or energy consumption) for MG algorithms. We focus our
+efforts on one of the most popular parallel implementations of a multi-grid
+solver, the BoomerAMG~\cite{boomerAMG}, implemented using the HYPRE
+library~\cite{Falgout2002}. We change the shape of the V-cycle and adapt the
+number of relaxations at each cycle to achieve performance gains. In addition, we propose a
+new multi-grid algorithm that dynamically optimizes its floating-point precision to
+improve performance and reduce energy consumption while maintaining
+the quality of the final solution. In particular, this paper makes the following contributions
+beyond the state-of-the-art:
+
+\begin{itemize}
+
+    \item We evaluate the performance impact of solver's parameters such
+        as the shape of cycles and the number of iterations.
+
+    \item We propose a new cycle configuration and show that it is more
+        efficient than the state-of-the-art configurations by up to 28.3\%. 
+        Our experiments consider a total of 9 different matrices and 3 parallel scenarios
+        and demonstrate
+        that our new cycle configuration can be applied to a wide range of problems.
+
+        %We stress that we present only a few results because of lack of space
+        %but more measures were performed (and were consistent with the previous
+        %ones) to conclude on the \textsc{Up}-strategy:
+
+    \item We evaluate the impact of different floating-point precisions on the
+        time-to-solution while reaching full accuracy on the final result.
+
+    \item We propose an algorithm that dynamically adapts the precision of the
+        MG algorithm variables to increase performance and efficiency.
+
+    \item We perform a large evaluation and demonstrate the we can reduce by
+        15\% the execution time needed to reach the same quality result as the
+        original double-precision algorithm and up to 30\% for single-precision
+        accuracy.
+
+\end{itemize}
+
+The reminder of this paper is organized as follows:
+Section~\ref{sec:motivation} introduces the motivations for this work.
+Section~\ref{sec:pruning} investigates the impact of different parameters on
+the time to completion.  Section~\ref{sec:precision} explores
+precision-performance trade-offs.  Section~\ref{sec:related} discuss other
+related works and Section~\ref{sec:conclusions} concludes this paper.
+
