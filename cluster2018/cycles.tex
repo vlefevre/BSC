@@ -55,6 +55,16 @@ highlight that in the experiments depicted in Figure~\ref{fig.first_tests},
 although different number of relaxations were evaluated, all levels executed
 the \emph{same} number of relaxations.
 
+\begin{figure*}
+    \includegraphics[width=0.33\linewidth]{figs/convergence_fast_norm.pdf}
+    \includegraphics[width=0.33\linewidth]{figs/convergence_fast_time.pdf}
+    \includegraphics[width=0.33\linewidth]{figs/time_convergence_fast.pdf}
+    \caption{Evaluation of 4 level-dependent relaxation tuning strategies.
+    Residual norm per cycle (left), time spent in each cycle (middle) and
+    convergence time in function of the error tolerance (right).}
+    \label{fig.newstrat}
+\end{figure*}
+
 \subsection{\leo{Level-Dependent Relaxation Tuning}}
 
 Based on this information, we propose to reduce the execution time of a V-cycle
@@ -72,16 +82,6 @@ grid):
     \item \emph{Fast3} :  2 relaxations at levels 6 and 4.
     \item \emph{Fast4} : no relaxations at level 3.
 \end{itemize}
-
-\begin{figure*}
-    \includegraphics[width=0.33\linewidth]{figs/convergence_fast_norm.pdf}
-    \includegraphics[width=0.33\linewidth]{figs/convergence_fast_time.pdf}
-    \includegraphics[width=0.33\linewidth]{figs/time_convergence_fast.pdf}
-    \caption{Evaluation of 4 level-dependent relaxation tuning strategies.
-    Residual norm per cycle (left), time spent in each cycle (middle) and
-    convergence time in function of the error tolerance (right).}
-    \label{fig.newstrat}
-\end{figure*}
 
 The strategy \emph{Fast} aims at reducing the cost of the cycle by removing the
 penultimate relaxation which is very expensive, and expecting that the accuracy
@@ -157,6 +157,18 @@ compute an approximation at level $l$, then we use the level $l+1$ to compute
 an approximate error term $e^l$ and finally we redo some relaxation to refine
 the solution. The two relaxations do not have the same goal.
 
+\begin{figure*}
+    \centering
+    \subfloat[\textsc{Unstructured-Anisotropy}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_1.pdf}}
+    \subfloat[\textsc{3DLaplace-7pt(1,1,1)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_2.pdf}}
+    \subfloat[\textsc{3DLaplace-7pt(0.1,0.1,0.01)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_5.pdf}}\\
+    \subfloat[\textsc{3DLaplace-7pt(5,5,5)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_6.pdf}}
+    \subfloat[\textsc{3DLaplace-27pt}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_3.pdf}}
+    \subfloat[\textsc{PDE-Dirichlet}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_4.pdf}}
+    \caption{Comparison of the original algorithm V1 with \emph{Fast4} and \emph{Up} strategies.}
+    \label{fig.up_comparison}
+\end{figure*}
+
 This analysis opens the door for strategies in which grid levels have a
 different number of relaxations when going down than when going up in the
 cycle.  In fact, assuming that the values of the error vectors are smaller
@@ -171,23 +183,11 @@ in the cycle (i.e., no relaxations when going down).  We call this strategy
 \emph{Up}.
 
 We run \emph{Up} and \emph{Fast4}, as long as the classical V-cycle, on the
-same inputs. For generality purposes, this time we 
+same inputs. For generality purposes, this time we
 evaluate matrices generated from other physical problems besides the Unstructured-Anisotropy one: i) 3D Laplace equation with a 9-pt stencil (considering three diffrent configurations of the $c_x,c_y,c_z$ anisotropy parameters), ii) 3D Laplace
 with a 27-point stencil and iii) 3D Laplace partial derivative equation with
 Dirichlet boundary conditions. All problems use the same matrix size of 512,000. The
 results are presented in Figure~\ref{fig.up_comparison}.
-
-\begin{figure*}
-    \centering
-    \subfloat[\textsc{Unstructured-Anisotropy}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_1.pdf}}
-    \subfloat[\textsc{3DLaplace-7pt(1,1,1)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_2.pdf}}
-    \subfloat[\textsc{3DLaplace-7pt(0.1,0.1,0.01)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_5.pdf}}\\
-    \subfloat[\textsc{3DLaplace-7pt(5,5,5)}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_6.pdf}}
-    \subfloat[\textsc{3DLaplace-27pt}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_3.pdf}}
-    \subfloat[\textsc{PDE-Dirichlet}]{\includegraphics[width=0.33\linewidth]{figs/time_convergence_up_4.pdf}}
-    \caption{Comparison of the original algorithm V1 with \emph{Fast4} and \emph{Up} strategies.}
-    \label{fig.up_comparison}
-\end{figure*}
 
 The first thing we observe is that the \emph{Fast4} strategy does not
 always perform well. In fact, for two of these four applications the
@@ -211,7 +211,7 @@ The problems tested are \textsc{3DLaplace-7pt} and
 The total size of the matrix is set to either 5,832,000 or 13,824,000, while
 the topology is composed of either 27 (3x3x3), 36 (6x6x1) or 64 (4x4x4)
 processors, where each processor holds 1 MPI process and runs 1 OpenMP
-thread per process. 
+thread per process.
 For these 6 possible combinations, we observe an
 average improvement of 18.4\% (ranging from 16.0\% to 28.3\%) for
 \textsc{3DLaplace-7pt} and 20.5\% (ranging from 16.2\% to 25.0\%) for
