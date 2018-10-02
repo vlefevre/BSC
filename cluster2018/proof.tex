@@ -11,9 +11,9 @@ previous section).}
    \begin{theorem}
 
        Given $b_{max}$, a maximum number of bits, $n$ the number of different
-       precisions $b_1,\dots,b_n$ to use, and $T(b)=\alpha b+c$, with $\alpha$
+       precisions $b_1 \leq b_2 \leq \dots \leq b_{n-1} \leq b_n$ to use, and $T(b)=\alpha b+c$, with $\alpha$
        and $c$ two constants, the time to execute a cycle at precision $b$,
-       then the execution time of our adaptive algorithm is minimized for $b_i
+       then the execution time of our adaptive algorithm is minimized for $\forall i, b_i
        = \frac{i}{n}b_{max}$.
 
    \end{theorem}
@@ -41,7 +41,7 @@ previous section).}
     \end{align*}
 
     Indeed, when we reach the number of iterations $\textsc{MaxIter}(b_i)$ we
-    change from precision $b_i$ to precision $b_{i+1}$.  We can rewrite
+    change from precision $b_i$ to precision $b_{i+1}$. This means that until we are before the iteration $\textsc{MaxIter}(b_1)$, we compute using $b_1$ bits. Then until we reach the iteration $\textsc{MaxIter}(b_2)$, we compute using $b_2$ bits, that is during $\textsc{MaxIter}(b_2) - \textsc{MaxIter}(b_1)$ iterations, and so on until we reach the maximum accuracy with $b_n$ bits at iteration $\textsc{MaxIter}(b_n)$.  We can rewrite
     $T_{total}$ as
 
     \begin{align*}

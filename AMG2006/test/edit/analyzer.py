@@ -11,7 +11,7 @@ import numpy as np
 import math
 
 font = {'family' : 'normal',
-        'size'   : 15}
+        'size'   : 12}
 
 pylab.rc('font', **font)
 
@@ -108,7 +108,7 @@ else:
 resultplot = np.array(result)
 yval = np.array(resultplot[:,1],dtype='f8')
 cval = np.array(resultplot[:,2],dtype='i8')
-bar = plt.bar(np.arange(0,len(result)),yval,0.4)
+bar = plt.bar(np.arange(0,len(result)),yval,0.4,align='edge')
 i=0
 for column in bar:
 	column.set_color(colors[cval[i]])
@@ -118,9 +118,11 @@ for key in sorted(colors):
 	rpatch = mpatches.Patch(color=colors[key], label=str(key))
 	handles.append(rpatch)
 plt.legend(loc=2,handles=handles,ncol=(len(colors)+1)/2,prop={'size':10},title='Number of precisions used')
-plt.ylabel("Units of time",fontsize=20)
-plt.xlabel("Precision sets",fontsize=20)
+plt.ylabel("Units of time",fontsize=16)
+plt.xlabel("Precision sets",fontsize=16)
 plt.xticks(pylab.arange(0,len(result)),resultplot[:,0],rotation='vertical')
+#manual coloring of sets with one precision available for pmbs
+#plt.gca().get_xticklabels()[18].set_color("red") 
 plt.title(r"Time to reach accuracy "+str(tolerance)+"\nfor different strategies with threshold "+str(thr)+"\nand time model is $T(b)=b^{"+str(alpha)+"}$.")
 plt.xlim([0,len(files)])
 plt.ylim([0,maxValue+3])
