@@ -154,7 +154,8 @@ want to keep the model simple enough and see if the data can fit it.
     \caption{Cost of the MG solver considering several different dynamic
     precision scenarios to reach different error degrees in the output:
     $10^{-3}$ on the left, $10^{-7}$ in the middle and $10^{-15}$ on the
-    right.}
+    right. Red labels indicate current performances with either single-precision or double-precision floating-points. Green label indicates the
+    performance using a mix of half-, single- and double-precision floating point as available on a GPU.}
     \label{fig.estimation1}
 \end{figure*}
 
@@ -237,7 +238,7 @@ in the mantissa when the threshold is reached for a given precision).
 Strategies are denoted as $b\_delta$. This can be either an addition or a
 multiplication. In particular, we provide a scenario where the available
 mantissa precisions are 11, 24 and 53 (represented by a starting mantissa
-precision of 11 and a multiplicator of 2.24). This corresponds to the case
+precision of 11 and a multiplicator of 2.24, in green on Figure~\ref{fig.estimation1}). This corresponds to the case
 where the computation starts in half-precision, then switches to
 single-precision and finally to double-precision. This scenario is particularly
 relevant because those precisions are already available in architectures such
