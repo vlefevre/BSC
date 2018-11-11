@@ -2,4 +2,10 @@
 *.bbl
 *.blg
 *.log
+*.swp
+*.out
+*.nav
+*.toc
+*.snm
+*.tox
 report.pdf
